@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="PubMan Firefox Suite" verbose="1" preserve-order="true">
+
+	<parameter name="browserType" value="firefox">
+	
+	<test name="basic">
+		<classes>
+			<class name="base.TestSuiteInitialisation"></class>
+			<class name="base.BaseTest"></class>
+			<class name="base.depositor.ReleaseConferencePaperDepositorTest"></class>
+			<class name="base.guest.SimpleSearchUnregisteredTest"></class>
+			<class name="base.moddep.SimpleSearchRegisteredTest"></class>
+			<class name="base.guest.AdvancedSearchUnregisteredTest"></class>
+			<class name="base.moddep.AdvancedSearchRegisteredTest"></class>
+		</classes>
+	</test>
+	
+	<test name="data-driven">
+		<classes></classes>
+	</test>
+	
+	<test name="functional">
+		<classes></classes>
+	</test>
+
+	</parameter>
+
+</suite>
