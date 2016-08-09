@@ -19,12 +19,14 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	
 	private DepositorHomePage depositorHomePage;
 	
-	private String title = "Released conference paper in simple workflow: " + getTimeStamp();
-	private String filepath = "res\\SamplePDFFile.pdf";
+	private String title;
+	private String filepath;
 	
 	@BeforeClass
 	public void setup() {
 		super.setup();
+		title = "Released conference paper in simple workflow: " + getTimeStamp();
+		filepath = "file:" + getClass().getResource("/SamplePDFFile.pdf").getPath();
 	}
 	
 	@Test(priority = 1)
