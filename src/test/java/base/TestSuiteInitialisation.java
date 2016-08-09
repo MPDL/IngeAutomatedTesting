@@ -62,7 +62,7 @@ public class TestSuiteInitialisation {
 	}
 	
 	private void loadProperties() throws FileNotFoundException {
-		String propertiesEnvName = System.getenv(propertiesFileName);
+		String propertiesEnvName = "/" + System.getenv(propertiesFileName);
 		properties = new Properties();
 		FileInputStream input = new FileInputStream(new File(propertiesEnvName));
 
