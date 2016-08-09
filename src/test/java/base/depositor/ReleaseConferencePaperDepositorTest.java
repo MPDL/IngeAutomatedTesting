@@ -20,7 +20,7 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	private DepositorHomePage depositorHomePage;
 	
 	private String title = "Released conference paper in simple workflow: " + getTimeStamp();
-	private String filepath = "/res/SamplePDFFile.pdf";
+	private String filepath = "res/SamplePDFFile.pdf";
 	
 	@BeforeClass
 	public void setup() {
