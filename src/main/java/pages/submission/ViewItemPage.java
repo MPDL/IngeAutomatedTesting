@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
 import pages.submission.transition.AcceptItemPage;
 import pages.submission.transition.DiscardItemPage;
+import pages.submission.transition.FinaliseSubmissionPage;
 import pages.submission.transition.SubmitItemPage;
 
 public class ViewItemPage extends BasePage {
@@ -17,6 +18,9 @@ public class ViewItemPage extends BasePage {
 	
 	@FindBy(className = "statusLabel")
 	private WebElement itemStatus;
+	
+	@FindBy(id = "j_idt107:lnkRelease")
+	private WebElement releaseItemLink;
 	
 	@FindBy(id = "j_idt107:lnkSubmit")
 	private WebElement submitItemLink;
@@ -42,6 +46,12 @@ public class ViewItemPage extends BasePage {
 	
 	public String getItemStatus() {
 		return itemStatus.getText();
+	}
+	
+	public ViewItemPage releaseItem() {
+		releaseItemLink.click();
+		
+		return new FinaliseSubmissionPage(driver).releaseSubmission();
 	}
 	
 	public ViewItemPage submitItem() {

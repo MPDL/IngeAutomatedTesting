@@ -10,6 +10,7 @@
 			<class name="base.TestSuiteInitialisation"></class>
 			<class name="base.BaseTest"></class>
 			<class name="base.depositor.ReleaseConferencePaperDepositorTest"></class>
+			<class name="base.depositor.ReleaseBookFullStandardTest"></class>
 			<class name="base.depositor.JournalArticleEasyStandardTest"></class>
 			<class name="base.guest.SimpleSearchUnregisteredTest"></class>
 			<class name="base.moddep.SimpleSearchRegisteredTest"></class>

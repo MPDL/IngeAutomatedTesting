@@ -40,11 +40,21 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	public void fullSubmissionSimpleWorkflow() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
 		// TODO data-driven testing implementation
-		FinaliseSubmissionPage finaliseSubmissionPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath);
-		finaliseSubmissionPage.releaseSubmission();
+		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath);
+		String itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, "Pending", "Item was not uploaded.");
 	}
 	
 	@Test(priority = 3)
+	public void depositorReleasesSubmission() {
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		ViewItemPage viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
+		viewItemPage = viewItemPage.releaseItem();
+		String itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, "Released", "Item was not released.");
+	}
+	
+	@Test(priority = 4)
 	public void viewMostRecentItems() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		StartPage startPage = depositorHomePage.goToStartPage();
@@ -52,19 +62,19 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 		Assert.assertEquals(mostRecentItemTitle, title, "Item does not show up at the start page.");
 	}
 	
-	@Test(priority = 3)
+	@Test(priority = 5)
 	public void viewItem() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage(driver);
+		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
 		ViewItemPage viewItemPage = myItemsPage.openItemByTitle(title);
 		String actualTitle = viewItemPage.getItemTitle();
 		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
 	}
 	
-	@Test(priority = 4)
+	@Test(priority = 6)
 	public void discardSubmission() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage(driver);
+		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
 		myItemsPage.discardItemByTitle(title);
 	}
 	

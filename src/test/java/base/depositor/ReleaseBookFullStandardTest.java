@@ -10,11 +10,12 @@ import pages.LoginPage;
 import pages.StartPage;
 import pages.homepages.DepositorHomePage;
 import pages.homepages.ModeratorHomePage;
-import pages.submission.EasySubmissionPage;
+import pages.submission.FullSubmissionPage;
 import pages.submission.ViewItemPage;
+import pages.submission.transition.FinaliseSubmissionPage;
 
-public class JournalArticleEasyStandardTest extends BaseTest {
-
+public class ReleaseBookFullStandardTest extends BaseTest {
+	
 	private String title;
 	private String filepath;
 	
@@ -25,7 +26,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	@BeforeClass
 	public void setup() {
 		super.setup();
-		title = "Released journal article in standard workflow: " + getTimeStamp();
+		title = "Released book in standard workflow: " + getTimeStamp();
 		filepath = "file:" + getClass().getResource("/SamplePDFFile.pdf").getPath();
 	}
 	
@@ -37,12 +38,13 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	}
 	
 	@Test(priority = 2)
-	public void easySubmissionStandardWorkflow() {
-		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().goToEasySubmissionStandardPage();
-		viewItemPage = easySubmissionPage.easySubmission(Genre.ARTICLE, title, filepath);
+	public void fullSubmissionStandardWorkflow() {
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
+		// TODO data-driven testing implementation
+		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, filepath);
 		String itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, "Pending", "Item was not uploaded.");
-	}	
+	}
 	
 	@Test(priority = 3)
 	public void depositorSubmitsItem() {

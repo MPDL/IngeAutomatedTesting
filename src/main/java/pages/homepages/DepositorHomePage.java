@@ -22,7 +22,7 @@ public class DepositorHomePage extends HomePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public MyItemsPage goToMyItemsPage(WebDriver driver) {
+	public MyItemsPage goToMyItemsPage() {
 		myItemsLink.click();
 		
 		return PageFactory.initElements(driver, MyItemsPage.class);

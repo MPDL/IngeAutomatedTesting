@@ -1,10 +1,11 @@
 package pages.submission;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.BasePage;
-import pages.search.SearchResultsPage;
 
 public class MyItemsPage extends BasePage {
 
@@ -15,9 +16,10 @@ public class MyItemsPage extends BasePage {
 	}
 	
 	public ViewItemPage openItemByTitle(String itemTitle) {
-		SearchResultsPage searchResultsPage = searchComponent.quickSearch(itemTitle);
-		ViewItemPage viewItemPage = searchResultsPage.openFirstResult();
-		return viewItemPage;
+		WebElement itemLink = driver.findElement(By.cssSelector("a[title='" + itemTitle + "']"));
+		itemLink.click();
+			
+		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
 	public MyItemsPage deleteItemByTitle(String itemTitle) {

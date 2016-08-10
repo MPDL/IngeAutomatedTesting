@@ -33,6 +33,14 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.easySubmissionStandard();
 	}
 	
+	public FullSubmissionPage goToFullSubmissionStandardPage() {
+		fullSubmissionLink.click();
+		
+		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
+		
+		return collectionSelectionPage.fullSubmissionStandard();
+	}
+	
 	public FullSubmissionPage goToFullSubmissionSimplePage() {
 		fullSubmissionLink.click();
 		

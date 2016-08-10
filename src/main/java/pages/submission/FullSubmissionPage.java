@@ -44,6 +44,9 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:j_idt827:0:inpSourceTitle_Journal")
 	private WebElement sourceTitleBox;
 	
+	@FindBy(id = "form1:lnkSave")
+	private WebElement saveButton;
+	
 	@FindBy(id = "form1:lnkRelease")
 	private WebElement releaseButton;
 	
@@ -55,11 +58,11 @@ public class FullSubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public FinaliseSubmissionPage fullSubmission(Genre genre, String title, String filepath) {
+	public ViewItemPage fullSubmission(Genre genre, String title, String filepath) {
 		fillInData(genre, title);
 		fillInGenericData();
 		uploadFile(filepath);
-		return submit();
+		return save();
 	}
 	
 	private void fillInData(Genre genre, String title) {
@@ -88,6 +91,12 @@ public class FullSubmissionPage extends BasePage {
 		Select genreSourceSelect = new Select(sourceGenreDropdown);
 		genreSourceSelect.selectByValue(Genre.BOOK.toString());
 		sourceTitleBox.sendKeys("Test Book");
+	}
+	
+	private ViewItemPage save() {
+		saveButton.click();
+		
+		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
 	private FinaliseSubmissionPage submit() {
