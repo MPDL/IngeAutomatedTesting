@@ -6,11 +6,23 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.BasePage;
+import pages.submission.transition.AcceptItemPage;
+import pages.submission.transition.DiscardItemPage;
+import pages.submission.transition.SubmitItemPage;
 
 public class ViewItemPage extends BasePage {
 
 	@FindBy(css = ".itemHeadline>b")
 	private WebElement itemTitle;
+	
+	@FindBy(className = "statusLabel")
+	private WebElement itemStatus;
+	
+	@FindBy(id = "j_idt107:lnkSubmit")
+	private WebElement submitItemLink;
+	
+	@FindBy(id = "j_idt107:lnkAccept")
+	private WebElement acceptItemLink;
 	
 	@FindBy(id = "j_idt107:lnkDelete")
 	private WebElement deleteItemLink;
@@ -28,6 +40,16 @@ public class ViewItemPage extends BasePage {
 		return itemTitle.getText();
 	}
 	
+	public String getItemStatus() {
+		return itemStatus.getText();
+	}
+	
+	public ViewItemPage submitItem() {
+		submitItemLink.click();
+		
+		return new SubmitItemPage(driver).submitItem();
+	}
+	
 	public MyItemsPage deleteItem() {
 		deleteItemLink.click();
 		driver.switchTo().alert().accept();
@@ -39,8 +61,13 @@ public class ViewItemPage extends BasePage {
 	public ViewItemPage discardItem() {
 		discardItemLink.click();
 		
-		DiscardItemPage discardItemPage = PageFactory.initElements(driver, DiscardItemPage.class);
-		return discardItemPage.discardItem();
+		return new DiscardItemPage(driver).discardItem();
+	}
+	
+	public ViewItemPage acceptItem() {
+		acceptItemLink.click();
+		
+		return new AcceptItemPage(driver).acceptItem();
 	}
 	
 }

@@ -10,10 +10,10 @@ import base.Genre;
 import pages.LoginPage;
 import pages.StartPage;
 import pages.homepages.DepositorHomePage;
-import pages.submission.FinaliseSubmissionPage;
 import pages.submission.FullSubmissionPage;
 import pages.submission.MyItemsPage;
 import pages.submission.ViewItemPage;
+import pages.submission.transition.FinaliseSubmissionPage;
 
 public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	
@@ -37,11 +37,19 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	}
 	
 	@Test(priority = 2)
-	public void goToFullSubmissionPage() {
-		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionPage();
+	public void fullSubmissionSimpleWorkflow() {
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
 		// TODO data-driven testing implementation
 		FinaliseSubmissionPage finaliseSubmissionPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath);
 		finaliseSubmissionPage.releaseSubmission();
+	}
+	
+	@Test(priority = 3)
+	public void viewMostRecentItems() {
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		StartPage startPage = depositorHomePage.goToStartPage();
+		String mostRecentItemTitle = startPage.getNameOfMostRecentItem();
+		Assert.assertEquals(mostRecentItemTitle, title, "Item does not show up at the start page.");
 	}
 	
 	@Test(priority = 3)

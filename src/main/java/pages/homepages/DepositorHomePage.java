@@ -6,11 +6,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.submission.MyItemsPage;
+import pages.submission.SubmissionPage;
 
 public class DepositorHomePage extends HomePage {
 	
 	@FindBy(id = "Header:lnkDepWorkspace")
 	private WebElement myItemsLink;
+
+	@FindBy(id = "Header:lnkSubmission")
+	private WebElement submissionLink;
 	
 	public DepositorHomePage(WebDriver driver) {
 		super(driver);
@@ -22,5 +26,10 @@ public class DepositorHomePage extends HomePage {
 		myItemsLink.click();
 		
 		return PageFactory.initElements(driver, MyItemsPage.class);
+	}
+	
+	public SubmissionPage goToSubmissionPage() {
+		submissionLink.click();
+		return PageFactory.initElements(driver, SubmissionPage.class);
 	}
 }

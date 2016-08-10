@@ -34,13 +34,11 @@ public class LoginPage {
 	}
 	
 	public ModeratorHomePage loginAsModerator(String username, String password) {
-		// TODO to be filled in with moderator data
 		login(username, password);
 		return PageFactory.initElements(driver,  ModeratorHomePage.class);
 	}
 	
 	public CombinedHomePage loginAsCombinedUser(String username, String password) {
-		// TODO to be filled in with combined user data
 		login(username, password);
 		return PageFactory.initElements(driver,  CombinedHomePage.class);
 	}

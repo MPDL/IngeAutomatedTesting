@@ -6,8 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.BasePage;
+import pages.submission.transition.CollectionSelectionPage;
 
 public class SubmissionPage extends BasePage {
+	
+	@FindBy(id = "j_idt98:lnkSubmission_lnkEasySubmission")
+	private WebElement easySubmissionLink;
 	
 	@FindBy(id = "j_idt98:lnkNewSubmission")
 	private WebElement fullSubmissionLink;
@@ -21,7 +25,15 @@ public class SubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public FullSubmissionPage goToFullSubmissionPage() {
+	public EasySubmissionPage goToEasySubmissionStandardPage() {
+		easySubmissionLink.click();
+		
+		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
+		
+		return collectionSelectionPage.easySubmissionStandard();
+	}
+	
+	public FullSubmissionPage goToFullSubmissionSimplePage() {
 		fullSubmissionLink.click();
 		
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);

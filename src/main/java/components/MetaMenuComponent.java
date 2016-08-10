@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.LoginPage;
+import pages.StartPage;
 
 /**
  * Menu containing login, contact, disclaimer, help, and language choice
@@ -29,6 +30,12 @@ public class MetaMenuComponent {
 		loginButton.click();
 		
 		return PageFactory.initElements(driver, LoginPage.class);
+	}
+	
+	public StartPage logout() {
+		loginButton.click();
+		
+		return PageFactory.initElements(driver, StartPage.class);
 	}
 	
 }

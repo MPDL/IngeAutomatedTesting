@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import base.Genre;
 import pages.BasePage;
+import pages.submission.transition.FinaliseSubmissionPage;
 
 public class FullSubmissionPage extends BasePage {
 
@@ -21,6 +22,9 @@ public class FullSubmissionPage extends BasePage {
 	
 	@FindBy(id = "form1:inputTitleText")
 	private WebElement titleBox;
+	
+	@FindBy(id = "form1:fileUploads:0:inpExtraFileDescription")
+	private WebElement descriptionBox;
 	
 	@FindBy(id = "form1:j_idt497:0:inpcreator_persons_person_family_name_optional")
 	private WebElement personFamilyNameBox;
@@ -43,7 +47,7 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:lnkRelease")
 	private WebElement releaseButton;
 	
-	private final String abstractValue = "http://purl.org/escidoc/metadata/ves/content-categories/abstract";
+	private final String publisherVersionValue = "http://purl.org/escidoc/metadata/ves/content-categories/publisher-version";
 	
 	public FullSubmissionPage(WebDriver driver) {
 		super(driver);
@@ -69,12 +73,14 @@ public class FullSubmissionPage extends BasePage {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("document.getElementById('" + addFileButtonID + "').style.display = 'block';");
 		driver.findElement(By.id(addFileButtonID)).sendKeys(filepath);
-		
 		Select contentCategorySelect = new Select(contentCategoryDropdown);
-		contentCategorySelect.selectByValue(abstractValue);
+		contentCategorySelect.selectByValue(publisherVersionValue);
+		descriptionBox.sendKeys("test");
 	}
 	
 	private void fillInGenericData() {
+		/* TODO add locator, content info, page number of source, arXiv identifier, event information, project information
+		source genre, title, author, details and identifier */
 		personFamilyNameBox.sendKeys("Testermann, Testo (MPI for Social Anthropology, Max Planck Society)");
 		orgNrBox.sendKeys("1");
 		organisationNameBox.sendKeys("MPI for Social Anthropology, Max Planck Society");

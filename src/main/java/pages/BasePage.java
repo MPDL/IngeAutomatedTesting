@@ -13,6 +13,7 @@ import pages.homepages.HomePage;
 import pages.homepages.ModeratorHomePage;
 import pages.search.AdvancedSearchPage;
 import pages.search.SearchResultsPage;
+import pages.submission.ViewItemPage;
 
 public abstract class BasePage {
 
@@ -53,7 +54,12 @@ public abstract class BasePage {
 		return searchComponent.goToAdvancedSearchPage();
 	}
 	
-
+	public ViewItemPage openItemByTitle(String itemTitle) {
+		SearchResultsPage searchResultsPage = searchComponent.quickSearch(itemTitle);
+		ViewItemPage viewItemPage = searchResultsPage.openFirstResult();
+		return viewItemPage;
+	}
+	
 	public HomePage goToHomePage(HomePage homePage) {
 		if (homePage instanceof DepositorHomePage)
 			return new DepositorHomePage(driver);

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.StartPage;
 import pages.submission.ImportWorkspacePage;
 import pages.submission.MyItemsPage;
+import pages.submission.QAWorkspacePage;
 import pages.submission.SubmissionPage;
 
 /**
@@ -56,6 +57,14 @@ public class MainMenuComponent {
 		importWorkspaceLink.click();
 		
 		return PageFactory.initElements(driver, ImportWorkspacePage.class);
+	}
+	
+	public QAWorkspacePage goToQAWorkspacePage() {
+		workspaceLink.click();
+		WebElement qaWorkspaceLink = driver.findElement(By.id("j_idt108:lnkQAWorkspace"));
+		qaWorkspaceLink.click();
+		
+		return PageFactory.initElements(driver, QAWorkspacePage.class);
 	}
 	
 	public SubmissionPage goToSubmissionPage() {
