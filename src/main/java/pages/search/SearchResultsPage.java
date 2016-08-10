@@ -3,6 +3,7 @@ package pages.search;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -27,5 +28,18 @@ public class SearchResultsPage extends BasePage {
 		titleLink.click();
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
+	}
+	
+	public List<WebElement> getResults() {
+		return searchResults;
+	}
+	
+	public boolean areAllResultsReleased() {
+		for (WebElement result : searchResults) {
+			String uploadInfo = result.findElement(By.cssSelector(".listItemLine:nth-of-type(2)>span:nth-of-type(2)")).getText();
+			if (!uploadInfo.contains("Published"))
+				return false;
+		}
+		return true;
 	}
 }

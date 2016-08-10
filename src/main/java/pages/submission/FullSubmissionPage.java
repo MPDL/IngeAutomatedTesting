@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import base.Genre;
 import pages.BasePage;
-import pages.submission.transition.FinaliseSubmissionPage;
 
 public class FullSubmissionPage extends BasePage {
 
@@ -97,11 +96,5 @@ public class FullSubmissionPage extends BasePage {
 		saveButton.click();
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
-	}
-	
-	private FinaliseSubmissionPage submit() {
-		releaseButton.click();
-		
-		return PageFactory.initElements(driver, FinaliseSubmissionPage.class);
 	}
 }

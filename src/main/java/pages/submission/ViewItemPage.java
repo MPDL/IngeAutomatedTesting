@@ -67,7 +67,6 @@ public class ViewItemPage extends BasePage {
 		return PageFactory.initElements(driver, MyItemsPage.class);
 	}
 	
-	// TODO fix to adhere with POM standards
 	public ViewItemPage discardItem() {
 		discardItemLink.click();
 		

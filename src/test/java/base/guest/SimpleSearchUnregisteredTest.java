@@ -18,10 +18,27 @@ public class SimpleSearchUnregisteredTest extends BaseTest {
 	}
 	
 	@Test
+	public void noSearchCriteriaTest() {
+		StartPage startPage = new StartPage(driver);
+		String expectedHeadline = startPage.getHeadline();
+		SearchResultsPage searchResultsPage = startPage.quickSearch("");
+		String headlineText = searchResultsPage.getHeadline();
+		Assert.assertEquals(headlineText, expectedHeadline, "Empty search query does not lead to error.");
+	}
+	
+	@Test
 	public void simpleSearchTest() {
 		StartPage startPage = new StartPage(driver);
 		SearchResultsPage searchResultsPage = startPage.quickSearch(searchQuery);
 		String headlineText = searchResultsPage.getHeadline();
 		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+	}
+	
+	@Test
+	public void onlyPublishedItems() {
+		StartPage startPage = new StartPage(driver);
+		SearchResultsPage searchResultsPage = startPage.quickSearch(searchQuery);
+		boolean allReleased = searchResultsPage.areAllResultsReleased();
+		Assert.assertTrue(allReleased, "An item in search results has not been released.");
 	}
 }

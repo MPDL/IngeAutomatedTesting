@@ -17,7 +17,9 @@ import pages.search.SearchResultsPage;
  */
 public class AdvancedSearchRegisteredTest extends BaseTest {
 	
-	private String searchQuery = "test";
+	private String titleQuery = "test";
+	private String authorQuery = "Müller";
+	private String organisationQuery = "MPI of Cognitive Neuroscience";
 	
 	private CombinedHomePage combinedHomePage;
 	
@@ -33,9 +35,37 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	}
 	
 	@Test(priority=2)
-	public void advancedSearchTest() {
+	public void advancedSearchTitleTest() {
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
-		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(searchQuery);
+		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, "", "");
+		String headlineText = searchResultsPage.getHeadline();
+		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+	}
+	
+	@Test(priority=2)
+	public void advancedSearchAuthorTest() {
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
+		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", authorQuery, "");
+		String headlineText = searchResultsPage.getHeadline();
+		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+	}
+	
+	@Test(priority=2)
+	public void advancedSearchOrganisationTest() {
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
+		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", "", organisationQuery);
+		String headlineText = searchResultsPage.getHeadline();
+		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+	}
+	
+	@Test(priority=2)
+	public void advancedSearchCombinedTest() {
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
+		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, authorQuery, organisationQuery);
 		String headlineText = searchResultsPage.getHeadline();
 		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
 	}

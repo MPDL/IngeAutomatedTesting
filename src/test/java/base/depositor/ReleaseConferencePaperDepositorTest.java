@@ -13,7 +13,6 @@ import pages.homepages.DepositorHomePage;
 import pages.submission.FullSubmissionPage;
 import pages.submission.MyItemsPage;
 import pages.submission.ViewItemPage;
-import pages.submission.transition.FinaliseSubmissionPage;
 
 public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	

@@ -12,7 +12,6 @@ import pages.homepages.DepositorHomePage;
 import pages.homepages.ModeratorHomePage;
 import pages.submission.FullSubmissionPage;
 import pages.submission.ViewItemPage;
-import pages.submission.transition.FinaliseSubmissionPage;
 
 public class ReleaseBookFullStandardTest extends BaseTest {
 	

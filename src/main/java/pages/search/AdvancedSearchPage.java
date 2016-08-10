@@ -16,7 +16,13 @@ public class AdvancedSearchPage extends BasePage {
 	protected WebElement personTextBox;
 	
 	@FindBy(id = "form1:criterions:4:organizationSearchTermEmptyFirst")
-	protected WebElement organizaionTestBox;
+	protected WebElement organisationTextBox;
+	
+	@FindBy(id = "form1:criterions:6:startDateFirst")
+	protected WebElement dateFrom;
+	
+	@FindBy(id = "form1:criterions:6:endDateFirst")
+	protected WebElement dateTo;
 	
 	@FindBy(id = "form1:lnkAdvancedSearchStartSearch")
 	protected WebElement startSearchButton;
@@ -27,13 +33,23 @@ public class AdvancedSearchPage extends BasePage {
 		PageFactory.initElements(driver,  this);
 	}
 	
-	public SearchResultsPage advancedSearch(String searchQuery) {
-		fillInData(searchQuery);
+	public SearchResultsPage advancedSearch(String title, String author, String organisation) {
+		fillInTitle(title);
+		fillInAuthor(author);
+		fillInOrganisation(organisation);
 		startSearchButton.click();
 		return PageFactory.initElements(driver, SearchResultsPage.class);
 	}
 	
-	private void fillInData(String title) {
+	private void fillInTitle(String title) {
 		titleTextBox.sendKeys(title);
+	}
+	
+	private void fillInAuthor(String author) {
+		personTextBox.sendKeys(author);
+	}
+	
+	private void fillInOrganisation(String organisation) {
+		organisationTextBox.sendKeys(organisation);
 	}
 }
