@@ -56,7 +56,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	}
 	
 	
-	@Test(priority = 3)
+	@Test(priority = 4)
 	public void moderatorReleasesSubmission() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
@@ -66,7 +66,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 4)
+	@Test(priority = 5)
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openItemByTitle(title);
