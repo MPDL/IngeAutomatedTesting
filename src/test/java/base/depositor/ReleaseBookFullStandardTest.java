@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import base.BaseTest;
 import base.Genre;
+import base.ItemStatus;
 import pages.LoginPage;
 import pages.StartPage;
 import pages.homepages.DepositorHomePage;
@@ -26,7 +27,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void setup() {
 		super.setup();
 		title = "Released book in standard workflow: " + getTimeStamp();
-		filepath = "file:" + getClass().getResource("/SamplePDFFile.pdf").getPath();
+		filepath = getFilepath("SamplePDFFile.pdf");
 	}
 	
 	@Test(priority = 1)
@@ -41,15 +42,15 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
 		// TODO data-driven testing implementation
 		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, filepath);
-		String itemStatus = viewItemPage.getItemStatus();
-		Assert.assertEquals(itemStatus, "Pending", "Item was not uploaded.");
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
 	
 	@Test(priority = 3)
 	public void depositorSubmitsItem() {
 		viewItemPage = viewItemPage.submitItem();
-		String itemStatus = viewItemPage.getItemStatus();
-		Assert.assertEquals(itemStatus, "Submitted", "Item was not submitted.");
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
@@ -61,8 +62,8 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
-		String itemStatus = viewItemPage.getItemStatus();
-		Assert.assertEquals(itemStatus, "Released", "Item was not released.");
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
 	@Test(priority = 4)

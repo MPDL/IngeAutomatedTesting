@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import base.ItemStatus;
 import pages.BasePage;
 import pages.submission.transition.AcceptItemPage;
 import pages.submission.transition.DiscardItemPage;
@@ -16,7 +17,7 @@ public class ViewItemPage extends BasePage {
 	@FindBy(css = ".itemHeadline>b")
 	private WebElement itemTitle;
 	
-	@FindBy(className = "statusLabel")
+	@FindBy(className = "statusIcon")
 	private WebElement itemStatus;
 	
 	@FindBy(id = "j_idt107:lnkRelease")
@@ -44,8 +45,17 @@ public class ViewItemPage extends BasePage {
 		return itemTitle.getText();
 	}
 	
-	public String getItemStatus() {
-		return itemStatus.getText();
+	public ItemStatus getItemStatus() {
+		String classNames = itemStatus.getAttribute("class");
+		if (classNames.contains("pendingItem"))
+			return ItemStatus.PENDING;
+		if (classNames.contains("submittedItem"))
+			return ItemStatus.SUBMITTED;
+		if (classNames.contains("releasedItem"))
+			return ItemStatus.RELEASED;
+		if (classNames.contains("inRevisionItem"))
+			return ItemStatus.INREWORK;
+		return ItemStatus.DISCARDED;
 	}
 	
 	public ViewItemPage releaseItem() {

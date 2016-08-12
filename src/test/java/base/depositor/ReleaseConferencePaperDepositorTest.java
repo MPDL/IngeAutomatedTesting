@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import base.BaseTest;
 import base.Genre;
+import base.ItemStatus;
 import pages.LoginPage;
 import pages.StartPage;
 import pages.homepages.DepositorHomePage;
@@ -25,7 +26,7 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	public void setup() {
 		super.setup();
 		title = "Released conference paper in simple workflow: " + getTimeStamp();
-		filepath = "file:" + getClass().getResource("/SamplePDFFile.pdf").getPath();
+		filepath = getFilepath("SamplePDFFile.pdf");
 	}
 	
 	@Test(priority = 1)
@@ -40,8 +41,8 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
 		// TODO data-driven testing implementation
 		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath);
-		String itemStatus = viewItemPage.getItemStatus();
-		Assert.assertEquals(itemStatus, "Pending", "Item was not uploaded.");
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
 	
 	@Test(priority = 3)
@@ -49,8 +50,8 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		ViewItemPage viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
 		viewItemPage = viewItemPage.releaseItem();
-		String itemStatus = viewItemPage.getItemStatus();
-		Assert.assertEquals(itemStatus, "Released", "Item was not released.");
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
 	@Test(priority = 4)

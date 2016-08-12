@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
@@ -78,6 +79,16 @@ public abstract class BaseTest {
 		long time = new Date().getTime();
 		Timestamp timeStamp = new Timestamp(time);
 		return timeStamp.toString();
+	}
+	
+	public String getFilepath(String fileName) {
+		fileName = "/" + fileName;
+		String filepath = getClass().getResource(fileName).getPath();
+		if (driver instanceof FirefoxDriver)
+			filepath = "file:" + filepath;
+		if (driver instanceof ChromeDriver)
+			filepath = filepath.substring(1, filepath.length());
+		return filepath;
 	}
 	
 }

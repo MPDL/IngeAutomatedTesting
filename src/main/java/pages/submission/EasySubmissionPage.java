@@ -5,7 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import base.Genre;
 import pages.BasePage;
@@ -57,6 +59,7 @@ public class EasySubmissionPage extends BasePage {
 		WebElement addMultipleAuthorsLink = driver.findElement(By.id("btnShowMultipleAuthors"));
 		addMultipleAuthorsLink.click();
 		WebElement parseAuthorsBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep2Manual:inpcreatorParseString"));
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(parseAuthorsBox));
 		parseAuthorsBox.sendKeys("Testo Testermann, test user");
 		WebElement addAuthorsLink = driver.findElement(By.id("form1:easySubmission:easySubmissionStep2Manual:btnAddAuthors"));
 		addAuthorsLink.click();

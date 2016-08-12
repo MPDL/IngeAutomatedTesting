@@ -42,7 +42,12 @@ public class SimpleSearchRegisteredTest extends BaseTest {
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch(searchQuery);
 		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		try {
+			Assert.assertEquals(headlineText, "Search Results");
+		}
+		catch (AssertionError exc) {
+			Assert.assertEquals(headlineText, "Suchergebnisse", "Search results page was not displayed.");
+		}
 	}
 	
 	@Test(priority = 2)

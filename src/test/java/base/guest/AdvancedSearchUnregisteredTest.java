@@ -35,37 +35,34 @@ public class AdvancedSearchUnregisteredTest extends BaseTest {
 	
 	@Test
 	public void advancedSearchTitleTest() {
-		StartPage startPage = new StartPage(driver);
-		AdvancedSearchPage advancedSearchPage = startPage.goToAdvancedSearchPage();
-		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, "", "");
-		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		searchTest(titleQuery, "", "");
 	}
 	
 	@Test
 	public void advancedSearchAuthorTest() {
-		StartPage startPage = new StartPage(driver);
-		AdvancedSearchPage advancedSearchPage = startPage.goToAdvancedSearchPage();
-		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", authorQuery, "");
-		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		searchTest("", authorQuery, "");
 	}
 	
 	@Test
 	public void advancedSearchOrganisationTest() {
-		StartPage startPage = new StartPage(driver);
-		AdvancedSearchPage advancedSearchPage = startPage.goToAdvancedSearchPage();
-		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", "", organisationQuery);
-		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		searchTest("", "", organisationQuery);
 	}
 	
 	@Test
 	public void advancedSearchCombinedTest() {
+		searchTest(titleQuery, authorQuery, organisationQuery);
+	}
+	
+	private void searchTest(String titleQuery, String authorQuery, String organisationQuery) {
 		StartPage startPage = new StartPage(driver);
 		AdvancedSearchPage advancedSearchPage = startPage.goToAdvancedSearchPage();
 		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, authorQuery, organisationQuery);
 		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		try {
+			Assert.assertEquals(headlineText, "Search Results");
+		}
+		catch (AssertionError exc) {
+			Assert.assertEquals(headlineText, "Suchergebnisse");
+		}
 	}
 }

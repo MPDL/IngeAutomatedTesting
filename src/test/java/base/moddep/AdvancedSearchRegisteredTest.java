@@ -36,38 +36,35 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	
 	@Test(priority=2)
 	public void advancedSearchTitleTest() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
-		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, "", "");
-		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		searchTest(titleQuery, "", "");
 	}
 	
 	@Test(priority=2)
 	public void advancedSearchAuthorTest() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
-		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", authorQuery, "");
-		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		searchTest("", authorQuery, "");
 	}
 	
 	@Test(priority=2)
 	public void advancedSearchOrganisationTest() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
-		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", "", organisationQuery);
-		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		searchTest("", "", organisationQuery);
 	}
 	
 	@Test(priority=2)
 	public void advancedSearchCombinedTest() {
+		searchTest(titleQuery, authorQuery, organisationQuery);
+	}
+	
+	private void searchTest(String titleQuery, String authorQuery, String organisationQuery) {
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
 		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, authorQuery, organisationQuery);
 		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, "Search Results", "Search results page was not displayed.");
+		try {
+			Assert.assertEquals(headlineText, "Search Results");
+		}
+		catch (AssertionError exc) {
+			Assert.assertEquals(headlineText, "Suchergebnisse", "Search results page was not displayed.");
+		}
 	}
 	
 	@AfterClass
