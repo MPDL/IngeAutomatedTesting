@@ -73,7 +73,7 @@ public class TestSuiteInitialisation {
 	*/
 	private ChromeDriver initialiseChromeDriver() {
 		ChromeOptions options = new ChromeOptions();
-		System.setProperty("webdriver.chrome.driver", "/future/path/to/ChromeDriver");
+		System.setProperty("webdriver.chrome.driver", "/" + System.getenv("chromeDriver"));
 		DesiredCapabilities chrome = DesiredCapabilities.chrome();
 		chrome.setCapability(ChromeOptions.CAPABILITY, options);
 		log4j.info("Launching Chrome browser...");
