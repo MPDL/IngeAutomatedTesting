@@ -10,7 +10,10 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -47,6 +50,10 @@ public class TestSuiteInitialisation {
 				log4j.info("Browser type identified as Firefox.");
 				driver = initialiseFirefoxDriver();
 				break;
+			case "chrome":
+				log4j.info("Browser type indentified as Chrome.");
+				driver = initialiseChromeDriver();
+				break;
 			default:
 				log4j.warn("Browser type was not identified. Launching Firefox instead...");
 				driver = initialiseFirefoxDriver();
@@ -59,6 +66,18 @@ public class TestSuiteInitialisation {
 	private FirefoxDriver initialiseFirefoxDriver() {
 		log4j.info("Launching Firefox browser...");
 		return new FirefoxDriver();
+	}
+	
+	/*
+	* TODO provide Jenkins with ChromeDriver
+	*/
+	private ChromeDriver initialiseChromeDriver() {
+		ChromeOptions options = new ChromeOptions();
+		System.setProperty("webdriver.chrome.driver", "/future/path/to/ChromeDriver");
+		DesiredCapabilities chrome = DesiredCapabilities.chrome();
+		chrome.setCapability(ChromeOptions.CAPABILITY, options);
+		log4j.info("Launching Chrome browser...");
+		return new ChromeDriver();
 	}
 	
 	private void loadProperties() throws FileNotFoundException {
