@@ -73,6 +73,7 @@ public class TestSuiteInitialisation {
 	*/
 	private ChromeDriver initialiseChromeDriver() {
 		ChromeOptions options = new ChromeOptions();
+		options.setBinary("/" + System.getenv("chromeDriver"));
 		System.setProperty("webdriver.chrome.driver", "/" + System.getenv("chromeDriver"));
 		DesiredCapabilities chrome = DesiredCapabilities.chrome();
 		chrome.setCapability(ChromeOptions.CAPABILITY, options);
