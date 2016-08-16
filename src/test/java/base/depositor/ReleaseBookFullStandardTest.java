@@ -105,6 +105,8 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
+		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
+		moderatorHomePage.logout();
 	}
 	
 }
