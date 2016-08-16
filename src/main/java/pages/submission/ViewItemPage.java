@@ -10,6 +10,7 @@ import pages.BasePage;
 import pages.submission.transition.AcceptItemPage;
 import pages.submission.transition.DiscardItemPage;
 import pages.submission.transition.FinaliseSubmissionPage;
+import pages.submission.transition.ReworkItemPage;
 import pages.submission.transition.SubmitItemPage;
 
 public class ViewItemPage extends BasePage {
@@ -28,6 +29,15 @@ public class ViewItemPage extends BasePage {
 	
 	@FindBy(id = "j_idt107:lnkAccept")
 	private WebElement acceptItemLink;
+	
+	@FindBy(id = "j_idt107:lnkEdit")
+	private WebElement editItemLink;
+	
+	@FindBy(id = "j_idt107:lnkRevise")
+	private WebElement reviseItemLink;
+	
+	@FindBy(id = "j_idt107:lnkModify")
+	private WebElement modifyItemLink;
 	
 	@FindBy(id = "j_idt107:lnkDelete")
 	private WebElement deleteItemLink;
@@ -87,6 +97,24 @@ public class ViewItemPage extends BasePage {
 		acceptItemLink.click();
 		
 		return new AcceptItemPage(driver).acceptItem();
+	}
+	
+	public ViewItemPage editItem() {
+		editItemLink.click();
+		
+		return new EditItemPage(driver).editItem();
+	}
+	
+	public ViewItemPage sendBackForRework() {
+		reviseItemLink.click();
+		
+		return new ReworkItemPage(driver).sendBackForRework();
+	}
+	
+	public ViewItemPage modifyItem() {
+		modifyItemLink.click();
+		
+		return new EditItemPage(driver).modifyItem();
 	}
 	
 }
