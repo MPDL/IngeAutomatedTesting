@@ -65,7 +65,7 @@ public class TestSuiteInitialisation {
 		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
 		driver = new RemoteWebDriver(
 	            new URL("http://"+System.getenv("SAUCE_USERNAME")+":"+System.getenv("SAUCE_ACCESS_KEY")+"@ondemand.saucelabs.com:80/wd/hub",
-	            desiredCapabilities);
+	            desiredCapabilities));
 		driver.manage().window().maximize();
 		log4j.info("Window maximised.");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
