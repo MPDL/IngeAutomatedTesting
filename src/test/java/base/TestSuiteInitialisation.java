@@ -14,9 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -48,7 +45,7 @@ public class TestSuiteInitialisation {
 	}
 	
 	private void initialiseDriver(String browserType) {
-		/*switch(browserType) {
+		switch(browserType) {
 			case "firefox":
 				log4j.info("Browser type identified as Firefox.");
 				driver = initialiseFirefoxDriver();
@@ -60,22 +57,10 @@ public class TestSuiteInitialisation {
 			default:
 				log4j.warn("Browser type was not identified. Launching Firefox instead...");
 				driver = initialiseFirefoxDriver();
-		}*/
-		// begin experimental
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-		desiredCapabilities.setBrowserName(System.getenv("SELENIUM_BROWSER"));
-		desiredCapabilities.setVersion(System.getenv("SELENIUM_VERSION"));
-		desiredCapabilities.setCapability(CapabilityType.PLATFORM, System.getenv("SELENIUM_PLATFORM"));
-		try {
-			driver = new RemoteWebDriver(
-		            new URL("http://"+System.getenv("SAUCE_USERNAME")+":"+System.getenv("SAUCE_ACCESS_KEY")+"@ondemand.saucelabs.com:80/wd/hub"),
-		            desiredCapabilities);
 		}
-		catch (Exception exc) {}
 		driver.manage().window().maximize();
 		log4j.info("Window maximised.");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		// end experimental
 	}
 	
 	private FirefoxDriver initialiseFirefoxDriver() {
