@@ -81,7 +81,7 @@ public abstract class BaseTest {
 		return timeStamp.toString();
 	}
 	
-	public String getFilepath(String fileName) {
+	public final String getFilepath(String fileName) {
 		fileName = "/" + fileName;
 		String filepath = getClass().getResource(fileName).getPath();
 		if (driver instanceof FirefoxDriver)

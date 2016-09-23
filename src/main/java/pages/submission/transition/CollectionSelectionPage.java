@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import main.java.pages.BasePage;
 import main.java.pages.submission.EasySubmissionPage;
+import main.java.pages.submission.FetchSubmissionPage;
 import main.java.pages.submission.FullSubmissionPage;
 
 public class CollectionSelectionPage extends BasePage {
@@ -39,5 +40,11 @@ public class CollectionSelectionPage extends BasePage {
 		standardTestContext.click();
 		
 		return PageFactory.initElements(driver, EasySubmissionPage.class);
+	}
+	
+	public FetchSubmissionPage fetchSubmissionStandard() {
+		standardTestContext.click();
+		
+		return PageFactory.initElements(driver, FetchSubmissionPage.class);
 	}
 }

@@ -16,6 +16,9 @@ public class SubmissionPage extends BasePage {
 	@FindBy(id = "j_idt98:lnkNewSubmission")
 	private WebElement fullSubmissionLink;
 	
+	@FindBy(id = "j_idt98:lnkSubmission_lnkImport")
+	private WebElement fetchSubmissionLink;
+	
 	@FindBy(id = "j_idt98:lnkSubmission_lnkMultipleImport")
 	private WebElement multipleImportLink;
 
@@ -47,6 +50,14 @@ public class SubmissionPage extends BasePage {
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
 		
 		return collectionSelectionPage.fullSubmissionSimple();
+	}
+	
+	public FetchSubmissionPage goToFetchSubmissionStandardPage() {
+		fetchSubmissionLink.click();
+		
+		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
+		
+		return collectionSelectionPage.fetchSubmissionStandard();
 	}
 	
 	public MultipleImportPage goToMultipleImportPage() {
