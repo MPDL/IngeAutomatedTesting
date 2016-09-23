@@ -14,7 +14,13 @@ import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
 import main.java.pages.submission.ViewItemPage;
+import main.java.pages.tools.ToolsPage;
 
+/**
+ * Components and actions common to every QA-PubMan page.
+ * @author apetrova
+ *
+ */
 public abstract class BasePage {
 
 	protected WebDriver driver;
@@ -48,6 +54,10 @@ public abstract class BasePage {
 	
 	public SearchResultsPage quickSearch(String searchQuery) {
 		return searchComponent.quickSearch(searchQuery);
+	}
+	
+	public ToolsPage goToToolsPage() {
+		return mainMenuComponent.goToToolsPage();
 	}
 	
 	public AdvancedSearchPage goToAdvancedSearchPage() {

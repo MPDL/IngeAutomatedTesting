@@ -9,7 +9,7 @@
 		<classes>
 			<class name="test.java.base.TestSuiteInitialisation"></class>
 			<class name="test.java.base.BaseTest"></class>
-			<class name="test.java.base.depositor.ReleaseConferencePaperDepositorTest"></class>
+			<!-- <class name="test.java.base.depositor.ReleaseConferencePaperFullSimpleTest"></class>
 			<class name="test.java.base.depositor.ReleaseBookFullStandardTest"></class>
 			<class name="test.java.base.depositor.JournalArticleEasyStandardTest"></class>
 			<class name="test.java.base.guest.SimpleSearchUnregisteredTest"></class>
@@ -17,6 +17,12 @@
 			<class name="test.java.base.guest.AdvancedSearchUnregisteredTest"></class>
 			<class name="test.java.base.moddep.AdvancedSearchRegisteredTest"></class>
 			<class name="test.java.base.moddep.AdministrativeSearchTest"></class>
+			<class name="test.java.base.moddep.FetchArXivStandardTest"></class>
+			<class name="test.java.base.moddep.ExportRestExampleStandardTest"></class>
+			<class name="test.java.base.guest.ExportRestExampleStandardTest"></class> -->
+			<class name="test.java.base.moddep.ExportItemStandardTest"></class>
+			<!-- <class name="test.java.base.cone.ConeAuthorTest"></class>
+			<class name="test.java.base.cone.ConeJournalTest"></class> -->
 		</classes>
 	</test>
 	

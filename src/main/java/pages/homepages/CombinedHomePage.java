@@ -5,10 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.SubmissionPage;
 
 public class CombinedHomePage extends HomePage {
 
+	@FindBy(id = "Header:lnkDepWorkspace")
+	private WebElement myItemsLink;
+	
 	@FindBy(id = "Header:lnkSubmission")
 	private WebElement submissionLink;
 	
@@ -16,6 +20,12 @@ public class CombinedHomePage extends HomePage {
 		super(driver);
 		
 		PageFactory.initElements(driver, this);
+	}
+	
+	public MyItemsPage goToMyItemsPage() {
+		myItemsLink.click();
+		
+		return PageFactory.initElements(driver, MyItemsPage.class);
 	}
 	
 	public SubmissionPage goToSubmissionPage() {

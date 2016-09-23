@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import main.java.pages.cone.ConeHomePage;
 import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
@@ -35,12 +36,17 @@ public class LoginPage {
 	
 	public ModeratorHomePage loginAsModerator(String username, String password) {
 		login(username, password);
-		return PageFactory.initElements(driver,  ModeratorHomePage.class);
+		return PageFactory.initElements(driver, ModeratorHomePage.class);
 	}
 	
 	public CombinedHomePage loginAsCombinedUser(String username, String password) {
 		login(username, password);
-		return PageFactory.initElements(driver,  CombinedHomePage.class);
+		return PageFactory.initElements(driver, CombinedHomePage.class);
+	}
+	
+	public ConeHomePage loginCone(String username, String password) {
+		login(username, password);
+		return PageFactory.initElements(driver, ConeHomePage.class);
 	}
 	
 	private void login(String username, String password) {

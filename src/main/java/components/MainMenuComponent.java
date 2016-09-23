@@ -11,6 +11,7 @@ import main.java.pages.submission.ImportWorkspacePage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.QAWorkspacePage;
 import main.java.pages.submission.SubmissionPage;
+import main.java.pages.tools.ToolsPage;
 
 /**
  * Menu containing item, workspace, and tool management
@@ -32,6 +33,9 @@ public class MainMenuComponent {
 	
 	@FindBy(id = "Header:lnkSubmission")
 	private WebElement submissionLink;
+	
+	@FindBy(id = "Header:lnkTools")
+	private WebElement toolsLink;
 	
 	public MainMenuComponent(WebDriver driver) {
 		this.driver = driver;
@@ -71,5 +75,11 @@ public class MainMenuComponent {
 		submissionLink.click();
 		
 		return PageFactory.initElements(driver, SubmissionPage.class);
+	}
+	
+	public ToolsPage goToToolsPage() {
+		toolsLink.click();
+		
+		return PageFactory.initElements(driver, ToolsPage.class);
 	}
 }

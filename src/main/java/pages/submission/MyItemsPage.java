@@ -1,14 +1,32 @@
 package main.java.pages.submission;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import main.java.pages.BasePage;
 
 public class MyItemsPage extends BasePage {
 
+	@FindBy(id = "j_idt103:itemList:iterCurrentPartList:0:selItemSelect")
+	private WebElement firstItemCheckBox;
+	
+	@FindBy(id = "j_idt103:lnkChangeSubmenuToExport")
+	private WebElement exportLink;
+	
+	@FindBy(id = "j_idt103:selExportFormatName")
+	private WebElement formatDropdown;
+	
+	@FindBy(id = "j_idt103:btnExportDownload")
+	private WebElement downloadLink;
+	
 	public MyItemsPage(WebDriver driver) {
 		super(driver);
 		
@@ -30,5 +48,35 @@ public class MyItemsPage extends BasePage {
 	public ViewItemPage discardItemByTitle(String itemTitle) {
 		ViewItemPage viewItemPage = openItemByTitle(itemTitle);
 		return viewItemPage.discardItem();
+	}
+	
+	public boolean exportItem(String itemTitle, String value) {
+		try {
+			exportLink.click();
+			PageFactory.initElements(driver, this);
+			
+			Select formatSelect = new Select(formatDropdown);
+			formatSelect.selectByValue(value);
+			
+			firstItemCheckBox.click();
+			
+			downloadLink.click();
+			new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
+			downloadLink.sendKeys(Keys.ESCAPE);
+			return true;
+		}
+		catch (Exception exc) {
+			return false;
+		}
+	}
+	
+	public boolean hasItems() {
+		try {
+			driver.findElement(By.className("listItem"));
+			return true;
+		}
+		catch (NoSuchElementException exc) {
+			return false;
+		}
 	}
 }
