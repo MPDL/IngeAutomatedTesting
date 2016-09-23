@@ -1,12 +1,12 @@
-package pages.submission;
+package main.java.pages.submission;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.BasePage;
-import pages.submission.transition.AcceptItemPage;
+import main.java.pages.BasePage;
+import main.java.pages.submission.transition.AcceptItemPage;
 
 public class EditItemPage extends BasePage {
 

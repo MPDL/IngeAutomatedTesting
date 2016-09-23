@@ -1,9 +1,9 @@
-package pages.homepages;
+package main.java.pages.homepages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.submission.QAWorkspacePage;
+import main.java.pages.submission.QAWorkspacePage;
 
 public class ModeratorHomePage extends HomePage {
 

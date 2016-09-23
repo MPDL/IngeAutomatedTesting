@@ -1,12 +1,12 @@
-package components;
+package main.java.components;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.LoginPage;
-import pages.StartPage;
+import main.java.pages.LoginPage;
+import main.java.pages.StartPage;
 
 /**
  * Menu containing login, contact, disclaimer, help, and language choice

@@ -1,13 +1,13 @@
-package pages.homepages;
+package main.java.pages.homepages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.BasePage;
-import pages.StartPage;
-import pages.search.AdministrativeSearchPage;
+import main.java.pages.BasePage;
+import main.java.pages.StartPage;
+import main.java.pages.search.AdministrativeSearchPage;
 
 public class HomePage extends BasePage {
 

@@ -1,4 +1,4 @@
-package pages.submission;
+package main.java.pages.submission;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,8 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import base.Genre;
-import pages.BasePage;
+import test.java.base.Genre;
+import main.java.pages.BasePage;
 
 public class FullSubmissionPage extends BasePage {
 

@@ -1,19 +1,19 @@
-package pages;
+package main.java.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import components.MainMenuComponent;
-import components.MetaMenuComponent;
-import components.SearchComponent;
-import pages.homepages.CombinedHomePage;
-import pages.homepages.DepositorHomePage;
-import pages.homepages.HomePage;
-import pages.homepages.ModeratorHomePage;
-import pages.search.AdvancedSearchPage;
-import pages.search.SearchResultsPage;
-import pages.submission.ViewItemPage;
+import main.java.components.MainMenuComponent;
+import main.java.components.MetaMenuComponent;
+import main.java.components.SearchComponent;
+import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.homepages.DepositorHomePage;
+import main.java.pages.homepages.HomePage;
+import main.java.pages.homepages.ModeratorHomePage;
+import main.java.pages.search.AdvancedSearchPage;
+import main.java.pages.search.SearchResultsPage;
+import main.java.pages.submission.ViewItemPage;
 
 public abstract class BasePage {
 

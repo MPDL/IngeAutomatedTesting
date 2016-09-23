@@ -1,4 +1,4 @@
-package pages.submission;
+package main.java.pages.submission;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.BasePage;
+import main.java.pages.BasePage;
 
 public class ImportWorkspacePage extends BasePage {
 

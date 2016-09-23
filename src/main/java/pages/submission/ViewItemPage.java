@@ -1,17 +1,17 @@
-package pages.submission;
+package main.java.pages.submission;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import base.ItemStatus;
-import pages.BasePage;
-import pages.submission.transition.AcceptItemPage;
-import pages.submission.transition.DiscardItemPage;
-import pages.submission.transition.FinaliseSubmissionPage;
-import pages.submission.transition.ReworkItemPage;
-import pages.submission.transition.SubmitItemPage;
+import test.java.base.ItemStatus;
+import main.java.pages.BasePage;
+import main.java.pages.submission.transition.AcceptItemPage;
+import main.java.pages.submission.transition.DiscardItemPage;
+import main.java.pages.submission.transition.FinaliseSubmissionPage;
+import main.java.pages.submission.transition.ReworkItemPage;
+import main.java.pages.submission.transition.SubmitItemPage;
 
 public class ViewItemPage extends BasePage {
 

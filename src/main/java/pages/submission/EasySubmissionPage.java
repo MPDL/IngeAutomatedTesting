@@ -1,4 +1,4 @@
-package pages.submission;
+package main.java.pages.submission;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import base.Genre;
-import pages.BasePage;
+import test.java.base.Genre;
+import main.java.pages.BasePage;
 
 /** 
  *  Page with a dynamic three-step completion process

@@ -1,16 +1,16 @@
-package base.moddep;
+package test.java.base.moddep;
 
 import org.junit.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.BaseTest;
-import pages.LoginPage;
-import pages.StartPage;
-import pages.homepages.CombinedHomePage;
-import pages.search.AdministrativeSearchPage;
-import pages.search.SearchResultsPage;
+import test.java.base.BaseTest;
+import main.java.pages.LoginPage;
+import main.java.pages.StartPage;
+import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.search.AdministrativeSearchPage;
+import main.java.pages.search.SearchResultsPage;
 
 public class AdministrativeSearchTest extends BaseTest {
 

@@ -1,19 +1,25 @@
-package base.depositor;
+package test.java.base.depositor;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.BaseTest;
-import base.Genre;
-import base.ItemStatus;
-import pages.LoginPage;
-import pages.StartPage;
-import pages.homepages.DepositorHomePage;
-import pages.homepages.ModeratorHomePage;
-import pages.submission.FullSubmissionPage;
-import pages.submission.ViewItemPage;
+import test.java.base.BaseTest;
+import test.java.base.Genre;
+import test.java.base.ItemStatus;
+import main.java.pages.LoginPage;
+import main.java.pages.StartPage;
+import main.java.pages.homepages.DepositorHomePage;
+import main.java.pages.homepages.ModeratorHomePage;
+import main.java.pages.submission.FullSubmissionPage;
+import main.java.pages.submission.ViewItemPage;
 
+/**
+ * TestLink UC #5
+ * Tests full submission of a book in standard workflow.
+ * @author apetrova
+ *
+ */
 public class ReleaseBookFullStandardTest extends BaseTest {
 	
 	private String title;

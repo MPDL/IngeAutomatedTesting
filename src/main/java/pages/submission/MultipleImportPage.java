@@ -1,4 +1,4 @@
-package pages.submission;
+package main.java.pages.submission;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.BasePage;
+import main.java.pages.BasePage;
 
 public class MultipleImportPage extends BasePage {
 

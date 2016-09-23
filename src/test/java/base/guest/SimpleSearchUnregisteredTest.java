@@ -1,12 +1,12 @@
-package base.guest;
+package test.java.base.guest;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.BaseTest;
-import pages.StartPage;
-import pages.search.SearchResultsPage;
+import test.java.base.BaseTest;
+import main.java.pages.StartPage;
+import main.java.pages.search.SearchResultsPage;
 
 public class SimpleSearchUnregisteredTest extends BaseTest {
 

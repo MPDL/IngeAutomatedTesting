@@ -1,4 +1,4 @@
-package components;
+package main.java.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.StartPage;
-import pages.submission.ImportWorkspacePage;
-import pages.submission.MyItemsPage;
-import pages.submission.QAWorkspacePage;
-import pages.submission.SubmissionPage;
+import main.java.pages.StartPage;
+import main.java.pages.submission.ImportWorkspacePage;
+import main.java.pages.submission.MyItemsPage;
+import main.java.pages.submission.QAWorkspacePage;
+import main.java.pages.submission.SubmissionPage;
 
 /**
  * Menu containing item, workspace, and tool management

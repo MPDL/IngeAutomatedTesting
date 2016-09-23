@@ -1,4 +1,4 @@
-package base;
+package test.java.base;
 
 import java.sql.Timestamp;
 import java.util.Date;

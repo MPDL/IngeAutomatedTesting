@@ -1,13 +1,13 @@
-package components;
+package main.java.components;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.search.AdvancedSearchPage;
-import pages.search.BrowsePage;
-import pages.search.SearchResultsPage;
+import main.java.pages.search.AdvancedSearchPage;
+import main.java.pages.search.BrowsePage;
+import main.java.pages.search.SearchResultsPage;
 
 public class SearchComponent {
 

@@ -1,9 +1,9 @@
-package pages.search;
+package main.java.pages.search;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.BasePage;
+import main.java.pages.BasePage;
 
 public class BrowsePage extends BasePage {
 

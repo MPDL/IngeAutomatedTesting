@@ -1,4 +1,4 @@
-package base;
+package test.java.base;
 
 public enum Genre {
 	ARTICLE, BOOK, BOOK_ITEM, PROCEEDINGS, CONFERENCE_PAPER, TALK_AT_EVENT, CONFERENCE_REPORT, POSTER,

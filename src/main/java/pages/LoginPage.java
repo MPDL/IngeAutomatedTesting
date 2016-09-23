@@ -1,13 +1,13 @@
-package pages;
+package main.java.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.homepages.CombinedHomePage;
-import pages.homepages.DepositorHomePage;
-import pages.homepages.ModeratorHomePage;
+import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.homepages.DepositorHomePage;
+import main.java.pages.homepages.ModeratorHomePage;
 
 public class LoginPage {
 

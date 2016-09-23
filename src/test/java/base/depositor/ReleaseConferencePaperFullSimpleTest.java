@@ -1,21 +1,27 @@
-package base.depositor;
+package test.java.base.depositor;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.BaseTest;
-import base.Genre;
-import base.ItemStatus;
-import pages.LoginPage;
-import pages.StartPage;
-import pages.homepages.DepositorHomePage;
-import pages.submission.FullSubmissionPage;
-import pages.submission.MyItemsPage;
-import pages.submission.ViewItemPage;
+import test.java.base.BaseTest;
+import test.java.base.Genre;
+import test.java.base.ItemStatus;
+import main.java.pages.LoginPage;
+import main.java.pages.StartPage;
+import main.java.pages.homepages.DepositorHomePage;
+import main.java.pages.submission.FullSubmissionPage;
+import main.java.pages.submission.MyItemsPage;
+import main.java.pages.submission.ViewItemPage;
 
-public class ReleaseConferencePaperDepositorTest extends BaseTest {
+/**
+ * Test Link UC #4
+ * Tests the publication of a conference paper through full submission in simple workflow.
+ * @author apetrova
+ *
+ */
+public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
 	private DepositorHomePage depositorHomePage;
 	
@@ -39,7 +45,6 @@ public class ReleaseConferencePaperDepositorTest extends BaseTest {
 	@Test(priority = 2)
 	public void fullSubmissionSimpleWorkflow() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
-		// TODO data-driven testing implementation
 		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
