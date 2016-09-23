@@ -5,10 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import main.java.pages.cone.ConeHomePage;
 import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
+import main.java.pages.tools.cone.ConeHomePage;
 
 public class LoginPage {
 

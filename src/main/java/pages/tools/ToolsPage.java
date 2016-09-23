@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import main.java.pages.BasePage;
-import main.java.pages.cone.ConeBasePage;
+import main.java.pages.tools.cone.ConeBasePage;
 
 public class ToolsPage extends BasePage {
 

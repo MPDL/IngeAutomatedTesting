@@ -1,4 +1,4 @@
-package main.java.pages.cone;
+package main.java.pages.tools.cone;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

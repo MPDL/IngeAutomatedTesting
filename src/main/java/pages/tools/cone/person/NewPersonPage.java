@@ -1,11 +1,11 @@
-package main.java.pages.cone.person;
+package main.java.pages.tools.cone.person;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import main.java.pages.cone.ConeBasePage;
+import main.java.pages.tools.cone.ConeBasePage;
 
 public class NewPersonPage extends ConeBasePage {
 

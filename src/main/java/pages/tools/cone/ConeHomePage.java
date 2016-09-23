@@ -1,4 +1,4 @@
-package main.java.pages.cone;
+package main.java.pages.tools.cone;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import main.java.pages.cone.journal.NewJournalPage;
-import main.java.pages.cone.person.NewPersonPage;
+import main.java.pages.tools.cone.journal.NewJournalPage;
+import main.java.pages.tools.cone.person.NewPersonPage;
 
 /**
  * Homepage for registered users with the rights

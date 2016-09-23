@@ -54,22 +54,30 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 		depositorHomePage.logout();
 	}
 	
-	
-	@Test(priority = 3)
-	public void moderatorReleasesSubmission() {
+	@Test(priority = 4)
+	public void loginAsModerator() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
+		Assert.assertEquals(moderatorHomePage.getUsername(), moderatorName, "Expected and actual name don't match.");
+	}
+	
+	@Test(priority = 5)
+	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 4)
+	@Test(priority = 6)
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
+	}
+	
+	@Test(priority = 7)
+	public void moderatorLogout() {
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}

@@ -6,11 +6,11 @@ import org.testng.annotations.Test;
 
 import junit.framework.Assert;
 import main.java.pages.StartPage;
-import main.java.pages.cone.ConeBasePage;
-import main.java.pages.cone.ConeHomePage;
-import main.java.pages.cone.journal.EditJournalPage;
-import main.java.pages.cone.journal.NewJournalPage;
-import main.java.pages.cone.journal.ViewJournalPage;
+import main.java.pages.tools.cone.ConeBasePage;
+import main.java.pages.tools.cone.ConeHomePage;
+import main.java.pages.tools.cone.journal.EditJournalPage;
+import main.java.pages.tools.cone.journal.NewJournalPage;
+import main.java.pages.tools.cone.journal.ViewJournalPage;
 import test.java.base.BaseTest;
 
 public class ConeJournalTest extends BaseTest {

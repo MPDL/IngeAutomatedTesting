@@ -1,4 +1,4 @@
-package main.java.pages.cone;
+package main.java.pages.tools.cone;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import main.java.pages.cone.journal.ViewJournalPage;
-import main.java.pages.cone.person.ViewPersonPage;
+import main.java.pages.tools.cone.journal.ViewJournalPage;
+import main.java.pages.tools.cone.person.ViewPersonPage;
 
 public class ConeSearchPage extends ConeBasePage {
 

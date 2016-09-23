@@ -5,10 +5,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import main.java.pages.StartPage;
-import main.java.pages.cone.ConeBasePage;
-import main.java.pages.cone.ConeHomePage;
-import main.java.pages.cone.person.NewPersonPage;
-import main.java.pages.cone.person.ViewPersonPage;
+import main.java.pages.tools.cone.ConeBasePage;
+import main.java.pages.tools.cone.ConeHomePage;
+import main.java.pages.tools.cone.person.NewPersonPage;
+import main.java.pages.tools.cone.person.ViewPersonPage;
 import test.java.base.BaseTest;
 
 public class ConeAuthorTest extends BaseTest {
@@ -27,7 +27,7 @@ public class ConeAuthorTest extends BaseTest {
 	}
 	
 	@Test(priority = 2)
-	public void createNewAuthor() {
+	public void createAuthor() {
 		NewPersonPage newPersonPage = coneHomePage.enterNewPerson();
 		ViewPersonPage viewPersonPage = newPersonPage.createNewAuthor("Test Testerfrau", "Testerfrau");
 	}
