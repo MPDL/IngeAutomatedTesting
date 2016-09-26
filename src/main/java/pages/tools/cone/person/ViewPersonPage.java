@@ -12,6 +12,12 @@ public class ViewPersonPage extends ConeBasePage {
 	@FindBy(className = "sub")
 	private WebElement editButton;
 	
+	@FindBy(css = ".itemLine:nth-of-type(2) .xDouble_area0")
+	private WebElement completeName;
+	
+	@FindBy(css = ".itemLine:nth-of-type(3) .xDouble_area0")
+	private WebElement familyName;
+	
 	public ViewPersonPage(WebDriver driver) {
 		super(driver);
 		
@@ -22,5 +28,13 @@ public class ViewPersonPage extends ConeBasePage {
 		editButton.click();
 		
 		return PageFactory.initElements(driver, EditPersonPage.class);
+	}
+	
+	public String getCompleteName() {
+		return completeName.getText();
+	}
+	
+	public String getFamilyName() {
+		return familyName.getText();
 	}
 }

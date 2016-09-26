@@ -54,7 +54,7 @@ public class SimpleSearchRegisteredTest extends BaseTest {
 	public void onlyPublishedItems() {
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch(searchQuery);
-		boolean allReleased = searchResultsPage.areAllResultsReleased();
+		boolean allReleased = searchResultsPage.allResultsReleased();
 		Assert.assertTrue(allReleased, "An item in search results has not been released.");
 	}
 	

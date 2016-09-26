@@ -17,13 +17,8 @@ import main.java.pages.tools.cone.person.NewPersonPage;
  */
 public class ConeHomePage extends ConeBasePage {
 
-	private WebDriver driver;
-	
 	@FindBy(css = "#metaMenuSkipLinkAnchor a:nth-of-type(2)")
 	private WebElement logoutLink;
-	
-	@FindBy(css = "#mainMenuSkipLinkAnchor a:nth-of-type(2)")
-	private WebElement searchLink;
 	
 	@FindBy(css = "#mainMenuSkipLinkAnchor a:nth-of-type(3)")
 	private WebElement enterNewEntityLink;
@@ -46,12 +41,6 @@ public class ConeHomePage extends ConeBasePage {
 		driver.findElement(By.linkText("journals")).click();
 		
 		return PageFactory.initElements(driver, NewJournalPage.class);
-	}
-	
-	public ConeSearchPage goToSearch(String searchQuery, String type) {
-		searchLink.click();
-		
-		return PageFactory.initElements(driver, ConeSearchPage.class);
 	}
 	
 	public ConeBasePage logout() {

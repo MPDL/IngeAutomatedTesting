@@ -1,15 +1,12 @@
 package main.java.pages.submission;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import main.java.pages.BasePage;
 
@@ -54,20 +51,18 @@ public class MyItemsPage extends BasePage {
 		try {
 			exportLink.click();
 			PageFactory.initElements(driver, this);
-			
-			Select formatSelect = new Select(formatDropdown);
-			formatSelect.selectByValue(value);
-			
-			firstItemCheckBox.click();
-			
-			downloadLink.click();
-			new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
-			downloadLink.sendKeys(Keys.ESCAPE);
-			return true;
 		}
-		catch (Exception exc) {
-			return false;
+		catch (NoSuchElementException exc) {
+			// export submenu already open: do nothing
+			// TODO temporary solution, design a fix
 		}
+			
+		Select formatSelect = new Select(formatDropdown);
+		formatSelect.selectByValue(value);
+			
+		firstItemCheckBox.click();
+			
+		return downloadLink.isDisplayed() && downloadLink.isEnabled();
 	}
 	
 	public boolean hasItems() {

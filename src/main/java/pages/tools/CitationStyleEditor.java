@@ -16,6 +16,5 @@ public class CitationStyleEditor {
 	
 	public void searchByExample() {
 		searchExampleLink.click();
-		
 	}
 }

@@ -27,17 +27,18 @@ public class ConeSearchPage extends ConeBasePage {
 	
 	public ConeBasePage searchFirstResult(String searchQuery, EntityType type) {
 		Select typeSelect = new Select(typeDropdown);
+		searchBox.clear();
 		searchBox.sendKeys(searchQuery);
 		switch(type) {
 			case PERSON:
 				typeSelect.selectByValue("persons");
 				submitButton.click();
-				driver.findElement(By.cssSelector("large_marginLInclclear a")).click();
+				driver.findElement(By.cssSelector(".itemLine a")).click();
 				return PageFactory.initElements(driver, ViewPersonPage.class);
 			case JOURNAL:
 				typeSelect.selectByValue("journals");
 				submitButton.click();
-				driver.findElement(By.cssSelector("large_marginLInclclear a")).click();
+				driver.findElement(By.cssSelector(".itemLine a")).click();
 				return PageFactory.initElements(driver, ViewJournalPage.class);
 			default:
 				return PageFactory.initElements(driver, ConeSearchPage.class);

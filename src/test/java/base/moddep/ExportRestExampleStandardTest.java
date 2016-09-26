@@ -10,6 +10,12 @@ import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.tools.RestExamplePage;
 import test.java.base.BaseTest;
 
+/**
+ * TestLink Use Case #7
+ * Export is tested up to the Download button.
+ * @author apetrova
+ *
+ */
 public class ExportRestExampleStandardTest extends BaseTest {
 
 	private CombinedHomePage combinedHomePage;
@@ -27,7 +33,6 @@ public class ExportRestExampleStandardTest extends BaseTest {
 	
 	@Test(priority = 2)
 	public void exportREST() {
-		// TODO better coverage
 		RestExamplePage restExamplePage = combinedHomePage.goToToolsPage().goToRestInterface();
 		boolean itemsWereExported = restExamplePage.exportableItemAvailable();
 		Assert.assertTrue(itemsWereExported, "No items were exported.");

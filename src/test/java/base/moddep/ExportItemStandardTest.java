@@ -10,8 +10,15 @@ import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.submission.FetchSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
+import main.java.pages.submission.ViewItemPage;
 import test.java.base.BaseTest;
 
+/**
+ * TestLink Use Case #15
+ * Export up to Submit button.
+ * @author apetrova
+ *
+ */
 public class ExportItemStandardTest extends BaseTest {
 
 	private CombinedHomePage combinedHomePage;
@@ -44,13 +51,13 @@ public class ExportItemStandardTest extends BaseTest {
 		
 		combinedHomePage = (CombinedHomePage) myItemsPage.goToHomePage(combinedHomePage);
 		FetchSubmissionPage fetchPage = combinedHomePage.goToSubmissionPage().goToFetchSubmissionStandardPage();
-		fetchPage.fetchSubmission(identifier);
+		ViewItemPage viewResultsPage = fetchPage.fetchSubmission(identifier);
+		combinedHomePage = (CombinedHomePage) viewResultsPage.goToHomePage(combinedHomePage);
+		myItemsPage = combinedHomePage.goToMyItemsPage();
 	}
 	
 	@Test(priority = 3)
 	public void exportItemBibtex() {
-		combinedHomePage = (CombinedHomePage) myItemsPage.goToHomePage(combinedHomePage);
-		myItemsPage = combinedHomePage.goToMyItemsPage();
 		boolean itemIsExported = myItemsPage.exportItem(itemTitle, bibtexValue);
 		Assert.assertTrue(itemIsExported, "Item was not exported.");
 	}
@@ -58,7 +65,7 @@ public class ExportItemStandardTest extends BaseTest {
 	@Test(priority = 4)
 	public void exportItemEndNote() {
 		combinedHomePage = (CombinedHomePage) myItemsPage.goToHomePage(combinedHomePage);
-		myItemsPage = combinedHomePage.goToMyItemsPage();
+		myItemsPage = ((CombinedHomePage)(combinedHomePage.goToSubmissionPage().goToHomePage(combinedHomePage))).goToMyItemsPage();
 		boolean itemIsExported = myItemsPage.exportItem(itemTitle, endNoteValue);
 		Assert.assertTrue(itemIsExported, "Item was not exported.");
 	}

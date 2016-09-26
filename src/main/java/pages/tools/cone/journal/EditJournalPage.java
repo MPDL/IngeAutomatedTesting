@@ -25,6 +25,7 @@ public class EditJournalPage extends ConeBasePage {
 	}
 	
 	public ViewJournalPage changeTitle(String newTitle) {
+		titleBox.clear();
 		titleBox.sendKeys(newTitle);
 		saveButton.click();
 		

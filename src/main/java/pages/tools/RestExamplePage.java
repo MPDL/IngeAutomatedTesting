@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import main.java.pages.BasePage;
 
@@ -20,13 +21,9 @@ public class RestExamplePage extends BasePage {
 	}
 	
 	public boolean exportableItemAvailable() {
-		try {
-			buttonArea./*findElement(By.tagName("a")).*/click();
-			buttonArea.sendKeys(Keys.ESCAPE);
-			return true;
-		}
-		catch (Exception exc) {
-			return false;
-		}
+		boolean itemIsAvailable;
+		itemIsAvailable = buttonArea.isDisplayed() && buttonArea.isEnabled();
+		
+		return itemIsAvailable;
 	}
 }

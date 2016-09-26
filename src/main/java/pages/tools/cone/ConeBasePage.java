@@ -22,6 +22,9 @@ public class ConeBasePage {
 	@FindBy(css = "#metaMenuSkipLinkAnchor a:nth-of-type(2)")
 	private WebElement loginLink;
 	
+	@FindBy(css = "#mainMenuSkipLinkAnchor a:nth-of-type(2)")
+	private WebElement searchLink;
+	
 	public ConeBasePage(WebDriver driver) {
 		this.driver = driver;
 		
@@ -44,5 +47,11 @@ public class ConeBasePage {
 	
 	public ConeHomePage goToHomePage(ConeHomePage coneHomePage) {
 		return PageFactory.initElements(driver, ConeHomePage.class);
+	}
+	
+	public ConeSearchPage goToSearch() {
+		searchLink.click();
+		
+		return PageFactory.initElements(driver, ConeSearchPage.class);
 	}
 }
