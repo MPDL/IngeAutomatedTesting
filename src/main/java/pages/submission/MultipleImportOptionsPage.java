@@ -1,5 +1,6 @@
 package main.java.pages.submission;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,7 +29,8 @@ public class MultipleImportOptionsPage extends BasePage {
 	}
 	
 	public ImportWorkspacePage setUploadOptions(String importName) {
-		undoOnClickCheckbox.clear();
+		//undoOnClickCheckbox.clear();
+		undoOnClickCheckbox.sendKeys(Keys.DELETE);
 		doNotCheckDuplicateRadioButton.click();
 		importNameBox.sendKeys(importName);
 		

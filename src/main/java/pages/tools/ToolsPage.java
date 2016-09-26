@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import main.java.pages.BasePage;
+import main.java.pages.tools.citation.CitationStyleEditor;
 import main.java.pages.tools.cone.ConeBasePage;
 
 public class ToolsPage extends BasePage {
@@ -40,14 +41,25 @@ public class ToolsPage extends BasePage {
 	}
 	
 	public RestExamplePage goToRestInterface() {
+		String firstHandle = driver.getWindowHandle();
 		restLink.click();
+		
+		Set<String> windowHandles = driver.getWindowHandles();
+		windowHandles.remove(firstHandle);
+		driver.switchTo().window(windowHandles.iterator().next());
+		
 		driver.findElement(By.id("mainMenuSkipLinkAnchor")).findElement(By.tagName("a")).click();
 		
 		return PageFactory.initElements(driver, RestExamplePage.class);
 	}
 	
 	public CitationStyleEditor goToCitationStyleEditor() {
+		String firstHandle = driver.getWindowHandle();
 		citationEditorLink.click();
+		
+		Set<String> windowHandles = driver.getWindowHandles();
+		windowHandles.remove(firstHandle);
+		driver.switchTo().window(windowHandles.iterator().next());
 		
 		return PageFactory.initElements(driver, CitationStyleEditor.class);
 	}

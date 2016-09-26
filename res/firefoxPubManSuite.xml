@@ -9,7 +9,7 @@
 		<classes>
 			<class name="test.java.base.TestSuiteInitialisation"></class>
 			<class name="test.java.base.BaseTest"></class>
-			<!-- <class name="test.java.base.depositor.ReleaseConferencePaperFullSimpleTest"></class>
+			<class name="test.java.base.depositor.ReleaseConferencePaperFullSimpleTest"></class>
 			<class name="test.java.base.depositor.ReleaseBookFullStandardTest"></class>
 			<class name="test.java.base.depositor.JournalArticleEasyStandardTest"></class>
 			<class name="test.java.base.guest.SimpleSearchUnregisteredTest"></class>
@@ -19,10 +19,18 @@
 			<class name="test.java.base.moddep.AdministrativeSearchTest"></class>
 			<class name="test.java.base.moddep.FetchArXivStandardTest"></class>
 			<class name="test.java.base.moddep.ExportRestExampleStandardTest"></class>
-			<class name="test.java.base.guest.ExportRestExampleStandardTest"></class> -->
+			<class name="test.java.base.guest.ExportRestExampleStandardTest"></class>
+			<class name="test.java.base.moddep.ExportSearchRESTTest"></class>
+			<class name="test.java.base.guest.ExportSearchRESTTest"></class>
 			<class name="test.java.base.moddep.ExportItemStandardTest"></class>
-			<!-- <class name="test.java.base.cone.ConeAuthorTest"></class>
-			<class name="test.java.base.cone.ConeJournalTest"></class> -->
+			<class name="test.java.base.moddep.ExportSearchBibtexTest"></class>
+			<class name="test.java.base.cone.ConeAuthorTest"></class>
+			<class name="test.java.base.cone.ConeJournalTest"></class>
+			<class name="test.java.base.citation.ExportCitationStyleTest"></class>
+			<class name="test.java.base.guest.CreateCitationStyleTest"></class>
+			<class name="test.java.base.cone.InstallCitationStyleTest"></class>
+			<class name="test.java.base.citation.EditCitationTest"></class>
+			<class name="test.java.base.moddep.BatchImportTest"></class>
 		</classes>
 	</test>
 	

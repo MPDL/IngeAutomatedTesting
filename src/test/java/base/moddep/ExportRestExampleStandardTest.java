@@ -8,6 +8,7 @@ import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.tools.RestExamplePage;
+import main.java.pages.tools.ToolsPage;
 import test.java.base.BaseTest;
 
 /**
@@ -33,12 +34,18 @@ public class ExportRestExampleStandardTest extends BaseTest {
 	
 	@Test(priority = 2)
 	public void exportREST() {
-		RestExamplePage restExamplePage = combinedHomePage.goToToolsPage().goToRestInterface();
+		ToolsPage toolsPage = combinedHomePage.goToToolsPage();
+		saveCurrentHandle();
+		
+		RestExamplePage restExamplePage = toolsPage.goToRestInterface();
 		boolean itemsWereExported = restExamplePage.exportableItemAvailable();
 		Assert.assertTrue(itemsWereExported, "No items were exported.");
 	}
 	
 	public void tearDown() {
+		driver.close();
+		driver.switchTo().window(getSavedHandle());
+		
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		combinedHomePage.logout();
 	}

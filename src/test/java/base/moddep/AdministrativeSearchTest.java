@@ -39,5 +39,6 @@ public class AdministrativeSearchTest extends BaseTest {
 	@AfterClass
 	public void tearDown() {
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		combinedHomePage.logout();
 	}
 }

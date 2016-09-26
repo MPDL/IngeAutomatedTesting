@@ -1,4 +1,4 @@
-package test.java.base.citation;
+package test.java.base.moddep;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;

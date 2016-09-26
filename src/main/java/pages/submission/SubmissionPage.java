@@ -60,9 +60,11 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.fetchSubmissionStandard();
 	}
 	
-	public MultipleImportPage goToMultipleImportPage() {
+	public MultipleImportPage goToMultipleImportStandardPage() {
 		multipleImportLink.click();
 		
-		return PageFactory.initElements(driver, MultipleImportPage.class);
+		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
+		
+		return collectionSelectionPage.importSubmissionStandard();
 	}
 }

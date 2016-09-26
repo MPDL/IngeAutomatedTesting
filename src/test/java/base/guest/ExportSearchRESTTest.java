@@ -1,6 +1,7 @@
 package test.java.base.guest;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -32,6 +33,11 @@ private RestExamplePage restExamplePage;
 	public void downloadList() {
 		boolean exportPossible = restExamplePage.exportableItemAvailable();
 		Assert.assertTrue(exportPossible, "Export is not possible.");
+	}
+	
+	@AfterClass
+	public void tearDown() {
+		driver.close();
 	}
 	
 }

@@ -84,6 +84,7 @@ public class ConeAuthorTest extends BaseTest {
 	
 	@AfterClass
 	public void tearDown() {
+		driver.close();
 		coneHomePage = new ConeBasePage(driver).goToHomePage(coneHomePage);
 		coneHomePage.logout();
 	}

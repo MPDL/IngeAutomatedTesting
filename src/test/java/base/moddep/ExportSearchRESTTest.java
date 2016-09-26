@@ -46,6 +46,7 @@ public class ExportSearchRESTTest extends BaseTest {
 	
 	@AfterClass
 	public void logout() {
+		driver.close();
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		combinedHomePage.logout();
 	}

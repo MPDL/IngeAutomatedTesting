@@ -20,9 +20,15 @@
 			<class name="test.java.base.moddep.FetchArXivStandardTest"></class>
 			<class name="test.java.base.moddep.ExportRestExampleStandardTest"></class>
 			<class name="test.java.base.guest.ExportRestExampleStandardTest"></class>
+			<class name="test.java.base.moddep.ExportSearchRESTTest"></class>
 			<class name="test.java.base.moddep.ExportItemStandardTest"></class>
+			<class name="test.java.base.moddep.ExportSearchBibtexTest"></class>
 			<class name="test.java.base.cone.CreateConeAuthorTest"></class>
 			<class name="test.java.base.cone.ConeJournalTest"></class>
+			<class name="test.java.base.citation.ExportCitationStyleTest"></class>
+			<class name="test.java.base.guest.CreateCitationStyleTest"></class>
+			<class name="test.java.base.cone.InstallCitationStyleTest"></class>
+			<class name="test.java.base.citation.EditCitationTest"></class>
 		</classes>
 	</test>
 	

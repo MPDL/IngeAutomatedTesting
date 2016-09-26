@@ -17,9 +17,9 @@ public class MultipleImportPage extends BasePage {
 	private WebDriverWait wait;
 	
 	@FindBy(id = "j_idt98:selFormat")
-	private Select importFormatSelect;
+	private WebElement importFormatDropdown;
 	
-	private final String uploadButtonID = "j_idt98:inpMultipleImportUploadedImportFile";
+	private final String uploadInputID = "j_idt98:inpMultipleImportUploadedImportFile_input";
 	private final String importButtonID = "j_idt98:lnkUploadFile";
 	
 	public MultipleImportPage(WebDriver driver) {
@@ -31,12 +31,15 @@ public class MultipleImportPage extends BasePage {
 	}
 	
 	public MultipleImportOptionsPage batchImportItems(String filepath, String format) {
-		// TODO handle illegal arguments
+		if (filepath == null)
+			return null;
+		
+		Select importFormatSelect = new Select(importFormatDropdown);
 		importFormatSelect.selectByVisibleText(format);
 		
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("document.getElementById('" + uploadButtonID + "').style.display = 'block';");
-		driver.findElement(By.id(uploadButtonID)).sendKeys(filepath);
+		jse.executeScript("document.getElementById('" + uploadInputID + "').style.display = 'block';");
+		driver.findElement(By.id(uploadInputID)).sendKeys(filepath);
 		
 		WebElement importButton = driver.findElement(By.id(importButtonID));
 	    wait.until(ExpectedConditions.elementToBeClickable(importButton));

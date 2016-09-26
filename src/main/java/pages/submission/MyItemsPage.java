@@ -59,9 +59,11 @@ public class MyItemsPage extends BasePage {
 			
 		Select formatSelect = new Select(formatDropdown);
 		formatSelect.selectByValue(value);
-			
-		firstItemCheckBox.click();
-			
+		
+		if (!firstItemCheckBox.isSelected())
+			firstItemCheckBox.click();
+		downloadLink.click();
+		
 		return downloadLink.isDisplayed() && downloadLink.isEnabled();
 	}
 	

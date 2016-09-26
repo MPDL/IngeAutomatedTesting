@@ -3,8 +3,6 @@ package main.java.pages.search;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -84,17 +82,12 @@ public class SearchResultsPage extends BasePage {
 			fileFormatSelect.selectByValue(fileFormat);
 		}
 		
-		makeVisible(allCheckBox);
 		selectAllItems();
+		
 		return downloadLink.isDisplayed() && downloadLink.isEnabled();
 	}
 	
 	private void selectAllItems() {
 		allCheckBox.click();
-	}
-	
-	private void makeVisible(WebElement element) {
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("arguments[0].style.display='block';", element);
 	}
 }

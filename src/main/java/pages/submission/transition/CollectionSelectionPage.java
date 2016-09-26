@@ -9,6 +9,7 @@ import main.java.pages.BasePage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.FetchSubmissionPage;
 import main.java.pages.submission.FullSubmissionPage;
+import main.java.pages.submission.MultipleImportPage;
 
 public class CollectionSelectionPage extends BasePage {
 	
@@ -46,5 +47,11 @@ public class CollectionSelectionPage extends BasePage {
 		standardTestContext.click();
 		
 		return PageFactory.initElements(driver, FetchSubmissionPage.class);
+	}
+	
+	public MultipleImportPage importSubmissionStandard() {
+		standardTestContext.click();
+			
+		return PageFactory.initElements(driver, MultipleImportPage.class);
 	}
 }

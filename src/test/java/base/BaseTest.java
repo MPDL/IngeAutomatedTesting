@@ -35,6 +35,8 @@ public abstract class BaseTest {
 	protected String modDepUsername;
 	protected String modDepPassword;
 	
+	protected String baseWindowHandle;
+	
 	public void setup() {
 		configureDriver();
 		configureUsers();
@@ -89,6 +91,14 @@ public abstract class BaseTest {
 		if (driver instanceof ChromeDriver)
 			filepath = filepath.substring(1, filepath.length());
 		return filepath;
+	}
+	
+	public void saveCurrentHandle() {
+		baseWindowHandle = driver.getWindowHandle();
+	}
+	
+	public String getSavedHandle() {
+		return baseWindowHandle;
 	}
 	
 }
