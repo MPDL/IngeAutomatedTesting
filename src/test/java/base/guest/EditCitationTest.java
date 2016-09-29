@@ -45,7 +45,6 @@ public class EditCitationTest extends BaseTest {
 	
 	@AfterClass
 	public void tearDown() {
-		driver.close();
-		driver.switchTo().window(baseWindowHandle);
+		backToBaseHandle();
 	}
 }

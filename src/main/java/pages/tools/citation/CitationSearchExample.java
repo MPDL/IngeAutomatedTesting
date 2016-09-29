@@ -25,7 +25,8 @@ public class CitationSearchExample {
 	
 	public List<WebElement> getSearchResults() {
 		searchButton.click();
-		searchResults = driver.findElements(By.tagName("table"));
+		WebElement allResults = driver.findElement(By.id("searchResults"));
+		searchResults = allResults.findElements(By.tagName("table"));
 		
 		return searchResults;
 	}

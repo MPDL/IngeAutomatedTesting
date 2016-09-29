@@ -1,6 +1,5 @@
 package test.java.base.moddep;
 
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,8 +30,8 @@ public class ExportSearchBibtexTest extends BaseTest {
 	@Test(priority = 2)
 	public void exportSimpleSearch() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
-		boolean resultsExported = searchResults.allResultsExported("BIBTEX", null);
-		Assert.assertTrue(resultsExported, "Results were not exported.");
+		searchResults = searchResults.goToExport();
+		searchResults.exportResults("BIBTEX", null);
 	}
 	
 	@AfterClass

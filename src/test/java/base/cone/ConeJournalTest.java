@@ -31,7 +31,8 @@ public class ConeJournalTest extends BaseTest {
 	
 	@Test(priority = 1)
 	public void loginCone() {
-		ConeBasePage coneStartPage = new StartPage(driver).goToToolsPage().goToCoNE();
+		saveCurrentHandle();
+		ConeBasePage coneStartPage = new StartPage(driver).goToAdvancedSearchPage().goToToolsPage().goToCoNE();
 		coneHomePage = coneStartPage.login(getPropertyValue("coneUsername"), getPropertyValue("conePassword"));
 	}
 	
@@ -77,12 +78,12 @@ public class ConeJournalTest extends BaseTest {
 		}
 		
 		Assert.assertTrue(itemWasDeleted, "Journal was not deleted.");
+		
+		coneSearch.logout();
 	}
 	
 	@AfterClass 
 	public void tearDown() {
-		driver.close();
-		coneHomePage = new ConeBasePage(driver).goToHomePage(coneHomePage);
-		coneHomePage.logout();
+		backToBaseHandle();
 	}
 }

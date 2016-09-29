@@ -1,8 +1,11 @@
 package main.java.pages;
 
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import main.java.components.MainMenuComponent;
 import main.java.components.MetaMenuComponent;
@@ -76,6 +79,17 @@ public abstract class BasePage {
 		if (homePage instanceof ModeratorHomePage)
 			return new ModeratorHomePage(driver);
 		return new CombinedHomePage(driver);
+	}
+	
+	public Object openLinkNewWindow(WebElement link, Object PageType) {
+		String firstHandle = driver.getWindowHandle();
+		link.click();
+		
+		Set<String> windowHandles = driver.getWindowHandles();
+		windowHandles.remove(firstHandle);
+		driver.switchTo().window(windowHandles.iterator().next());
+		
+		return PageFactory.initElements(driver, PageType.getClass());
 	}
 	
 }

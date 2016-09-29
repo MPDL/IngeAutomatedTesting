@@ -32,6 +32,7 @@ public class ConeAuthorTest extends BaseTest {
 	
 	@Test(priority = 1)
 	public void loginCone() {
+		saveCurrentHandle();
 		ConeBasePage coneStartPage = new StartPage(driver).goToToolsPage().goToCoNE();
 		coneHomePage = coneStartPage.login(getPropertyValue("coneUsername"), getPropertyValue("conePassword"));
 	}
@@ -80,12 +81,12 @@ public class ConeAuthorTest extends BaseTest {
 		}
 		
 		Assert.assertTrue(itemWasDeleted, "Person was not deleted.");
+		
+		coneSearchPage.logout();
 	}
 	
 	@AfterClass
 	public void tearDown() {
-		driver.close();
-		coneHomePage = new ConeBasePage(driver).goToHomePage(coneHomePage);
-		coneHomePage.logout();
+		backToBaseHandle();
 	}
 }

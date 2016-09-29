@@ -1,6 +1,7 @@
 package main.java.pages.search;
 
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import main.java.pages.BasePage;
 import main.java.pages.submission.ViewItemPage;
-import main.java.pages.tools.RestExamplePage;
+import main.java.pages.tools.rest.RestExamplePage;
 
 public class SearchResultsPage extends BasePage {
 
@@ -61,8 +62,13 @@ public class SearchResultsPage extends BasePage {
 	}
 	
 	public RestExamplePage insertQueryREST() {
+		String firstHandle = driver.getWindowHandle();
 		queryInRestLink.click();
-		//TODO switch frames?
+
+		Set<String> windowHandles = driver.getWindowHandles();
+		windowHandles.remove(firstHandle);
+		driver.switchTo().window(windowHandles.iterator().next());
+		
 		return PageFactory.initElements(driver, RestExamplePage.class);
 	}
 	
@@ -72,7 +78,7 @@ public class SearchResultsPage extends BasePage {
 		return PageFactory.initElements(driver, SearchResultsPage.class);
 	}
 	
-	public boolean allResultsExported(String format, String fileFormat) {
+	public void exportResults(String format, String fileFormat) {
 		Select exportFormat = new Select(exportFormatDropdown);
 		exportFormat.selectByValue(format);
 		
@@ -84,7 +90,7 @@ public class SearchResultsPage extends BasePage {
 		
 		selectAllItems();
 		
-		return downloadLink.isDisplayed() && downloadLink.isEnabled();
+		downloadLink.click();
 	}
 	
 	private void selectAllItems() {

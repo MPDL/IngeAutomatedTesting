@@ -1,6 +1,5 @@
 package test.java.base.moddep;
 
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -33,24 +32,21 @@ public class ExportCitationStyleTest extends BaseTest {
 	public void exportSearchPDF() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
-		boolean resultsExported = searchResults.allResultsExported("APA", "pdf");
-		Assert.assertTrue(resultsExported, "Results were not exported.");
+		searchResults.exportResults("APA", "pdf");
 	}
 	
 	@Test(priority = 2)
 	public void exportSearchHTML() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
-		boolean resultsExported = searchResults.allResultsExported("APA", "html_plain");
-		Assert.assertTrue(resultsExported, "Results were not exported.");
+		searchResults.exportResults("APA", "html_plain");
 	}
 	
 	@Test(priority = 3)
 	public void exportSearchDOC() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
-		boolean resultsExported = searchResults.allResultsExported("APA", "docx");
-		Assert.assertTrue(resultsExported, "Results were not exported.");
+		searchResults.exportResults("APA", "docx");
 	}
 	
 	@AfterMethod

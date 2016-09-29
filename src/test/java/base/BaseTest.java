@@ -35,7 +35,7 @@ public abstract class BaseTest {
 	protected String modDepUsername;
 	protected String modDepPassword;
 	
-	protected String baseWindowHandle;
+	private String baseWindowHandle;
 	
 	public void setup() {
 		configureDriver();
@@ -97,8 +97,9 @@ public abstract class BaseTest {
 		baseWindowHandle = driver.getWindowHandle();
 	}
 	
-	public String getSavedHandle() {
-		return baseWindowHandle;
+	public void backToBaseHandle() {
+		driver.close();
+		driver.switchTo().window(baseWindowHandle);
 	}
 	
 }

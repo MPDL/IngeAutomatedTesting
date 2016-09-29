@@ -31,6 +31,7 @@ public class CreateCitationStyleTest extends BaseTest {
 	@Test(priority = 1)
 	public void openCSEditor() {
 		StartPage startPage = new StartPage(driver);
+		saveCurrentHandle();
 		csEditor = startPage.goToToolsPage().goToCitationStyleEditor();
 		
 		String actual = csEditor.getHeadline().trim();
@@ -48,5 +49,9 @@ public class CreateCitationStyleTest extends BaseTest {
 	public void createCitationStyle() {
 		VisualEditor editor = searchExample.editFirstResult();
 		editor.createNewStyle(title);
+		boolean canSaveStyle = editor.canSaveStyle();
+		Assert.assertTrue(canSaveStyle, "Save button is not enabled.");
+		
+		backToBaseHandle();
 	}
 }

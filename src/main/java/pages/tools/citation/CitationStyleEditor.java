@@ -9,6 +9,8 @@ public class CitationStyleEditor {
 
 	private WebDriver driver;
 	
+	private static CitationStyleEditor instance;
+	
 	@FindBy(css = "div .lead")
 	private WebElement csHeadline;
 	
@@ -22,6 +24,12 @@ public class CitationStyleEditor {
 		this.driver = driver;
 		
 		PageFactory.initElements(driver, this);
+	}
+	
+	public static CitationStyleEditor getInstance(WebDriver driver) {
+		if (instance == null)
+			instance = new CitationStyleEditor(driver);
+		return instance;
 	}
 	
 	public CitationSearchExample searchByExample() {

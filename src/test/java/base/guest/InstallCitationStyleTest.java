@@ -1,7 +1,7 @@
 package test.java.base.guest;
 
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -32,9 +32,17 @@ public class InstallCitationStyleTest extends BaseTest {
 	
 	@Test(priority = 2)
 	public void searchCSName() {
-		csEditor = combinedHomePage.goToToolsPage().goToCitationStyleEditor();
+		saveCurrentHandle();
+		csEditor = combinedHomePage.goToAdvancedSearchPage().goToToolsPage().goToCitationStyleEditor();
 		CitationSearchName searchName = csEditor.searchStyle(styleName);
 		WebElement firstResult = searchName.getFirstResult();
 		searchName.openStylePage(firstResult).installStyle();
+	}
+	
+	@AfterClass
+	public void tearDown() {
+		backToBaseHandle();
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		combinedHomePage.logout();
 	}
 }

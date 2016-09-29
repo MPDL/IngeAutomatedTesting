@@ -10,6 +10,9 @@ public class VisualEditor {
 
 	private WebDriver driver;
 	
+	@FindBy(id = "styleMenuUl")
+	private WebElement hiddenMenu;
+	
 	@FindBy(id = "styleMenu")
 	private WebElement styleMenu;
 	
@@ -24,25 +27,23 @@ public class VisualEditor {
 	
 	public void createNewStyle(String title) {
 		styleMenu.click();
-		styleMenu.findElement(By.id("menuNewStyle")).click();
+		hiddenMenu.findElement(By.id("menuNewStyle")).click();
 		PageFactory.initElements(driver, VisualEditor.class);
 		
+		titleBox.clear();
 		titleBox.sendKeys(title);
-		styleMenu.click();
-		styleMenu.findElement(By.cssSelector("ul>li:nth-of-type(3)")).click();
 	}
 	
 	public void editStyle(String newTitle) {
 		titleBox.clear();
 		titleBox.sendKeys(newTitle);
-		
-		saveStyle();
 	}
 	
-	private void saveStyle() {
+	public boolean canSaveStyle() {
 		styleMenu.click();
-		styleMenu.findElement(By.cssSelector("ul>li:nth-of-type(3)")).click();
-		driver.findElement(By.id("downloadify_1474893774335")).click();
-		driver.findElement(By.className("ui-icon-closethick")).click();
+		hiddenMenu.findElement(By.cssSelector("ul>li:nth-of-type(3)")).click();
+		WebElement saveButton = driver.findElement(By.xpath("//object[contains(@id, 'downloadify')]"));
+		
+		return saveButton.isDisplayed() && saveButton.isEnabled();
 	}
 }

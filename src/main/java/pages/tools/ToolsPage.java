@@ -1,8 +1,5 @@
 package main.java.pages.tools;
 
-import java.util.Set;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import main.java.pages.BasePage;
 import main.java.pages.tools.citation.CitationStyleEditor;
 import main.java.pages.tools.cone.ConeBasePage;
+import main.java.pages.tools.rest.RestDescriptionPage;
+import main.java.pages.tools.rest.RestExamplePage;
 
 public class ToolsPage extends BasePage {
 
@@ -30,18 +29,21 @@ public class ToolsPage extends BasePage {
 	}
 	
 	public ConeBasePage goToCoNE() {
-		String firstHandle = driver.getWindowHandle();
+		return (ConeBasePage) openLinkNewWindow(coneLink, ConeBasePage.getInstance(driver));
+		/*String firstHandle = driver.getWindowHandle();
 		coneLink.click();
 		
 		Set<String> windowHandles = driver.getWindowHandles();
 		windowHandles.remove(firstHandle);
 		driver.switchTo().window(windowHandles.iterator().next());
 		
-		return PageFactory.initElements(driver, ConeBasePage.class);
+		return PageFactory.initElements(driver, ConeBasePage.class);*/
 	}
 	
 	public RestExamplePage goToRestInterface() {
-		String firstHandle = driver.getWindowHandle();
+		RestDescriptionPage restDescription = (RestDescriptionPage) openLinkNewWindow(restLink, RestDescriptionPage.getInstance(driver));
+		return restDescription.goToRestExample();
+		/*String firstHandle = driver.getWindowHandle();
 		restLink.click();
 		
 		Set<String> windowHandles = driver.getWindowHandles();
@@ -50,17 +52,18 @@ public class ToolsPage extends BasePage {
 		
 		driver.findElement(By.id("mainMenuSkipLinkAnchor")).findElement(By.tagName("a")).click();
 		
-		return PageFactory.initElements(driver, RestExamplePage.class);
+		return PageFactory.initElements(driver, RestExamplePage.class);*/
 	}
 	
 	public CitationStyleEditor goToCitationStyleEditor() {
-		String firstHandle = driver.getWindowHandle();
+		return (CitationStyleEditor) openLinkNewWindow(citationEditorLink, CitationStyleEditor.getInstance(driver));
+		/*String firstHandle = driver.getWindowHandle();
 		citationEditorLink.click();
 		
 		Set<String> windowHandles = driver.getWindowHandles();
 		windowHandles.remove(firstHandle);
 		driver.switchTo().window(windowHandles.iterator().next());
 		
-		return PageFactory.initElements(driver, CitationStyleEditor.class);
+		return PageFactory.initElements(driver, CitationStyleEditor.class);*/
 	}
 }

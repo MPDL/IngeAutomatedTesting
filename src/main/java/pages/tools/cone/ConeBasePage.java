@@ -16,6 +16,8 @@ public class ConeBasePage {
 
 	protected WebDriver driver;
 	
+	private static ConeBasePage instance;
+	
 	@FindBy(id = "headline")
 	private WebElement headline;
 	
@@ -31,6 +33,12 @@ public class ConeBasePage {
 		PageFactory.initElements(this.driver, this);
 	}
 	
+	public static ConeBasePage getInstance(WebDriver driver) {
+		if (instance == null)
+			instance = new ConeBasePage(driver);
+		return instance;
+	}
+	
 	public String getHeadline() {
 		return headline.getText();
 	}
@@ -43,6 +51,12 @@ public class ConeBasePage {
 		loginLink.click();
 		
 		return PageFactory.initElements(driver, LoginPage.class);
+	}
+	
+	public ConeBasePage logout() {
+		loginLink.click();
+		
+		return PageFactory.initElements(driver, ConeBasePage.class);
 	}
 	
 	public ConeHomePage goToHomePage(ConeHomePage coneHomePage) {

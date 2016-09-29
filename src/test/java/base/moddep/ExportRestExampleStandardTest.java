@@ -1,14 +1,15 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
-import main.java.pages.tools.RestExamplePage;
 import main.java.pages.tools.ToolsPage;
+import main.java.pages.tools.rest.RestExamplePage;
 import test.java.base.BaseTest;
 
 /**
@@ -38,13 +39,15 @@ public class ExportRestExampleStandardTest extends BaseTest {
 		saveCurrentHandle();
 		
 		RestExamplePage restExamplePage = toolsPage.goToRestInterface();
-		boolean itemsWereExported = restExamplePage.exportableItemAvailable();
-		Assert.assertTrue(itemsWereExported, "No items were exported.");
+		restExamplePage.downloadExport();
+		
+		boolean newFieldsAppear = restExamplePage.newFieldsAppear();
+		Assert.assertTrue(newFieldsAppear, "Search URI and feeds fields were not displayed.");
 	}
 	
+	@AfterClass
 	public void tearDown() {
-		driver.close();
-		driver.switchTo().window(getSavedHandle());
+		backToBaseHandle();
 		
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		combinedHomePage.logout();
