@@ -42,7 +42,7 @@ public class VisualEditor {
 	public boolean canSaveStyle() {
 		styleMenu.click();
 		hiddenMenu.findElement(By.cssSelector("ul>li:nth-of-type(3)")).click();
-		WebElement saveButton = driver.findElement(By.xpath("//object[contains(@id, 'downloadify')]"));
+		WebElement saveButton = driver.findElement(By.xpath("//object[contains(@id, 'downloadify_')]"));
 		
 		return saveButton.isDisplayed() && saveButton.isEnabled();
 	}

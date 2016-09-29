@@ -1,6 +1,7 @@
-package test.java.base.guest;
+package test.java.base.moddep;
 
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -36,7 +37,8 @@ public class InstallCitationStyleTest extends BaseTest {
 		csEditor = combinedHomePage.goToAdvancedSearchPage().goToToolsPage().goToCitationStyleEditor();
 		CitationSearchName searchName = csEditor.searchStyle(styleName);
 		WebElement firstResult = searchName.getFirstResult();
-		searchName.openStylePage(firstResult).installStyle();
+		boolean canInstallStyle = searchName.openStylePage(firstResult).canSaveStyle();
+		Assert.assertTrue(canInstallStyle, "Button for installing style is not active.");
 	}
 	
 	@AfterClass

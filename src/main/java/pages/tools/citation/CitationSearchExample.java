@@ -12,6 +12,9 @@ public class CitationSearchExample {
 
 	private WebDriver driver;
 	
+	@FindBy(id = "styleFormatInputControls")
+	private WebElement styleFormat;
+	
 	@FindBy(id = "searchButton")
 	private WebElement searchButton;
 	
@@ -24,7 +27,7 @@ public class CitationSearchExample {
 	}
 	
 	public List<WebElement> getSearchResults() {
-		searchButton.click();
+		styleFormat.findElement(By.tagName("button")).click();
 		WebElement allResults = driver.findElement(By.id("searchResults"));
 		searchResults = allResults.findElements(By.tagName("table"));
 		

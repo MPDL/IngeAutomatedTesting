@@ -1,5 +1,6 @@
 package main.java.pages.tools.citation;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,8 +22,11 @@ public class StyleInfoPage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void installStyle() {
+	public boolean canSaveStyle() {
 		installStyleButton.click();
+		WebElement saveButton = driver.findElement(By.xpath("//object[contains(@id, 'downloadify')]"));
+		
+		return saveButton.isDisplayed() && saveButton.isEnabled();
 	}
 	
 	public VisualEditor editStyle() {

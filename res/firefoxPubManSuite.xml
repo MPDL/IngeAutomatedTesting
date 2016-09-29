@@ -26,10 +26,10 @@
 			<class name="test.java.base.moddep.ExportSearchBibtexTest"></class>
 			<class name="test.java.base.cone.ConeAuthorTest"></class>
 			<class name="test.java.base.cone.ConeJournalTest"></class>
-			<class name="test.java.base.citation.ExportCitationStyleTest"></class>
+			<class name="test.java.base.moddep.ExportCitationStyleTest"></class>
 			<class name="test.java.base.guest.CreateCitationStyleTest"></class>
-			<class name="test.java.base.cone.InstallCitationStyleTest"></class>
-			<class name="test.java.base.citation.EditCitationTest"></class>
+			<class name="test.java.base.moddep.InstallCitationStyleTest"></class>
+			<class name="test.java.base.guest.EditCitationTest"></class>
 			<class name="test.java.base.moddep.BatchImportTest"></class>
 		</classes>
 	</test>

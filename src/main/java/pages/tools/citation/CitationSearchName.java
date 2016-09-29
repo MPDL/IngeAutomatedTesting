@@ -15,8 +15,11 @@ public class CitationSearchName {
 	@FindBy(id = "styleNameQuery")
 	private WebElement styleQuery;
 	
-	@FindBy(id = "searchButton")
-	private WebElement searchButton;
+	@FindBy(id = "styleNameInput")
+	private WebElement styleNameInput;
+	
+	@FindBy(id = "searchResults")
+	private WebElement searchResults;
 	
 	public CitationSearchName(WebDriver driver) {
 		this.driver = driver;
@@ -26,13 +29,13 @@ public class CitationSearchName {
 	
 	public CitationSearchName searchStyle(String name) {
 		styleQuery.sendKeys(name);
-		searchButton.click();
+		styleNameInput.findElement(By.tagName("button")).click();
 		
 		return PageFactory.initElements(driver, CitationSearchName.class);
 	}
 	
 	public WebElement getFirstResult() {
-		List<WebElement> results = driver.findElements(By.className("viewCode"));
+		List<WebElement> results = searchResults.findElements(By.tagName("table"));
 		return results.get(0);
 	}
 	
