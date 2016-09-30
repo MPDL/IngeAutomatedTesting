@@ -29,6 +29,7 @@
 			<class name="test.java.base.guest.CreateCitationStyleTest"></class>
 			<class name="test.java.base.cone.InstallCitationStyleTest"></class>
 			<class name="test.java.base.citation.EditCitationTest"></class>
+			<class name="test.java.base.moddep.BatchImportTest"></class>
 		</classes>
 	</test>
 	

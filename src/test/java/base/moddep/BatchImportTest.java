@@ -38,7 +38,7 @@ public class BatchImportTest extends BaseTest {
 		MultipleImportPage multipleImportPage = combinedHomePage.goToSubmissionPage().goToMultipleImportStandardPage();
 		MultipleImportOptionsPage multipleImportOptionsPage = multipleImportPage.batchImportItems(filepath, "BibTeX");
 		ImportWorkspacePage importWorkspace = multipleImportOptionsPage.setUploadOptions(title);
-		importWorkspace.waitForUploadToFinish();
+		importWorkspace.waitForActionToFinish(title);
 		
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		importWorkspace = combinedHomePage.goToImportWorkspace();
@@ -55,10 +55,12 @@ public class BatchImportTest extends BaseTest {
 	
 	@Test(priority = 4)
 	public void deleteImport() {
-		// delete import
-		
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		ImportWorkspacePage importWorkspace = combinedHomePage.goToImportWorkspace();
+		importWorkspace.deleteImport(title);
+		
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		importWorkspace = combinedHomePage.goToImportWorkspace();
 		boolean importIsPresent = importWorkspace.isImportPresent(title);
 		Assert.assertTrue(importIsPresent, "File was not deleted.");
 	}

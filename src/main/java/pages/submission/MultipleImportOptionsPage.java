@@ -1,6 +1,5 @@
 package main.java.pages.submission;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +10,7 @@ import main.java.pages.BasePage;
 public class MultipleImportOptionsPage extends BasePage {
 
 	@FindBy(id = "j_idt98:selRollback")
-	private WebElement undoOnClickCheckbox;
+	private WebElement undoErrorCheckbox;
 	
 	@FindBy(id = "j_idt98:selDuplicateStrategy:0")
 	private WebElement doNotCheckDuplicateRadioButton;
@@ -29,8 +28,7 @@ public class MultipleImportOptionsPage extends BasePage {
 	}
 	
 	public ImportWorkspacePage setUploadOptions(String importName) {
-		//undoOnClickCheckbox.clear();
-		undoOnClickCheckbox.sendKeys(Keys.DELETE);
+		undoErrorCheckbox.click();
 		doNotCheckDuplicateRadioButton.click();
 		importNameBox.sendKeys(importName);
 		

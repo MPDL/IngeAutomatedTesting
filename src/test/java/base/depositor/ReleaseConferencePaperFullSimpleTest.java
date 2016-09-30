@@ -62,8 +62,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	@Test(priority = 4)
 	public void viewMostRecentItems() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		StartPage startPage = depositorHomePage.goToStartPage();
-		String mostRecentItemTitle = startPage.getNameOfMostRecentItem();
+		String mostRecentItemTitle = depositorHomePage.goToStartPage().getNameOfMostRecentItem();
 		Assert.assertEquals(mostRecentItemTitle, title, "Item does not show up at the start page.");
 	}
 	

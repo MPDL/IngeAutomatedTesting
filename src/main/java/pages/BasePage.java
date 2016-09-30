@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import main.java.components.MainMenuComponent;
 import main.java.components.MetaMenuComponent;
@@ -27,6 +28,7 @@ import main.java.pages.tools.ToolsPage;
 public abstract class BasePage {
 
 	protected WebDriver driver;
+	protected WebDriverWait wait;
 	
 	@FindBy(id = "contentSkipLinkAnchor")
 	private WebElement headline;
@@ -35,8 +37,11 @@ public abstract class BasePage {
 	protected MainMenuComponent mainMenuComponent;
 	protected SearchComponent searchComponent;
 	
+	private final int EXPLICIT_TIMEOUT = 50;
+	
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
+		wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
 		
 		metaMenuComponent = new MetaMenuComponent(driver);
 		mainMenuComponent = new MainMenuComponent(driver);
@@ -74,6 +79,7 @@ public abstract class BasePage {
 	}
 	
 	public HomePage goToHomePage(HomePage homePage) {
+		goToStartPage();
 		if (homePage instanceof DepositorHomePage)
 			return new DepositorHomePage(driver);
 		if (homePage instanceof ModeratorHomePage)

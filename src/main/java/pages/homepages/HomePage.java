@@ -35,4 +35,10 @@ public class HomePage extends BasePage {
 		administrativeSearchLink.click();
 		return PageFactory.initElements(driver, AdministrativeSearchPage.class);
 	}
+	
+	// homepages are set at the start page
+	@Override
+	public StartPage goToStartPage() {
+		return PageFactory.initElements(driver, StartPage.class);
+	}
 }
