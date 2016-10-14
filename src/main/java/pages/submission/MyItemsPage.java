@@ -1,5 +1,7 @@
 package main.java.pages.submission;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -62,18 +64,12 @@ public class MyItemsPage extends BasePage {
 		
 		if (!firstItemCheckBox.isSelected())
 			firstItemCheckBox.click();
-		downloadLink.click();
 		
 		return downloadLink.isDisplayed() && downloadLink.isEnabled();
 	}
 	
 	public boolean hasItems() {
-		try {
-			driver.findElement(By.className("listItem"));
-			return true;
-		}
-		catch (NoSuchElementException exc) {
-			return false;
-		}
+		List<WebElement> items = driver.findElements(By.className("listItem"));
+		return items.size() > 0;
 	}
 }

@@ -1,7 +1,6 @@
 package test.java.base.guest;
 
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -42,8 +41,7 @@ public class EditCitationTest extends BaseTest {
 		StyleInfoPage stylePage = csName.openStylePage(bestMatch);
 		VisualEditor editor = stylePage.editStyle();
 		editor.editStyle(newTitle);
-		boolean canSaveStyle = editor.canSaveStyle();
-		Assert.assertTrue(canSaveStyle, "Style was not accepted.");
+		editor.saveModifiedStyle();
 	}
 	
 	@AfterClass

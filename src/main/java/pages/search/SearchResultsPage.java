@@ -78,7 +78,7 @@ public class SearchResultsPage extends BasePage {
 		return PageFactory.initElements(driver, SearchResultsPage.class);
 	}
 	
-	public void exportResults(String format, String fileFormat) {
+	public boolean resultExportPossible(String format, String fileFormat) {
 		Select exportFormat = new Select(exportFormatDropdown);
 		exportFormat.selectByValue(format);
 		
@@ -90,7 +90,7 @@ public class SearchResultsPage extends BasePage {
 		
 		selectAllItems();
 		
-		downloadLink.click();
+		return downloadLink.isDisplayed() && downloadLink.isEnabled();
 	}
 	
 	private void selectAllItems() {

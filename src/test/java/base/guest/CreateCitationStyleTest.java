@@ -49,7 +49,7 @@ public class CreateCitationStyleTest extends BaseTest {
 	public void createCitationStyle() {
 		VisualEditor editor = searchExample.editFirstResult();
 		editor.createNewStyle(title);
-		boolean canSaveStyle = editor.canSaveStyle();
+		boolean canSaveStyle = editor.canSaveNewStyle();
 		Assert.assertTrue(canSaveStyle, "Save button is not enabled.");
 		
 		backToBaseHandle();

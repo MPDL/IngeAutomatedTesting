@@ -41,10 +41,8 @@ public class ExportSearchRESTTest extends BaseTest {
 	
 	@Test(priority = 3)
 	public void downloadList() {
-		restExamplePage.downloadExport();
-		
-		boolean newFieldsAppear = restExamplePage.newFieldsAppear();
-		Assert.assertTrue(newFieldsAppear, "Search URI and feeds fields were not displayed.");
+		boolean downloadPossible = restExamplePage.exportDownloadPossible();
+		Assert.assertTrue(downloadPossible, "Search URI and feeds fields were not displayed.");
 	}
 	
 	@AfterClass

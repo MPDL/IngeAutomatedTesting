@@ -37,7 +37,7 @@ public abstract class BasePage {
 	protected MainMenuComponent mainMenuComponent;
 	protected SearchComponent searchComponent;
 	
-	private final int EXPLICIT_TIMEOUT = 50;
+	private final int EXPLICIT_TIMEOUT = 200;
 	
 	public BasePage(WebDriver driver) {
 		this.driver = driver;

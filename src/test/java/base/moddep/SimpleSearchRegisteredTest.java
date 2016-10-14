@@ -30,7 +30,6 @@ public class SimpleSearchRegisteredTest extends BaseTest {
 	
 	@Test(priority = 2)
 	public void noSearchCriteriaTest() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		String expectedHeadline = combinedHomePage.getHeadline();
 		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch("");
 		String headlineText = searchResultsPage.getHeadline();

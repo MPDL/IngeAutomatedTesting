@@ -69,8 +69,7 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	
 	@AfterClass
 	public void logout() {
-		StartPage startPage = new StartPage(driver).goToStartPage();
-		combinedHomePage = (CombinedHomePage) startPage.goToHomePage(combinedHomePage);
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		combinedHomePage.logout();
 	}
 }

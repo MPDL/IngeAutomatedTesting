@@ -12,25 +12,13 @@ public class RestExamplePage extends BasePage {
 	@FindBy(className = "activeButton")
 	private WebElement buttonArea;
 	
-	@FindBy(id = "result")
-	private WebElement searchURI;
-	
-	@FindBy(id = "feeds")
-	private WebElement searchFeeds;
-	
 	public RestExamplePage(WebDriver driver) {
 		super(driver);
 		
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void downloadExport() {
-		buttonArea.click();
-		
-		PageFactory.initElements(driver, this);
-	}
-	
-	public boolean newFieldsAppear() {
-		return searchURI.isDisplayed() && searchFeeds.isDisplayed();
+	public boolean exportDownloadPossible() {
+		return buttonArea.isDisplayed() && buttonArea.isEnabled();
 	}
 }

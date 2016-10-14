@@ -39,10 +39,8 @@ public class ExportRestExampleStandardTest extends BaseTest {
 		saveCurrentHandle();
 		
 		RestExamplePage restExamplePage = toolsPage.goToRestInterface();
-		restExamplePage.downloadExport();
-		
-		boolean newFieldsAppear = restExamplePage.newFieldsAppear();
-		Assert.assertTrue(newFieldsAppear, "Search URI and feeds fields were not displayed.");
+		boolean downloadPossible = restExamplePage.exportDownloadPossible();
+		Assert.assertTrue(downloadPossible, "Search URI and feeds fields were not displayed.");
 	}
 	
 	@AfterClass

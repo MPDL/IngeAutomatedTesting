@@ -25,6 +25,7 @@ public class ConeSearchPage extends ConeBasePage {
 		super(driver);
 	}
 	
+	// TODO separate method into simpler ones: search, hasResults, getFirstResult
 	public ConeBasePage searchFirstResult(String searchQuery, EntityType type) {
 		Select typeSelect = new Select(typeDropdown);
 		searchBox.clear();

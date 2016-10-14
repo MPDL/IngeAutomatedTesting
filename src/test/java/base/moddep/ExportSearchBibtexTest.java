@@ -31,7 +31,7 @@ public class ExportSearchBibtexTest extends BaseTest {
 	public void exportSimpleSearch() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
-		searchResults.exportResults("BIBTEX", null);
+		searchResults.resultExportPossible("BIBTEX", null);
 	}
 	
 	@AfterClass

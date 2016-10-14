@@ -67,6 +67,7 @@ public class ImportWorkspacePage extends BasePage {
 		return PageFactory.initElements(driver, ImportWorkspacePage.class);
 	}
 	
+	// Currently language-specific
 	public ImportWorkspacePage deleteImport(String importName) {
 		findImport(importName).findElement(By.linkText("Delete")).click();
 		waitForActionToFinish(importName);

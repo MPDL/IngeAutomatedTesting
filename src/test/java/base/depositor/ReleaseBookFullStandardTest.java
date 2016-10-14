@@ -69,7 +69,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		viewItemPage = viewItemPage.editItem();
 		viewItemPage = viewItemPage.sendBackForRework();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
-		Assert.assertEquals(itemStatus, ItemStatus.INREWORK, "Item was not sent for rework.");
+		Assert.assertEquals(itemStatus, ItemStatus.IN_REWORK, "Item was not sent for rework.");
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}

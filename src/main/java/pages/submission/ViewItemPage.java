@@ -64,7 +64,7 @@ public class ViewItemPage extends BasePage {
 		if (classNames.contains("releasedItem"))
 			return ItemStatus.RELEASED;
 		if (classNames.contains("inRevisionItem"))
-			return ItemStatus.INREWORK;
+			return ItemStatus.IN_REWORK;
 		return ItemStatus.DISCARDED;
 	}
 	

@@ -1,5 +1,6 @@
 package test.java.base.moddep;
 
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -32,21 +33,24 @@ public class ExportCitationStyleTest extends BaseTest {
 	public void exportSearchPDF() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
-		searchResults.exportResults("APA", "pdf");
+		boolean exportPossible = searchResults.resultExportPossible("APA", "pdf");
+		Assert.assertTrue(exportPossible, "Export is not possible: download button is disabled.");
 	}
 	
 	@Test(priority = 2)
 	public void exportSearchHTML() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
-		searchResults.exportResults("APA", "html_plain");
+		boolean exportPossible = searchResults.resultExportPossible("APA", "html_plain");
+		Assert.assertTrue(exportPossible, "Export is not possible: download button is disabled.");
 	}
 	
 	@Test(priority = 3)
 	public void exportSearchDOC() {
 		SearchResultsPage searchResults = combinedHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
-		searchResults.exportResults("APA", "docx");
+		boolean exportPossible = searchResults.resultExportPossible("APA", "docx");
+		Assert.assertTrue(exportPossible, "Export is not possible: download button is disabled.");
 	}
 	
 	@AfterMethod
