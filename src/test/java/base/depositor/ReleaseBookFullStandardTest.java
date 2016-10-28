@@ -65,7 +65,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void moderatorSendsBackSubmission() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openPublishedItemByTitle(title);
 		viewItemPage = viewItemPage.editItem();
 		viewItemPage = viewItemPage.sendBackForRework();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
@@ -78,7 +78,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void depositorRevisesItem() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
-		viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
+		viewItemPage = depositorHomePage.goToMyItemsPage().openPublishedItemByTitle(title);
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
@@ -91,7 +91,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void moderatorReleasesSubmission() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openPublishedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -100,14 +100,14 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	@Test(priority = 7)
 	public void moderatorModifiesRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openItemByTitle(title);
+		viewItemPage = moderatorHomePage.openPublishedItemByTitle(title);
 		viewItemPage = viewItemPage.modifyItem();
 	}
 	
 	@Test(priority = 8)
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openItemByTitle(title);
+		viewItemPage = moderatorHomePage.openPublishedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");

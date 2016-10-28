@@ -52,6 +52,10 @@ public class SearchResultsPage extends BasePage {
 		return searchResults;
 	}
 	
+	public int getResultCount() {
+		return searchResults.size();
+	}
+	
 	public boolean allResultsReleased() {
 		for (WebElement result : searchResults) {
 			String uploadInfo = result.findElement(By.cssSelector(".listItemLine:nth-of-type(2)>span:nth-of-type(2)")).getText();

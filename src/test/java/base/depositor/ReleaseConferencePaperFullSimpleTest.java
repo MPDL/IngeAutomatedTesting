@@ -53,7 +53,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	@Test(priority = 3)
 	public void depositorReleasesSubmission() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		ViewItemPage viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
+		ViewItemPage viewItemPage = depositorHomePage.goToMyItemsPage().openPublishedItemByTitle(title);
 		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -70,7 +70,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	public void viewItem() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
-		ViewItemPage viewItemPage = myItemsPage.openItemByTitle(title);
+		ViewItemPage viewItemPage = myItemsPage.openPublishedItemByTitle(title);
 		String actualTitle = viewItemPage.getItemTitle();
 		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
 	}

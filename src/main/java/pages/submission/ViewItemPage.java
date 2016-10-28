@@ -105,6 +105,12 @@ public class ViewItemPage extends BasePage {
 		return new EditItemPage(driver).editItem();
 	}
 	
+	public ViewItemPage editTitle(String newTitle) {
+		editItemLink.click();
+		
+		return new EditItemPage(driver).editTitle(newTitle);
+	}
+	
 	public ViewItemPage sendBackForRework() {
 		reviseItemLink.click();
 		
@@ -115,6 +121,18 @@ public class ViewItemPage extends BasePage {
 		modifyItemLink.click();
 		
 		return new EditItemPage(driver).modifyItem();
+	}
+	
+	public ViewItemPage modifyTitle(String newTitle) {
+		modifyItemLink.click();
+		
+		return new EditItemPage(driver).modifyTitle(newTitle);
+	}
+	
+	public ViewItemPage modifyAuthor(String newAuthor) {
+		modifyItemLink.click();
+		
+		return new EditItemPage(driver).modifyAuthor(newAuthor);
 	}
 	
 }

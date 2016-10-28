@@ -72,7 +72,7 @@ public abstract class BasePage {
 		return searchComponent.goToAdvancedSearchPage();
 	}
 	
-	public ViewItemPage openItemByTitle(String itemTitle) {
+	public ViewItemPage openPublishedItemByTitle(String itemTitle) {
 		SearchResultsPage searchResultsPage = searchComponent.quickSearch(itemTitle);
 		ViewItemPage viewItemPage = searchResultsPage.openFirstResult();
 		return viewItemPage;

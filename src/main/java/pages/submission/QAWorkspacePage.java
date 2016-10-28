@@ -15,7 +15,7 @@ public class QAWorkspacePage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public ViewItemPage openItemByTitle(String itemTitle) {
+	public ViewItemPage openPublishedItemByTitle(String itemTitle) {
 		WebElement itemLink = driver.findElement(By.cssSelector("a[title='" + itemTitle + "']"));
 		itemLink.click();
 		
