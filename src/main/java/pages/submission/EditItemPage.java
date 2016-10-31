@@ -51,6 +51,27 @@ public class EditItemPage extends BasePage {
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
+	public ViewItemPage editAuthor(String newAuthor) {
+		personFamilyNameBox.clear();
+		personFamilyNameBox.sendKeys(newAuthor);
+		driver.findElement(By.cssSelector(".ac_results>li")).click();
+		saveButton.click();
+		
+		return PageFactory.initElements(driver, ViewItemPage.class);
+	}
+	
+	public ViewItemPage addAuthor(String additionalAuthor) {
+		int authorCount = driver.findElements(By.xpath("//input[contains(@id, 'j_idt497') and contains(@id, 'inpcreator_persons_person_family_name')]")).size();
+		WebElement addSecondAuthor = driver.findElement(By.id("form1:j_idt497:" + (authorCount - 1) + ":btnAddCreator"));
+		addSecondAuthor.click();
+		WebElement secondFamilyNameBox = driver.findElement(By.id("form1:j_idt497:" + authorCount + ":inpcreator_persons_person_family_name_optional"));
+		secondFamilyNameBox.sendKeys(additionalAuthor);
+		driver.findElement(By.cssSelector(".ac_results>li")).click();
+		saveButton.click();
+		
+		return PageFactory.initElements(driver, ViewItemPage.class);
+	}
+	
 	public ViewItemPage modifyItem() {
 		editDescription(" (modified by moderator)");
 		acceptButton.click();
