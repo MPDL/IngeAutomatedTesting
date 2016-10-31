@@ -117,17 +117,19 @@ public class FullSubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public ViewItemPage fullSubmission(Genre genre, String title, String filepath) {
-		fillInData(genre, title);
+	public ViewItemPage fullSubmission(Genre genre, String title, String author, String filepath) {
+		fillInData(genre, title, author);
 		fillInGenericData(genre);
 		uploadFile(filepath);
 		return save();
 	}
 	
-	private void fillInData(Genre genre, String title) {
+	private void fillInData(Genre genre, String title, String author) {
 		Select genreSelect = new Select(genreDropdown);
 		genreSelect.selectByValue(genre.toString());
 		titleBox.sendKeys(title);
+		
+		fillInPersonInfo(author);
 	}
 	
 	private void uploadFile(String filepath) {
@@ -142,7 +144,6 @@ public class FullSubmissionPage extends BasePage {
 	
 	private void fillInGenericData(Genre genre) {
 		/* TODO add locator */
-		fillInPersonInfo();
 		fillInContentInfo();
 		fillInDetailsInfo();
 		if (genre.equals(Genre.CONFERENCE_PAPER))
@@ -151,8 +152,8 @@ public class FullSubmissionPage extends BasePage {
 		fillInSourceInfo();
 	}
 	
-	private void fillInPersonInfo() {
-		personFamilyNameBox.sendKeys("Testermann, Testo (MPI for Social Anthropology, Max Planck Society)");
+	private void fillInPersonInfo(String author) {
+		personFamilyNameBox.sendKeys(author);
 		orgNrBox.sendKeys("1");
 		orgNameBox.sendKeys("MPI for Social Anthropology, Max Planck Society");
 	}

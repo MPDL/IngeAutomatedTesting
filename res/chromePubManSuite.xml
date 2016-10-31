@@ -7,8 +7,8 @@
 	
 	<test name="basic">
 		<classes>
-			<class name="test.java.base.TestSuiteInitialisation"></class>
-			<class name="test.java.base.BaseTest"></class>
+<!-- 			<class name="test.java.base.TestSuiteInitialisation"></class> -->
+<!-- 			<class name="test.java.base.BaseTest"></class> -->
 <!-- 			<class name="test.java.base.depositor.ReleaseConferencePaperFullSimpleTest"></class> -->
 <!-- 			<class name="test.java.base.depositor.ReleaseBookFullStandardTest"></class> -->
 <!-- 			<class name="test.java.base.depositor.JournalArticleEasyStandardTest"></class> -->
@@ -31,12 +31,16 @@
 <!-- 			<class name="test.java.base.moddep.InstallCitationStyleTest"></class> -->
 <!-- 			<class name="test.java.base.guest.EditCitationTest"></class> -->
 <!-- 			<class name="test.java.base.moddep.BatchImportTest"></class> -->
-			<class name="test.java.base.moddep.SubmitJournalArticleTest"></class>
+<!-- 			<class name="test.java.base.moddep.SubmitJournalArticleTest"></class> -->
 		</classes>
 	</test>
 	
 	<test name="data-driven">
-		<classes></classes>
+		<classes>
+			<class name="test.java.base.TestSuiteInitialisation"></class>
+			<class name="test.java.base.BaseTest"></class>
+			<class name="test.java.base.moddep.SubmitJournalArticleTest"></class>
+		</classes>
 	</test>
 	
 	<test name="functional">

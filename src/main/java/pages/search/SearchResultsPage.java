@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,7 +43,10 @@ public class SearchResultsPage extends BasePage {
 	}
 	
 	public ViewItemPage openFirstResult() {
-		WebElement titleLink = searchResults.get(0).findElement(By.className("itemHeadline"));
+		if (getResultCount() == 0)
+			throw new NoSuchElementException("There are no search results.");
+		
+		WebElement titleLink = searchResults.get(0).findElement(By.xpath("//a[contains(@id, 'shortTitle')]"));
 		titleLink.click();
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);

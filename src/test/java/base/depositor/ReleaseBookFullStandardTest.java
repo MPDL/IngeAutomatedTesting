@@ -24,6 +24,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	
 	private String title;
 	private String filepath;
+	private String author;
 	
 	private DepositorHomePage depositorHomePage;
 	private ModeratorHomePage moderatorHomePage;
@@ -34,6 +35,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		super.setup();
 		title = "Released book in standard workflow: " + getTimeStamp();
 		filepath = getFilepath("SamplePDFFile.pdf");
+		author = "Testermeier, Testo (MPI for Social Anthropology)";
 	}
 	
 	@Test(priority = 1)
@@ -47,7 +49,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void fullSubmissionStandardWorkflow() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
 		// TODO data-driven testing implementation
-		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, filepath);
+		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, filepath, author);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}

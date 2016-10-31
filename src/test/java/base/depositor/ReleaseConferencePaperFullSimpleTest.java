@@ -27,12 +27,14 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
 	private String title;
 	private String filepath;
+	private String author;
 	
 	@BeforeClass
 	public void setup() {
 		super.setup();
 		title = "Released conference paper in simple workflow: " + getTimeStamp();
 		filepath = getFilepath("SamplePDFFile.pdf");
+		author = "Testermeier, Testo (MPI for Social Anthropology)";
 	}
 	
 	@Test(priority = 1)
@@ -45,7 +47,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	@Test(priority = 2)
 	public void fullSubmissionSimpleWorkflow() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
-		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath);
+		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath, author);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
