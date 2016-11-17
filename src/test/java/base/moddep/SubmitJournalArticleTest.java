@@ -33,7 +33,8 @@ public class SubmitJournalArticleTest extends BaseTest {
 	private String submittedTitle;
 	private String releasedTitle;
 	private String author;
-	private String newAuthor;
+	private String secondAuthor;
+	private String thirdAuthor;
 	private String filepath;
 	
 	private static class ReindexerDataIterator implements Iterator<Object[]> {
@@ -91,7 +92,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 		this.submittedTitle = id + " " + submittedTitle + ": " + getTimeStamp();
 		this.releasedTitle = id + " " + releasedTitle + ": " + getTimeStamp();
 		this.author = author;
-		this.newAuthor = newAuthor;
+		this.secondAuthor = newAuthor;
 	}
 	
 	@Test(priority = 1)
@@ -121,13 +122,45 @@ public class SubmitJournalArticleTest extends BaseTest {
 	}
 	
 	@Test(priority = 4)
+	public void editAuthor() {
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(submittedTitle);
+		viewItem = viewItem.editItem().editAuthor(secondAuthor);
+	}
+	
+	@Test(priority = 5)
+	public void editAuthorSearch() {
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(submittedTitle, secondAuthor, "");
+		
+		int resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
+		
+		searchResults = searchResults.goToAdvancedSearchPage().advancedSearch(submittedTitle, author, "");
+		resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 0, "Item is still found with old author name.");
+	}
+	
+	@Test(priority = 6)
+	public void addAuthorSubmitted() {
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(submittedTitle);
+		viewItem = viewItem.editItem().addAuthor(secondAuthor);
+	}
+	
+	@Test(priority = 7)
+	public void secondAuthorSearch() {
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(submittedTitle, secondAuthor, "");
+		
+		int resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
+	}
+	
+	@Test(priority = 8)
 	public void releaseItem() {
 		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(submittedTitle);
 		viewItem = viewItem.submitItem();
 		viewItem = viewItem.releaseItem();
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 9)
 	public void searchReleasedItem() {
 		startPage = combinedHomePage.logout();
 		SearchResultsPage searchResults = startPage.quickSearch(submittedTitle);
@@ -137,7 +170,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
 	}
 	
-	@Test(priority = 6)
+	@Test(priority = 10)
 	public void modifyReleasedTitle() {
 		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(submittedTitle);
 		viewItem = viewItem.modifyTitle(releasedTitle);
@@ -146,7 +179,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(actualTitle, releasedTitle, "Title was not changed.");
 	}
 	
-	@Test(priority = 7)
+	@Test(priority = 11)
 	public void searchReleasedItemNewTitle() {
 		startPage = combinedHomePage.logout();
 		SearchResultsPage searchResults = startPage.quickSearch(releasedTitle);
@@ -156,15 +189,15 @@ public class SubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
 	}
 	
-	@Test(priority = 8)
+	@Test(priority = 12)
 	public void changeAuthor() {
 		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(releasedTitle);
-		viewItem.modifyAuthor(newAuthor);
+		viewItem.modifyAuthor(secondAuthor);
 	}
 	
-	@Test(priority = 9)
+	@Test(priority = 13)
 	public void adminAuthorSearch() {
-		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, newAuthor, "");
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, secondAuthor, "");
 		
 		int resultCount = searchResults.getResultCount();
 		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
@@ -174,7 +207,39 @@ public class SubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(resultCount, 0, "Item is still found with old author name.");
 	}
 	
-	@Test(priority = 10)
+	@Test(priority = 14)
+	public void changeReleasedItemAuthor() {
+		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(releasedTitle);
+		viewItem.modifyAuthor(author);
+	}
+	
+	@Test(priority = 15)
+	public void modifiedAuthorSearch() {
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, author, "");
+		
+		int resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
+		
+		searchResults = searchResults.goToAdvancedSearchPage().advancedSearch(releasedTitle, secondAuthor, "");
+		resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 0, "Item is still found with old author name.");
+	}
+	
+	@Test(priority = 16)
+	public void addAuthorReleased() {
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
+		viewItem = viewItem.modifyAddAuthor(thirdAuthor);
+	}
+	
+	@Test(priority = 17)
+	public void thirdAuthorSearch() {
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, thirdAuthor, "");
+		
+		int resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
+	}
+	
+	@Test(priority = 18)
 	public void discardItem() {
 		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(releasedTitle);
 		viewItem = viewItem.discardItem();

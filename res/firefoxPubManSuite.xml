@@ -32,6 +32,7 @@
 			<class name="test.java.base.guest.EditCitationTest"></class>
 			<class name="test.java.base.moddep.BatchImportTest"></class>
 			<class name="test.java.base.moddep.StandardSubmitJournalArticleTest"></class>
+ 			<class name="test.java.base.guest.SearchContentTest"></class>
 		</classes>
 	</test>
 	
