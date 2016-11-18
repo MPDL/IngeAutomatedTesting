@@ -18,7 +18,7 @@ public class SearchContentTest extends BaseTest {
 	@Test
 	public void searchContent() {
 		StartPage startPage = new StartPage(driver);
-		SearchResultsPage searchResults = startPage.quickSearch("replication spurious savant restoration");
+		SearchResultsPage searchResults = startPage.quickSearch("dskfidndfkisdfnidnfidfkdnjkf");
 		
 		int resultCount = searchResults.getResultCount();
 		Assert.assertEquals(resultCount, 1, resultCount == 0 ? "Matching result is not displayed." : "Non-matching results were displayed.");
