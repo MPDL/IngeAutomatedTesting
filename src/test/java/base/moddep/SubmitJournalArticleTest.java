@@ -172,7 +172,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 10)
 	public void modifyReleasedTitle() {
-		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(submittedTitle);
+		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(submittedTitle);
 		viewItem = viewItem.modifyTitle(releasedTitle);
 		String actualTitle = viewItem.getItemTitle();
 		
@@ -191,7 +191,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 12)
 	public void changeAuthor() {
-		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
 		viewItem.modifyAuthor(secondAuthor);
 	}
 	
@@ -209,7 +209,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 14)
 	public void changeReleasedItemAuthor() {
-		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
 		viewItem.modifyAuthor(author);
 	}
 	
@@ -241,7 +241,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 18)
 	public void discardItem() {
-		ViewItemPage viewItem = combinedHomePage.openPublishedItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
 		viewItem = viewItem.discardItem();
 	}
 	

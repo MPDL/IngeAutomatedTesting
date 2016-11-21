@@ -63,7 +63,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	
 	@Test(priority = 5)
 	public void moderatorReleasesSubmission() {
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openPublishedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -72,7 +72,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	@Test(priority = 6)
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openPublishedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 	}
 	

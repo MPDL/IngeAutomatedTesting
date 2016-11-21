@@ -49,7 +49,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void fullSubmissionStandardWorkflow() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
 		// TODO data-driven testing implementation
-		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, filepath, author);
+		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, author, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
@@ -67,7 +67,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void moderatorSendsBackSubmission() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openPublishedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.editItem();
 		viewItemPage = viewItemPage.sendBackForRework();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
@@ -80,7 +80,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void depositorRevisesItem() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
-		viewItemPage = depositorHomePage.goToMyItemsPage().openPublishedItemByTitle(title);
+		viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
@@ -93,7 +93,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	public void moderatorReleasesSubmission() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openPublishedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -102,14 +102,14 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	@Test(priority = 7)
 	public void moderatorModifiesRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openPublishedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.modifyItem();
 	}
 	
 	@Test(priority = 8)
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openPublishedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");

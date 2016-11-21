@@ -47,7 +47,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	@Test(priority = 2)
 	public void fullSubmissionSimpleWorkflow() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
-		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, filepath, author);
+		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, author, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
@@ -55,7 +55,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	@Test(priority = 3)
 	public void depositorReleasesSubmission() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		ViewItemPage viewItemPage = depositorHomePage.goToMyItemsPage().openPublishedItemByTitle(title);
+		ViewItemPage viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
 		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -70,9 +70,8 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
 	@Test(priority = 5)
 	public void viewItem() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
-		ViewItemPage viewItemPage = myItemsPage.openPublishedItemByTitle(title);
+		ViewItemPage viewItemPage = myItemsPage.openSubmittedItemByTitle(title);
 		String actualTitle = viewItemPage.getItemTitle();
 		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
 	}
@@ -86,8 +85,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
 	@AfterClass
 	public void tearDown() {
-		StartPage startPage = new StartPage(driver).goToStartPage();
-		depositorHomePage = (DepositorHomePage) startPage.goToHomePage(depositorHomePage);
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 }
