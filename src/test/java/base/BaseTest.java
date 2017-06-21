@@ -1,13 +1,19 @@
 package test.java.base;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 
 /**
  * Superclass for all test classes. Prepares the driver instance and user data
@@ -100,6 +106,18 @@ public abstract class BaseTest {
 	public void backToBaseHandle() {
 		driver.close();
 		driver.switchTo().window(baseWindowHandle);
+	}
+	
+	@AfterMethod
+	public void failureScreenshot(ITestResult result) {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			try {
+				String screenshotPath = "./target/screenshot" + result.getName() + ".jpg";
+				File screenshot = ((TakesScreenshot) driver).getScreenshotAs(org.openqa.selenium.OutputType.FILE);
+				FileUtils.copyFile(screenshot, new File(screenshotPath));
+			}
+			catch (IOException exc) {}
+		}
 	}
 	
 }

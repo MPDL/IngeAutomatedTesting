@@ -38,9 +38,9 @@
 	
 	<test name="data-driven">
 		<classes>
-			<class name="test.java.base.TestSuiteInitialisation"></class>
-			<class name="test.java.base.BaseTest"></class>
-			<class name="test.java.base.moddep.SubmitJournalArticleTest"></class>
+<!-- 			<class name="test.java.base.TestSuiteInitialisation"></class> -->
+<!-- 			<class name="test.java.base.BaseTest"></class> -->
+<!-- 			<class name="test.java.base.moddep.SubmitJournalArticleTest"></class> -->
 		</classes>
 	</test>
 	

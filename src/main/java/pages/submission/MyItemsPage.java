@@ -23,6 +23,9 @@ public class MyItemsPage extends BasePage {
 	@FindBy(id = "j_idt103:selExportFormatName")
 	private WebElement formatDropdown;
 	
+	@FindBy(id = "j_idt103:itemList:extSelectTop")
+	private WebElement itemCountDropdown;
+	
 	@FindBy(id = "j_idt103:btnExportDownload")
 	private WebElement downloadLink;
 	
@@ -71,5 +74,13 @@ public class MyItemsPage extends BasePage {
 	public boolean hasItems() {
 		List<WebElement> items = driver.findElements(By.className("listItem"));
 		return items.size() > 0;
+	}
+	
+	public MyItemsPage show50Entries() {
+		itemCountDropdown.click();
+		Select itemCountSelect = new Select(itemCountDropdown);
+		itemCountSelect.selectByValue("50");
+		
+		return PageFactory.initElements(driver, MyItemsPage.class);
 	}
 }

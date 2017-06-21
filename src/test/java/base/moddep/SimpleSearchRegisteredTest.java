@@ -33,6 +33,9 @@ public class SimpleSearchRegisteredTest extends BaseTest {
 		String expectedHeadline = combinedHomePage.getHeadline();
 		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch("");
 		String headlineText = searchResultsPage.getHeadline();
+		// workaround when start button is not enabled; TODO: find permantent solution
+		searchResultsPage.goToAdvancedSearchPage();
+		//
 		Assert.assertEquals(headlineText, expectedHeadline, "Empty search query does not lead to error.");
 	}
 	

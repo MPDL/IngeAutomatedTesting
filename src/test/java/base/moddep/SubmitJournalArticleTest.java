@@ -87,12 +87,13 @@ public class SubmitJournalArticleTest extends BaseTest {
 	}
 	
 	@Factory(dataProvider = "reindexer_data")
-	public SubmitJournalArticleTest(String id, String title, String submittedTitle, String releasedTitle, String author, String newAuthor) {
+	public SubmitJournalArticleTest(String id, String title, String submittedTitle, String releasedTitle, String author, String newAuthor, String thirdAuthor) {
 		this.title = id + " " + title + ": " + getTimeStamp();
 		this.submittedTitle = id + " " + submittedTitle + ": " + getTimeStamp();
 		this.releasedTitle = id + " " + releasedTitle + ": " + getTimeStamp();
 		this.author = author;
 		this.secondAuthor = newAuthor;
+		this.thirdAuthor = thirdAuthor;
 	}
 	
 	@Test(priority = 1)
@@ -114,7 +115,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 3)
 	public void editTitle() {
-		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(title);
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().show50Entries().openItemByTitle(title);
 		viewItem = viewItem.editItem().editTitle(submittedTitle);
 		String actualTitle = viewItem.getItemTitle();
 		
@@ -123,7 +124,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 4)
 	public void editAuthor() {
-		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(submittedTitle);
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().show50Entries().openItemByTitle(submittedTitle);
 		viewItem = viewItem.editItem().editAuthor(secondAuthor);
 	}
 	
@@ -141,13 +142,13 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 6)
 	public void addAuthorSubmitted() {
-		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(submittedTitle);
-		viewItem = viewItem.editItem().addAuthor(secondAuthor);
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().show50Entries().openItemByTitle(submittedTitle);
+		viewItem = viewItem.editItem().addAuthor(author);
 	}
 	
 	@Test(priority = 7)
 	public void secondAuthorSearch() {
-		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(submittedTitle, secondAuthor, "");
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(submittedTitle, author, "");
 		
 		int resultCount = searchResults.getResultCount();
 		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
@@ -155,7 +156,7 @@ public class SubmitJournalArticleTest extends BaseTest {
 	
 	@Test(priority = 8)
 	public void releaseItem() {
-		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(submittedTitle);
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().show50Entries().openItemByTitle(submittedTitle);
 		viewItem = viewItem.submitItem();
 		viewItem = viewItem.releaseItem();
 	}
@@ -192,30 +193,12 @@ public class SubmitJournalArticleTest extends BaseTest {
 	@Test(priority = 12)
 	public void changeAuthor() {
 		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
-		viewItem.modifyAuthor(secondAuthor);
+		viewItem.modifyAuthor(thirdAuthor);
 	}
 	
 	@Test(priority = 13)
 	public void adminAuthorSearch() {
-		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, secondAuthor, "");
-		
-		int resultCount = searchResults.getResultCount();
-		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
-		
-		searchResults = searchResults.goToAdvancedSearchPage().advancedSearch(releasedTitle, author, "");
-		resultCount = searchResults.getResultCount();
-		Assert.assertEquals(resultCount, 0, "Item is still found with old author name.");
-	}
-	
-	@Test(priority = 14)
-	public void changeReleasedItemAuthor() {
-		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
-		viewItem.modifyAuthor(author);
-	}
-	
-	@Test(priority = 15)
-	public void modifiedAuthorSearch() {
-		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, author, "");
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, thirdAuthor, "");
 		
 		int resultCount = searchResults.getResultCount();
 		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
@@ -225,9 +208,27 @@ public class SubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(resultCount, 0, "Item is still found with old author name.");
 	}
 	
+	@Test(priority = 14)
+	public void changeReleasedItemAuthor() {
+		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
+		viewItem.modifyAuthor(secondAuthor);
+	}
+	
+	@Test(priority = 15)
+	public void modifiedAuthorSearch() {
+		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, secondAuthor, "");
+		
+		int resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
+		
+		searchResults = searchResults.goToAdvancedSearchPage().advancedSearch(releasedTitle, thirdAuthor, "");
+		resultCount = searchResults.getResultCount();
+		Assert.assertEquals(resultCount, 0, "Item is still found with old author name.");
+	}
+	
 	@Test(priority = 16)
 	public void addAuthorReleased() {
-		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().show50Entries().openItemByTitle(releasedTitle);
 		viewItem = viewItem.modifyAddAuthor(thirdAuthor);
 	}
 	

@@ -47,8 +47,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	
 	@Test(priority = 2)
 	public void fullSubmissionStandardWorkflow() {
-		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
-		// TODO data-driven testing implementation
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
 		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, author, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");

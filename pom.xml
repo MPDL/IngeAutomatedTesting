@@ -25,7 +25,7 @@
 	  			<configuration>
 	  				<suiteXmlFiles>
 	  					<suiteXmlFile>res/firefoxPubManSuite.xml</suiteXmlFile>
-	  					<!-- <suiteXmlFile>res/chromePubManSuite.xml</suiteXmlFile> -->
+<!-- 	  					<suiteXmlFile>res/chromePubManSuite.xml</suiteXmlFile> -->
 	  				</suiteXmlFiles>
 	  			</configuration>
 			</plugin>
