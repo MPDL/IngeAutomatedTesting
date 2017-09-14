@@ -31,8 +31,8 @@ public class TestSuiteInitialisation {
 	private static Logger log4j = LogManager.getLogger(TestSuiteInitialisation.class.getName());
 	private static Properties properties;
 	
-	private final String startPageURL = "http://qa-pubman.mpdl.mpg.de/pubman/faces/HomePage.jsp";
-	private final String propertiesFileName = "pubmanTestData";
+	private final String startPageURL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	private final String propertiesFileName = "ingeTestData";
 	
 	@Parameters({"browserType"})
 	@BeforeSuite
@@ -41,7 +41,7 @@ public class TestSuiteInitialisation {
 		loadProperties();
 		
 		driver.navigate().to(startPageURL);
-		log4j.info("QA PubMan start page loaded.");
+		log4j.info("PubMan start page loaded.");
 	}
 	
 	private void initialiseDriver(String browserType) {

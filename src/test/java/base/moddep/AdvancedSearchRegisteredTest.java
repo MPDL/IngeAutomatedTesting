@@ -6,9 +6,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import test.java.base.BaseTest;
-import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
-import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
 
@@ -21,7 +20,7 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	private String authorQuery = "Müller";
 	private String organisationQuery = "MPI of Cognitive Neuroscience";
 	
-	private CombinedHomePage combinedHomePage;
+	private DepositorHomePage depositorHomePage;
 	
 	@BeforeClass
 	public void setup() {
@@ -30,8 +29,7 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	
 	@Test(priority=1)
 	public void logInAsCombinedUser() {
-		LoginPage loginPage = new StartPage(driver).goToLoginPage();
-		combinedHomePage = loginPage.loginAsCombinedUser(modDepUsername, modDepPassword);
+		depositorHomePage = new StartPage(driver).loginAsDepositor(depositorUsername, depositorPassword);
 	}
 	
 	@Test(priority=2)
@@ -55,8 +53,8 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	}
 	
 	private void searchTest(String titleQuery, String authorQuery, String organisationQuery) {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		AdvancedSearchPage advancedSearchPage = depositorHomePage.goToAdvancedSearchPage();
 		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, authorQuery, organisationQuery);
 		String headlineText = searchResultsPage.getHeadline();
 		try {
@@ -69,7 +67,7 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	
 	@AfterClass
 	public void logout() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		combinedHomePage.logout();
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		depositorHomePage.logout();
 	}
 }

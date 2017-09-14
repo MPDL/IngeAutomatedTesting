@@ -9,16 +9,16 @@ import main.java.pages.BasePage;
 
 public class MultipleImportOptionsPage extends BasePage {
 
-	@FindBy(id = "j_idt98:selRollback")
+	@FindBy(xpath = "//input[contains(@id, 'selRollback')]")
 	private WebElement undoErrorCheckbox;
 	
-	@FindBy(id = "j_idt98:selDuplicateStrategy:0")
+	@FindBy(xpath = "//input[contains(@id, 'selDuplicateStrategy:0')]")
 	private WebElement doNotCheckDuplicateRadioButton;
 	
-	@FindBy(id = "j_idt98:inpMultipleImportName")
+	@FindBy(xpath = "//input[contains(@id, 'inpMultipleImportName')]")
 	private WebElement importNameBox;
 	
-	@FindBy(id = "j_idt98:lnkStartImport")
+	@FindBy(xpath = "//a[contains(@id, 'lnkStartImport')]")
 	private WebElement importButton;
 	
 	public MultipleImportOptionsPage(WebDriver driver) {

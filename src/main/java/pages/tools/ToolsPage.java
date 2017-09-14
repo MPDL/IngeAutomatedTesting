@@ -13,13 +13,13 @@ import main.java.pages.tools.rest.RestExamplePage;
 
 public class ToolsPage extends BasePage {
 
-	@FindBy(id = "j_idt98:lnkCoNE")
+	@FindBy(xpath = "//a[contains(@id, 'lnkCoNE')]")
 	private WebElement coneLink;
 	
-	@FindBy(id = "j_idt98:lnkRest")
+	@FindBy(xpath = "//a[contains(@id, 'lnkRest')]")
 	private WebElement restLink;
 	
-	@FindBy(id = "j_idt98:lnkCslEditor")
+	@FindBy(xpath = "//a[contains(@id, 'lnkCslEditor')]")
 	private WebElement citationEditorLink;
 	
 	public ToolsPage(WebDriver driver) {

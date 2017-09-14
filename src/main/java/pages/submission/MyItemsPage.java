@@ -14,19 +14,19 @@ import main.java.pages.BasePage;
 
 public class MyItemsPage extends BasePage {
 
-	@FindBy(id = "j_idt103:itemList:iterCurrentPartList:0:selItemSelect")
+	@FindBy(xpath = "//input[contains(@id, 'itemList:iterCurrentPartList:0:selItemSelect')]")
 	private WebElement firstItemCheckBox;
 	
-	@FindBy(id = "j_idt103:lnkChangeSubmenuToExport")
+	@FindBy(xpath = "//a[contains(@id, 'lnkChangeSubmenuToExport')]")
 	private WebElement exportLink;
 	
-	@FindBy(id = "j_idt103:selExportFormatName")
+	@FindBy(xpath = "//select[contains(@id, 'selExportFormatName')]")
 	private WebElement formatDropdown;
 	
 	@FindBy(id = "j_idt103:itemList:extSelectTop")
 	private WebElement itemCountDropdown;
 	
-	@FindBy(id = "j_idt103:btnExportDownload")
+	@FindBy(xpath = "//a[contains(@id, 'btnExportDownload')]")
 	private WebElement downloadLink;
 	
 	public MyItemsPage(WebDriver driver) {
@@ -59,7 +59,7 @@ public class MyItemsPage extends BasePage {
 		}
 		catch (NoSuchElementException exc) {
 			// export submenu already open: do nothing
-			// TODO temporary solution, design a fix
+			// TODO this is only a temporary solution, design a fix
 		}
 			
 		Select formatSelect = new Select(formatDropdown);

@@ -5,9 +5,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
-import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.FetchSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.ViewItemPage;
@@ -21,7 +20,7 @@ import test.java.base.BaseTest;
  */
 public class ExportItemStandardTest extends BaseTest {
 
-	private CombinedHomePage combinedHomePage;
+	private DepositorHomePage depositorHomePage;
 	private MyItemsPage myItemsPage;
 	
 	private String itemTitle = "Exported item";
@@ -35,13 +34,12 @@ public class ExportItemStandardTest extends BaseTest {
 	
 	@Test(priority = 1)
 	public void loginModDep() {
-		LoginPage loginPage = new StartPage(driver).goToLoginPage();
-		combinedHomePage = loginPage.loginAsCombinedUser(modDepUsername, modDepPassword);
+		depositorHomePage = new StartPage(driver).loginAsDepositor(depositorUsername, depositorPassword);
 	}
 	
 	@Test(priority = 2)
 	public void selectItem() {
-		myItemsPage = combinedHomePage.goToMyItemsPage();
+		myItemsPage = depositorHomePage.goToMyItemsPage();
 		if (!myItemsPage.hasItems())
 			uploadItem();
 	}
@@ -49,11 +47,11 @@ public class ExportItemStandardTest extends BaseTest {
 	private void uploadItem() {
 		String identifier = "arXiv:1304.2685";
 		
-		combinedHomePage = (CombinedHomePage) myItemsPage.goToHomePage(combinedHomePage);
-		FetchSubmissionPage fetchPage = combinedHomePage.goToSubmissionPage().goToFetchSubmissionStandardPage();
+		depositorHomePage = (DepositorHomePage) myItemsPage.goToHomePage(depositorHomePage);
+		FetchSubmissionPage fetchPage = depositorHomePage.goToSubmissionPage().goToFetchSubmissionStandardPage();
 		ViewItemPage viewResultsPage = fetchPage.fetchSubmission(identifier);
-		combinedHomePage = (CombinedHomePage) viewResultsPage.goToHomePage(combinedHomePage);
-		myItemsPage = combinedHomePage.goToMyItemsPage();
+		depositorHomePage = (DepositorHomePage) viewResultsPage.goToHomePage(depositorHomePage);
+		myItemsPage = depositorHomePage.goToMyItemsPage();
 	}
 	
 	@Test(priority = 3)
@@ -64,15 +62,15 @@ public class ExportItemStandardTest extends BaseTest {
 	
 	@Test(priority = 4)
 	public void exportItemEndNote() {
-		combinedHomePage = (CombinedHomePage) myItemsPage.goToHomePage(combinedHomePage);
-		myItemsPage = ((CombinedHomePage)(combinedHomePage.goToSubmissionPage().goToHomePage(combinedHomePage))).goToMyItemsPage();
+		depositorHomePage = (DepositorHomePage) myItemsPage.goToHomePage(depositorHomePage);
+		myItemsPage = ((DepositorHomePage)(depositorHomePage.goToSubmissionPage().goToHomePage(depositorHomePage))).goToMyItemsPage();
 		boolean itemIsExported = myItemsPage.exportItem(itemTitle, endNoteValue);
 		Assert.assertTrue(itemIsExported, "Item was not exported.");
 	}
 	
 	@AfterClass
 	public void tearDown() {
-		combinedHomePage = (CombinedHomePage) myItemsPage.goToHomePage(combinedHomePage);
-		combinedHomePage.logout();
+		depositorHomePage = (DepositorHomePage) myItemsPage.goToHomePage(depositorHomePage);
+		depositorHomePage.logout();
 	}
 }

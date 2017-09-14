@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import test.java.base.BaseTest;
 import test.java.base.Genre;
 import test.java.base.ItemStatus;
-import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
@@ -32,8 +31,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	
 	@Test(priority = 1)
 	public void loginAsDepositor() {
-		LoginPage loginPage = new StartPage(driver).goToLoginPage();
-		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
+		depositorHomePage = new StartPage(driver).loginAsDepositor(depositorUsername, depositorPassword);
 		Assert.assertEquals(depositorHomePage.getUsername(), depositorName, "Expected and actual name don't match.");
 	}
 	
@@ -56,8 +54,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	
 	@Test(priority = 4)
 	public void loginAsModerator() {
-		LoginPage loginPage = new StartPage(driver).goToLoginPage();
-		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
+		moderatorHomePage = new StartPage(driver).loginAsModerator(moderatorUsername, moderatorPassword);
 		Assert.assertEquals(moderatorHomePage.getUsername(), moderatorName, "Expected and actual name don't match.");
 	}
 	

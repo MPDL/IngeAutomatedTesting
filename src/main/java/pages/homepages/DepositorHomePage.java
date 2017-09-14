@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import main.java.pages.submission.ImportWorkspacePage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.SubmissionPage;
 
@@ -31,5 +32,9 @@ public class DepositorHomePage extends HomePage {
 	public SubmissionPage goToSubmissionPage() {
 		submissionLink.click();
 		return PageFactory.initElements(driver, SubmissionPage.class);
+	}
+	
+	public ImportWorkspacePage goToImportWorkspace() {
+		return mainMenuComponent.goToImportWorkspacePage();
 	}
 }

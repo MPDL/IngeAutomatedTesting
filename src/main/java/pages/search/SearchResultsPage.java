@@ -17,19 +17,19 @@ import main.java.pages.tools.rest.RestExamplePage;
 
 public class SearchResultsPage extends BasePage {
 
-	@FindBy(id = "j_idt105:lnkRestServiceExamplePage")
+	@FindBy(xpath = "//a[contains(@id, 'lnkRestServiceExamplePage')]")
 	private WebElement queryInRestLink;
 	
-	@FindBy(id = "j_idt105:lnkList_lblExportOptions")
+	@FindBy(xpath = "//a[contains(@id, 'lblExportOptions')]")
 	private WebElement exportLink;
 	
-	@FindBy(id = "j_idt105:selEXPORTFORMAT_OPTIONS")
+	@FindBy(xpath = "//select[contains(@id, 'selEXPORTFORMAT_OPTIONS')]")
 	private WebElement exportFormatDropdown;
 	
 	@FindBy(className = "allCheckBox")
 	private WebElement allCheckBox;
 	
-	@FindBy(id = "j_idt105:btnExportDownload")
+	@FindBy(xpath = "//a[contains(@id, 'btnExportDownload')]")
 	private WebElement downloadLink;
 	
 	private List<WebElement> searchResults;
@@ -91,7 +91,7 @@ public class SearchResultsPage extends BasePage {
 		exportFormat.selectByValue(format);
 		
 		if (fileFormat != null) {
-			WebElement fileFormatDropdown = driver.findElement(By.id("j_idt105:selFILEFORMAT_OPTIONS"));
+			WebElement fileFormatDropdown = driver.findElement(By.xpath("//select[contains(@id, 'selFILEFORMAT_OPTIONS')]"));
 			Select fileFormatSelect = new Select(fileFormatDropdown);
 			fileFormatSelect.selectByValue(fileFormat);
 		}

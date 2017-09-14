@@ -16,11 +16,11 @@ public class MultipleImportPage extends BasePage {
 
 	private WebDriverWait wait;
 	
-	@FindBy(id = "j_idt98:selFormat")
+	@FindBy(xpath = "//select[contains(@id, 'selFormat')]")
 	private WebElement importFormatDropdown;
 	
-	private final String uploadInputID = "j_idt98:inpMultipleImportUploadedImportFile_input";
-	private final String importButtonID = "j_idt98:lnkUploadFile";
+	private final String uploadInputID = "j_idt97:inpMultipleImportUploadedImportFile_input";
+	private final String importButtonID = "j_idt97:lnkUploadFile";
 	
 	public MultipleImportPage(WebDriver driver) {
 		super(driver);

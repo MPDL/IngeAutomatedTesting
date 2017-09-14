@@ -10,16 +10,16 @@ import main.java.pages.submission.transition.CollectionSelectionPage;
 
 public class SubmissionPage extends BasePage {
 	
-	@FindBy(id = "j_idt98:lnkSubmission_lnkEasySubmission")
+	@FindBy(xpath = "//a[contains(@id, 'lnkSubmission_lnkEasySubmission')]")
 	private WebElement easySubmissionLink;
 	
-	@FindBy(id = "j_idt98:lnkNewSubmission")
+	@FindBy(xpath = "//a[contains(@id, 'lnkNewSubmission')]")
 	private WebElement fullSubmissionLink;
 	
-	@FindBy(id = "j_idt98:lnkSubmission_lnkImport")
+	@FindBy(xpath = "//a[contains(@id, 'lnkSubmission_lnkImport')]")
 	private WebElement fetchSubmissionLink;
 	
-	@FindBy(id = "j_idt98:lnkSubmission_lnkMultipleImport")
+	@FindBy(xpath = "//a[contains(@id, 'lnkSubmission_lnkMultipleImport')]")
 	private WebElement multipleImportLink;
 
 	public SubmissionPage(WebDriver driver) {
@@ -30,11 +30,9 @@ public class SubmissionPage extends BasePage {
 	
 	public EasySubmissionPage goToEasySubmissionStandardPage() {
 		easySubmissionLink.click();
+		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
 		
-		return PageFactory.initElements(driver, EasySubmissionPage.class);
-//		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
-//		
-//		return collectionSelectionPage.easySubmissionStandard();
+		return collectionSelectionPage.easySubmissionStandard();
 	}
 	
 	public FullSubmissionPage goToFullSubmissionStandardPage() {

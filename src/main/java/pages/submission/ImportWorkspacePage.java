@@ -60,6 +60,14 @@ public class ImportWorkspacePage extends BasePage {
 	}
 	
 	// Currently language-specific
+	public ImportWorkspacePage submitImport(String importName) {
+		findImport(importName).findElement(By.linkText("Submit")).click();
+		waitForActionToFinish(importName);
+		
+		return PageFactory.initElements(driver, ImportWorkspacePage.class);
+	}
+	
+	// Currently language-specific
 	public ImportWorkspacePage releaseImport(String importName) {
 		findImport(importName).findElement(By.linkText("Release")).click();
 		waitForActionToFinish(importName);

@@ -44,7 +44,7 @@ public class MainMenuComponent {
 	}
 	
 	public StartPage goToStartPage() {
-		startPageLink.click();
+		driver.navigate().to("https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp");
 		
 		return PageFactory.initElements(driver, StartPage.class);
 	}
@@ -57,7 +57,7 @@ public class MainMenuComponent {
 	
 	public ImportWorkspacePage goToImportWorkspacePage() {
 		workspaceLink.click();
-		WebElement importWorkspaceLink = driver.findElement(By.id("j_idt108:lnkImportWorkspace"));
+		WebElement importWorkspaceLink = driver.findElement(By.id("j_idt107:lnkImportWorkspace"));
 		importWorkspaceLink.click();
 		
 		return PageFactory.initElements(driver, ImportWorkspacePage.class);
@@ -65,7 +65,7 @@ public class MainMenuComponent {
 	
 	public QAWorkspacePage goToQAWorkspacePage() {
 		workspaceLink.click();
-		WebElement qaWorkspaceLink = driver.findElement(By.id("j_idt108:lnkQAWorkspace"));
+		WebElement qaWorkspaceLink = driver.findElement(By.id("j_idt107:lnkQAWorkspace"));
 		qaWorkspaceLink.click();
 		
 		return PageFactory.initElements(driver, QAWorkspacePage.class);

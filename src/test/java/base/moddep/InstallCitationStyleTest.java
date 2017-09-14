@@ -6,16 +6,15 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
-import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.tools.citation.CitationSearchName;
 import main.java.pages.tools.citation.CitationStyleEditor;
 import test.java.base.BaseTest;
 
 public class InstallCitationStyleTest extends BaseTest {
 
-	private CombinedHomePage combinedHomePage;
+	private DepositorHomePage depositorHomePage;
 	private CitationStyleEditor csEditor;
 	
 	private String styleName = "IEEE";
@@ -27,14 +26,13 @@ public class InstallCitationStyleTest extends BaseTest {
 	
 	@Test(priority = 1)
 	public void loginCombined() {
-		LoginPage loginPage = new StartPage(driver).goToLoginPage();
-		combinedHomePage = loginPage.loginAsCombinedUser(modDepUsername, modDepPassword);
+		depositorHomePage = new StartPage(driver).loginAsDepositor(depositorUsername, depositorPassword);
 	}
 	
 	@Test(priority = 2)
 	public void searchCSName() {
 		saveCurrentHandle();
-		csEditor = combinedHomePage.goToAdvancedSearchPage().goToToolsPage().goToCitationStyleEditor();
+		csEditor = depositorHomePage.goToAdvancedSearchPage().goToToolsPage().goToCitationStyleEditor();
 		CitationSearchName searchName = csEditor.searchStyle(styleName);
 		WebElement firstResult = searchName.getFirstResult();
 		boolean canInstallStyle = searchName.openStylePage(firstResult).canSaveStyle();
@@ -44,7 +42,7 @@ public class InstallCitationStyleTest extends BaseTest {
 	@AfterClass
 	public void tearDown() {
 		backToBaseHandle();
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		combinedHomePage.logout();
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		depositorHomePage.logout();
 	}
 }

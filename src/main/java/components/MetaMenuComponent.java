@@ -17,7 +17,7 @@ public class MetaMenuComponent {
 
 	protected WebDriver driver;
 	
-	@FindBy(xpath = "//a[contains(@id, 'lnkLoginLogout')]")
+	@FindBy(xpath = "//input[contains(@id, 'lnkLogout')]")
 	private WebElement loginButton;
 	
 	public MetaMenuComponent(WebDriver driver) {

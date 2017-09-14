@@ -11,10 +11,10 @@ import main.java.pages.search.AdministrativeSearchPage;
 
 public class HomePage extends BasePage {
 
-	@FindBy(id = "Header:j_idt39:lnkAccountUserName")
+	@FindBy(xpath = "//a[contains(@id, 'lnkAccountUserName')]")
 	private WebElement loggedInUsername;
 	
-	@FindBy(id = "Header:j_idt67:lnkAdminSearch")
+	@FindBy(xpath = "//a[contains(@id, 'lnkAdminSearch')]")
 	private WebElement administrativeSearchLink;
 	
 	public HomePage(WebDriver driver) {
