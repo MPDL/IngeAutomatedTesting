@@ -32,7 +32,8 @@ public class TestSuiteInitialisation {
 	private static Properties properties;
 	
 	private final String startPageURL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
-	private final String propertiesFileName = "ingeTestData";
+	private final String propertiesFileName = "pubmanTestData";
+//	private final String propertiesFileName = "ingeTestData";
 	
 	@Parameters({"browserType"})
 	@BeforeSuite

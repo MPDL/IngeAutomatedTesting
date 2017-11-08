@@ -57,7 +57,7 @@ public abstract class BasePage {
 	}
 	
 	public LoginPage goToLoginPage() {
-		return metaMenuComponent.goToLoginPage();
+		return PageFactory.initElements(driver, LoginPage.class);
 	}
 	
 	public SearchResultsPage quickSearch(String searchQuery) {

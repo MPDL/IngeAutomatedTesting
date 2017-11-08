@@ -10,10 +10,10 @@ import main.java.pages.submission.ViewItemPage;
 
 public class ReworkItemPage extends BasePage {
 
-	@FindBy(name = "j_idt98:j_idt130")
+	@FindBy(className = "inputTxtArea")
 	private WebElement reworkCommentBox;
 	
-	@FindBy(id = "j_idt98:lnkSave")
+	@FindBy(xpath = "//a[contains(@id, ':lnkSave')]")
 	private WebElement saveButton;
 	
 	public ReworkItemPage(WebDriver driver) {

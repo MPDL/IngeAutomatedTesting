@@ -10,10 +10,10 @@ import main.java.pages.submission.ViewItemPage;
 
 public class SubmitItemPage extends BasePage {
 
-	@FindBy(name = "j_idt98:j_idt146")
+	@FindBy(className = "inputTxtArea")
 	private WebElement submitCommentBox;
 	
-	@FindBy(id = "j_idt98:lnkSave")
+	@FindBy(xpath = "//a[contains(@id, ':lnkSave')]")
 	private WebElement submitItemButton;
 	
 	public SubmitItemPage(WebDriver driver) {

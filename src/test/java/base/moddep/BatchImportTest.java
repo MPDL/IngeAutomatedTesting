@@ -5,9 +5,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
-import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.ImportWorkspacePage;
 import main.java.pages.submission.MultipleImportOptionsPage;

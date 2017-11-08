@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import test.java.base.Genre;
@@ -26,13 +25,13 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:fileUploads:0:inpExtraFileDescription")
 	private WebElement descriptionBox;
 	
-	@FindBy(id = "form1:j_idt497:0:inpcreator_persons_person_family_name_optional")
+	@FindBy(xpath = "//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]")
 	private WebElement personFamilyNameBox;
 	
-	@FindBy(id = "form1:j_idt497:0:inppersons_person_ous_optional")
+	@FindBy(xpath = "//input[contains(@id, '0:inppersons_person_ous_optional')]")
 	private WebElement orgNrBox;
 	
-	@FindBy(id = "form1:j_idt545:0:inporganizations_organization_name")
+	@FindBy(xpath = "//textarea[contains(@id, '0:inporganizations_organization_name')]")
 	private WebElement orgNameBox;
 	
 	@FindBy(id = "form1:inputFreeKeywords")
@@ -68,40 +67,40 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:inpProjectInfoFundingProgram")
 	private WebElement projectFundingProgram;
 	
-	@FindBy(id = "form1:j_idt827:0:selChooseSourceGenre")
+	@FindBy(xpath = "//select[contains(@id, '0:selChooseSourceGenre')]")
 	private WebElement sourceGenreDropdown;
 	
-	@FindBy(id = "form1:j_idt827:0:inpSourceTitle_Journal")
+	@FindBy(xpath = "//textarea[contains(@id, '0:inpSourceTitle_Journal')]")
 	private WebElement sourceTitleBox;
 	
-	@FindBy(id = "form1:j_idt827:0:j_idt899:0:selCreatorRoleString")
+	@FindBy(xpath = "//select[contains(@id, '0:selCreatorRoleString')]")
 	private WebElement creatorRoleDropdown;
 	
-	@FindBy(id = "form1:j_idt827:0:j_idt899:0:inpcreator_persons_person_family_name_optional")
+	@FindBy(xpath = "//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]")
 	private WebElement creatorFamilyNameBox;
 	
-	@FindBy(id = "form1:j_idt827:0:j_idt899:0:inppersons_person_ous_optional")
+	@FindBy(xpath = "//input[contains(@id, '0:inppersons_person_ous_optional')]")
 	private WebElement creatorOrgNrBox;
 	
-	@FindBy(id = "form1:j_idt827:0:j_idt954:0:inporganizations_organization_name")
+	@FindBy(xpath = "//textarea[contains(@id, '0:inporganizations_organization_name')]")
 	private WebElement creatorOrgNameBox;
 	
-	@FindBy(id = "form1:j_idt827:0:inpSourceDetailVolume")
+	@FindBy(xpath = "//input[contains(@id, '0:inpSourceDetailVolume')]")
 	private WebElement sourceVolumeBox;
 	
-	@FindBy(id = "form1:j_idt827:0:inpSourceNumberOfPagesLabel")
+	@FindBy(xpath = "//input[contains(@id, '0:inpSourceNumberOfPagesLabel')]")
 	private WebElement sourcePageNrBox;
 	
-	@FindBy(id = "form1:j_idt827:0:inpSourceDetailPublisher")
+	@FindBy(xpath = "//textarea[contains(@id, '0:inpSourceDetailPublisher')]")
 	private WebElement sourcePublisherBox;
 	
-	@FindBy(id = "form1:j_idt827:0:inpSourceDetailPublisherLabel")
+	@FindBy(xpath = "//input[contains(@id, '0:inpSourceDetailPublisherLabel')]")
 	private WebElement sourcePublisherPlace;
 	
-	@FindBy(id = "form1:j_idt827:0:iterSourceDetailsIdentifier:0:selSourceDetailIdentifier")
+	@FindBy(xpath = "//select[contains(@id, '0:iterSourceDetailsIdentifier:0:selSourceDetailIdentifier')]")
 	private WebElement sourceIdentifierDropdown;
 	
-	@FindBy(id = "form1:j_idt827:0:iterSourceDetailsIdentifier:0:inpSourceDetailIdentifier")
+	@FindBy(xpath = "//input[contains(@id, '0:iterSourceDetailsIdentifier:0:inpSourceDetailIdentifier')]")
 	private WebElement sourceIdentifierBox;
 	
 	@FindBy(id = "form1:lnkSave")

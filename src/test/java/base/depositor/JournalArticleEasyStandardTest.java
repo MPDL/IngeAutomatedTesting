@@ -37,7 +37,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	
 	@Test(priority = 2)
 	public void easySubmissionStandardWorkflow() {
-		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().goToEasySubmissionStandardPage();
+		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToEasySubmissionPage();
 		viewItemPage = easySubmissionPage.easySubmission(Genre.ARTICLE, title, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
@@ -48,17 +48,21 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
+	}
+	
+	@Test(priority = 4)
+	public void logoutDepositor() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
-	@Test(priority = 4)
+	@Test(priority = 5)
 	public void loginAsModerator() {
 		moderatorHomePage = new StartPage(driver).loginAsModerator(moderatorUsername, moderatorPassword);
 		Assert.assertEquals(moderatorHomePage.getUsername(), moderatorName, "Expected and actual name don't match.");
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 6)
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
@@ -66,14 +70,14 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 6)
+	@Test(priority = 7)
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 	}
 	
-	@Test(priority = 7)
+	@Test(priority = 8)
 	public void moderatorLogout() {
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();

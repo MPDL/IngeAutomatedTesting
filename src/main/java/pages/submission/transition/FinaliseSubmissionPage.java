@@ -10,7 +10,7 @@ import main.java.pages.submission.ViewItemPage;
 
 public class FinaliseSubmissionPage extends BasePage {
 
-	@FindBy(id = "j_idt98:lnkRelease")
+	@FindBy(xpath = "//a[contains(@id, ':lnkRelease')]")
 	private WebElement releaseSubmissionButton;
 	
 	public FinaliseSubmissionPage(WebDriver driver) {

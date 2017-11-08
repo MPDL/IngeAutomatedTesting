@@ -12,13 +12,13 @@ import main.java.pages.tools.cone.ConeHomePage;
 
 public class LoginPage {
 
-	@FindBy(className = "username")
+	@FindBy(xpath = "//input[contains(@id, 'inputUsername')]")
 	private WebElement usernameInputBox;
 	
-	@FindBy(className = "password")
+	@FindBy(xpath = "//input[contains(@id, 'inputSecretPassword')]")
 	private WebElement passwordInputBox;
 	
-	@FindBy(className = "activeButton")
+	@FindBy(xpath = "//input[contains(@id, 'lnkLogin')]")
 	private WebElement submitButton;
 	
 	protected WebDriver driver;

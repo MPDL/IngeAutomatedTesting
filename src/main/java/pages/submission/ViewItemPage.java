@@ -21,28 +21,28 @@ public class ViewItemPage extends BasePage {
 	@FindBy(className = "statusIcon")
 	private WebElement itemStatus;
 	
-	@FindBy(id = "j_idt107:lnkRelease")
+	@FindBy(xpath = "//a[contains(@id, ':lnkRelease')]")
 	private WebElement releaseItemLink;
 	
-	@FindBy(id = "j_idt107:lnkSubmit")
+	@FindBy(xpath = "//a[contains(@id, ':lnkSubmit')]")
 	private WebElement submitItemLink;
 	
-	@FindBy(id = "j_idt107:lnkAccept")
+	@FindBy(xpath = "//a[contains(@id, ':lnkAccept')]")
 	private WebElement acceptItemLink;
 	
-	@FindBy(id = "j_idt107:lnkEdit")
+	@FindBy(xpath = "//a[contains(@id, ':lnkEdit')]")
 	private WebElement editItemLink;
 	
-	@FindBy(id = "j_idt107:lnkRevise")
+	@FindBy(xpath = "//a[contains(@id, ':lnkRevise')]")
 	private WebElement reviseItemLink;
 	
-	@FindBy(id = "j_idt107:lnkModify")
+	@FindBy(xpath = "//a[contains(@id, ':lnkModify')]")
 	private WebElement modifyItemLink;
 	
-	@FindBy(id = "j_idt107:lnkDelete")
+	@FindBy(xpath = "//a[contains(@id, ':lnkDelete')]")
 	private WebElement deleteItemLink;
 	
-	@FindBy(id = "j_idt107:lnkWithdraw")
+	@FindBy(xpath = "//a[contains(@id, ':lnkWithdraw')]")
 	private WebElement discardItemLink;
 	
 	public ViewItemPage(WebDriver driver) {

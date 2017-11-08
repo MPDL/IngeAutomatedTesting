@@ -83,12 +83,16 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
+	}
+	
+	@Test(priority = 6)
+	public void logoutDepositor() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
 	
-	@Test(priority = 6)
+	@Test(priority = 7)
 	public void moderatorReleasesSubmission() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
@@ -98,20 +102,24 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 7)
+	@Test(priority = 8)
 	public void moderatorModifiesRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.modifyItem();
 	}
 	
-	@Test(priority = 8)
+	@Test(priority = 9)
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
+	}
+	
+	@Test(priority = 10)
+	public void logoutModerator() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}

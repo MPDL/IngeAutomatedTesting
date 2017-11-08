@@ -117,6 +117,9 @@ public abstract class BaseTest {
 				FileUtils.copyFile(screenshot, new File(screenshotPath));
 			}
 			catch (IOException exc) {}
+			System.out.println(result.getName());
+			System.out.println(result.getThrowable().getMessage());
+			System.out.println();
 		}
 	}
 	

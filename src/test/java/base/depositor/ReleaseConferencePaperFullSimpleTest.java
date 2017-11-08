@@ -11,6 +11,7 @@ import test.java.base.ItemStatus;
 import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.ViewItemPage;
@@ -23,7 +24,7 @@ import main.java.pages.submission.ViewItemPage;
  */
 public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
-	private CombinedHomePage combinedHomePage;
+	private DepositorHomePage depositorHomePage;
 	
 	private String title;
 	private String filepath;
@@ -40,13 +41,13 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	@Test(priority = 1)
 	public void loginAsDepositor() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
-		combinedHomePage = loginPage.loginAsCombinedUser(modDepUsername, modDepPassword);
-		Assert.assertEquals(combinedHomePage.getUsername(), depositorName, "Expected and actual name don't match.");
+		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
+		Assert.assertEquals(depositorHomePage.getUsername(), depositorName, "Expected and actual name don't match.");
 	}
 	
 	@Test(priority = 2)
 	public void fullSubmissionSimpleWorkflow() {
-		FullSubmissionPage fullSubmissionPage = combinedHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
 		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, author, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
@@ -54,8 +55,8 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
 	@Test(priority = 3)
 	public void depositorReleasesSubmission() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		ViewItemPage viewItemPage = combinedHomePage.goToMyItemsPage().openItemByTitle(title);
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		ViewItemPage viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
 		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -63,14 +64,14 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
 	@Test(priority = 4)
 	public void viewMostRecentItems() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		String mostRecentItemTitle = combinedHomePage.goToStartPage().getNameOfMostRecentItem();
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		String mostRecentItemTitle = depositorHomePage.goToStartPage().getNameOfMostRecentItem();
 		Assert.assertEquals(mostRecentItemTitle, title, "Item does not show up at the start page.");
 	}
 	
 	@Test(priority = 5)
 	public void viewItem() {
-		MyItemsPage myItemsPage = combinedHomePage.goToMyItemsPage();
+		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
 		ViewItemPage viewItemPage = myItemsPage.openSubmittedItemByTitle(title);
 		String actualTitle = viewItemPage.getItemTitle();
 		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
@@ -78,14 +79,14 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	
 	@Test(priority = 6)
 	public void discardSubmission() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		MyItemsPage myItemsPage = combinedHomePage.goToMyItemsPage();
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
 		myItemsPage.discardItemByTitle(title);
 	}
 	
 	@AfterClass
 	public void tearDown() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		combinedHomePage.logout();
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		depositorHomePage.logout();
 	}
 }
