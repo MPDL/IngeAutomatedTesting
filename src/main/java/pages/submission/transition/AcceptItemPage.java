@@ -10,7 +10,7 @@ import main.java.pages.submission.ViewItemPage;
 
 public class AcceptItemPage extends BasePage {
 
-	@FindBy(xpath = "//textarea[contains(@id, ':acceptanceComment')]")
+	@FindBy(tagName = "textarea")
 	private WebElement acceptanceCommentBox;
 	
 	@FindBy(xpath = "//a[contains(@id, ':lnkSave')]")

@@ -10,7 +10,7 @@ import main.java.pages.submission.ViewItemPage;
 
 public class DiscardItemPage extends BasePage {
 
-	@FindBy(xpath = "//a[contains(id, ':lnkSave')]")
+	@FindBy(xpath = "//a[contains(@id, ':lnkSave')]")
 	private WebElement discardButton;
 	
 	@FindBy(className = "inputTxtArea")
