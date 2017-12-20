@@ -57,7 +57,7 @@ public class MainMenuComponent {
 	
 	public ImportWorkspacePage goToImportWorkspacePage() {
 		workspaceLink.click();
-		WebElement importWorkspaceLink = driver.findElement(By.id("j_idt107:lnkImportWorkspace"));
+		WebElement importWorkspaceLink = driver.findElement(By.xpath("//a[contains(@id, 'lnkImportWorkspace')]"));
 		importWorkspaceLink.click();
 		
 		return PageFactory.initElements(driver, ImportWorkspacePage.class);
@@ -65,7 +65,7 @@ public class MainMenuComponent {
 	
 	public QAWorkspacePage goToQAWorkspacePage() {
 		workspaceLink.click();
-		WebElement qaWorkspaceLink = driver.findElement(By.id("j_idt107:lnkQAWorkspace"));
+		WebElement qaWorkspaceLink = driver.findElement(By.xpath("//a[contains(@id, 'lnkQAWorkspace')]"));
 		qaWorkspaceLink.click();
 		
 		return PageFactory.initElements(driver, QAWorkspacePage.class);

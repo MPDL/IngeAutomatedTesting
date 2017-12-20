@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import test.java.base.BaseTest;
 import main.java.pages.StartPage;
+import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
@@ -20,7 +21,7 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	private String authorQuery = "Müller";
 	private String organisationQuery = "MPI of Cognitive Neuroscience";
 	
-	private DepositorHomePage depositorHomePage;
+	private CombinedHomePage combinedHomePage;
 	
 	@BeforeClass
 	public void setup() {
@@ -29,7 +30,7 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	
 	@Test(priority=1)
 	public void logInAsCombinedUser() {
-		depositorHomePage = new StartPage(driver).loginAsDepositor(depositorUsername, depositorPassword);
+		combinedHomePage = new StartPage(driver).loginAsCombinedUser(modDepUsername, modDepPassword);
 	}
 	
 	@Test(priority=2)
@@ -53,8 +54,8 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	}
 	
 	private void searchTest(String titleQuery, String authorQuery, String organisationQuery) {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		AdvancedSearchPage advancedSearchPage = depositorHomePage.goToAdvancedSearchPage();
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
 		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, authorQuery, organisationQuery);
 		String headlineText = searchResultsPage.getHeadline();
 		try {
@@ -67,7 +68,7 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	
 	@AfterClass
 	public void logout() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		combinedHomePage.logout();
 	}
 }

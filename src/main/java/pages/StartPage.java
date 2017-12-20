@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 
@@ -42,6 +43,11 @@ public class StartPage extends BasePage {
 	public ModeratorHomePage loginAsModerator(String username, String password) {
 		login(username, password);
 		return PageFactory.initElements(driver, ModeratorHomePage.class);
+	}
+	
+	public CombinedHomePage loginAsCombinedUser(String username, String password) {
+		login(username, password);
+		return PageFactory.initElements(driver, CombinedHomePage.class);
 	}
 	
 	private void login(String username, String password) {
