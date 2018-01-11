@@ -53,63 +53,82 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
 	
-	@Test(priority = 3)
+	@Test(priority = 3, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void depositorSubmitsItem() {
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
+	}
+	
+	@Test(priority = 4, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	public void logoutDepositor() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
-	@Test(priority = 4)
-	public void moderatorSendsBackSubmission() {
+	@Test(priority = 5, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	public void loginModerator() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
+	}
+	
+	@Test(priority = 6, dependsOnMethods = { "fullSubmissionStandardWorkflow", "loginModerator" })
+	public void moderatorSendsBackSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.editItem();
 		viewItemPage = viewItemPage.sendBackForRework();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.IN_REWORK, "Item was not sent for rework.");
+	}
+	
+	@Test(priority = 7, dependsOnMethods = { "loginModerator" })
+	public void logoutModerator() {
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}
 	
-	@Test(priority = 5)
-	public void depositorRevisesItem() {
+	@Test(priority = 8, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	public void loginDepositor() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
+	}
+	
+	@Test(priority = 9, dependsOnMethods = { "fullSubmissionStandardWorkflow", "loginDepositor" })
+	public void depositorRevisesItem() {
 		viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 	}
 	
-	@Test(priority = 6)
-	public void logoutDepositor() {
+	@Test(priority = 10, dependsOnMethods = { "loginDepositor" })
+	public void logoutDepositor2() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
-	
-	@Test(priority = 7)
-	public void moderatorReleasesSubmission() {
+	@Test(priority = 11, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	public void loginModerator2() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
+	}
+	
+	@Test(priority = 12, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 8)
+	@Test(priority = 13, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorModifiesRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.modifyItem();
 	}
 	
-	@Test(priority = 9)
+	@Test(priority = 14, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
@@ -118,8 +137,8 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
 	}
 	
-	@Test(priority = 10)
-	public void logoutModerator() {
+	@Test(priority = 15, dependsOnMethods = { "loginModerator2" })
+	public void logoutModerator2() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}
