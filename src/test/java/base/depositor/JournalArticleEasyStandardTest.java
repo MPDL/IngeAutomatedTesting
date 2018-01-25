@@ -77,7 +77,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 		viewItemPage = viewItemPage.discardItem();
 	}
 	
-	@Test(priority = 8, dependsOnMethods = { "easySubmissionStandardWorkflow", "loginAsModerator" })
+	@Test(priority = 8, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorLogout() {
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
