@@ -80,7 +80,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	
 	@AfterClass
 	public void moderatorLogout() {
-		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
+		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}
 }
