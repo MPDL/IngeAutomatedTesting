@@ -50,7 +50,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 	}
 	
-	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow", "logoutDepositor" })
+	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow"})
 	public void logoutDepositor() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
