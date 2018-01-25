@@ -1,6 +1,7 @@
 package test.java.base.depositor;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -77,7 +78,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 		viewItemPage = viewItemPage.discardItem();
 	}
 	
-	@Test(priority = 8, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@AfterClass
 	public void moderatorLogout() {
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();

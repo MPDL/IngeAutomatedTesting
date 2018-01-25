@@ -109,7 +109,7 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:lnkRelease")
 	private WebElement releaseButton;
 	
-	private final String publisherVersionValue = "http://purl.org/escidoc/metadata/ves/content-categories/publisher-version";
+	private final String publisherVersionValue = "publisher-version";
 	
 	public FullSubmissionPage(WebDriver driver) {
 		super(driver);

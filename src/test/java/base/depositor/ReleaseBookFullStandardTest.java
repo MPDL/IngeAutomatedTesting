@@ -72,7 +72,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
 	}
 	
-	@Test(priority = 6, dependsOnMethods = { "fullSubmissionStandardWorkflow", "loginModerator" })
+	@Test(priority = 6, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorSendsBackSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.editItem();
@@ -81,7 +81,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.IN_REWORK, "Item was not sent for rework.");
 	}
 	
-	@Test(priority = 7, dependsOnMethods = { "loginModerator" })
+	@Test(priority = 7, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void logoutModerator() {
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
@@ -93,7 +93,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
 	}
 	
-	@Test(priority = 9, dependsOnMethods = { "fullSubmissionStandardWorkflow", "loginDepositor" })
+	@Test(priority = 9, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void depositorRevisesItem() {
 		viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
 		viewItemPage = viewItemPage.submitItem();
@@ -101,7 +101,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 	}
 	
-	@Test(priority = 10, dependsOnMethods = { "loginDepositor" })
+	@Test(priority = 10, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void logoutDepositor2() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
@@ -137,7 +137,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
 	}
 	
-	@Test(priority = 15, dependsOnMethods = { "loginModerator2" })
+	@Test(priority = 15, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void logoutModerator2() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
