@@ -61,9 +61,11 @@ public class SearchResultsPage extends BasePage {
 	}
 	
 	public boolean allResultsReleased() {
-		for (WebElement result : searchResults) {
-			String uploadInfo = result.findElement(By.cssSelector(".listItemLine:nth-of-type(2)>span:nth-of-type(2)")).getText();
-			if (!uploadInfo.contains("Published"))
+		int serarchResultsCount = searchResults.size();
+		for (int i = 0; i < serarchResultsCount; i++) {
+			WebElement result = searchResults.get(i);
+			String uploadInfo = result.findElement(By.xpath("//label[contains(@id, 'itemList:iterCurrentPartList:" + i + ":lblItemState')]")).getText();
+			if (!uploadInfo.contains("Published") && !uploadInfo.contains("Freigegeben"))
 				return false;
 		}
 		return true;

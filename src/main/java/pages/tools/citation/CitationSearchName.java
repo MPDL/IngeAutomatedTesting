@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CitationSearchName {
 
@@ -35,6 +37,7 @@ public class CitationSearchName {
 	}
 	
 	public WebElement getFirstResult() {
+		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));
 		List<WebElement> results = searchResults.findElements(By.tagName("table"));
 		return results.get(0);
 	}

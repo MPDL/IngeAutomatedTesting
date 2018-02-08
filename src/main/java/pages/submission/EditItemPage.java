@@ -15,7 +15,10 @@ public class EditItemPage extends BasePage {
 	@FindBy(id = "form1:inputTitleText")
 	private WebElement titleBox;
 	
-	@FindBy(id = "form1:j_idt497:0:inpcreator_persons_person_family_name_optional")
+	@FindBy(id = "iterCreatorOrganisationAuthors")
+	private WebElement authors;
+	
+	@FindBy(xpath = "//input[contains(@id, '0\\:inpcreator_persons_person_family_name_optional')]")
 	private WebElement personFamilyNameBox;
 	
 	@FindBy(id = "form1:fileUploads:0:inpExtraFileDescription")
@@ -61,10 +64,11 @@ public class EditItemPage extends BasePage {
 	}
 	
 	public ViewItemPage addAuthor(String additionalAuthor) {
-		int authorCount = driver.findElements(By.xpath("//input[contains(@id, 'j_idt497') and contains(@id, 'inpcreator_persons_person_family_name')]")).size();
-		WebElement addSecondAuthor = driver.findElement(By.id("form1:j_idt497:" + (authorCount - 1) + ":btnAddCreator"));
+		int authorCount = authors.findElements(By.xpath("//input[contains(@id, 'inpcreator_persons_person_family_name')]")).size();
+		WebElement addSecondAuthor = authors.findElement(By.xpath("//input[contains(@id, '" + (authorCount - 1) + "\\:btnAddCreator"));
 		addSecondAuthor.click();
-		WebElement secondFamilyNameBox = driver.findElement(By.id("form1:j_idt497:" + authorCount + ":inpcreator_persons_person_family_name_optional"));
+		authors = driver.findElement(By.id("iterCreatorOrganisationAuthors"));
+		WebElement secondFamilyNameBox = authors.findElement(By.xpath("//input[contains(@id, '" + authorCount + "\\:inpcreator_persons_person_family_name_optional"));
 		secondFamilyNameBox.sendKeys(additionalAuthor);
 		driver.findElement(By.cssSelector(".ac_results>li")).click();
 		saveButton.click();

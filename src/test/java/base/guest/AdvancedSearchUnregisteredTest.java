@@ -27,10 +27,10 @@ public class AdvancedSearchUnregisteredTest extends BaseTest {
 	public void noSearchCriteriaTest() {
 		StartPage startPage = new StartPage(driver);
 		AdvancedSearchPage advancedSearchPage = startPage.goToAdvancedSearchPage();
-		String expectedHeadline = advancedSearchPage.getHeadline();
 		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", "", "");
-		String headlineText = searchResultsPage.getHeadline();
-		Assert.assertEquals(headlineText, expectedHeadline, "Empty search query does not lead to error.");
+		boolean errorDisplayed = searchResultsPage.errorMessageDisplayed();
+		Assert.assertTrue(errorDisplayed, "Error message is not displayed when searching without criteria.");
+		log4j.info("Error message after searching without criteria: " + searchResultsPage.getErrorMessage());
 	}
 	
 	@Test

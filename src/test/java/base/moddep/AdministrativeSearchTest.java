@@ -1,6 +1,6 @@
 package test.java.base.moddep;
 
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

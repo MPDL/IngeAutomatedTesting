@@ -10,7 +10,6 @@
 			<class name="test.java.base.TestSuiteInitialisation"></class>
 			<class name="test.java.base.BaseTest"></class>
 			<class name="test.java.base.depositor.ReleaseBookFullStandardTest"></class>
-<!-- 			<class name="test.java.base.depositor.JournalArticleEasyStandardTest"></class> -->
 			<class name="test.java.base.guest.SimpleSearchUnregisteredTest"></class>
 			<class name="test.java.base.moddep.SimpleSearchRegisteredTest"></class>
 			<class name="test.java.base.guest.AdvancedSearchUnregisteredTest"></class>

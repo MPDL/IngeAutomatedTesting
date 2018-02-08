@@ -2,6 +2,8 @@ package main.java.pages;
 
 import java.util.Set;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +32,7 @@ public abstract class BasePage {
 	protected WebDriver driver;
 	protected WebDriverWait wait;
 	
-	@FindBy(id = "contentSkipLinkAnchor")
+	@FindBy(css = "#contentSkipLinkAnchor>h1")
 	private WebElement headline;
 	
 	protected MetaMenuComponent metaMenuComponent;
@@ -96,6 +98,23 @@ public abstract class BasePage {
 		driver.switchTo().window(windowHandles.iterator().next());
 		
 		return PageFactory.initElements(driver, PageType.getClass());
+	}
+	
+	public boolean errorMessageDisplayed() {
+		try {
+			driver.findElement(By.className("messageError"));
+			return true;
+		}
+		catch (NoSuchElementException exc) {
+			return false;
+		}
+	}
+	
+	public String getErrorMessage() {
+		if (errorMessageDisplayed()) {
+			return driver.findElement(By.className("messageError")).getText();
+		}
+		return "";
 	}
 	
 }
