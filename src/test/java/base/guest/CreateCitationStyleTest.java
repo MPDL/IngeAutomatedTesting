@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -45,13 +46,16 @@ public class CreateCitationStyleTest extends BaseTest {
 		Assert.assertTrue(searchResults.size() > 0, "No results were displayed.");
 	}
 	
-	@Test(priority = 3)
+	@Test(priority = 3, dependsOnMethods = {"searchByExample"})
 	public void createCitationStyle() {
 		VisualEditor editor = searchExample.editFirstResult();
 		editor.createNewStyle(title);
 		boolean canSaveStyle = editor.canSaveNewStyle();
 		Assert.assertTrue(canSaveStyle, "Save button is not enabled.");
-		
+	}
+	
+	@AfterClass
+	public void tearDown() {
 		backToBaseHandle();
 	}
 }

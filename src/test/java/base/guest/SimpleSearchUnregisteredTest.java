@@ -38,12 +38,4 @@ public class SimpleSearchUnregisteredTest extends BaseTest {
 			Assert.assertEquals(headlineText, "Suchergebnisse", "Search results page was not displayed.");
 		}
 	}
-	
-	@Test
-	public void onlyPublishedItems() {
-		StartPage startPage = new StartPage(driver);
-		SearchResultsPage searchResultsPage = startPage.quickSearch(searchQuery);
-		boolean allReleased = searchResultsPage.allResultsReleased();
-		Assert.assertTrue(allReleased, "An item in search results has not been released.");
-	}
 }

@@ -30,7 +30,6 @@ public class AdvancedSearchUnregisteredTest extends BaseTest {
 		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch("", "", "");
 		boolean errorDisplayed = searchResultsPage.errorMessageDisplayed();
 		Assert.assertTrue(errorDisplayed, "Error message is not displayed when searching without criteria.");
-		log4j.info("Error message after searching without criteria: " + searchResultsPage.getErrorMessage());
 	}
 	
 	@Test

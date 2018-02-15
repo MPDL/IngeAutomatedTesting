@@ -11,6 +11,7 @@
 			<class name="test.java.base.BaseTest"></class>
 			<class name="test.java.base.depositor.ReleaseBookFullStandardTest"></class>
 			<class name="test.java.base.guest.SimpleSearchUnregisteredTest"></class>
+			<class name="test.java.base.moddep.StandardSubmitJournalArticleTest"></class>
 			<class name="test.java.base.moddep.SimpleSearchRegisteredTest"></class>
 			<class name="test.java.base.guest.AdvancedSearchUnregisteredTest"></class>
 			<class name="test.java.base.moddep.AdvancedSearchRegisteredTest"></class>
@@ -19,7 +20,6 @@
 			<class name="test.java.base.guest.CreateCitationStyleTest"></class>
 			<class name="test.java.base.moddep.InstallCitationStyleTest"></class>
 			<class name="test.java.base.guest.EditCitationTest"></class>
-			<class name="test.java.base.moddep.StandardSubmitJournalArticleTest"></class>
  			<class name="test.java.base.guest.SearchContentTest"></class>
 		</classes>
 	</test>

@@ -65,7 +65,7 @@ public class SearchResultsPage extends BasePage {
 		for (int i = 0; i < serarchResultsCount; i++) {
 			WebElement result = searchResults.get(i);
 			String uploadInfo = result.findElement(By.xpath("//label[contains(@id, 'itemList:iterCurrentPartList:" + i + ":lblItemState')]")).getText();
-			if (!uploadInfo.contains("Published") && !uploadInfo.contains("Freigegeben"))
+			if (!uploadInfo.contains("Released") && !uploadInfo.contains("Freigegeben"))
 				return false;
 		}
 		return true;

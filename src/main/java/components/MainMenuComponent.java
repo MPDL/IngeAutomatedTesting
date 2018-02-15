@@ -22,7 +22,7 @@ public class MainMenuComponent {
 
 	protected WebDriver driver;
 	
-	@FindBy(id = "Header:lnkHome")
+	@FindBy(id = "Header:lnkStartPage")
 	private WebElement startPageLink;
 	
 	@FindBy(id = "Header:lnkDepWorkspace")

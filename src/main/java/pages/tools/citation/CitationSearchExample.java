@@ -29,7 +29,7 @@ public class CitationSearchExample {
 	}
 	
 	public List<WebElement> getSearchResults() {
-		styleFormat.findElement(By.tagName("button")).click();
+		styleFormat.findElement(By.id("searchButton")).click();
 		WebElement allResults = driver.findElement(By.id("searchResults"));
 		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));
 		searchResults = allResults.findElements(By.tagName("table"));
