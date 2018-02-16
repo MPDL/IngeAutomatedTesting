@@ -3,6 +3,7 @@ package main.java.pages.tools.citation;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,7 +30,8 @@ public class CitationSearchExample {
 	}
 	
 	public List<WebElement> getSearchResults() {
-		styleFormat.findElement(By.id("searchButton")).click();
+		WebElement searchButton = styleFormat.findElement(By.id("searchButton"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchButton);
 		WebElement allResults = driver.findElement(By.id("searchResults"));
 		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));
 		searchResults = allResults.findElements(By.tagName("table"));

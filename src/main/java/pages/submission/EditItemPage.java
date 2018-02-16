@@ -18,7 +18,7 @@ public class EditItemPage extends BasePage {
 	@FindBy(id = "iterCreatorOrganisationAuthors")
 	private WebElement authors;
 	
-	@FindBy(xpath = "//input[contains(@id, '0\\:inpcreator_persons_person_family_name_optional')]")
+	@FindBy(xpath = "//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]")
 	private WebElement personFamilyNameBox;
 	
 	@FindBy(id = "form1:fileUploads:0:inpExtraFileDescription")
@@ -63,12 +63,12 @@ public class EditItemPage extends BasePage {
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
+	// TODO the only method as of now to locate unambiguously is through the dynamic IDs: change this
 	public ViewItemPage addAuthor(String additionalAuthor) {
-		int authorCount = authors.findElements(By.xpath("//input[contains(@id, 'inpcreator_persons_person_family_name')]")).size();
-		WebElement addSecondAuthor = authors.findElement(By.xpath("//input[contains(@id, '" + (authorCount - 1) + "\\:btnAddCreator"));
+		int authorCount = authors.findElements(By.xpath("//input[contains(@id, 'form1:j_idt499') and contains(@id, 'inpcreator_persons_person_family_name_optional')]")).size();
+		WebElement addSecondAuthor = authors.findElement(By.id("form1:j_idt499:" + (authorCount - 1) + ":btnAddCreator"));
 		addSecondAuthor.click();
-		authors = driver.findElement(By.id("iterCreatorOrganisationAuthors"));
-		WebElement secondFamilyNameBox = authors.findElement(By.xpath("//input[contains(@id, '" + authorCount + "\\:inpcreator_persons_person_family_name_optional"));
+		WebElement secondFamilyNameBox = driver.findElement(By.id("form1:j_idt499:" + authorCount + ":inpcreator_persons_person_family_name_optional"));
 		secondFamilyNameBox.sendKeys(additionalAuthor);
 		driver.findElement(By.cssSelector(".ac_results>li")).click();
 		saveButton.click();
@@ -86,7 +86,7 @@ public class EditItemPage extends BasePage {
 	public ViewItemPage modifyTitle(String newTitle) {
 		titleBox.clear();
 		titleBox.sendKeys(newTitle);
-		releaseButton.click();
+		saveButton.click();
 		
 		return new FinaliseSubmissionPage(driver).releaseSubmission();
 	}
@@ -95,7 +95,7 @@ public class EditItemPage extends BasePage {
 		personFamilyNameBox.clear();
 		personFamilyNameBox.sendKeys(newAuthor);
 		driver.findElement(By.cssSelector(".ac_results>li")).click();
-		releaseButton.click();
+		saveButton.click();
 		
 		return new FinaliseSubmissionPage(driver).releaseSubmission();
 	}

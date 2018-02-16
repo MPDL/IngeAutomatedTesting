@@ -10,7 +10,10 @@ import main.java.pages.submission.ViewItemPage;
 
 public class FinaliseSubmissionPage extends BasePage {
 
-	@FindBy(xpath = "//a[contains(@id, ':lnkRelease')]")
+	@FindBy(tagName = "textarea")
+	private WebElement confirmationTextArea;
+	
+	@FindBy(xpath = "//a[contains(@id, ':lnkSave')]")
 	private WebElement releaseSubmissionButton;
 	
 	public FinaliseSubmissionPage(WebDriver driver) {
@@ -20,6 +23,7 @@ public class FinaliseSubmissionPage extends BasePage {
 	}
 	
 	public ViewItemPage releaseSubmission() {
+		confirmationTextArea.sendKeys("Testing release.");
 		releaseSubmissionButton.click();
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);

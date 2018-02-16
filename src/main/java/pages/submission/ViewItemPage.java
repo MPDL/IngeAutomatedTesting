@@ -150,7 +150,7 @@ public class ViewItemPage extends BasePage {
 	public ViewItemPage modifyAddAuthor(String newAuthor) {
 		modifyItemLink.click();
 		
-		return new EditItemPage(driver).modifyAuthor(newAuthor);
+		return new EditItemPage(driver).addAuthor(newAuthor);
 	}
 	
 }
