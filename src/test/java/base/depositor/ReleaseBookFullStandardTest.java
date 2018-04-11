@@ -116,7 +116,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	@Test(priority = 12, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
-		viewItemPage = viewItemPage.acceptItem();
+		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
@@ -129,6 +129,15 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	}
 	
 	@Test(priority = 14, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	public void moderatorReleasesSubmissionAgain() {
+		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
+		viewItemPage = viewItemPage.releaseItem();
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
+	}
+	
+	@Test(priority = 15, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
@@ -137,7 +146,7 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
 	}
 	
-	@Test(priority = 15, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 16, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void logoutModerator2() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();

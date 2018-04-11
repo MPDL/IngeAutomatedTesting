@@ -65,10 +65,10 @@ public class EditItemPage extends BasePage {
 	
 	// TODO the only method as of now to locate unambiguously is through the dynamic IDs: change this
 	public ViewItemPage addAuthor(String additionalAuthor) {
-		int authorCount = authors.findElements(By.xpath("//input[contains(@id, 'form1:j_idt499') and contains(@id, 'inpcreator_persons_person_family_name_optional')]")).size();
-		WebElement addSecondAuthor = authors.findElement(By.id("form1:j_idt499:" + (authorCount - 1) + ":btnAddCreator"));
+		int authorCount = authors.findElements(By.xpath("//input[contains(@id, 'form1:j_idt510') and contains(@id, 'inpcreator_persons_person_family_name_optional')]")).size();
+		WebElement addSecondAuthor = authors.findElement(By.id("form1:j_idt510:" + (authorCount - 1) + ":btnAddCreator"));
 		addSecondAuthor.click();
-		WebElement secondFamilyNameBox = driver.findElement(By.id("form1:j_idt499:" + authorCount + ":inpcreator_persons_person_family_name_optional"));
+		WebElement secondFamilyNameBox = driver.findElement(By.id("form1:j_idt510:" + authorCount + ":inpcreator_persons_person_family_name_optional"));
 		secondFamilyNameBox.sendKeys(additionalAuthor);
 		driver.findElement(By.cssSelector(".ac_results>li")).click();
 		saveButton.click();
@@ -78,9 +78,10 @@ public class EditItemPage extends BasePage {
 	
 	public ViewItemPage modifyItem() {
 		editDescription(" (modified by moderator)");
-		acceptButton.click();
+		saveButton.click();
 		
-		return new AcceptItemPage(driver).acceptItem();
+		//return new AcceptItemPage(driver).acceptItem();
+		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
 	public ViewItemPage modifyTitle(String newTitle) {
@@ -88,7 +89,8 @@ public class EditItemPage extends BasePage {
 		titleBox.sendKeys(newTitle);
 		saveButton.click();
 		
-		return new FinaliseSubmissionPage(driver).releaseSubmission();
+		//return new FinaliseSubmissionPage(driver).releaseSubmission();
+		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
 	public ViewItemPage modifyAuthor(String newAuthor) {
@@ -97,7 +99,8 @@ public class EditItemPage extends BasePage {
 		driver.findElement(By.cssSelector(".ac_results>li")).click();
 		saveButton.click();
 		
-		return new FinaliseSubmissionPage(driver).releaseSubmission();
+		//return new FinaliseSubmissionPage(driver).releaseSubmission();
+		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
 	private void editDescription(String descriptionEdit) {

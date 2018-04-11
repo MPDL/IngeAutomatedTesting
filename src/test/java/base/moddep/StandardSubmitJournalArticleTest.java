@@ -54,7 +54,7 @@ public class StandardSubmitJournalArticleTest extends BaseTest {
 	@Test(priority = 1)
 	public void submitJournalArticle() {
 		loginCombined();
-		FullSubmissionPage fullSubmission = combinedHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
+		FullSubmissionPage fullSubmission = combinedHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
 		ViewItemPage viewItem = fullSubmission.fullSubmission(Genre.ARTICLE, title, author, filepath);
 		String actualTitle = viewItem.getItemTitle();
 		
@@ -146,6 +146,13 @@ public class StandardSubmitJournalArticleTest extends BaseTest {
 	}
 	
 	@Test(priority = 11, dependsOnMethods = { "submitJournalArticle" })
+	public void releaseItemAgain() {
+		refreshHomePage();
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
+		viewItem = viewItem.releaseItem();
+	}
+	
+	@Test(priority = 12, dependsOnMethods = { "submitJournalArticle" })
 	public void searchReleasedItemNewTitle() {
 		refreshHomePage();
 		startPage = combinedHomePage.logout();
@@ -156,14 +163,21 @@ public class StandardSubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
 	}
 	
-	@Test(priority = 12, dependsOnMethods = { "submitJournalArticle" })
+	@Test(priority = 13, dependsOnMethods = { "submitJournalArticle" })
 	public void changeReleasedItemAuthor() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
 		viewItem.modifyAuthor(author);
 	}
 	
-	@Test(priority = 13, dependsOnMethods = { "submitJournalArticle" })
+	@Test(priority = 14, dependsOnMethods = { "submitJournalArticle" })
+	public void releaseItemAgain2() {
+		refreshHomePage();
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
+		viewItem = viewItem.releaseItem();
+	}
+	
+	@Test(priority = 15, dependsOnMethods = { "submitJournalArticle" })
 	public void modifiedAuthorSearch() {
 		refreshHomePage();
 		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, author, "");
@@ -176,14 +190,21 @@ public class StandardSubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(resultCount, 0, "Item is still found with old author name.");
 	}
 	
-	@Test(priority = 14, dependsOnMethods = { "submitJournalArticle" })
+	@Test(priority = 16, dependsOnMethods = { "submitJournalArticle" })
 	public void addAuthorReleased() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
 		viewItem = viewItem.modifyAddAuthor(thirdAuthor);
 	}
 	
-	@Test(priority = 15, dependsOnMethods = { "submitJournalArticle" })
+	@Test(priority = 17, dependsOnMethods = { "submitJournalArticle" })
+	public void releaseItemAgain3() {
+		refreshHomePage();
+		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
+		viewItem = viewItem.releaseItem();
+	}
+	
+	@Test(priority = 18, dependsOnMethods = { "submitJournalArticle" })
 	public void thirdAuthorSearch() {
 		refreshHomePage();
 		SearchResultsPage searchResults = combinedHomePage.goToAdministrativeSearchPage().advancedSearch(releasedTitle, thirdAuthor, "");
@@ -192,7 +213,7 @@ public class StandardSubmitJournalArticleTest extends BaseTest {
 		Assert.assertEquals(resultCount, 1, (resultCount == 0) ? "No results were found," : "There are more results with this title.");
 	}
 	
-	@Test(priority = 16, dependsOnMethods = { "submitJournalArticle" })
+	@Test(priority = 19, dependsOnMethods = { "submitJournalArticle" })
 	public void discardItem() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);

@@ -27,7 +27,7 @@ public abstract class BaseTest {
 	protected Properties properties;
 	
 	protected String testCaseID;
-	protected String startPageURL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	protected String startPageURL = TestSuiteInitialisation.getStartPageURL();
 	
 	protected String depositorName;
 	protected String depositorUsername;

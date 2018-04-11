@@ -61,10 +61,10 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:txtEventEndDate")
 	private WebElement eventEndDate;
 	
-	@FindBy(id = "form1:inputProjectTitle")
+	@FindBy(xpath = "//textarea[contains(@id, 'inputProjectTitle')]")
 	private WebElement projectName;
 	
-	@FindBy(id = "form1:inpProjectInfoFundingProgram")
+	@FindBy(xpath = "//input[contains(@id, 'inpProjectInfoFundingProgram')]")
 	private WebElement projectFundingProgram;
 	
 	@FindBy(xpath = "//select[contains(@id, '0:selChooseSourceGenre')]")

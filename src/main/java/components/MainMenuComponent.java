@@ -12,6 +12,7 @@ import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.QAWorkspacePage;
 import main.java.pages.submission.SubmissionPage;
 import main.java.pages.tools.ToolsPage;
+import test.java.base.TestSuiteInitialisation;
 
 /**
  * Menu containing item, workspace, and tool management
@@ -44,7 +45,7 @@ public class MainMenuComponent {
 	}
 	
 	public StartPage goToStartPage() {
-		driver.navigate().to("https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp");
+		driver.navigate().to(TestSuiteInitialisation.getStartPageURL());
 		
 		return PageFactory.initElements(driver, StartPage.class);
 	}
