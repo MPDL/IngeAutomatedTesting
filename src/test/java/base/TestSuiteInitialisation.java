@@ -12,7 +12,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -31,8 +34,8 @@ public class TestSuiteInitialisation {
 	private static Logger log4j = LogManager.getLogger(TestSuiteInitialisation.class.getName());
 	private static Properties properties;
 	
-	private static final String startPageURL = "https://qa.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
-	private final String propertiesFileName = "pubmanTestData";
+	private static final String startPageURL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	private final String propertiesFileName = "ingeTestData";
 	
 	@Parameters({"browserType"})
 	@BeforeSuite
@@ -65,7 +68,35 @@ public class TestSuiteInitialisation {
 	
 	private FirefoxDriver initialiseFirefoxDriver() {
 		log4j.info("Launching Firefox browser...");
-		return new FirefoxDriver();
+		System.setProperty("webdriver.gecko.driver", "/" + System.getenv("geckodriver"));
+		FirefoxOptions options = new FirefoxOptions();
+		options.setCapability("marionette", true);
+		
+		FirefoxBinary binary = new FirefoxBinary();
+		options.setBinary(binary);
+		FirefoxProfile profile = initFirefoxProfile();
+		options.setProfile(profile);
+
+		return new FirefoxDriver(options);
+	}
+	
+	private FirefoxProfile initFirefoxProfile() {
+		FirefoxProfile profile = new FirefoxProfile();
+		profile.setPreference("browser.download.folderList",2);
+		profile.setPreference("browser.download.manager.showWhenStarting", false);
+		profile.setPreference("browser.download.dir","./target/downloads");
+		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/msword, application/csv, application/ris, text/csv, image/png, application/pdf, text/html, text/plain, application/zip, application/x-zip, application/x-zip-compressed, application/download, application/octet-stream");
+		profile.setPreference("browser.download.manager.alertOnEXEOpen", false);
+		profile.setPreference("browser.download.manager.focusWhenStarting", false);  
+		profile.setPreference("browser.download.useDownloadDir", true);
+		profile.setPreference("browser.helperApps.alwaysAsk.force", false);
+		profile.setPreference("browser.download.manager.closeWhenDone", true);
+		profile.setPreference("browser.download.manager.showAlertOnComplete", false);
+		profile.setPreference("browser.download.manager.useWindow", false);
+		profile.setPreference("services.sync.prefs.sync.browser.download.manager.showWhenStarting", false);
+		profile.setPreference("pdfjs.disabled", true);
+		
+		return profile;
 	}
 	
 	/*
@@ -92,7 +123,7 @@ public class TestSuiteInitialisation {
 			log4j.error("Properties file with login data couldn't be loaded");
 			e.printStackTrace();
 		} finally {
-        	if(input != null) {
+        	if (input != null) {
         		try {
         			input.close();
         		} catch (IOException e) {

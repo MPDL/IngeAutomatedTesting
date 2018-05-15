@@ -13,13 +13,13 @@ import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
 
 /*
- * TODO improve test coverage
+ * Assumes at least one item matching each search query is present
  */
 public class AdvancedSearchRegisteredTest extends BaseTest {
 	
-	private String titleQuery = "test";
-	private String authorQuery = "Müller";
-	private String organisationQuery = "MPI of Cognitive Neuroscience";
+	private String titleQuery = "Submission";
+	private String authorQuery = "Testermann";
+	private String organisationQuery = "MPDL";
 	
 	private CombinedHomePage combinedHomePage;
 	
@@ -57,6 +57,12 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
 		AdvancedSearchPage advancedSearchPage = combinedHomePage.goToAdvancedSearchPage();
 		SearchResultsPage searchResultsPage = advancedSearchPage.advancedSearch(titleQuery, authorQuery, organisationQuery);
+		testSearchHeadline(searchResultsPage);
+		testResultsPresence(searchResultsPage);
+		testReleasedResults(searchResultsPage);
+	}
+	
+	private void testSearchHeadline(SearchResultsPage searchResultsPage) {
 		String headlineText = searchResultsPage.getHeadline();
 		try {
 			Assert.assertEquals(headlineText, "Search Results");
@@ -64,6 +70,15 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 		catch (AssertionError exc) {
 			Assert.assertEquals(headlineText, "Suchergebnisse", "Search results page was not displayed.");
 		}
+	}
+	
+	private void testResultsPresence(SearchResultsPage searchResultsPage) {
+		Assert.assertNotEquals(0, searchResultsPage.getResultCount(), "Search should return at least one result: title - '" + titleQuery
+				+ "', person - '" + authorQuery + "', org - '" + organisationQuery + "'.");
+	}
+	
+	private void testReleasedResults(SearchResultsPage searchResultsPage) {
+		Assert.assertTrue(searchResultsPage.allResultsReleased(), "An unreleased item is present in advanced search results.");
 	}
 	
 	@AfterClass

@@ -47,6 +47,8 @@ public class SimpleSearchRegisteredTest extends BaseTest {
 		catch (AssertionError exc) {
 			Assert.assertEquals(headlineText, "Suchergebnisse", "Search results page was not displayed.");
 		}
+		Assert.assertNotEquals(searchResultsPage.getResultCount(), 0, 
+				"At least one result should be present for term '" + searchQuery + "'.");
 	}
 	
 	@Test(priority = 2)

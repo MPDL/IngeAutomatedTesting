@@ -37,18 +37,6 @@
 		</classes>
 	</test>
 	
-	<test name="data-driven">
-		<classes>
-			<class name="test.java.base.TestSuiteInitialisation"></class>
-			<class name="test.java.base.BaseTest"></class>
-			<class name="test.java.base.moddep.SubmitJournalArticleTest"></class>
-		</classes>
-	</test>
-	
-	<test name="functional">
-		<classes></classes>
-	</test>
-	
 	</parameter>
 
 </suite>

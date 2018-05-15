@@ -1,5 +1,10 @@
 package main.java.pages.submission;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +25,12 @@ public class ViewItemPage extends BasePage {
 	
 	@FindBy(className = "statusIcon")
 	private WebElement itemStatus;
+	
+	@FindBy(css = ".labelLine")
+	private List<WebElement> labels;
+	
+	@FindBy(css = ".xTiny_marginLExcl")
+	private List<WebElement> values;
 	
 	@FindBy(xpath = "//a[contains(@id, ':lnkRelease')]")
 	private WebElement releaseItemLink;
@@ -45,14 +56,27 @@ public class ViewItemPage extends BasePage {
 	@FindBy(xpath = "//a[contains(@id, ':lnkWithdraw')]")
 	private WebElement discardItemLink;
 	
+	private Map<String, String> labelMap;
+	
 	public ViewItemPage(WebDriver driver) {
 		super(driver);
-		
 		PageFactory.initElements(driver, this);
+		
+		initLabelMap();
+	}
+	
+	private void initLabelMap() {
+		labelMap = new HashMap<>();
+		int labelCount = labels.size();
+		for (int i = 0; i < labelCount; i++) {
+			String label = labels.get(i).getText().trim();
+			String value = values.get(i).getText().trim();
+			labelMap.put(label, value);
+		}
 	}
 	
 	public String getItemTitle() {
-		return itemTitle.getText();
+		return itemTitle.getText().trim();
 	}
 	
 	public ItemStatus getItemStatus() {
@@ -151,6 +175,24 @@ public class ViewItemPage extends BasePage {
 		modifyItemLink.click();
 		
 		return new EditItemPage(driver).addAuthor(newAuthor);
+	}
+	
+	/**
+	 * assumes the label map has been initialised
+	 */
+	public String getLabel(String label) {
+		/*int labelCount = labels.size();
+		for (int i = 0; i < labelCount; i++) {
+			WebElement labelElement = labels.get(i);
+			if (labelElement.getText().trim().equals(label)) {
+				return values.get(i).getText().trim();
+			}
+		}*/
+		String value = labelMap.get(label);
+		if (value == null) {
+			throw new NoSuchElementException("No label present: '" + label + "'");
+		}
+		return value;
 	}
 	
 }

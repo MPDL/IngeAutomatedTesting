@@ -88,12 +88,13 @@ public abstract class BaseTest {
 		Timestamp timeStamp = new Timestamp(time);
 		return timeStamp.toString();
 	}
-	
+
 	public final String getFilepath(String fileName) {
 		fileName = "/" + fileName;
 		String filepath = getClass().getResource(fileName).getPath();
-		if (driver instanceof FirefoxDriver)
-			filepath = "file:" + filepath;
+		if (driver instanceof FirefoxDriver) {
+			filepath = filepath.substring(1, filepath.length()).replace('/', '\\');
+		}
 		if (driver instanceof ChromeDriver)
 			filepath = filepath.substring(1, filepath.length());
 		return filepath;
@@ -117,9 +118,9 @@ public abstract class BaseTest {
 				FileUtils.copyFile(screenshot, new File(screenshotPath));
 			}
 			catch (IOException exc) {}
-			System.out.println(result.getName());
-			System.out.println(result.getThrowable().getMessage());
-			System.out.println();
+			
+			log4j.error(result.getName() + ": ");
+			log4j.error(result.getThrowable().getMessage());
 		}
 	}
 	
