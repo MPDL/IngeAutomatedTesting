@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import test.java.base.BaseTest;
-import test.java.base.Genre;
 import test.java.base.ItemStatus;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
@@ -14,7 +13,7 @@ import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.ViewItemPage;
 
-public class JournalArticleEasyStandardTest extends BaseTest {
+public class EasyArticleDeterministicTest extends BaseTest {
 
 	private String title;
 	private String filepath;
@@ -27,7 +26,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	public void setup() {
 		super.setup();
 		title = "Released journal article in standard workflow: " + getTimeStamp();
-		filepath = getFilepath("SamplePDFFile.pdf");
+		filepath = "SamplePDFFile.pdf";
 	}
 	
 	@Test(priority = 1)
@@ -39,7 +38,7 @@ public class JournalArticleEasyStandardTest extends BaseTest {
 	@Test(priority = 2)
 	public void easySubmissionStandardWorkflow() {
 		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToEasySubmissionPage();
-		viewItemPage = easySubmissionPage.easySubmission(Genre.ARTICLE, title, filepath);
+		viewItemPage = easySubmissionPage.easySubmission("Journal Article", title, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}	

@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -115,6 +117,17 @@ public abstract class BasePage {
 			return driver.findElement(By.className("messageError")).getText();
 		}
 		return "";
+	}
+	
+	public final String getFilepath(String fileName) {
+		fileName = "/" + fileName;
+		String filepath = getClass().getResource(fileName).getPath();
+		if (driver instanceof FirefoxDriver) {
+			filepath = filepath.substring(1, filepath.length()).replace('/', '\\');
+		}
+		if (driver instanceof ChromeDriver)
+			filepath = filepath.substring(1, filepath.length());
+		return filepath;
 	}
 	
 }

@@ -1,0 +1,127 @@
+package test.java.base.depositor;
+
+import java.util.Map;
+
+import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import main.java.pages.LoginPage;
+import main.java.pages.StartPage;
+import main.java.pages.homepages.DepositorHomePage;
+import main.java.pages.submission.FullSubmissionPage;
+import main.java.pages.submission.MyItemsPage;
+import main.java.pages.submission.ViewItemPage;
+import test.java.base.BaseTest;
+import test.java.base.ItemStatus;
+import test.java.base.TableHelper;
+
+public class FullSimpleEventDependentTest extends BaseTest {
+
+	private String title;
+	
+	private DepositorHomePage depositorHomePage;
+	private ViewItemPage viewItemPage;
+	
+	private TableHelper table = new TableHelper();
+	private Map<String, String> values;
+	
+	@BeforeClass
+	public void setup() {
+		super.setup();
+	}
+	
+	@Test(priority = 1)
+	public void loginAsDepositor() {
+		LoginPage loginPage = new StartPage(driver).goToLoginPage();
+		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
+		Assert.assertEquals(depositorHomePage.getUsername(), depositorName, "Expected and actual name don't match.");
+	}
+	
+	@Test(priority = 2)
+	public void fullSubmissionSimpleEventDependent() {
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
+		viewItemPage = fullSubmissionPage.fullSubmissionEventDepSimple(table);
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
+	}
+	
+	@Test(priority = 3, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
+	public void checkDataCorrectness() {
+		values = table.getMap();
+		title = values.get("[title]");
+		
+		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
+		compare("Genre", "DEGREE");
+		compare("Name", "[upload file]");
+		compare("Description", "[description file]");
+		compare("Visibility", "[Visibility]");
+		compare("Copyright Date", "[Copyright Date]");
+		compare("Copyright Info", "[Copyright statement]");
+		compare("License", "[license URL]");
+		compare("Free keywords", "[free keywords]");
+		compare("Abstract", "[abstract]");
+		compare("Pages", "[Total no of pages source]");
+		compare("Degree", "[degree type]");
+		compare("Project name", "[Project name]");
+		compare("Grant ID", "[Grant ID]");
+		compare("Funding program", "[Funding program]");
+		compare("Title", "[title source]");
+		compare("Source Genre", "[genre source]");
+		compare("Volume / Issue", "[Volume source]");
+		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
+		Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + values.get("[Publisher source]").trim());
+		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + values.get("[identifier source value]").trim());
+	}
+	
+	private void compare(String label, String expected) {
+		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
+	}
+	
+	@Test(priority = 4, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
+	public void depositorReleasesSubmission() {
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
+		viewItemPage = viewItemPage.releaseItem();
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
+	}
+	
+	@Test(priority = 5, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
+	public void viewMostRecentItems() {
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		String mostRecentItemTitle = depositorHomePage.goToStartPage().getNameOfMostRecentItem();
+		Assert.assertEquals(mostRecentItemTitle, title, "Item does not show up at the start page.");
+	}
+	
+	@Test(priority = 6, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
+	public void viewItem() {
+		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
+		viewItemPage = myItemsPage.openSubmittedItemByTitle(title);
+		String actualTitle = viewItemPage.getItemTitle();
+		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
+	}
+	
+	@Test(priority = 7, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
+	public void discardSubmission() {
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
+		myItemsPage.discardItemByTitle(title);
+	}
+	
+	@AfterClass
+	public void tearDown() {
+		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
+		depositorHomePage.logout();
+	}
+	
+	@AfterClass
+	public void saveDataAfterFailure(ITestContext context) {
+		if (context.getFailedTests().size() > 0) {
+			String testOutputPath = "./target/" + this.getClass().getSimpleName() + ".txt";
+			table.writeContentsToFile(testOutputPath);
+		}
+	}
+}

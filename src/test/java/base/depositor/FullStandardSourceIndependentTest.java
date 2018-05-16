@@ -1,41 +1,38 @@
 package test.java.base.depositor;
 
+import java.util.Map;
+
+import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseTest;
-import test.java.base.Genre;
-import test.java.base.ItemStatus;
 import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
+import test.java.base.BaseTest;
+import test.java.base.ItemStatus;
+import test.java.base.TableHelper;
 
-/**
- * TestLink UC #5
- * Tests full submission of a book in standard workflow.
- * @author apetrova
- *
- */
-public class ReleaseBookFullStandardTest extends BaseTest {
-	
+public class FullStandardSourceIndependentTest extends BaseTest {
+
 	private String title;
-	private String filepath;
-	private String author;
 	
 	private DepositorHomePage depositorHomePage;
 	private ModeratorHomePage moderatorHomePage;
 	private ViewItemPage viewItemPage;
 	
+	private TableHelper table = new TableHelper();
+	Map<String, String> values;
+	
 	@BeforeClass
 	public void setup() {
 		super.setup();
-		title = "Released book in standard workflow: " + getTimeStamp();
-		filepath = getFilepath("SamplePDFFile.pdf");
-		author = "Testermeier, Testo (MPI for Social Anthropology)";
 	}
 	
 	@Test(priority = 1)
@@ -46,33 +43,54 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 	}
 	
 	@Test(priority = 2)
-	public void fullSubmissionStandardWorkflow() {
+	public void submitSourceIndependent() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
-		viewItemPage = fullSubmissionPage.fullSubmission(Genre.BOOK, title, author, filepath);
+		viewItemPage = fullSubmissionPage.fullSubmissionSrcIndep(table);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
 	
-	@Test(priority = 3, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 3, dependsOnMethods = { "submitSourceIndependent" })
+	public void checkDataCorrectness() {
+		values = table.getMap();
+		title = values.get("[title]");
+		
+		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
+		compare("Genre", "SOURCE_INDEPENDENT");
+		compare("Name", "[upload file]");
+		compare("Description", "[description file]");
+		compare("Visibility", "[Visibility]");
+		compare("Copyright Date", "[Copyright Date]");
+		compare("Copyright Info", "[Copyright statement]");
+		compare("License", "[license URL]");
+		compare("Free keywords", "[free keywords]");
+		compare("Abstract", "[abstract]");
+	}
+	
+	private void compare(String label, String expected) {
+		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
+	}
+	
+	@Test(priority = 4, dependsOnMethods = { "submitSourceIndependent" })
 	public void depositorSubmitsItem() {
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 	}
 	
-	@Test(priority = 4, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 5, dependsOnMethods = { "submitSourceIndependent" })
 	public void logoutDepositor() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
-	@Test(priority = 5, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 6, dependsOnMethods = { "submitSourceIndependent" })
 	public void loginModerator() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
 	}
 	
-	@Test(priority = 6, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 7, dependsOnMethods = { "submitSourceIndependent" })
 	public void moderatorSendsBackSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.editItem();
@@ -81,19 +99,19 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.IN_REWORK, "Item was not sent for rework.");
 	}
 	
-	@Test(priority = 7, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 8, dependsOnMethods = { "submitSourceIndependent" })
 	public void logoutModerator() {
 		moderatorHomePage = (ModeratorHomePage) viewItemPage.goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}
 	
-	@Test(priority = 8, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 9, dependsOnMethods = { "submitSourceIndependent" })
 	public void loginDepositor() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
 	}
 	
-	@Test(priority = 9, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 10, dependsOnMethods = { "submitSourceIndependent" })
 	public void depositorRevisesItem() {
 		viewItemPage = depositorHomePage.goToMyItemsPage().openItemByTitle(title);
 		viewItemPage = viewItemPage.submitItem();
@@ -101,43 +119,43 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 	}
 	
-	@Test(priority = 10, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 11, dependsOnMethods = { "submitSourceIndependent" })
 	public void logoutDepositor2() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
-	@Test(priority = 11, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 12, dependsOnMethods = { "submitSourceIndependent" })
 	public void loginModerator2() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		moderatorHomePage = loginPage.loginAsModerator(moderatorUsername, moderatorPassword);
 	}
 	
-	@Test(priority = 12, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 13, dependsOnMethods = { "submitSourceIndependent" })
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
-		viewItemPage = viewItemPage.releaseItem();
+		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 13, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 14, dependsOnMethods = { "submitSourceIndependent" })
 	public void moderatorModifiesRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.modifyItem();
 	}
 	
-	@Test(priority = 14, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 15, dependsOnMethods = { "submitSourceIndependent" })
 	public void moderatorReleasesSubmissionAgain() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
-		viewItemPage = viewItemPage.releaseItem();
+		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 15, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 16, dependsOnMethods = { "submitSourceIndependent" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
@@ -146,10 +164,17 @@ public class ReleaseBookFullStandardTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
 	}
 	
-	@Test(priority = 16, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
+	@Test(priority = 17, dependsOnMethods = { "submitSourceIndependent" })
 	public void logoutModerator2() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		moderatorHomePage.logout();
 	}
 	
+	@AfterClass
+	public void saveDataAfterFailure(ITestContext context) {
+		if (context.getFailedTests().size() > 0) {
+			String testOutputPath = "./target/" + this.getClass().getSimpleName() + ".txt";
+			table.writeContentsToFile(testOutputPath);
+		}
+	}
 }

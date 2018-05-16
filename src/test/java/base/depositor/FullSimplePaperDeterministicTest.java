@@ -22,19 +22,20 @@ import main.java.pages.submission.ViewItemPage;
  * @author apetrova
  *
  */
-public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
+public class FullSimplePaperDeterministicTest extends BaseTest {
 	
 	private DepositorHomePage depositorHomePage;
 	
 	private String title;
-	private String filepath;
+	private String[] filepath;
 	private String author;
 	
 	@BeforeClass
 	public void setup() {
 		super.setup();
 		title = "Released conference paper in simple workflow: " + getTimeStamp();
-		filepath = getFilepath("SamplePDFFile.pdf");
+		filepath = new String[1];
+		filepath[0] = getFilepath("SamplePDFFile.pdf");
 		author = "Testermeier, Testo (MPI for Social Anthropology)";
 	}
 	
@@ -48,7 +49,7 @@ public class ReleaseConferencePaperFullSimpleTest extends BaseTest {
 	@Test(priority = 2)
 	public void fullSubmissionSimpleWorkflow() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
-		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission(Genre.CONFERENCE_PAPER, title, author, filepath);
+		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission("Conference Paper", title, author, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
