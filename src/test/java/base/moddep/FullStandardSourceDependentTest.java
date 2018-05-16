@@ -58,7 +58,7 @@ public class FullStandardSourceDependentTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
 	
-	@Test(priority = 2, dependsOnMethods = { "submitSourceIndependent" })
+	@Test(priority = 2, dependsOnMethods = { "submitSourceDependent" })
 	public void checkDataCorrectness() {
 		values = table.getMap();
 		title = values.get("[title]");
