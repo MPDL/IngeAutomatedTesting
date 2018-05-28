@@ -43,6 +43,11 @@ public class CitationStyleEditor {
 	}
 	
 	private CitationSearchName searchByName() {
+	    try {
+          Thread.sleep(2000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
 		searchByNameLink.click();
 		
 		return PageFactory.initElements(driver, CitationSearchName.class);

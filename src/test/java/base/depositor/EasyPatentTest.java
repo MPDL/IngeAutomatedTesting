@@ -48,10 +48,11 @@ public class EasyPatentTest extends BaseTest {
 	}	
 	
 	@Test(priority = 3)
-	public void checkDataCorrectness() {
+	public void checkDataCorrectness() throws InterruptedException {
 		values = table.getMap();
 		title = values.get("[title]");
 		
+		System.out.println(viewItemPage.getItemTitle() + " - " + title.trim());
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
 		compare("Genre", "PATENT");
 		compare("Name", "[upload file]");
@@ -63,33 +64,43 @@ public class EasyPatentTest extends BaseTest {
 		compare("Free keywords", "[free keywords]");
 		compare("Abstract", "[abstract]");
 		compare("Pages", "[Total no of pages source]");
-		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
+		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
+            && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
+        {
+		  Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
+        }
 	}
 	
 	private void compare(String label, String expected) {
+	    if (values.get(expected) == null)
+	    {
+	      System.out.println("Expected Value empty. Won't compare");
+	      return;
+	    }
+	    System.out.println("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
 		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
 	}
 	
-	@Test(priority = 3, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void depositorSubmitsItem() {
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 	}
 	
-	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow"})
+	@Test(priority = 5, dependsOnMethods = { "easySubmissionStandardWorkflow"})
 	public void logoutDepositor() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
-	@Test(priority = 5, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 6, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void loginAsModerator() {
 		moderatorHomePage = new StartPage(driver).loginAsModerator(moderatorUsername, moderatorPassword);
 		Assert.assertEquals(moderatorHomePage.getUsername(), moderatorName, "Expected and actual name don't match.");
 	}
 	
-	@Test(priority = 6, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 7, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
@@ -97,7 +108,7 @@ public class EasyPatentTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 7, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 8, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);

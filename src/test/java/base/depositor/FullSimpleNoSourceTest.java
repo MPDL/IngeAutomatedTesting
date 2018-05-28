@@ -26,6 +26,7 @@ public class FullSimpleNoSourceTest extends BaseTest {
 	private String title;
 	
 	private TableHelper table = new TableHelper();
+	private Map<String, String> values;
 	
 	@BeforeClass
 	public void setup() {
@@ -50,34 +51,57 @@ public class FullSimpleNoSourceTest extends BaseTest {
 	
 	@Test(priority = 3, dependsOnMethods = { "fullSubmissionSimpleNoSource" })
 	public void checkDataCorrectness() {
-		Map<String, String> values = table.getMap();
+		values = table.getMap();
 		title = values.get("[title]");
 		
-		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
-		Assert.assertEquals(viewItemPage.getLabel("Genre"), values.get("DEGREE"));
-		Assert.assertEquals(viewItemPage.getLabel("Name"), values.get("[upload file]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Description"), values.get("[description file]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Visibility"), values.get("[Visibility]"));
-		Assert.assertEquals(viewItemPage.getLabel("Copyright Date"), values.get("[Copyright Date]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Copyright Info"), values.get("[Copyright statement]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("License"), values.get("[license URL]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Free keywords"), values.get("[free keywords]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Abstract"), values.get("[abstract]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Pages"), values.get("[Total no of pages source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Degree"), values.get("[degree type]"));
-		Assert.assertEquals(viewItemPage.getLabel("Project name"), values.get("[Project name]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + 
-																	values.get("[identifier value]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Grant ID"), values.get("[Grant ID]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Funding program"), values.get("[Funding program]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Title"), values.get("[title source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Source Genre"), values.get("[genre source]"));
-		Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + 
-																	values.get("[Publisher source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Volume / Issue"), values.get("[Volume source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
-																	values.get("[identifier source value]").trim());
+		compare("Genre", "DEGREE");
+        compare("Name", "[upload file]");
+        compare("Description", "[description file]");
+        compare("Visibility", "[Visibility]");
+        compare("Copyright Date", "[Copyright Date]");
+        compare("Copyright Info", "[Copyright statement]");
+        compare("License", "[license URL]");
+        compare("Free keywords", "[free keywords]");
+        compare("Abstract", "[abstract]");
+        compare("Pages", "[Total no of pages source]");
+        compare("Degree", "[degree type]");
+        compare("Project name", "[Project name]");
+        compare("Grant ID", "[Grant ID]");
+        compare("Funding program", "[Funding program]");
+        compare("Title", "[title source]");
+        compare("Source Genre", "[genre source]");
+        compare("Volume / Issue", "[Volume source]");
+        
+        if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
+            && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
+        {
+          Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + 
+            values.get("[identifier value]").trim());
+        }
+        
+        if (values.containsKey("[Place source]") && values.get("[Place source]") != null
+            && values.containsKey("[Publisher source]") && values.get("[Publisher source]") != null)
+        {
+          Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + 
+            values.get("[Publisher source]").trim());
+        }
+        
+        if (values.containsKey("[identifier source create item]") && values.get("[identifier source create item]") != null
+            && values.containsKey("[identifier source value]") && values.get("[identifier source value]") != null)
+        {
+          Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
+            values.get("[identifier source value]").trim());
+        }
 	}
+	
+	private void compare(String label, String expected) {
+      if (values.get(expected) == null)
+      {
+        System.out.println("Expected Value empty. Won't compare");
+        return;
+      }
+        Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
+    }
 	
 	@Test(priority = 4, dependsOnMethods = { "fullSubmissionSimpleNoSource" })
 	public void depositorReleasesSubmission() {

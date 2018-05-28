@@ -146,20 +146,20 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(xpath = "//textarea[contains(@id, '0:inpSourceTitle_Journal')]")
 	private WebElement sourceTitleBox;
 	
-	@FindBy(xpath = "//select[contains(@id, '0:selCreatorRoleString')]")
-	private WebElement creatorRoleDropdown;
+	@FindBy(xpath = "//select[contains(@id, '0:selSourceCreatorRoleString')]")
+	private WebElement sourceCreatorRoleDropdown;
 	
 	@FindBy(css = "#iterSourceCreatorOrganisationAuthors .familyName")
-	private WebElement creatorFamilyNameBox;
+	private WebElement sourceCreatorFamilyNameBox;
 	
 	@FindBy(css = "#iterSourceCreatorOrganisationAuthors .ouNumber")
-	private WebElement creatorOrgNrBox;
+	private WebElement sourceCreatorOrgNrBox;
 	
 	@FindBy(css = "#iterSourceCreatorOrganisation .organizationName")
-	private WebElement creatorOrgNameBox;
+	private WebElement sourceCreatorOrgNameBox;
 	
 	@FindBy(css = "#iterSourceCreatorOrganisation .organizationAddress")
-	private WebElement creatorOrgAddrBox;
+	private WebElement sourceCreatorOrgAddrBox;
 	
 	@FindBy(xpath = "//input[contains(@id, '0:inpSourceDetailVolume')]")
 	private WebElement sourceVolumeBox;
@@ -692,11 +692,12 @@ public class FullSubmissionPage extends BasePage {
 		Select genreSourceSelect = new Select(sourceGenreDropdown);
 		genreSourceSelect.selectByVisibleText(genreSource);
 		sourceTitleBox.sendKeys(titleSource);
-		Select creatorRoleSelect = new Select(creatorRoleDropdown);
+		System.out.println("Dropdown: " + sourceCreatorRoleDropdown + " - " );
+		Select creatorRoleSelect = new Select(sourceCreatorRoleDropdown);
 		creatorRoleSelect.selectByVisibleText(roleSource);
-		creatorFamilyNameBox.sendKeys(personSource);
-		creatorOrgNameBox.sendKeys(orgSource);
-		creatorOrgAddrBox.sendKeys(orgAddrSource);
+		sourceCreatorFamilyNameBox.sendKeys(personSource);
+		sourceCreatorOrgNameBox.sendKeys(orgSource);
+		sourceCreatorOrgAddrBox.sendKeys(orgAddrSource);
 	}
 	
 	private void fillInSourceDetails(String volumeSource, String numPagesSource, String publisherSource, String placeSource) {

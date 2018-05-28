@@ -73,6 +73,7 @@ public class TestSuiteInitialisation {
 		options.setCapability("marionette", true);
 		
 		FirefoxBinary binary = new FirefoxBinary();
+//		binary.addCommandLineOptions("--headless");
 		options.setBinary(binary);
 		FirefoxProfile profile = initFirefoxProfile();
 		options.setProfile(profile);

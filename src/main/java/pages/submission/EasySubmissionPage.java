@@ -161,14 +161,17 @@ public class EasySubmissionPage extends BasePage {
 		WebElement licenseBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:0:inpComponentFileDefaultMetadataLicense"));
 		licenseBox.sendKeys(licenseURL);
 		
-		WebElement fileURLBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:inpLocatorUpload"));
-		fileURLBox.sendKeys(fileURL);
-		WebElement uploadFileURL = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:btnEditItemUpload"));
-		uploadFileURL.click();
+		if (fileURL != null && !"".equals(fileURL)) {
+		  WebElement fileURLBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:inpLocatorUpload"));
+	      fileURLBox.sendKeys(fileURL);
+	      WebElement uploadFileURL = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:btnEditItemUpload"));
+	      uploadFileURL.click();
+	        
+	      contentCategoryDropdown = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:1:selContentCategory"));
+	      contentCategorySelect = new Select(contentCategoryDropdown);
+	      contentCategorySelect.selectByVisibleText(contentCategory);
+		}
 		
-		contentCategoryDropdown = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:1:selContentCategory"));
-		contentCategorySelect = new Select(contentCategoryDropdown);
-		contentCategorySelect.selectByVisibleText(contentCategory);
 	}
 	
 	private void addLocator(TableHelper table) {

@@ -71,12 +71,28 @@ public class FullSimpleEventDependentTest extends BaseTest {
 		compare("Title", "[title source]");
 		compare("Source Genre", "[genre source]");
 		compare("Volume / Issue", "[Volume source]");
-		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + values.get("[Publisher source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + values.get("[identifier source value]").trim());
+		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
+		  && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
+        {
+		  Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
+        }
+		if (values.containsKey("[Publisher source]") && values.get("[Publisher source]") != null)
+        {
+		  Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + values.get("[Publisher source]").trim());
+        }
+		if (values.containsKey("[identifier source create item]") && values.get("[identifier source create item]") != null
+	      && values.containsKey("[identifier source value]") && values.get("[identifier source value]") != null)
+	    {
+		  Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + values.get("[identifier source value]").trim());
+        }
 	}
 	
 	private void compare(String label, String expected) {
+	  if (values.get(expected) == null)
+      {
+        System.out.println("Expected Value empty. Won't compare");
+        return;
+      }
 		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
 	}
 	

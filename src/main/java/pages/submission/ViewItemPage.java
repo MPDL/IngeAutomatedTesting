@@ -71,7 +71,10 @@ public class ViewItemPage extends BasePage {
 		for (int i = 0; i < labelCount; i++) {
 			String label = labels.get(i).getText().trim();
 			String value = values.get(i).getText().trim();
-			labelMap.put(label, value);
+			if ( !labelMap.containsKey(label))
+			{
+			  labelMap.put(label, value);
+			}
 		}
 	}
 	
@@ -188,10 +191,16 @@ public class ViewItemPage extends BasePage {
 				return values.get(i).getText().trim();
 			}
 		}*/
+	    System.out.println("looking for label " + label);
 		String value = labelMap.get(label);
+//		for (String v : labelMap.values())
+//		{
+//		  System.out.println("label from map: " + v);
+//		}
 		if (value == null) {
 			throw new NoSuchElementException("No label present: '" + label + "'");
 		}
+		System.out.println("Label found: " + value);
 		return value;
 	}
 	

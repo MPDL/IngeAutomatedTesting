@@ -1,6 +1,7 @@
 package test.java.base.depositor;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -49,12 +50,11 @@ public class EasyLegalTest extends BaseTest {
 	
 	@Test(priority = 3)
 	public void checkDataCorrectness() {
-		Map<String, String> values = table.getMap();
-		title = values.get("[title]");
-		
 		values = table.getMap();
 		title = values.get("[title]");
-		
+//		for (Entry<String, String> set :  table.getMap().entrySet()) {
+//          System.out.println("Table Entry: " + set.getKey() + " - " + set.getValue());
+//        }		
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
 		compare("Genre", "LEGAL");
 		compare("Name", "[upload file]");
@@ -68,37 +68,54 @@ public class EasyLegalTest extends BaseTest {
 		compare("Pages", "[Total no of pages source]");
 		compare("Title", "[title source]");
 		compare("Source Genre", "[genre source]");
-		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Volume / Issue"), values.get("[Volume source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
-																	values.get("[identifier source value]").trim());
+		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
+            && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
+        {
+		  Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
+        }
+		if (values.containsKey("[Volume source]") && values.get("[Volume source]") != null)
+        {
+		  Assert.assertEquals(viewItemPage.getLabel("Volume / Issue"), values.get("[Volume source]").trim());
+        }
+		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
+            && values.containsKey("[identifier source create item]") && values.get("[identifier source create item") != null)
+        {
+		  Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
+        values.get("[identifier source value]").trim());
+        }
 	}
 	
 	private void compare(String label, String expected) {
+  	    if (!values.containsKey(expected) || values.get(expected) == null)
+        {
+          System.out.println("Expected Value empty. Won't compare");
+          return;
+        }
+        System.out.println("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
 		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
 	}
 	
 	
-	@Test(priority = 3, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void depositorSubmitsItem() {
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item was not submitted.");
 	}
 	
-	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow"})
+	@Test(priority = 5, dependsOnMethods = { "easySubmissionStandardWorkflow"})
 	public void logoutDepositor() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		depositorHomePage.logout();
 	}
 	
-	@Test(priority = 5, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 6, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void loginAsModerator() {
 		moderatorHomePage = new StartPage(driver).loginAsModerator(moderatorUsername, moderatorPassword);
 		Assert.assertEquals(moderatorHomePage.getUsername(), moderatorName, "Expected and actual name don't match.");
 	}
 	
-	@Test(priority = 6, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 7, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
@@ -106,7 +123,7 @@ public class EasyLegalTest extends BaseTest {
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
 	
-	@Test(priority = 7, dependsOnMethods = { "easySubmissionStandardWorkflow" })
+	@Test(priority = 8, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);

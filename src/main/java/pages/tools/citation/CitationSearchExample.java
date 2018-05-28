@@ -31,6 +31,12 @@ public class CitationSearchExample {
 	
 	public List<WebElement> getSearchResults() {
 		WebElement searchButton = styleFormat.findElement(By.id("searchButton"));
+		// sleep needed to ensure correct script execution
+		try {
+          Thread.sleep(2000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchButton);
 		WebElement allResults = driver.findElement(By.id("searchResults"));
 		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));

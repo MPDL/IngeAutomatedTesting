@@ -24,8 +24,8 @@ public class ExportItemStandardTest extends BaseTest {
 	private MyItemsPage myItemsPage;
 	
 	private String itemTitle = "Exported item";
-	private String bibtexValue = "BibTex";
-	private String endNoteValue = "Endnote";
+	private String bibtexValue = "BibTeX";
+	private String endNoteValue = "EndNote";
 	
 	@BeforeClass
 	public void setup() {

@@ -20,7 +20,7 @@ public class MyItemsPage extends BasePage {
 	@FindBy(xpath = "//a[contains(@id, 'lnkChangeSubmenuToExport')]")
 	private WebElement exportLink;
 	
-	@FindBy(xpath = "//select[contains(@id, 'selExportFormatName')]")
+	@FindBy(xpath = "//select[contains(@id, 'selEXPORTFORMAT')]")
 	private WebElement formatDropdown;
 	
 	@FindBy(id = "j_idt103:itemList:extSelectTop")

@@ -94,10 +94,12 @@ public abstract class BasePage {
 	public Object openLinkNewWindow(WebElement link, Object PageType) {
 		String firstHandle = driver.getWindowHandle();
 		link.click();
-		
 		Set<String> windowHandles = driver.getWindowHandles();
 		windowHandles.remove(firstHandle);
-		driver.switchTo().window(windowHandles.iterator().next());
+		for(String winHandle : driver.getWindowHandles()){
+		    System.out.println("switching to: " + winHandle);
+		    driver.switchTo().window(winHandle);
+		}
 		
 		return PageFactory.initElements(driver, PageType.getClass());
 	}
