@@ -34,7 +34,11 @@ public class CitationStyleEditor {
 	
 	public CitationSearchExample searchByExample() {
 		searchExampleLink.click();
-		
+		try {
+          Thread.sleep(250);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
 		return PageFactory.initElements(driver, CitationSearchExample.class);
 	}
 	
