@@ -1,5 +1,6 @@
 package main.java.pages;
 
+import java.io.File;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -132,7 +133,7 @@ public abstract class BasePage {
 		fileName = "/" + fileName;
 		String filepath = getClass().getResource(fileName).getPath();
 		if (driver instanceof FirefoxDriver) {
-			filepath = filepath.substring(1, filepath.length()).replace('/', '\\');
+			filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
 		}
 		if (driver instanceof ChromeDriver)
 			filepath = filepath.substring(1, filepath.length());
