@@ -130,14 +130,23 @@ public abstract class BasePage {
 	}
 	
 	public final String getFilepath(String fileName) {
-		fileName = "/" + fileName;
-		String filepath = getClass().getResource(fileName).getPath();
-		if (driver instanceof FirefoxDriver) {
-			filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
-		}
-		if (driver instanceof ChromeDriver)
-			filepath = filepath.substring(1, filepath.length());
-		return filepath;
+	  fileName = "/" + fileName;
+      String filepath = getClass().getResource(fileName).getPath();
+      String os = System.getProperty("os.name");
+      System.out.println("OS " + os);
+      if (driver instanceof FirefoxDriver) {
+        if (os.startsWith("Windows")) {
+          filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
+        }
+      }
+      if (driver instanceof ChromeDriver) {
+        if (os.startsWith("Windows")) {
+          filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
+        }
+      }
+        
+      System.out.println("filepath: " + filepath);
+      return filepath;
 	}
 	
 }
