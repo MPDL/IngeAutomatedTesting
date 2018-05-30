@@ -103,6 +103,11 @@ public abstract class BasePage {
 	public Object openLinkNewWindow(WebElement link, Object PageType) {
 		String firstHandle = driver.getWindowHandle();
 		link.click();
+		try {
+          Thread.sleep(250);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
 		Set<String> windowHandles = driver.getWindowHandles();
 		windowHandles.remove(firstHandle);
 		for(String winHandle : driver.getWindowHandles()){
