@@ -97,7 +97,7 @@ public class FullSimpleNoSourceTest extends BaseTest {
 	private void compare(String label, String expected) {
       if (values.get(expected) == null)
       {
-        System.out.println("Expected Value empty. Won't compare");
+        log4j.info("Expected Value empty. Won't compare");
         return;
       }
         Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());

@@ -8,43 +8,46 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.testng.log4testng.Logger;
 
 public class TableHelper {
 	
+    private static final Logger log4j = Logger.getLogger(TableHelper.class);
+  
 	private Map<String, Integer> headerMap;
-	private XSSFSheet dataTable;
 	private Map<String, String> randomValueMap;
+    private XSSFSheet dataTable;
 	
 	public TableHelper() {
-		loadDataTable();
-		createMap(dataTable);
+		createMap(loadDataTable());
 		randomValueMap = new HashMap<>();
 	}
 	
-	private void loadDataTable() {
-		loadDataTable(0);
-	}
-	
-	private void loadDataTable(int sheetNr) {
+	private XSSFSheet loadDataTable() {
+	    XSSFSheet data = null;
 		String filepath = getClass().getResource("/data_table.xlsx").getPath();
 		XSSFWorkbook dataTableFile = null;
 		try {
 			dataTableFile = new XSSFWorkbook(new File(filepath));
-			dataTable = dataTableFile.getSheetAt(sheetNr);
+			data = dataTableFile.getSheetAt(0); // getting sheet site 1
 		}
-		catch (InvalidFormatException | IOException exc) {
-			// TODO: handle exceptions
+		catch (InvalidFormatException | IOException e) {
+		  e.printStackTrace();
 		}
 		finally {
 			if (dataTableFile != null) {
 				try { dataTableFile.close(); } catch (IOException e) { }
 			}
 		}
+		this.dataTable = data;
+        return data;
+		
 	}
 	
 	/**
@@ -75,13 +78,13 @@ public class TableHelper {
 		int cellCount = row.getLastCellNum();
 		String result = null;
 		int attempts = 0;
-		Random gen = new Random();
-		while ((result == null || result.equals("")) && attempts < 15) {
-			// get a random row index (add 1 as cell 0 is the category)
-			int i = gen.nextInt(cellCount - 1) + 1;
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		while ((result == null || ("").equals(result) || ("").equals(result.trim())) && attempts < 50) {
+			int i = random.nextInt(1, cellCount);
 			result = row.getCell(i).getStringCellValue();
 			attempts++;
 		}
+		log4j.debug("Category: " + category + " - entry: " + result);
 		if (!randomValueMap.containsKey(category)) {
 			randomValueMap.put(category, result);
 		}

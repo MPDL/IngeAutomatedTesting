@@ -13,7 +13,7 @@ import main.java.pages.search.SearchResultsPage;
 
 public class AdministrativeSearchTest extends BaseTest {
 
-	private String title = "protocarbolipid";
+	private String title = "test";
 	private CombinedHomePage combinedHomePage;
 	
 	@BeforeClass

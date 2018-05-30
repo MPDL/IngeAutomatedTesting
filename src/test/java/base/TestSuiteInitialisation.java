@@ -63,7 +63,7 @@ public class TestSuiteInitialisation {
 		}
 		driver.manage().window().maximize();
 		log4j.info("Window maximised.");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 	
 	private FirefoxDriver initialiseFirefoxDriver() {

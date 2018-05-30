@@ -8,6 +8,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
 
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
@@ -52,9 +53,6 @@ public class EasyLegalTest extends BaseTest {
 	public void checkDataCorrectness() {
 		values = table.getMap();
 		title = values.get("[title]");
-//		for (Entry<String, String> set :  table.getMap().entrySet()) {
-//          System.out.println("Table Entry: " + set.getKey() + " - " + set.getValue());
-//        }		
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
 		compare("Genre", "LEGAL");
 		compare("Name", "[upload file]");
@@ -88,10 +86,10 @@ public class EasyLegalTest extends BaseTest {
 	private void compare(String label, String expected) {
   	    if (!values.containsKey(expected) || values.get(expected) == null)
         {
-          System.out.println("Expected Value empty. Won't compare");
+  	    log4j.info("Expected Value empty. Won't compare");
           return;
         }
-        System.out.println("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
+        log4j.debug("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
 		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
 	}
 	

@@ -692,12 +692,13 @@ public class FullSubmissionPage extends BasePage {
 		Select genreSourceSelect = new Select(sourceGenreDropdown);
 		genreSourceSelect.selectByVisibleText(genreSource);
 		sourceTitleBox.sendKeys(titleSource);
-		System.out.println("Dropdown: " + sourceCreatorRoleDropdown + " - " );
+//		System.out.println("Dropdown: " + sourceCreatorRoleDropdown + " - " );
 		Select creatorRoleSelect = new Select(sourceCreatorRoleDropdown);
 		creatorRoleSelect.selectByVisibleText(roleSource);
 		sourceCreatorFamilyNameBox.sendKeys(personSource);
 		sourceCreatorOrgNameBox.sendKeys(orgSource);
 		sourceCreatorOrgAddrBox.sendKeys(orgAddrSource);
+//		System.out.println("DONE");
 	}
 	
 	private void fillInSourceDetails(String volumeSource, String numPagesSource, String publisherSource, String placeSource) {

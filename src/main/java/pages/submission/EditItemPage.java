@@ -40,6 +40,11 @@ public class EditItemPage extends BasePage {
 	}
 	
 	public ViewItemPage editItem() {
+  	    try {
+          Thread.sleep(250);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
 		editDescription(" (revised by moderator)");
 		saveButton.click();
 		

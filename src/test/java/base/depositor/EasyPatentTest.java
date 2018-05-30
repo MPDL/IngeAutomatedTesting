@@ -52,7 +52,6 @@ public class EasyPatentTest extends BaseTest {
 		values = table.getMap();
 		title = values.get("[title]");
 		
-		System.out.println(viewItemPage.getItemTitle() + " - " + title.trim());
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
 		compare("Genre", "PATENT");
 		compare("Name", "[upload file]");
@@ -74,10 +73,10 @@ public class EasyPatentTest extends BaseTest {
 	private void compare(String label, String expected) {
 	    if (values.get(expected) == null)
 	    {
-	      System.out.println("Expected Value empty. Won't compare");
+	      log4j.info("Expected Value empty. Won't compare");
 	      return;
 	    }
-	    System.out.println("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
+	    log4j.debug("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
 		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
 	}
 	

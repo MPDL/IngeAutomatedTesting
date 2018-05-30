@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.log4testng.Logger;
 
 import main.java.components.MainMenuComponent;
 import main.java.components.MetaMenuComponent;
@@ -30,6 +31,8 @@ import main.java.pages.tools.ToolsPage;
  *
  */
 public abstract class BasePage {
+  
+    protected final Logger log4j = Logger.getLogger(BasePage.class);
 
 	protected WebDriver driver;
 	protected WebDriverWait wait;
@@ -78,6 +81,11 @@ public abstract class BasePage {
 	
 	public ViewItemPage openSubmittedItemByTitle(String itemTitle) {
 		SearchResultsPage searchResultsPage = searchComponent.quickSearch(itemTitle);
+		try {
+	      Thread.sleep(250);
+	    } catch (InterruptedException e) {
+	      e.printStackTrace();
+	    }
 		ViewItemPage viewItemPage = searchResultsPage.openFirstResult();
 		return viewItemPage;
 	}
@@ -97,7 +105,6 @@ public abstract class BasePage {
 		Set<String> windowHandles = driver.getWindowHandles();
 		windowHandles.remove(firstHandle);
 		for(String winHandle : driver.getWindowHandles()){
-		    System.out.println("switching to: " + winHandle);
 		    driver.switchTo().window(winHandle);
 		}
 		

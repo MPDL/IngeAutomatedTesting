@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,9 +23,6 @@ public class ViewItemPage extends BasePage {
 
 	@FindBy(css = ".itemHeadline>b")
 	private WebElement itemTitle;
-	
-	@FindBy(className = "statusIcon")
-	private WebElement itemStatus;
 	
 	@FindBy(css = ".labelLine")
 	private List<WebElement> labels;
@@ -83,6 +81,12 @@ public class ViewItemPage extends BasePage {
 	}
 	
 	public ItemStatus getItemStatus() {
+  	    try {
+          Thread.sleep(250);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        WebElement itemStatus = driver.findElement(By.className("statusIcon"));
 		String classNames = itemStatus.getAttribute("class");
 		if (classNames.contains("pendingItem"))
 			return ItemStatus.PENDING;
@@ -184,23 +188,10 @@ public class ViewItemPage extends BasePage {
 	 * assumes the label map has been initialised
 	 */
 	public String getLabel(String label) {
-		/*int labelCount = labels.size();
-		for (int i = 0; i < labelCount; i++) {
-			WebElement labelElement = labels.get(i);
-			if (labelElement.getText().trim().equals(label)) {
-				return values.get(i).getText().trim();
-			}
-		}*/
-	    System.out.println("looking for label " + label);
 		String value = labelMap.get(label);
-//		for (String v : labelMap.values())
-//		{
-//		  System.out.println("label from map: " + v);
-//		}
 		if (value == null) {
 			throw new NoSuchElementException("No label present: '" + label + "'");
 		}
-		System.out.println("Label found: " + value);
 		return value;
 	}
 	

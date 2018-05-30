@@ -1,6 +1,7 @@
 package test.java.base.depositor;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.testng.Assert;
@@ -8,6 +9,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
 
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
@@ -19,7 +21,7 @@ import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
 public class EasyEventDependentTest extends BaseTest {
-
+  
 	private String title;
 	
 	private DepositorHomePage depositorHomePage;
@@ -43,6 +45,10 @@ public class EasyEventDependentTest extends BaseTest {
 	@Test(priority = 2)
 	public void easySubmissionStandardWorkflow() {
 		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToEasySubmissionPage();
+		log4j.debug("Table: " + table);
+        for(Entry<String, String> entry : table.getMap().entrySet()) {
+          log4j.debug("Table-Key: " + entry.getKey() + " - Table-Value: " + entry.getValue());
+        }
 		viewItemPage = easySubmissionPage.easySubmissionEventDependent(table);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
@@ -71,7 +77,7 @@ public class EasyEventDependentTest extends BaseTest {
 	private void compare(String label, String expected) {
   	    if (!values.containsKey(expected) || values.get(expected) == null)
         {
-          System.out.println("Expected Value empty. Won't compare");
+          log4j.info("Expected Value empty. Won't compare");
           return;
         }
 		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
