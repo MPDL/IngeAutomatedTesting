@@ -15,6 +15,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 
+import main.java.pages.homepages.HomePage;
+
 /**
  * Superclass for all test classes. Prepares the driver instance and user data
  * @author apetrova
@@ -116,6 +118,18 @@ public abstract class BaseTest {
 	public void backToBaseHandle() {
 		driver.close();
 		driver.switchTo().window(baseWindowHandle);
+	}
+	
+	/**
+	 * Navigates to the HomePage, using the WebDriver-Navigation.
+	 * 
+	 * @return the HomePage
+	 */
+	public HomePage navigateToHomePage() {
+		driver.navigate().to(startPageURL);
+		
+		HomePage homePage = new HomePage(driver);
+		return homePage;
 	}
 	
 	@AfterMethod
