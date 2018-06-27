@@ -2,25 +2,23 @@ package test.java.base.depositor;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import junit.framework.AssertionFailedError;
 import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
-public class FullStandardDegreeTest extends BaseTest {
+public class FullStandardDegreeTest extends BaseLoggedInUserTest {
 
 	private String title;
 	
@@ -175,12 +173,6 @@ public class FullStandardDegreeTest extends BaseTest {
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
-	}
-	
-	@Test(priority = 17, dependsOnMethods = { "submitDegree" })
-	public void logoutModerator2() {
-		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		moderatorHomePage.logout();
 	}
 	
 	@AfterClass

@@ -14,11 +14,11 @@ import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.ViewItemPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
-public class FullSimpleNoSourceTest extends BaseTest {
+public class FullSimpleNoSourceTest extends BaseLoggedInUserTest {
 	
 	private DepositorHomePage depositorHomePage;
 	private ViewItemPage viewItemPage;
@@ -132,12 +132,6 @@ public class FullSimpleNoSourceTest extends BaseTest {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
 		myItemsPage.discardItemByTitle(title);
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 	
 	@AfterClass

@@ -1,7 +1,6 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -10,7 +9,7 @@ import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.FetchSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.ViewItemPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
 /**
  * TestLink Use Case #15
@@ -18,7 +17,7 @@ import test.java.base.BaseTest;
  * @author apetrova
  *
  */
-public class ExportItemStandardTest extends BaseTest {
+public class ExportItemStandardTest extends BaseLoggedInUserTest {
 
 	private DepositorHomePage depositorHomePage;
 	private MyItemsPage myItemsPage;
@@ -66,11 +65,5 @@ public class ExportItemStandardTest extends BaseTest {
 		myItemsPage = ((DepositorHomePage)(depositorHomePage.goToSubmissionPage().goToHomePage(depositorHomePage))).goToMyItemsPage();
 		boolean itemIsExported = myItemsPage.exportItem(itemTitle, endNoteValue);
 		Assert.assertTrue(itemIsExported, "Item was not exported.");
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		depositorHomePage = (DepositorHomePage) myItemsPage.goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

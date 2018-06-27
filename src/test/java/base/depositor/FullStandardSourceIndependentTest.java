@@ -2,7 +2,6 @@ package test.java.base.depositor;
 
 import java.util.Map;
 
-import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -15,11 +14,11 @@ import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
-public class FullStandardSourceIndependentTest extends BaseTest {
+public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 
 	private String title;
 	
@@ -162,12 +161,6 @@ public class FullStandardSourceIndependentTest extends BaseTest {
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
-	}
-	
-	@Test(priority = 17, dependsOnMethods = { "submitSourceIndependent" })
-	public void logoutModerator2() {
-		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		moderatorHomePage.logout();
 	}
 	
 	@AfterClass

@@ -1,20 +1,17 @@
 package test.java.base.depositor;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseTest;
-import test.java.base.Genre;
-import test.java.base.ItemStatus;
 import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
-import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.ViewItemPage;
+import test.java.base.BaseLoggedInUserTest;
+import test.java.base.ItemStatus;
 
 /**
  * Test Link UC #4
@@ -22,7 +19,7 @@ import main.java.pages.submission.ViewItemPage;
  * @author apetrova
  *
  */
-public class FullSimplePaperDeterministicTest extends BaseTest {
+public class FullSimplePaperDeterministicTest extends BaseLoggedInUserTest {
 	
 	private DepositorHomePage depositorHomePage;
 	
@@ -83,11 +80,5 @@ public class FullSimplePaperDeterministicTest extends BaseTest {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
 		myItemsPage.discardItemByTitle(title);
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

@@ -4,14 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseTest;
-import test.java.base.ItemStatus;
 import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
+import test.java.base.BaseLoggedInUserTest;
+import test.java.base.ItemStatus;
 
 /**
  * TestLink UC #5
@@ -19,7 +19,7 @@ import main.java.pages.submission.ViewItemPage;
  * @author apetrova
  *
  */
-public class FullStandardBookDeterministicTest extends BaseTest {
+public class FullStandardBookDeterministicTest extends BaseLoggedInUserTest {
 	
 	private String title;
 	private String[] filepath;
@@ -145,12 +145,6 @@ public class FullStandardBookDeterministicTest extends BaseTest {
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
-	}
-	
-	@Test(priority = 16, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
-	public void logoutModerator2() {
-		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		moderatorHomePage.logout();
 	}
 	
 }

@@ -5,6 +5,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import test.java.base.BaseLoggedInUserTest;
 import test.java.base.BaseTest;
 import test.java.base.ItemStatus;
 import main.java.pages.StartPage;
@@ -13,7 +14,7 @@ import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.ViewItemPage;
 
-public class EasyArticleDeterministicTest extends BaseTest {
+public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 
 	private String title;
 	private String filepath;
@@ -80,11 +81,5 @@ public class EasyArticleDeterministicTest extends BaseTest {
           e.printStackTrace();
         }
 		viewItemPage = viewItemPage.discardItem();
-	}
-	
-	@AfterClass
-	public void moderatorLogout() {
-		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		moderatorHomePage.logout();
 	}
 }

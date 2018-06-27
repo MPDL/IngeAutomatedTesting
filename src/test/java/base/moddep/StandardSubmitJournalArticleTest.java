@@ -1,7 +1,6 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -11,10 +10,9 @@ import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.search.SearchResultsPage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
-import test.java.base.BaseTest;
-import test.java.base.Genre;
+import test.java.base.BaseLoggedInUserTest;
 
-public class StandardSubmitJournalArticleTest extends BaseTest {
+public class StandardSubmitJournalArticleTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;
 	private StartPage startPage;
@@ -219,11 +217,5 @@ public class StandardSubmitJournalArticleTest extends BaseTest {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
 		viewItem = viewItem.discardItem();
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		refreshHomePage();
-		combinedHomePage.logout();
 	}
 }

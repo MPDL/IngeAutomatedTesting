@@ -10,9 +10,9 @@ import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
 import main.java.pages.tools.rest.RestExamplePage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
-public class ExportSearchRESTTest extends BaseTest {
+public class ExportSearchRESTTest extends BaseLoggedInUserTest {
 
 	private DepositorHomePage depositorHomePage;
 	private RestExamplePage restExamplePage;
@@ -44,10 +44,7 @@ public class ExportSearchRESTTest extends BaseTest {
 	}
 	
 	@AfterClass
-	public void logout() {
+	public void tearDown() {
 		backToBaseHandle();
-		
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

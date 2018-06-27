@@ -1,19 +1,17 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
-import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.ImportWorkspacePage;
 import main.java.pages.submission.MultipleImportOptionsPage;
 import main.java.pages.submission.MultipleImportPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
-public class BatchImportTest extends BaseTest {
+public class BatchImportTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;
 	
@@ -62,11 +60,5 @@ public class BatchImportTest extends BaseTest {
 		importWorkspace = combinedHomePage.goToImportWorkspace();
 		boolean importIsPresent = importWorkspace.isImportPresent(title);
 		Assert.assertTrue(importIsPresent, "File was not deleted.");
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		combinedHomePage.logout();
 	}
 }

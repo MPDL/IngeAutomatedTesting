@@ -14,9 +14,9 @@ import main.java.pages.tools.cone.EntityType;
 import main.java.pages.tools.cone.journal.EditJournalPage;
 import main.java.pages.tools.cone.journal.NewJournalPage;
 import main.java.pages.tools.cone.journal.ViewJournalPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
-public class ConeJournalTest extends BaseTest {
+public class ConeJournalTest extends BaseLoggedInUserTest {
 
 	private ConeHomePage coneHomePage;
 	private ViewJournalPage viewJournalPage;
@@ -78,8 +78,6 @@ public class ConeJournalTest extends BaseTest {
 		}
 		
 		Assert.assertTrue(itemWasDeleted, "Journal was not deleted.");
-		
-		coneSearch.logout();
 	}
 	
 	@AfterClass 

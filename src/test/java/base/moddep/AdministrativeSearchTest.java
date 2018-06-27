@@ -1,17 +1,16 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseTest;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.search.AdministrativeSearchPage;
 import main.java.pages.search.SearchResultsPage;
+import test.java.base.BaseLoggedInUserTest;
 
-public class AdministrativeSearchTest extends BaseTest {
+public class AdministrativeSearchTest extends BaseLoggedInUserTest {
 
 	private String title = "test";
 	private CombinedHomePage combinedHomePage;
@@ -39,11 +38,5 @@ public class AdministrativeSearchTest extends BaseTest {
 		}
 		boolean allResultsReleased = searchResultsPage.allResultsReleased();
 		Assert.assertFalse(allResultsReleased, "All results are released.");
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		combinedHomePage.logout();
 	}
 }

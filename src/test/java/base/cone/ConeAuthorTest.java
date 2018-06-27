@@ -14,9 +14,9 @@ import main.java.pages.tools.cone.EntityType;
 import main.java.pages.tools.cone.person.EditPersonPage;
 import main.java.pages.tools.cone.person.NewPersonPage;
 import main.java.pages.tools.cone.person.ViewPersonPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
-public class ConeAuthorTest extends BaseTest {
+public class ConeAuthorTest extends BaseLoggedInUserTest {
 
 	private String name = "Test Testerfrau";
 	private String familyName = name.split(" ")[1];
@@ -81,8 +81,6 @@ public class ConeAuthorTest extends BaseTest {
 		}
 		
 		Assert.assertTrue(itemWasDeleted, "Person was not deleted.");
-		
-		coneSearchPage.logout();
 	}
 	
 	@AfterClass

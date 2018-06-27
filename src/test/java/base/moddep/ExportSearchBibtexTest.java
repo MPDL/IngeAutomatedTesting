@@ -1,15 +1,14 @@
 package test.java.base.moddep;
 
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.SearchResultsPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
-public class ExportSearchBibtexTest extends BaseTest {
+public class ExportSearchBibtexTest extends BaseLoggedInUserTest {
 
 	private DepositorHomePage depositorHomePage;
 	
@@ -30,11 +29,5 @@ public class ExportSearchBibtexTest extends BaseTest {
 		SearchResultsPage searchResults = depositorHomePage.quickSearch(searchQuery);
 		searchResults = searchResults.goToExport();
 		searchResults.resultExportPossible("BIBTEX", null);
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

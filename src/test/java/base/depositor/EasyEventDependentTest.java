@@ -16,11 +16,12 @@ import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.ViewItemPage;
+import test.java.base.BaseLoggedInUserTest;
 import test.java.base.BaseTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
-public class EasyEventDependentTest extends BaseTest {
+public class EasyEventDependentTest extends BaseLoggedInUserTest {
   
 	private String title;
 	
@@ -115,12 +116,6 @@ public class EasyEventDependentTest extends BaseTest {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
-	}
-	
-	@AfterClass
-	public void moderatorLogout() {
-		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		moderatorHomePage.logout();
 	}
 	
 	/**

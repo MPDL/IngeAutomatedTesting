@@ -1,21 +1,19 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseTest;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
-import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
+import test.java.base.BaseLoggedInUserTest;
 
 /*
  * Assumes at least one item matching each search query is present
  */
-public class AdvancedSearchRegisteredTest extends BaseTest {
+public class AdvancedSearchRegisteredTest extends BaseLoggedInUserTest {
 	
 	private String titleQuery = "Submission";
 	private String authorQuery = "Testermann";
@@ -79,11 +77,5 @@ public class AdvancedSearchRegisteredTest extends BaseTest {
 	
 	private void testReleasedResults(SearchResultsPage searchResultsPage) {
 		Assert.assertTrue(searchResultsPage.allResultsReleased(), "An unreleased item is present in advanced search results.");
-	}
-	
-	@AfterClass
-	public void logout() {
-		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
-		combinedHomePage.logout();
 	}
 }

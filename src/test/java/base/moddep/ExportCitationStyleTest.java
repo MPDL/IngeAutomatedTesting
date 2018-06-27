@@ -1,7 +1,6 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,9 +8,9 @@ import org.testng.annotations.Test;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.SearchResultsPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
-public class ExportCitationStyleTest extends BaseTest {
+public class ExportCitationStyleTest extends BaseLoggedInUserTest {
 
 	private DepositorHomePage depositorHomePage;
 	
@@ -49,11 +48,5 @@ public class ExportCitationStyleTest extends BaseTest {
 		searchResults = searchResults.goToExport();
 		boolean exportPossible = searchResults.resultExportPossible("APA", "docx");
 		Assert.assertTrue(exportPossible, "Export is not possible: download button is disabled.");
-	}
-	
-	@AfterMethod
-	public void logout() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

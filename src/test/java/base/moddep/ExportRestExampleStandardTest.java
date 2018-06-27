@@ -9,7 +9,7 @@ import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.tools.ToolsPage;
 import main.java.pages.tools.rest.RestExamplePage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
 /**
  * TestLink Use Case #7
@@ -17,7 +17,7 @@ import test.java.base.BaseTest;
  * @author apetrova
  *
  */
-public class ExportRestExampleStandardTest extends BaseTest {
+public class ExportRestExampleStandardTest extends BaseLoggedInUserTest {
 
 	private DepositorHomePage depositorHomePage;
 	
@@ -44,8 +44,5 @@ public class ExportRestExampleStandardTest extends BaseTest {
 	@AfterClass
 	public void tearDown() {
 		backToBaseHandle();
-		
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

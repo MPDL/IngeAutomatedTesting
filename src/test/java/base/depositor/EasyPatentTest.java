@@ -13,11 +13,12 @@ import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.ViewItemPage;
+import test.java.base.BaseLoggedInUserTest;
 import test.java.base.BaseTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
-public class EasyPatentTest extends BaseTest {
+public class EasyPatentTest extends BaseLoggedInUserTest {
 
 	private String title;
 	
@@ -112,12 +113,6 @@ public class EasyPatentTest extends BaseTest {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
-	}
-	
-	@AfterClass
-	public void moderatorLogout() {
-		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		moderatorHomePage.logout();
 	}
 	
 	@AfterClass

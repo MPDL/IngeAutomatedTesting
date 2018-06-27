@@ -1,16 +1,15 @@
 package test.java.base.moddep;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseTest;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.SearchResultsPage;
+import test.java.base.BaseLoggedInUserTest;
 
-public class SimpleSearchRegisteredTest extends BaseTest {
+public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 
 	private String searchQuery = "test";
 	
@@ -57,11 +56,5 @@ public class SimpleSearchRegisteredTest extends BaseTest {
 		SearchResultsPage searchResultsPage = depositorHomePage.quickSearch(searchQuery);
 		boolean allReleased = searchResultsPage.allResultsReleased();
 		Assert.assertTrue(allReleased, "An item in search results has not been released.");
-	}
-	
-	@AfterClass
-	public void logout() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

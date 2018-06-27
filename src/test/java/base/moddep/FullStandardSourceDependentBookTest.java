@@ -3,7 +3,6 @@ package test.java.base.moddep;
 import java.util.Map;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,11 +12,11 @@ import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.search.SearchResultsPage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
-public class FullStandardSourceDependentBookTest extends BaseTest {
+public class FullStandardSourceDependentBookTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;
 	private StartPage startPage;
@@ -235,11 +234,5 @@ public class FullStandardSourceDependentBookTest extends BaseTest {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
 		viewItem = viewItem.discardItem();
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		refreshHomePage();
-		combinedHomePage.logout();
 	}
 }

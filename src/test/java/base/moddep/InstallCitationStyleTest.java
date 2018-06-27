@@ -10,9 +10,9 @@ import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.tools.citation.CitationSearchName;
 import main.java.pages.tools.citation.CitationStyleEditor;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
-public class InstallCitationStyleTest extends BaseTest {
+public class InstallCitationStyleTest extends BaseLoggedInUserTest {
 
 	private DepositorHomePage depositorHomePage;
 	private CitationStyleEditor csEditor;
@@ -42,7 +42,5 @@ public class InstallCitationStyleTest extends BaseTest {
 	@AfterClass
 	public void tearDown() {
 		backToBaseHandle();
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }

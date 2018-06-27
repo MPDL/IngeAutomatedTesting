@@ -1,6 +1,5 @@
 package test.java.base.moddep;
 
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -8,7 +7,7 @@ import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.submission.FetchSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
-import test.java.base.BaseTest;
+import test.java.base.BaseLoggedInUserTest;
 
 /**
  * TestLink UC: 12
@@ -16,7 +15,7 @@ import test.java.base.BaseTest;
  * Identifier Type: arXiv
  *
  */
-public class FetchArXivStandardTest extends BaseTest {
+public class FetchArXivStandardTest extends BaseLoggedInUserTest {
 
 	private String arXivID = "arXiv:1304.2685";
 	
@@ -43,11 +42,5 @@ public class FetchArXivStandardTest extends BaseTest {
 	public void deleteItem() {
 		viewItemPage = viewItemPage.sendBackForRework();
 		viewItemPage.deleteItem();
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		depositorHomePage.logout();
 	}
 }
