@@ -14,10 +14,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import test.java.base.Genre;
+import main.java.pages.BasePage;
 import test.java.base.GenreGroup;
 import test.java.base.TableHelper;
-import main.java.pages.BasePage;
 
 public class FullSubmissionPage extends BasePage {
 
@@ -384,6 +383,7 @@ public class FullSubmissionPage extends BasePage {
 	private void fillInLocator(TableHelper table) {
 		String locator = table.getRandomRowEntry("[locator]");
 		String contentCategoryLocator = table.getRandomRowEntry("[content category all]");
+		//TODO: use fillInLocator again. Why was it removed?
 		//fillInLocator(locator, contentCategoryLocator, "");
 	}
 	
@@ -445,6 +445,12 @@ public class FullSubmissionPage extends BasePage {
 			for (int attempts = 0; attempts < 20; attempts++) {
 				try {
 					WebElement roleDropdown = driver.findElement(By.xpath("//select[contains(@id, '" + i + ":selCreatorRoleString')]"));
+					
+					//Width of the original Select-Element is not correct, as a result Selenium clicks at the wrong position
+					//Change the width of the Select-Element to make it selectable
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+				    jse.executeScript("arguments[0].style.width = '63px';",  roleDropdown);
+					
 					Select roleSelect = new Select(roleDropdown);
 					roleSelect.selectByVisibleText(roleAll);
 					break;
@@ -692,13 +698,17 @@ public class FullSubmissionPage extends BasePage {
 		Select genreSourceSelect = new Select(sourceGenreDropdown);
 		genreSourceSelect.selectByVisibleText(genreSource);
 		sourceTitleBox.sendKeys(titleSource);
-//		System.out.println("Dropdown: " + sourceCreatorRoleDropdown + " - " );
+		
+		//Width of the original Select-Element is not correct, as a result Selenium clicks at the wrong position
+		//Change the width of the Select-Element to make it selectable
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+	    jse.executeScript("arguments[0].style.width = '63px';",  sourceCreatorRoleDropdown);
+	    
 		Select creatorRoleSelect = new Select(sourceCreatorRoleDropdown);
 		creatorRoleSelect.selectByVisibleText(roleSource);
 		sourceCreatorFamilyNameBox.sendKeys(personSource);
 		sourceCreatorOrgNameBox.sendKeys(orgSource);
 		sourceCreatorOrgAddrBox.sendKeys(orgAddrSource);
-//		System.out.println("DONE");
 	}
 	
 	private void fillInSourceDetails(String volumeSource, String numPagesSource, String publisherSource, String placeSource) {
