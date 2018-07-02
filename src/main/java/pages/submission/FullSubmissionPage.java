@@ -449,7 +449,9 @@ public class FullSubmissionPage extends BasePage {
 					//Width of the original Select-Element is not correct, as a result Selenium clicks at the wrong position
 					//Change the width of the Select-Element to make it selectable
 					JavascriptExecutor jse = (JavascriptExecutor) driver;
-				    jse.executeScript("arguments[0].style.width = '63px';",  roleDropdown);
+					WebElement roleSelectContainer = roleDropdown.findElement(By.xpath(".."));
+					int roleSelectContainerWidth = roleSelectContainer.getSize().getWidth();
+				    jse.executeScript("arguments[0].style.width = '" + roleSelectContainerWidth + "px';",  roleDropdown);
 					
 					Select roleSelect = new Select(roleDropdown);
 					roleSelect.selectByVisibleText(roleAll);
@@ -702,7 +704,9 @@ public class FullSubmissionPage extends BasePage {
 		//Width of the original Select-Element is not correct, as a result Selenium clicks at the wrong position
 		//Change the width of the Select-Element to make it selectable
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-	    jse.executeScript("arguments[0].style.width = '63px';",  sourceCreatorRoleDropdown);
+		WebElement sourceCreatorRoleSelectContainer = sourceCreatorRoleDropdown.findElement(By.xpath(".."));
+		int sourceCreatorRoleSelectContainerWidth = sourceCreatorRoleSelectContainer.getSize().getWidth();
+	    jse.executeScript("arguments[0].style.width = '" + sourceCreatorRoleSelectContainerWidth + "px';",  sourceCreatorRoleDropdown);
 	    
 		Select creatorRoleSelect = new Select(sourceCreatorRoleDropdown);
 		creatorRoleSelect.selectByVisibleText(roleSource);
