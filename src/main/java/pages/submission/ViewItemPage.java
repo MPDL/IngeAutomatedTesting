@@ -11,13 +11,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import test.java.base.ItemStatus;
 import main.java.pages.BasePage;
-import main.java.pages.submission.transition.AcceptItemPage;
 import main.java.pages.submission.transition.DiscardItemPage;
 import main.java.pages.submission.transition.FinaliseSubmissionPage;
 import main.java.pages.submission.transition.ReworkItemPage;
 import main.java.pages.submission.transition.SubmitItemPage;
+import test.java.base.ItemStatus;
 
 public class ViewItemPage extends BasePage {
 
@@ -35,9 +34,6 @@ public class ViewItemPage extends BasePage {
 	
 	@FindBy(xpath = "//a[contains(@id, ':lnkSubmit')]")
 	private WebElement submitItemLink;
-	
-	@FindBy(xpath = "//a[contains(@id, ':lnkAccept')]")
-	private WebElement acceptItemLink;
 	
 	@FindBy(xpath = "//a[contains(@id, ':lnkEdit')]")
 	private WebElement editItemLink;
@@ -122,12 +118,6 @@ public class ViewItemPage extends BasePage {
 		discardItemLink.click();
 		
 		return new DiscardItemPage(driver).discardItem();
-	}
-	
-	public ViewItemPage acceptItem() {
-		acceptItemLink.click();
-		
-		return new AcceptItemPage(driver).acceptItem();
 	}
 	
 	public ViewItemPage editItem() {

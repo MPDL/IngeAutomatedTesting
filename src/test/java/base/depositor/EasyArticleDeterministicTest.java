@@ -1,18 +1,16 @@
 package test.java.base.depositor;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseLoggedInUserTest;
-import test.java.base.BaseTest;
-import test.java.base.ItemStatus;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.ViewItemPage;
+import test.java.base.BaseLoggedInUserTest;
+import test.java.base.ItemStatus;
 
 public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 
@@ -66,7 +64,7 @@ public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 	@Test(priority = 6, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
-		viewItemPage = viewItemPage.acceptItem();
+		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}

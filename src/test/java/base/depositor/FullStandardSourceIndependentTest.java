@@ -133,7 +133,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	@Test(priority = 13, dependsOnMethods = { "submitSourceIndependent" })
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
-		viewItemPage = viewItemPage.acceptItem();
+		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
@@ -149,7 +149,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	public void moderatorReleasesSubmissionAgain() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
-		viewItemPage = viewItemPage.acceptItem();
+		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}

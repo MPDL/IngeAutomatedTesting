@@ -3,13 +3,11 @@ package test.java.base.depositor;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.log4testng.Logger;
 
 import main.java.pages.StartPage;
 import main.java.pages.homepages.DepositorHomePage;
@@ -17,7 +15,6 @@ import main.java.pages.homepages.ModeratorHomePage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.ViewItemPage;
 import test.java.base.BaseLoggedInUserTest;
-import test.java.base.BaseTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
@@ -106,7 +103,7 @@ public class EasyEventDependentTest extends BaseLoggedInUserTest {
 	@Test(priority = 7, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
 		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
-		viewItemPage = viewItemPage.acceptItem();
+		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}

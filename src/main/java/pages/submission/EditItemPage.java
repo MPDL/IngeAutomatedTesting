@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import main.java.pages.BasePage;
-import main.java.pages.submission.transition.AcceptItemPage;
-import main.java.pages.submission.transition.FinaliseSubmissionPage;
 
 public class EditItemPage extends BasePage {
 
