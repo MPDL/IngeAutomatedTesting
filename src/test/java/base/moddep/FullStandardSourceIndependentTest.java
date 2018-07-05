@@ -140,7 +140,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	@Test(priority = 11, dependsOnMethods = { "submitSourceIndependent" })
 	public void modifyReleasedTitle() {
 		refreshHomePage();
-		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(submittedTitle);
+		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(submittedTitle);
 		viewItem = viewItem.modifyTitle(releasedTitle);
 		String actualTitle = viewItem.getItemTitle();
 		
@@ -168,7 +168,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	@Test(priority = 14, dependsOnMethods = { "submitSourceIndependent" })
 	public void changeReleasedItemAuthor() {
 		refreshHomePage();
-		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(releasedTitle);
 		viewItem.modifyAuthor(author);
 	}
 	
@@ -218,7 +218,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	@Test(priority = 20, dependsOnMethods = { "submitSourceIndependent" })
 	public void discardItem() {
 		refreshHomePage();
-		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(releasedTitle);
 		viewItem = viewItem.discardItem();
 	}
 }

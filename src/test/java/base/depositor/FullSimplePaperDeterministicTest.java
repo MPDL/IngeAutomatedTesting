@@ -70,7 +70,7 @@ public class FullSimplePaperDeterministicTest extends BaseLoggedInUserTest {
 	@Test(priority = 5)
 	public void viewItem() {
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
-		ViewItemPage viewItemPage = myItemsPage.openSubmittedItemByTitle(title);
+		ViewItemPage viewItemPage = myItemsPage.openReleasedItemByTitle(title);
 		String actualTitle = viewItemPage.getItemTitle();
 		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
 	}

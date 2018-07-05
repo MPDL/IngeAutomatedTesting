@@ -154,7 +154,7 @@ public class FullStandardSourceDependentBookTest extends BaseLoggedInUserTest {
 	@Test(priority = 11, dependsOnMethods = { "submitSourceDependentBook" })
 	public void modifyReleasedTitle() {
 		refreshHomePage();
-		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(submittedTitle);
+		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(submittedTitle);
 		viewItem = viewItem.modifyTitle(releasedTitle);
 		String actualTitle = viewItem.getItemTitle();
 		
@@ -182,7 +182,7 @@ public class FullStandardSourceDependentBookTest extends BaseLoggedInUserTest {
 	@Test(priority = 14, dependsOnMethods = { "submitSourceDependentBook" })
 	public void changeReleasedItemAuthor() {
 		refreshHomePage();
-		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(releasedTitle);
 		viewItem.modifyAuthor(author);
 	}
 	
@@ -232,7 +232,7 @@ public class FullStandardSourceDependentBookTest extends BaseLoggedInUserTest {
 	@Test(priority = 20, dependsOnMethods = { "submitSourceDependentBook" })
 	public void discardItem() {
 		refreshHomePage();
-		ViewItemPage viewItem = combinedHomePage.openSubmittedItemByTitle(releasedTitle);
+		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(releasedTitle);
 		viewItem = viewItem.discardItem();
 	}
 }

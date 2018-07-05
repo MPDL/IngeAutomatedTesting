@@ -65,7 +65,7 @@ public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 6, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -74,7 +74,7 @@ public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 	@Test(priority = 7, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
 		try {
           Thread.sleep(250);
         } catch (InterruptedException e) {

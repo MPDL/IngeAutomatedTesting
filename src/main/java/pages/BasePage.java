@@ -80,13 +80,33 @@ public abstract class BasePage {
 		return searchComponent.goToAdvancedSearchPage();
 	}
 	
-	public ViewItemPage openSubmittedItemByTitle(String itemTitle) {
+	/**
+	 * Opens the ViewItemPage of the item. <p>
+	 * 
+	 * Use the Search-Component to search for an exact match of the item title. <br>
+	 * Only released items can be opened this way. <p>
+	 * 
+	 * Opens the first search result item.
+	 * If more than one result is returned, the viewItemPage of the first result is opened and an warn message is printed.
+	 * 
+	 * @param itemTitle The title to search for.
+	 * @return The viewItemPage of the item.
+	 */
+	public ViewItemPage openReleasedItemByTitle(String itemTitle) {
+		//Use quotes to search for an exact match
+		itemTitle = "\"" + itemTitle + "\"";
+		
 		SearchResultsPage searchResultsPage = searchComponent.quickSearch(itemTitle);
 		try {
 	      Thread.sleep(250);
 	    } catch (InterruptedException e) {
 	      e.printStackTrace();
 	    }
+		
+		if(searchResultsPage.getResultCount() > 1) {
+			log4j.warn("More than one item with " + itemTitle + " found.");
+		}
+		
 		ViewItemPage viewItemPage = searchResultsPage.openFirstResult();
 		return viewItemPage;
 	}

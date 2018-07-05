@@ -105,7 +105,7 @@ public class EasyEventDependentTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 7, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.acceptItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -114,7 +114,7 @@ public class EasyEventDependentTest extends BaseLoggedInUserTest {
 	@Test(priority = 8, dependsOnMethods = { "easySubmissionStandardWorkflow" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 	}
 	

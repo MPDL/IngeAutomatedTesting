@@ -75,7 +75,7 @@ public class FullStandardBookDeterministicTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 6, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorSendsBackSubmission() {
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.editItem();
 		viewItemPage = viewItemPage.sendBackForRework();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
@@ -116,7 +116,7 @@ public class FullStandardBookDeterministicTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 12, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmission() {
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -125,14 +125,14 @@ public class FullStandardBookDeterministicTest extends BaseLoggedInUserTest {
 	@Test(priority = 13, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorModifiesRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.modifyItem();
 	}
 	
 	@Test(priority = 14, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorReleasesSubmissionAgain() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
@@ -141,7 +141,7 @@ public class FullStandardBookDeterministicTest extends BaseLoggedInUserTest {
 	@Test(priority = 15, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");

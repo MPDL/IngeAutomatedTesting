@@ -115,7 +115,7 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 	@Test(priority = 6, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
 	public void viewItem() {
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
-		viewItemPage = myItemsPage.openSubmittedItemByTitle(title);
+		viewItemPage = myItemsPage.openReleasedItemByTitle(title);
 		String actualTitle = viewItemPage.getItemTitle();
 		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
 	}
