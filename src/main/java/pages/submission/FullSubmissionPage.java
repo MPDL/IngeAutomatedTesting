@@ -270,7 +270,7 @@ public class FullSubmissionPage extends BasePage {
 	
 	private void fillInCommon(GenreGroup genreGroup, TableHelper table) {
 		fillInBasics(genreGroup, table);
-//		uploadFile(table);
+		uploadFile(table);
 		fillInLocator(table);
 		fillInAuthors(table);
 		fillInContent(table);
@@ -336,7 +336,6 @@ public class FullSubmissionPage extends BasePage {
 		WebElement licenseBox = driver.findElement(By.id("form1:fileUploads:0:inpLicenseUrl"));
 		licenseBox.sendKeys(licenseURL);
 		
-		/* uploading a file from URL currently leads to an internal server error, TODO: correct
 		WebElement fileURLBox = driver.findElement(By.id("form1:inpAddFileFromUrl"));
 		fileURLBox.sendKeys(fileURL);
 		WebElement uploadFileURL = driver.findElement(By.id("form1:btnUploadFileFromUrl"));
@@ -344,7 +343,7 @@ public class FullSubmissionPage extends BasePage {
 		
 		contentCategoryDropdown = driver.findElement(By.id("form1:fileUploads:1:selFileContentCategory"));
 		contentCategorySelect = new Select(contentCategoryDropdown);
-		contentCategorySelect.selectByVisibleText(contentCategory);*/
+		contentCategorySelect.selectByVisibleText(contentCategory);
 	}
 	
 	private void uploadFile(String filepath, int i) {

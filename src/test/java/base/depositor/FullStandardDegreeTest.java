@@ -66,7 +66,7 @@ public class FullStandardDegreeTest extends BaseLoggedInUserTest {
 		Assert.assertEquals(viewItemPage.getLabel("License"), values.get("[license URL]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Free keywords"), values.get("[free keywords]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Abstract"), values.get("[abstract]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Pages"), values.get("[Total no of pages source]").trim());
+		Assert.assertEquals(viewItemPage.getLabel("Pages"), values.get("[total no of pages]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Degree"), values.get("[degree type]"));
 		Assert.assertEquals(viewItemPage.getLabel("Project name"), values.get("[Project name]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + 
@@ -76,9 +76,10 @@ public class FullStandardDegreeTest extends BaseLoggedInUserTest {
 		Assert.assertEquals(viewItemPage.getLabel("Title"), values.get("[title source]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Source Genre"), values.get("[genre source]"));
 		Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + 
-																	values.get("[Publisher source]").trim());
+																	values.get("[Publisher source]").trim() + ", " +
+																	values.get("[Edition]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Volume / Issue"), values.get("[Volume source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
+		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + ": " + 
 																	values.get("[identifier source value]").trim());
 	}
 	
