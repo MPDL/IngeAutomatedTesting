@@ -78,34 +78,7 @@ public class EditItemPage extends BasePage {
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
-	
-	public ViewItemPage modifyItem() {
-		editDescription(" (modified by moderator)");
-		saveButton.click();
 		
-		//return new AcceptItemPage(driver).acceptItem();
-		return PageFactory.initElements(driver, ViewItemPage.class);
-	}
-	
-	public ViewItemPage modifyTitle(String newTitle) {
-		titleBox.clear();
-		titleBox.sendKeys(newTitle);
-		saveButton.click();
-		
-		//return new FinaliseSubmissionPage(driver).releaseSubmission();
-		return PageFactory.initElements(driver, ViewItemPage.class);
-	}
-	
-	public ViewItemPage modifyAuthor(String newAuthor) {
-		personFamilyNameBox.clear();
-		personFamilyNameBox.sendKeys(newAuthor);
-		driver.findElement(By.cssSelector(".ac_results>li")).click();
-		saveButton.click();
-		
-		//return new FinaliseSubmissionPage(driver).releaseSubmission();
-		return PageFactory.initElements(driver, ViewItemPage.class);
-	}
-	
 	private void editDescription(String descriptionEdit) {
 		descriptionBox.sendKeys(descriptionEdit);
 	}

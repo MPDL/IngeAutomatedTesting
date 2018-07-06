@@ -135,10 +135,10 @@ public class StandardSubmitJournalArticleTest extends BaseLoggedInUserTest {
 	}
 	
 	@Test(priority = 10, dependsOnMethods = { "submitJournalArticle" })
-	public void modifyReleasedTitle() {
+	public void editReleasedTitle() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(submittedTitle);
-		viewItem = viewItem.modifyTitle(releasedTitle);
+		viewItem = viewItem.editTitle(releasedTitle);
 		String actualTitle = viewItem.getItemTitle();
 		
 		Assert.assertEquals(actualTitle, releasedTitle, "Title was not changed.");
@@ -166,7 +166,7 @@ public class StandardSubmitJournalArticleTest extends BaseLoggedInUserTest {
 	public void changeReleasedItemAuthor() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(releasedTitle);
-		viewItem.modifyAuthor(author);
+		viewItem.editAuthor(author);
 	}
 	
 	@Test(priority = 14, dependsOnMethods = { "submitJournalArticle" })
@@ -193,7 +193,7 @@ public class StandardSubmitJournalArticleTest extends BaseLoggedInUserTest {
 	public void addAuthorReleased() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
-		viewItem = viewItem.modifyAddAuthor(thirdAuthor);
+		viewItem = viewItem.addAuthor(thirdAuthor);
 	}
 	
 	@Test(priority = 17, dependsOnMethods = { "submitJournalArticle" })

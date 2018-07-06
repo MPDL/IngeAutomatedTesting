@@ -41,9 +41,6 @@ public class ViewItemPage extends BasePage {
 	@FindBy(xpath = "//a[contains(@id, ':lnkRevise')]")
 	private WebElement reviseItemLink;
 	
-	@FindBy(xpath = "//a[contains(@id, ':lnkModify')]")
-	private WebElement modifyItemLink;
-	
 	@FindBy(xpath = "//a[contains(@id, ':lnkDelete')]")
 	private WebElement deleteItemLink;
 	
@@ -148,30 +145,6 @@ public class ViewItemPage extends BasePage {
 		reviseItemLink.click();
 		
 		return new ReworkItemPage(driver).sendBackForRework();
-	}
-	
-	public ViewItemPage modifyItem() {
-		modifyItemLink.click();
-		
-		return new EditItemPage(driver).modifyItem();
-	}
-	
-	public ViewItemPage modifyTitle(String newTitle) {
-		modifyItemLink.click();
-		
-		return new EditItemPage(driver).modifyTitle(newTitle);
-	}
-	
-	public ViewItemPage modifyAuthor(String newAuthor) {
-		modifyItemLink.click();
-		
-		return new EditItemPage(driver).modifyAuthor(newAuthor);
-	}
-	
-	public ViewItemPage modifyAddAuthor(String newAuthor) {
-		modifyItemLink.click();
-		
-		return new EditItemPage(driver).addAuthor(newAuthor);
 	}
 	
 	/**

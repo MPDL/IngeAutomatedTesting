@@ -138,10 +138,10 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	}
 	
 	@Test(priority = 11, dependsOnMethods = { "submitSourceIndependent" })
-	public void modifyReleasedTitle() {
+	public void editReleasedTitle() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(submittedTitle);
-		viewItem = viewItem.modifyTitle(releasedTitle);
+		viewItem = viewItem.editTitle(releasedTitle);
 		String actualTitle = viewItem.getItemTitle();
 		
 		Assert.assertEquals(actualTitle, releasedTitle, "Title was not changed.");
@@ -169,7 +169,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	public void changeReleasedItemAuthor() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(releasedTitle);
-		viewItem.modifyAuthor(author);
+		viewItem.editAuthor(author);
 	}
 	
 	@Test(priority = 15, dependsOnMethods = { "submitSourceIndependent" })
@@ -196,7 +196,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	public void addAuthorReleased() {
 		refreshHomePage();
 		ViewItemPage viewItem = combinedHomePage.goToMyItemsPage().openItemByTitle(releasedTitle);
-		viewItem = viewItem.modifyAddAuthor(thirdAuthor);
+		viewItem = viewItem.addAuthor(thirdAuthor);
 	}
 	
 	@Test(priority = 18, dependsOnMethods = { "submitSourceIndependent" })

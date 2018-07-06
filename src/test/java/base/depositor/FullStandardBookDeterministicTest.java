@@ -123,10 +123,10 @@ public class FullStandardBookDeterministicTest extends BaseLoggedInUserTest {
 	}
 	
 	@Test(priority = 13, dependsOnMethods = { "fullSubmissionStandardWorkflow" })
-	public void moderatorModifiesRelease() {
+	public void moderatorEditsRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
-		viewItemPage = viewItemPage.modifyItem();
+		viewItemPage = viewItemPage.editItem();
 	}
 	
 	@Test(priority = 14, dependsOnMethods = { "fullSubmissionStandardWorkflow" })

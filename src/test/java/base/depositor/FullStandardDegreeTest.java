@@ -152,10 +152,10 @@ public class FullStandardDegreeTest extends BaseLoggedInUserTest {
 	}
 	
 	@Test(priority = 14, dependsOnMethods = { "submitDegree" })
-	public void moderatorModifiesRelease() {
+	public void moderatorEditsRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
-		viewItemPage = viewItemPage.modifyItem();
+		viewItemPage = viewItemPage.editItem();
 	}
 	
 	@Test(priority = 15, dependsOnMethods = { "submitDegree" })
