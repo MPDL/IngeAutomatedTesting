@@ -7,10 +7,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -60,7 +61,7 @@ public class TableHelper {
 			int rowCount = dataTable.getLastRowNum();
 			for (int i = 0; i < rowCount; i++) {
 				Row currentRow = dataTable.getRow(i);
-				String rowHeader = currentRow.getCell(0).getStringCellValue();
+				String rowHeader = this.getCellValue(currentRow.getCell(0));
 				if (rowHeader != "") {
 					headerMap.put(rowHeader, i);
 				}
@@ -81,7 +82,7 @@ public class TableHelper {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		while ((result == null || ("").equals(result) || ("").equals(result.trim())) && attempts < 50) {
 			int i = random.nextInt(1, cellCount);
-			result = row.getCell(i).getStringCellValue();
+			result = this.getCellValue(row.getCell(i));
 			attempts++;
 		}
 		log4j.debug("Category: " + category + " - entry: " + result);
@@ -89,6 +90,36 @@ public class TableHelper {
 			randomValueMap.put(category, result);
 		}
 		return result;
+	}
+	
+	private String getCellValue(Cell cell) {
+		String cellValue;
+		
+		if(cell != null) {
+			CellType cellType = cell.getCellTypeEnum();
+			String cellAdress = cell.getAddress().formatAsString();
+			
+			switch(cellType) {
+			case STRING:
+				cellValue = cell.getStringCellValue();
+				break;
+			case NUMERIC:
+				cellValue = String.valueOf(cell.getNumericCellValue());
+				break;
+			case BOOLEAN:
+				cellValue = String.valueOf(cell.getBooleanCellValue());
+				break;
+			case BLANK:
+				cellValue = "";
+				break;
+			default:
+				throw new IllegalArgumentException("The cell-type '" + cellType + "' of the cell (" + cellAdress + ") is not supported.");
+			}
+		}else {
+			throw new NullPointerException("No cell to get the value from.");
+		}		
+		
+		return cellValue;
 	}
 	
 	public Map<String, String> getMap() {
