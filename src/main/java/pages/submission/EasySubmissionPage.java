@@ -11,9 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import main.java.pages.BasePage;
 import test.java.base.GenreGroup;
 import test.java.base.TableHelper;
-import main.java.pages.BasePage;
 
 /** 
  *  Page with a dynamic three-step completion process
@@ -115,6 +115,8 @@ public class EasySubmissionPage extends BasePage {
 		// switch to full submission mode
 		WebElement fullSubmissionButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep3Manual:lnkAddDetails"));
 		fullSubmissionButton.click();
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("form1:lnkSave")));
 		WebElement saveButton = driver.findElement(By.id("form1:lnkSave"));
 		saveButton.click();
 		
