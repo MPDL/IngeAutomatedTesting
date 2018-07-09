@@ -78,7 +78,7 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 																	values.get("[identifier source value]").trim());
 	}
 	
-	/*@Test(priority = 4, dependsOnMethods = { "submitEvent" })
+	@Test(priority = 4, dependsOnMethods = { "submitEvent" })
 	public void depositorSubmitsItem() {
 		viewItemPage = viewItemPage.submitItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
@@ -99,7 +99,7 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 7, dependsOnMethods = { "submitEvent" })
 	public void moderatorSendsBackSubmission() {
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.editItem();
 		viewItemPage = viewItemPage.sendBackForRework();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
@@ -140,8 +140,8 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 13, dependsOnMethods = { "submitEvent" })
 	public void moderatorReleasesSubmission() {
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
-		viewItemPage = viewItemPage.acceptItem();
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
+		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
@@ -149,15 +149,15 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 	@Test(priority = 14, dependsOnMethods = { "submitEvent" })
 	public void moderatorModifiesRelease() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
-		viewItemPage = viewItemPage.modifyItem();
+		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
+		viewItemPage = viewItemPage.editItem();
 	}
 	
 	@Test(priority = 15, dependsOnMethods = { "submitEvent" })
 	public void moderatorReleasesSubmissionAgain() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openSubmittedItemByTitle(title);
-		viewItemPage = viewItemPage.acceptItem();
+		viewItemPage = moderatorHomePage.goToQAWorkspacePage().openReleasedItemByTitle(title);
+		viewItemPage = viewItemPage.releaseItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
@@ -165,11 +165,11 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 	@Test(priority = 16, dependsOnMethods = { "submitEvent" })
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
-		viewItemPage = moderatorHomePage.openSubmittedItemByTitle(title);
+		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
 		viewItemPage = viewItemPage.discardItem();
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.DISCARDED, "Item was not discarded.");
-	}*/
+	}
 	
 	@AfterClass
 	public void saveDataAfterFailure(ITestContext context) {
