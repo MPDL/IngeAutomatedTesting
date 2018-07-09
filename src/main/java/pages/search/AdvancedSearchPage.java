@@ -42,14 +42,20 @@ public class AdvancedSearchPage extends BasePage {
 	}
 	
 	private void fillInTitle(String title) {
-		titleTextBox.sendKeys(title);
+		if(title != null) {
+			titleTextBox.sendKeys(title);
+		}		
 	}
 	
 	private void fillInAuthor(String author) {
-		personTextBox.sendKeys(author);
+		if(author != null) {
+			personTextBox.sendKeys(author);	
+		}		
 	}
 	
 	private void fillInOrganisation(String organisation) {
-		organisationTextBox.sendKeys(organisation);
+		if(organisation != null) {
+			organisationTextBox.sendKeys(organisation);
+		}		
 	}
 }
