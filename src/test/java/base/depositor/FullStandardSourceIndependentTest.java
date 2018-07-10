@@ -55,7 +55,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 		title = values.get("[title]");
 		
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
-		compare("Genre", "SOURCE_INDEPENDENT");
+		compare("Genre", "SOURCE_INDEP");
 		compare("Name", "[upload file]");
 		compare("Description", "[description file]");
 		compare("Visibility", "[Visibility]");

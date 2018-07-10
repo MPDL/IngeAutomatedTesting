@@ -63,7 +63,7 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 		Assert.assertEquals(viewItemPage.getLabel("License"), values.get("[license URL]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Free keywords"), values.get("[free keywords]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Abstract"), values.get("[abstract]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Pages"), values.get("[Total no of pages source]").trim());
+		Assert.assertEquals(viewItemPage.getLabel("Pages"), values.get("[total no of pages]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + 
 																	values.get("[identifier value]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Project name"), values.get("[Project name]").trim());

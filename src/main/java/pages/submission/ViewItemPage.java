@@ -64,6 +64,7 @@ public class ViewItemPage extends BasePage {
 			String value = values.get(i).getText().trim();
 			if ( !labelMap.containsKey(label))
 			{
+				//TODO: Handle equal labels (e.g. Details and Source Pages) appropriate
 			  labelMap.put(label, value);
 			}
 		}
