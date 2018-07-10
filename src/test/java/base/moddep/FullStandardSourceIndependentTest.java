@@ -2,7 +2,6 @@ package test.java.base.moddep;
 
 import java.util.Map;
 
-import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -21,6 +20,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;
 	private StartPage startPage;
+	ViewItemPage viewItem;
 	
 	private String title;
 	private String submittedTitle = "Submitted title " + getTimeStamp();
@@ -31,6 +31,7 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	private String thirdAuthor = "Author TheThird";
 	
 	private TableHelper table = new TableHelper();
+	private Map<String, String> values;
 	
 	@BeforeClass
 	public void setup() {
@@ -50,17 +51,32 @@ public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 	public void submitSourceIndependent() {
 		loginCombined();
 		FullSubmissionPage fullSubmission = combinedHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
-		ViewItemPage viewItem = fullSubmission.fullSubmissionSrcIndep(table);
+		viewItem = fullSubmission.fullSubmissionSrcIndep(table);
 		ItemStatus itemStatus = viewItem.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
 	
 	@Test(priority = 2, dependsOnMethods = { "submitSourceIndependent" })
 	public void checkDataCorrectness() {
-		Map<String, String> values = table.getMap();
+		values = table.getMap();
 		title = values.get("[title]");
 		author = values.get("[Person]");
-		throw new NotImplementedException("");
+		
+		//TODO: Check all appropriate labels
+		Assert.assertEquals(viewItem.getItemTitle(), title.trim());
+		compare("Genre", "SOURCE_INDEP");
+		compare("Name", "[upload file]");
+		compare("Description", "[description file]");
+		compare("Visibility", "[Visibility]");
+		compare("Copyright Date", "[Copyright Date]");
+		compare("Copyright Info", "[Copyright statement]");
+		compare("License", "[license URL]");
+		compare("Free keywords", "[free keywords]");
+		compare("Abstract", "[abstract]");
+	}
+	
+	private void compare(String label, String expected) {
+		Assert.assertEquals(viewItem.getLabel(label), values.get(expected).trim());
 	}
 	
 	@Test(priority = 3, dependsOnMethods = { "submitSourceIndependent" })

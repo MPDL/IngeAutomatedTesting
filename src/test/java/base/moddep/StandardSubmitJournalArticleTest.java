@@ -127,7 +127,8 @@ public class StandardSubmitJournalArticleTest extends BaseLoggedInUserTest {
 	public void searchReleasedItem() {
 		refreshHomePage();
 		startPage = combinedHomePage.logout();
-		SearchResultsPage searchResults = startPage.quickSearch(submittedTitle);
+		String exactSubmittedTitleSearchTerm = "\"" + submittedTitle + "\"";
+		SearchResultsPage searchResults = startPage.quickSearch(exactSubmittedTitleSearchTerm);
 		
 		int resultCount = searchResults.getResultCount();
 		loginCombined();
@@ -155,7 +156,8 @@ public class StandardSubmitJournalArticleTest extends BaseLoggedInUserTest {
 	public void searchReleasedItemNewTitle() {
 		refreshHomePage();
 		startPage = combinedHomePage.logout();
-		SearchResultsPage searchResults = startPage.quickSearch(releasedTitle);
+		String exactReleasedTitleSearchTerm = "\"" + releasedTitle + "\"";
+		SearchResultsPage searchResults = startPage.quickSearch(exactReleasedTitleSearchTerm);
 		
 		int resultCount = searchResults.getResultCount();
 		loginCombined();
