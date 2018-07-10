@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import main.java.pages.BasePage;
 
@@ -66,14 +67,27 @@ public class EditItemPage extends BasePage {
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
-	// TODO the only method as of now to locate unambiguously is through the dynamic IDs: change this
-	public ViewItemPage addAuthor(String additionalAuthor) {
-		int authorCount = authors.findElements(By.xpath("//input[contains(@id, 'form1:j_idt510') and contains(@id, 'inpcreator_persons_person_family_name_optional')]")).size();
-		WebElement addSecondAuthor = authors.findElement(By.id("form1:j_idt510:" + (authorCount - 1) + ":btnAddCreator"));
-		addSecondAuthor.click();
-		WebElement secondFamilyNameBox = driver.findElement(By.id("form1:j_idt510:" + authorCount + ":inpcreator_persons_person_family_name_optional"));
-		secondFamilyNameBox.sendKeys(additionalAuthor);
-		driver.findElement(By.cssSelector(".ac_results>li")).click();
+	/**
+	 * Add another author at the end of the author list, by clicking the bottommost add-author-button. <br>
+	 * Only the Family name is added to the next author.
+	 * 
+	 * @param nextAuthorFamilyName familyName of the author to add
+	 * @return the ViewItemPage
+	 */
+	public ViewItemPage addAuthor(String nextAuthorFamilyName) {		
+		int creatorCount = authors.findElements(By.xpath(".//select[contains(@id, 'selCreatorRoleString')]")).size();
+		
+		WebElement addNextAuthor = authors.findElement(By.xpath(".//input[@id='form1:j_idt512:" + (creatorCount-1) + ":btnAddCreator']"));
+		wait.until(ExpectedConditions.elementToBeClickable(addNextAuthor));
+		addNextAuthor.click();
+		
+		String nextFamilyNameBoxXPath = "//input[@id='form1:j_idt512:" + creatorCount + ":inpcreator_persons_person_family_name_optional']";
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(nextFamilyNameBoxXPath)));
+		WebElement nextFamilyNameBox = authors.findElement(By.xpath("." + nextFamilyNameBoxXPath));
+		nextFamilyNameBox.sendKeys(nextAuthorFamilyName);
+		
+		//If the first option of the suggestion-menu should be selected, use the following code:
+		//driver.findElement(By.cssSelector(".ac_results>li")).click();
 		saveButton.click();
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
