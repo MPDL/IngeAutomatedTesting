@@ -74,7 +74,7 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 		Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + 
 																	values.get("[Publisher source]").trim());
 		Assert.assertEquals(viewItemPage.getLabel("Volume / Issue"), values.get("[Volume source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
+		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + ": " + 
 																	values.get("[identifier source value]").trim());
 	}
 	
