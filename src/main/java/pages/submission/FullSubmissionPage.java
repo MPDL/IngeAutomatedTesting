@@ -434,6 +434,10 @@ public class FullSubmissionPage extends BasePage {
 		parseAuthorsBox.sendKeys(multipleAuthors);
 		WebElement addAuthorsLink = driver.findElement(By.id("form1:btnAddAuthors"));
 		addAuthorsLink.click();
+		
+		//TODO: Handle wait for the Throbber/Pageload correctly and in a generic way.
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("smallThrobber")));
+		
 		PageFactory.initElements(driver, this);
 		
 		// set all authors to given role. iterating over a WebElement list and
