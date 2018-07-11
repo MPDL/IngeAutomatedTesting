@@ -259,6 +259,8 @@ public class FullSubmissionPage extends BasePage {
 		return save();
 	}
 	
+	//TODO: Add full standard Submission for: GenreGroup.EVENT_DEPENDENT, GenreGroup.LEGAL
+	
 	public ViewItemPage fullSubmissionDegree(TableHelper table) {
 		fillInCommon(GenreGroup.DEGREE, table);
 		String degreeType = table.getRandomRowEntry("[degree type]");
@@ -270,17 +272,19 @@ public class FullSubmissionPage extends BasePage {
 	}
 	
 	private void fillInCommon(GenreGroup genreGroup, TableHelper table) {
-		fillInBasics(genreGroup, table);
+		String genre = table.getRandomRowEntry(genreGroup.toString());		
+		fillInBasics(genre, table);
 		uploadFile(table);
 		fillInLocator(table);
 		fillInAuthors(table);
 		fillInContent(table);
 		fillInDetails(table);
+		if (genre.equals("Conference Paper"))
+			fillInEvent(table);
 		fillInProject(table);
 	}
 	
-	private void fillInBasics(GenreGroup genreGroup, TableHelper table) {
-		String genre = table.getRandomRowEntry(genreGroup.toString());
+	private void fillInBasics(String genre, TableHelper table) {		
 		String title = table.getRandomRowEntry("[title]");
 		fillInBasics(genre, title);
 	}
@@ -383,8 +387,7 @@ public class FullSubmissionPage extends BasePage {
 	private void fillInLocator(TableHelper table) {
 		String locator = table.getRandomRowEntry("[locator]");
 		String contentCategoryLocator = table.getRandomRowEntry("[content category all]");
-		//TODO: use fillInLocator again. Why was it removed?
-		//fillInLocator(locator, contentCategoryLocator, "");
+		fillInLocator(locator, contentCategoryLocator, "");
 	}
 	
 	private void fillInLocator() {
@@ -399,9 +402,6 @@ public class FullSubmissionPage extends BasePage {
 		locatorDescription.sendKeys("A sample locator.");
 	}
 	
-	/**
-	 * Leads to a "mimetype missing" bug.
-	 */
 	private void fillInLocator(String locator, String contentCategoryLocator, String locatorDescription) {
 		WebElement locatorBox = driver.findElement(By.id("form1:locatorUploads:0:inpAddUrl"));
 		locatorBox.sendKeys(locator);
