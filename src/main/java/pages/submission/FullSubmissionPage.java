@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -424,7 +425,9 @@ public class FullSubmissionPage extends BasePage {
 	
 	private void fillInAuthors(String roleAll, String familyName, String multipleAuthors, String organisation, String orgAddress) {
 		personFamilyNameBox.sendKeys(familyName);
+		personFamilyNameBox.sendKeys(Keys.ESCAPE);
 		orgNameBox.sendKeys(organisation);
+		orgNameBox.sendKeys(Keys.ESCAPE);
 		orgAddrBox.sendKeys(orgAddress);
 		orgNrBox.sendKeys("1");
 		
@@ -467,8 +470,10 @@ public class FullSubmissionPage extends BasePage {
 
 	private void fillInPersonInfo(String author) {
 		personFamilyNameBox.sendKeys(author);
+		personFamilyNameBox.sendKeys(Keys.ESCAPE);
 		orgNrBox.sendKeys("1");
 		orgNameBox.sendKeys("MPI for Social Anthropology, Max Planck Society");
+		orgNameBox.sendKeys(Keys.ESCAPE);
 	}
 	
 	private void fillInContent(TableHelper table) {
@@ -496,6 +501,7 @@ public class FullSubmissionPage extends BasePage {
 		Select classificationSelect = new Select(classificationDropdown);
 		classificationSelect.selectByVisibleText(classificationType);
 		classificationValueBox.sendKeys(classificationValue);
+		classificationValueBox.sendKeys(Keys.ESCAPE);
 		abstractBox.sendKeys(abstractText);
 		Select abstractLanguageSelect = new Select(abstractLanguageBox);
 		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
@@ -533,6 +539,7 @@ public class FullSubmissionPage extends BasePage {
 	
 	private void fillInPublication(String publicationLanguage, String pageNumber, String identifierType, String identifierValue) {
 		publicationLanguageBox.sendKeys(publicationLanguage);
+		publicationLanguageBox.sendKeys(Keys.ESCAPE);
 		pageNumberBox.sendKeys(pageNumber);
 		Select identifierSelect = new Select(identifierDropdown);
 		identifierSelect.selectByVisibleText(identifierType);
@@ -582,6 +589,7 @@ public class FullSubmissionPage extends BasePage {
 		projectNameBox.sendKeys(projectName);
 		grantIDBox.sendKeys(grantID);
 		fundingProgramBox.sendKeys(fundingProgram);
+		fundingProgramBox.sendKeys(Keys.ESCAPE);
 	}
 	
 	private void fillInProjectInfo() {
@@ -714,7 +722,9 @@ public class FullSubmissionPage extends BasePage {
 		Select creatorRoleSelect = new Select(sourceCreatorRoleDropdown);
 		creatorRoleSelect.selectByVisibleText(roleSource);
 		sourceCreatorFamilyNameBox.sendKeys(personSource);
+		sourceCreatorFamilyNameBox.sendKeys(Keys.ESCAPE);
 		sourceCreatorOrgNameBox.sendKeys(orgSource);
+		sourceCreatorOrgNameBox.sendKeys(Keys.ESCAPE);
 		sourceCreatorOrgAddrBox.sendKeys(orgAddrSource);
 	}
 	

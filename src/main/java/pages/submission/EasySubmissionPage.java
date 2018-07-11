@@ -4,6 +4,7 @@ import java.util.Map.Entry;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -247,6 +248,7 @@ public class EasySubmissionPage extends BasePage {
 	private void fillInAuthors(String roleAll, String familyName, String multipleAuthors, String organisation, String orgAddress) {
 		WebElement authorFamilyName = driver.findElement(By.xpath("//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]"));
 		authorFamilyName.sendKeys(familyName);
+		authorFamilyName.sendKeys(Keys.ESCAPE);
 //		WebElement roleDropdown = driver.findElement(By.xpath("//select[contains(@id, '0:selCreatorRoleString')]"));
 //		Select roleSelect = new Select(roleDropdown);
 //		roleSelect.selectByVisibleText(roleAll);
@@ -261,6 +263,7 @@ public class EasySubmissionPage extends BasePage {
 		
 		WebElement organisationNameBox = driver.findElement(By.xpath("//textarea[contains(@id, 'inporganizations_organization_name')]"));
 		organisationNameBox.sendKeys(organisation);
+		organisationNameBox.sendKeys(Keys.ESCAPE);
 		WebElement orgAddressBox = driver.findElement(By.xpath("//textarea[contains(@id, 'inporganizations_organization_address')]"));
 		orgAddressBox.sendKeys(orgAddress);
 		WebElement personOrgNrBox = driver.findElement(By.xpath("//input[contains(@id, 'inppersons_person_ous_optional')]"));
