@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import main.java.pages.BasePage;
 import test.java.base.GenreGroup;
+import test.java.base.SeleniumWrapper;
 import test.java.base.TableHelper;
 
 public class FullSubmissionPage extends BasePage {
@@ -272,7 +272,7 @@ public class FullSubmissionPage extends BasePage {
 	}
 	
 	private void fillInCommon(GenreGroup genreGroup, TableHelper table) {
-		String genre = table.getRandomRowEntry(genreGroup.toString());		
+		String genre = table.getRandomRowEntry(genreGroup.toString());
 		fillInBasics(genre, table);
 		uploadFile(table);
 		fillInLocator(table);
@@ -425,9 +425,9 @@ public class FullSubmissionPage extends BasePage {
 	
 	private void fillInAuthors(String roleAll, String familyName, String multipleAuthors, String organisation, String orgAddress) {
 		personFamilyNameBox.sendKeys(familyName);
-		personFamilyNameBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		orgNameBox.sendKeys(organisation);
-		orgNameBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		orgAddrBox.sendKeys(orgAddress);
 		orgNrBox.sendKeys("1");
 		
@@ -470,10 +470,10 @@ public class FullSubmissionPage extends BasePage {
 
 	private void fillInPersonInfo(String author) {
 		personFamilyNameBox.sendKeys(author);
-		personFamilyNameBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		orgNrBox.sendKeys("1");
 		orgNameBox.sendKeys("MPI for Social Anthropology, Max Planck Society");
-		orgNameBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 	}
 	
 	private void fillInContent(TableHelper table) {
@@ -501,7 +501,7 @@ public class FullSubmissionPage extends BasePage {
 		Select classificationSelect = new Select(classificationDropdown);
 		classificationSelect.selectByVisibleText(classificationType);
 		classificationValueBox.sendKeys(classificationValue);
-		classificationValueBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		abstractBox.sendKeys(abstractText);
 		Select abstractLanguageSelect = new Select(abstractLanguageBox);
 		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
@@ -539,7 +539,7 @@ public class FullSubmissionPage extends BasePage {
 	
 	private void fillInPublication(String publicationLanguage, String pageNumber, String identifierType, String identifierValue) {
 		publicationLanguageBox.sendKeys(publicationLanguage);
-		publicationLanguageBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		pageNumberBox.sendKeys(pageNumber);
 		Select identifierSelect = new Select(identifierDropdown);
 		identifierSelect.selectByVisibleText(identifierType);
@@ -589,7 +589,7 @@ public class FullSubmissionPage extends BasePage {
 		projectNameBox.sendKeys(projectName);
 		grantIDBox.sendKeys(grantID);
 		fundingProgramBox.sendKeys(fundingProgram);
-		fundingProgramBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 	}
 	
 	private void fillInProjectInfo() {
@@ -722,9 +722,9 @@ public class FullSubmissionPage extends BasePage {
 		Select creatorRoleSelect = new Select(sourceCreatorRoleDropdown);
 		creatorRoleSelect.selectByVisibleText(roleSource);
 		sourceCreatorFamilyNameBox.sendKeys(personSource);
-		sourceCreatorFamilyNameBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		sourceCreatorOrgNameBox.sendKeys(orgSource);
-		sourceCreatorOrgNameBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		sourceCreatorOrgAddrBox.sendKeys(orgAddrSource);
 	}
 	
@@ -782,4 +782,18 @@ public class FullSubmissionPage extends BasePage {
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
+	
+	private void hideAllSuggestions() {
+		//Note: Suggestions can NOT be identified clearly (no id).
+		//Workaround: Hide all suggestions currently in the DOM.
+		//Problem: 1) ALL suggestions must be hidden.
+		//Problem: 2) Suggestion can NOT be used/clicked until their visibility is set to visible.
+		//Problem: 3) Wait for the visibility of the suggestion can not be used, because it would lead to a race condition.
+		
+		List<WebElement> suggestions = driver.findElements(By.xpath("//ul[@class='ac_results']"));
+		for (WebElement suggestion : suggestions) {
+			SeleniumWrapper.hideWebElement(driver, suggestion);			
+		}
+	}
+	
 }
