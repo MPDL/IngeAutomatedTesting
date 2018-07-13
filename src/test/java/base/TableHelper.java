@@ -70,6 +70,7 @@ public class TableHelper {
 		
 	}
 	
+	//TODO: Refactor this method
 	public String getRandomRowEntry(String category) {
 		Integer index = headerMap.get(category);
 		if (index == null) {
@@ -116,7 +117,8 @@ public class TableHelper {
 				throw new IllegalArgumentException("The cell-type '" + cellType + "' of the cell (" + cellAdress + ") is not supported.");
 			}
 		}else {
-			throw new NullPointerException("No cell to get the value from.");
+			log4j.error("No cell to get the value from.");
+			return null;
 		}		
 		
 		return cellValue;
