@@ -66,7 +66,7 @@ public class EasyPatentTest extends BaseLoggedInUserTest {
 		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
             && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
         {
-		  Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
+		  Assert.assertEquals(viewItemPage.getValue("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
         }
 	}
 	
@@ -76,8 +76,8 @@ public class EasyPatentTest extends BaseLoggedInUserTest {
 	      log4j.info("Expected Value empty. Won't compare");
 	      return;
 	    }
-	    log4j.debug("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
-		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
+	    log4j.debug("Comparing: " + viewItemPage.getValue(label) + " WITH " + values.get(expected).trim());
+		Assert.assertEquals(viewItemPage.getValue(label), values.get(expected).trim());
 	}
 	
 	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow" })

@@ -67,16 +67,16 @@ public class EasyLegalTest extends BaseLoggedInUserTest {
 		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
             && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
         {
-		  Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
+		  Assert.assertEquals(viewItemPage.getValue("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
         }
 		if (values.containsKey("[Volume source]") && values.get("[Volume source]") != null)
         {
-		  Assert.assertEquals(viewItemPage.getLabel("Volume / Issue"), values.get("[Volume source]").trim());
+		  Assert.assertEquals(viewItemPage.getValue("Volume / Issue"), values.get("[Volume source]").trim());
         }
 		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
             && values.containsKey("[identifier source create item]") && values.get("[identifier source create item") != null)
         {
-		  Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
+		  Assert.assertEquals(viewItemPage.getValue("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
         values.get("[identifier source value]").trim());
         }
 	}
@@ -87,8 +87,8 @@ public class EasyLegalTest extends BaseLoggedInUserTest {
   	    log4j.info("Expected Value empty. Won't compare");
           return;
         }
-        log4j.debug("Comparing: " + viewItemPage.getLabel(label) + " WITH " + values.get(expected).trim());
-		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
+        log4j.debug("Comparing: " + viewItemPage.getValue(label) + " WITH " + values.get(expected).trim());
+		Assert.assertEquals(viewItemPage.getValue(label), values.get(expected).trim());
 	}
 	
 	

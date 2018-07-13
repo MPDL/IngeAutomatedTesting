@@ -54,28 +54,28 @@ public class FullSimpleSourceDependentTest extends BaseLoggedInUserTest {
 		title = values.get("[title]");
 		
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
-		Assert.assertEquals(viewItemPage.getLabel("Genre"), values.get("DEGREE"));
-		Assert.assertEquals(viewItemPage.getLabel("Name"), values.get("[upload file]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Description"), values.get("[description file]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Visibility"), values.get("[Visibility]"));
-		Assert.assertEquals(viewItemPage.getLabel("Copyright Date"), values.get("[Copyright Date]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Copyright Info"), values.get("[Copyright statement]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("License"), values.get("[license URL]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Free keywords"), values.get("[free keywords]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Abstract"), values.get("[abstract]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Pages"), values.get("[Total no of pages source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Degree"), values.get("[degree type]"));
-		Assert.assertEquals(viewItemPage.getLabel("Project name"), values.get("[Project name]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifiers"), values.get("[identifier create item]").trim() + ": " + 
+		Assert.assertEquals(viewItemPage.getValue("Genre"), values.get("DEGREE"));
+		Assert.assertEquals(viewItemPage.getValue("Name"), values.get("[upload file]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Description"), values.get("[description file]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Visibility"), values.get("[Visibility]"));
+		Assert.assertEquals(viewItemPage.getValue("Copyright Date"), values.get("[Copyright Date]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Copyright Info"), values.get("[Copyright statement]").trim());
+		Assert.assertEquals(viewItemPage.getValue("License"), values.get("[license URL]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Free keywords"), values.get("[free keywords]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Abstract"), values.get("[abstract]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Pages"), values.get("[Total no of pages source]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Degree"), values.get("[degree type]"));
+		Assert.assertEquals(viewItemPage.getValue("Project name"), values.get("[Project name]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Identifiers"), values.get("[identifier create item]").trim() + ": " + 
 																	values.get("[identifier value]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Grant ID"), values.get("[Grant ID]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Funding program"), values.get("[Funding program]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Title"), values.get("[title source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Source Genre"), values.get("[genre source]"));
-		Assert.assertEquals(viewItemPage.getLabel("Publ. Info"), values.get("[Place source]").trim() + " : " + 
+		Assert.assertEquals(viewItemPage.getValue("Grant ID"), values.get("[Grant ID]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Funding program"), values.get("[Funding program]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Title"), values.get("[title source]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Source Genre"), values.get("[genre source]"));
+		Assert.assertEquals(viewItemPage.getValue("Publ. Info"), values.get("[Place source]").trim() + " : " + 
 																	values.get("[Publisher source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Volume / Issue"), values.get("[Volume source]").trim());
-		Assert.assertEquals(viewItemPage.getLabel("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
+		Assert.assertEquals(viewItemPage.getValue("Volume / Issue"), values.get("[Volume source]").trim());
+		Assert.assertEquals(viewItemPage.getValue("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
 																	values.get("[identifier source value]").trim());
 	}
 	

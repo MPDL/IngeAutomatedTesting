@@ -52,8 +52,6 @@ public class ViewItemPage extends BasePage {
 	public ViewItemPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
-		initLabelMap();
 	}
 	
 	private void initLabelMap() {
@@ -149,9 +147,17 @@ public class ViewItemPage extends BasePage {
 	}
 	
 	/**
-	 * assumes the label map has been initialised
+	 * Get the value of the field with the given label. <br>
+	 * Internally creates and searches a label map if the getLabel method is called for the first time.
+	 * 
+	 * @param label The label of the field to get the value from
+	 * @return The value of the associated field
 	 */
-	public String getLabel(String label) {
+	public String getValue(String label) {
+		if(labelMap == null) {
+			initLabelMap();
+		}
+		
 		String value = labelMap.get(label);
 		if (value == null) {
 			throw new NoSuchElementException("No label present: '" + label + "'");

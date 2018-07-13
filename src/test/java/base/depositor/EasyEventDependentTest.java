@@ -78,7 +78,7 @@ public class EasyEventDependentTest extends BaseLoggedInUserTest {
           log4j.info("Expected Value empty. Won't compare");
           return;
         }
-		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
+		Assert.assertEquals(viewItemPage.getValue(label), values.get(expected).trim());
 	}
 	
 	@Test(priority = 4, dependsOnMethods = { "easySubmissionStandardWorkflow" })

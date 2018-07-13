@@ -74,7 +74,7 @@ public class FullStandardSourceDependentTest extends BaseLoggedInUserTest {
 	}
 	
 	private void compare(String label, String expected) {
-		Assert.assertEquals(viewItemPage.getLabel(label), values.get(expected).trim());
+		Assert.assertEquals(viewItemPage.getValue(label), values.get(expected).trim());
 	}
 	
 	@Test(priority = 3, dependsOnMethods = { "submitSourceDependent" })
