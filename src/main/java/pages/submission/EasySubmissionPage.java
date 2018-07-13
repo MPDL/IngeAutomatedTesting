@@ -19,6 +19,7 @@ import test.java.base.TableHelper;
 /** 
  *  Page with a dynamic three-step completion process
  */
+//TODO: Refactor EasySubmissionPage: Declare the WebElements as instance variables; Split in to three single page classes
 public class EasySubmissionPage extends BasePage {
 	
 	public EasySubmissionPage(WebDriver driver) {
@@ -116,8 +117,11 @@ public class EasySubmissionPage extends BasePage {
 		// switch to full submission mode
 		WebElement fullSubmissionButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep3Manual:lnkAddDetails"));
 		fullSubmissionButton.click();
+		//TODO: Open a new Edit	Item Page with PageFactory and save the input there
 		
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("form1:lnkSave")));
+		//Use the headline 'Edit item' to check that the Edit item page is loaded, then click save
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(), 'Edit item')]")));
+		
 		WebElement saveButton = driver.findElement(By.id("form1:lnkSave"));
 		saveButton.click();
 		
@@ -221,9 +225,6 @@ public class EasySubmissionPage extends BasePage {
 		descriptionBox.sendKeys("A sample locator");
 	}
 	
-	/**
-	 * Leads to a "mimetype missing" bug.
-	 */
 	private void addLocator(String locator, String contentCategoryLocator, String locatorDescription) {
 		WebElement locatorBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:locatorUploads:0:inpLocatorLocator1"));
 		locatorBox.sendKeys(locator);
