@@ -438,8 +438,9 @@ public class FullSubmissionPage extends BasePage {
 		WebElement addAuthorsLink = driver.findElement(By.id("form1:btnAddAuthors"));
 		addAuthorsLink.click();
 		
-		//TODO: Handle wait for the Throbber/Pageload correctly and in a generic way.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("smallThrobber")));
+		//Wait until the page is loaded after the click, by checking weather any 'old' element is now stale on the new page
+		wait.until(ExpectedConditions.stalenessOf(addAuthorsLink));
+		//TODO: Handle wait for the Throbber/Pageload in a generic way.
 		
 		PageFactory.initElements(driver, this);
 		
