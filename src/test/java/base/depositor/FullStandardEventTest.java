@@ -42,7 +42,7 @@ public class FullStandardEventTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void submitEvent() {
-		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
 		viewItemPage = fullSubmissionPage.fullSubmissionEvent(table);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");

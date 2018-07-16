@@ -42,7 +42,7 @@ public class FullStandardDegreeTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void submitDegree() {
-		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
 		viewItemPage = fullSubmissionPage.fullSubmissionDegree(table);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");

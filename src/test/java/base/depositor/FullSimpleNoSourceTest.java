@@ -43,7 +43,7 @@ public class FullSimpleNoSourceTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void fullSubmissionSimpleNoSource() {
-		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
 		viewItemPage = fullSubmissionPage.fullSubmissionNoSrc(table);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");

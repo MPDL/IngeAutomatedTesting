@@ -45,7 +45,7 @@ public class FullSimplePaperDeterministicTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void fullSubmissionSimpleWorkflow() {
-		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
+		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
 		ViewItemPage viewItemPage = fullSubmissionPage.fullSubmission("Conference Paper", title, author, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");

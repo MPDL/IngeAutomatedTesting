@@ -42,7 +42,7 @@ public class EasyEventDependentTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void easySubmissionStandardWorkflow() {
-		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToEasySubmissionPage();
+		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().goToEasySubmissionStandardPage();
 		log4j.debug("Table: " + table);
         for(Entry<String, String> entry : table.getMap().entrySet()) {
           log4j.debug("Table-Key: " + entry.getKey() + " - Table-Value: " + entry.getValue());

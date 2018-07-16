@@ -36,7 +36,7 @@ public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void easySubmissionStandardWorkflow() {
-		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().depositorGoToEasySubmissionPage();
+		EasySubmissionPage easySubmissionPage = depositorHomePage.goToSubmissionPage().goToEasySubmissionStandardPage();
 		viewItemPage = easySubmissionPage.easySubmission("Journal Article", title, filepath);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
