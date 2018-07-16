@@ -32,12 +32,11 @@ public class SearchResultsPage extends BasePage {
 	@FindBy(xpath = "//a[contains(@id, 'btnExportDownload')]")
 	private WebElement downloadLink;
 	
+	@FindBy(className = "listItem")
 	private List<WebElement> searchResults;
 	
 	public SearchResultsPage(WebDriver driver) {
 		super(driver);
-		
-		searchResults = driver.findElements(By.className("listItem"));
 		
 		PageFactory.initElements(driver, this);
 	}
