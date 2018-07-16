@@ -1,10 +1,10 @@
 package main.java.pages.submission;
 
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -14,12 +14,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import main.java.pages.BasePage;
 import test.java.base.GenreGroup;
+import test.java.base.SeleniumWrapper;
 import test.java.base.TableHelper;
 
 /** 
  *  Page with a dynamic three-step completion process
  */
-//TODO: Refactor EasySubmissionPage: Declare the WebElements as instance variables; Split in to three single page classes
+//TODO: Refactor EasySubmissionPage: Add shared super class SubmissionPage with FullSubmissionPage; Declare the WebElements as instance variables; Split in to three single page classes
 public class EasySubmissionPage extends BasePage {
 	
 	public EasySubmissionPage(WebDriver driver) {
@@ -249,7 +250,7 @@ public class EasySubmissionPage extends BasePage {
 	private void fillInAuthors(String roleAll, String familyName, String multipleAuthors, String organisation, String orgAddress) {
 		WebElement authorFamilyName = driver.findElement(By.xpath("//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]"));
 		authorFamilyName.sendKeys(familyName);
-		authorFamilyName.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 //		WebElement roleDropdown = driver.findElement(By.xpath("//select[contains(@id, '0:selCreatorRoleString')]"));
 //		Select roleSelect = new Select(roleDropdown);
 //		roleSelect.selectByVisibleText(roleAll);
@@ -264,7 +265,7 @@ public class EasySubmissionPage extends BasePage {
 		
 		WebElement organisationNameBox = driver.findElement(By.xpath("//textarea[contains(@id, 'inporganizations_organization_name')]"));
 		organisationNameBox.sendKeys(organisation);
-		organisationNameBox.sendKeys(Keys.ESCAPE);
+		hideAllSuggestions();
 		WebElement orgAddressBox = driver.findElement(By.xpath("//textarea[contains(@id, 'inporganizations_organization_address')]"));
 		orgAddressBox.sendKeys(orgAddress);
 		WebElement personOrgNrBox = driver.findElement(By.xpath("//input[contains(@id, 'inppersons_person_ous_optional')]"));
@@ -475,6 +476,19 @@ public class EasySubmissionPage extends BasePage {
 		String endPage = table.getRandomRowEntry("[Endpage source]");
 		String volume = table.getRandomRowEntry("[Volume source]");
 		fillInEventSource(sourceGenre, sourceTitle, volume, startPage, endPage);
+	}
+	
+	private void hideAllSuggestions() {
+		//Note: Suggestions can NOT be identified clearly (no id).
+		//Workaround: Hide all suggestions currently in the DOM.
+		//Problem: 1) ALL suggestions must be hidden.
+		//Problem: 2) Suggestion can NOT be used/clicked until their visibility is set to visible.
+		//Problem: 3) Wait for the visibility of the suggestion can not be used, because it would lead to a race condition.
+		
+		List<WebElement> suggestions = driver.findElements(By.xpath("//ul[@class='ac_results']"));
+		for (WebElement suggestion : suggestions) {
+			SeleniumWrapper.hideWebElement(driver, suggestion);			
+		}
 	}
 	
 }
