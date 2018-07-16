@@ -13,7 +13,7 @@ import main.java.pages.submission.MultipleImportPage;
 
 public class CollectionSelectionPage extends BasePage {
 	
-	@FindBy(linkText = "Test_Context_Simple")
+	@FindBy(linkText = "Test Context Simple Workflow")
 	private WebElement simpleTestContext;
 	
 	@FindBy(linkText = "PubMan Test Collection")
@@ -35,6 +35,12 @@ public class CollectionSelectionPage extends BasePage {
 		standardTestContext.click();
 		
 		return PageFactory.initElements(driver, FullSubmissionPage.class);
+	}
+	
+	public EasySubmissionPage easySubmissionSimple() {
+		simpleTestContext.click();
+		
+		return PageFactory.initElements(driver, EasySubmissionPage.class);
 	}
 	
 	public EasySubmissionPage easySubmissionStandard() {

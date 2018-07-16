@@ -35,6 +35,13 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.easySubmissionStandard();
 	}
 	
+	public EasySubmissionPage goToEasySubmissionSimplePage() {
+		easySubmissionLink.click();
+		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
+		
+		return collectionSelectionPage.easySubmissionSimple();
+	}
+	
 	public FullSubmissionPage goToFullSubmissionStandardPage() {
 		fullSubmissionLink.click();
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
