@@ -18,6 +18,13 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
+/**
+ * Testcase #1 <br>
+ * Test Link UC #4 <br>
+ * 
+ * @author helk
+ *
+ */
 public class FullSimpleSourceDependentTest extends BaseLoggedInUserTest {
 
 	private DepositorHomePage depositorHomePage;

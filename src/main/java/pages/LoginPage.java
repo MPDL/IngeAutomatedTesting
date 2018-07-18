@@ -29,6 +29,7 @@ public class LoginPage {
 		PageFactory.initElements(driver,  this);
 	}
 	
+	// PM-02
 	public DepositorHomePage loginAsDepositor(String username, String password) {
 		login(username, password);
 		return PageFactory.initElements(driver, DepositorHomePage.class);

@@ -49,6 +49,7 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.fullSubmissionStandard();
 	}
 	
+	// PM-22
 	public FullSubmissionPage goToFullSubmissionSimplePage() {
 		fullSubmissionLink.click();
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);

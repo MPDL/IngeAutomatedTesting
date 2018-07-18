@@ -14,7 +14,9 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 
 /**
- * Test Link UC #4
+ * Testcase #1 <br>
+ * Test Link UC #4 <br>
+ * 
  * Tests the publication of a conference paper through full submission in simple workflow.
  * @author apetrova
  *

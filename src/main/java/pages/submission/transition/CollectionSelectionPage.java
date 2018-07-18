@@ -25,6 +25,7 @@ public class CollectionSelectionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	// PM-18
 	public FullSubmissionPage fullSubmissionSimple() {
 		simpleTestContext.click();
 		

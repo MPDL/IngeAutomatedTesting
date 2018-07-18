@@ -29,6 +29,7 @@ public class DepositorHomePage extends HomePage {
 		return PageFactory.initElements(driver, MyItemsPage.class);
 	}
 	
+	// PM-17
 	public SubmissionPage goToSubmissionPage() {
 		submissionLink.click();
 		return PageFactory.initElements(driver, SubmissionPage.class);

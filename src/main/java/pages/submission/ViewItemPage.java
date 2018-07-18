@@ -91,6 +91,7 @@ public class ViewItemPage extends BasePage {
 		return ItemStatus.DISCARDED;
 	}
 	
+	// PM-60
 	public ViewItemPage releaseItem() {
 		releaseItemLink.click();
 		
