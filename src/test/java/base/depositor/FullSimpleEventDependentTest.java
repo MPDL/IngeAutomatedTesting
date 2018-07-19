@@ -15,6 +15,7 @@ import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.ViewItemPage;
 import test.java.base.BaseLoggedInUserTest;
+import test.java.base.GenreGroup;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
@@ -61,7 +62,7 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 		title = values.get("[title]");
 		
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
-		compare("Genre", "DEGREE");
+		compare("Genre", GenreGroup.EVENT_DEPENDENT.toString());
 		compare("Name", "[upload file]");
 		compare("Description", "[description file]");
 		compare("Visibility", "[Visibility]");
@@ -70,14 +71,14 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 		compare("License", "[license URL]");
 		compare("Free keywords", "[free keywords]");
 		compare("Abstract", "[abstract]");
-		compare("Pages", "[Total no of pages source]");
+		compare("Pages", "[Total no of pages]");
 		compare("Degree", "[degree type]");
 		compare("Project name", "[Project name]");
 		compare("Grant ID", "[Grant ID]");
 		compare("Funding program", "[Funding program]");
-		compare("Title", "[title source]");
+		compare("Title", "[Title of event]");
 		compare("Source Genre", "[genre source]");
-		compare("Volume / Issue", "[Volume source]");
+		Assert.assertEquals(viewItemPage.getValue("Volume / Issue"), values.get("[Volume source]").trim() + " " + "(" + values.get("[issue source]").trim() + ")");
 		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
 		  && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
         {
@@ -90,7 +91,7 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 		if (values.containsKey("[identifier source create item]") && values.get("[identifier source create item]") != null
 	      && values.containsKey("[identifier source value]") && values.get("[identifier source value]") != null)
 	    {
-		  Assert.assertEquals(viewItemPage.getValue("Identifier"), values.get("[identifier source create item]").trim() + " : " + values.get("[identifier source value]").trim());
+		  Assert.assertEquals(viewItemPage.getValue("Identifier"), values.get("[identifier source create item]").trim() + ": " + values.get("[identifier source value]").trim());
         }
 	}
 	

@@ -15,6 +15,7 @@ import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.ViewItemPage;
 import test.java.base.BaseLoggedInUserTest;
+import test.java.base.GenreGroup;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
@@ -61,7 +62,7 @@ public class FullSimpleNoSourceTest extends BaseLoggedInUserTest {
 		values = table.getMap();
 		title = values.get("[title]");
 		
-		compare("Genre", "DEGREE");
+		compare("Genre", GenreGroup.NO_SOURCE.toString());
         compare("Name", "[upload file]");
         compare("Description", "[description file]");
         compare("Visibility", "[Visibility]");
@@ -70,35 +71,11 @@ public class FullSimpleNoSourceTest extends BaseLoggedInUserTest {
         compare("License", "[license URL]");
         compare("Free keywords", "[free keywords]");
         compare("Abstract", "[abstract]");
-        compare("Pages", "[Total no of pages source]");
+        compare("Pages", "[Total no of pages]");
         compare("Degree", "[degree type]");
         compare("Project name", "[Project name]");
         compare("Grant ID", "[Grant ID]");
         compare("Funding program", "[Funding program]");
-        compare("Title", "[title source]");
-        compare("Source Genre", "[genre source]");
-        compare("Volume / Issue", "[Volume source]");
-        
-        if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
-            && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
-        {
-          Assert.assertEquals(viewItemPage.getValue("Identifiers"), values.get("[identifier create item]").trim() + ": " + 
-            values.get("[identifier value]").trim());
-        }
-        
-        if (values.containsKey("[Place source]") && values.get("[Place source]") != null
-            && values.containsKey("[Publisher source]") && values.get("[Publisher source]") != null)
-        {
-          Assert.assertEquals(viewItemPage.getValue("Publ. Info"), values.get("[Place source]").trim() + " : " + 
-            values.get("[Publisher source]").trim());
-        }
-        
-        if (values.containsKey("[identifier source create item]") && values.get("[identifier source create item]") != null
-            && values.containsKey("[identifier source value]") && values.get("[identifier source value]") != null)
-        {
-          Assert.assertEquals(viewItemPage.getValue("Identifier"), values.get("[identifier source create item]").trim() + " : " + 
-            values.get("[identifier source value]").trim());
-        }
 	}
 	
 	private void compare(String label, String expected) {

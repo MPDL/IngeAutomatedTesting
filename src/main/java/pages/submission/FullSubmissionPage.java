@@ -2,7 +2,6 @@ package main.java.pages.submission;
 
 import java.util.List;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -279,7 +278,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInAuthors(table);
 		fillInContent(table);
 		fillInDetails(table);
-		if (genre.equals("Conference Paper"))
+		if (genre.equals("Conference Paper") || genre.equals("Meeting Abstract"))
 			fillInEvent(table);
 		fillInProject(table);
 	}
@@ -707,8 +706,7 @@ public class FullSubmissionPage extends BasePage {
 	}
 	
 	private void fillInSourceEventDependent(TableHelper table) {
-		//TODO: Implement this method
-		throw new NotImplementedException("");
+		fillInSource(table);
 	}
 	
 	private void fillInSource(TableHelper table) {
