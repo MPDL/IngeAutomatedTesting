@@ -18,6 +18,7 @@ import test.java.base.GenreGroup;
 import test.java.base.SeleniumWrapper;
 import test.java.base.TableHelper;
 
+//TODO: Refactor this class: Split into Components; Handle the different 'fullSubmission' workflows in a clearer way; Avoid code replication.
 public class FullSubmissionPage extends BasePage {
 
 	/* basics form */
@@ -94,12 +95,15 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:txtTotalNoOfPages")
 	private WebElement pageNumberBox;
 	
+	//TODO: Use/Set the Publisher (Details)
 	@FindBy(id = "form1:txtaPublisher")
 	private WebElement publisherBox;
 	
+	//TODO: Use/Set the Place (Details)
 	@FindBy(id = "form1:txtPlace")
 	private WebElement placeBox;
 	
+	//TODO: Use/Set the Table of content (Series Details)
 	@FindBy(id = "form1:txtaTableOfContent")
 	private WebElement tableOfContentsBox;
 	
@@ -109,6 +113,7 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(id = "form1:iterDetailGroupIdentifier:0:inpIdentifierValue")
 	private WebElement identifierValueBox;
 	
+	//TODO: Use/Set the Review type
 	@FindBy(id = "form1:cboReviewType")
 	private WebElement reviewDropdown;
 	
@@ -271,13 +276,23 @@ public class FullSubmissionPage extends BasePage {
 	}
 	
 	private void fillInCommon(GenreGroup genreGroup, TableHelper table) {
+		//TODO: Refactor this method. Use Enum for Genre.
+		
 		String genre = table.getRandomRowEntry(genreGroup.toString());
 		fillInBasics(genre, table);
 		uploadFile(table);
 		fillInLocator(table);
 		fillInAuthors(table);
 		fillInContent(table);
-		fillInDetails(table);
+		
+		if(genre.equals("Journal")) {
+			fillInDetailsForJournal(table);
+		}else if (genre.equals("Series")) {
+			fillInDetailsForSeries(table);
+		}else {
+			fillInDetails(table);
+		}			
+		
 		if (genre.equals("Conference Paper") || genre.equals("Meeting Abstract"))
 			fillInEvent(table);
 		fillInProject(table);
@@ -545,6 +560,44 @@ public class FullSubmissionPage extends BasePage {
 		
 	}
 	
+	// PM-40, PM-46, PM-48,
+	private void fillInDetailsForJournal(TableHelper table) {
+		String publicationLanguage = table.getRandomRowEntry("[Language of publication]");		
+		String datePrint = table.getRandomRowEntry("[Date published in print valid]");
+		String pageNumber = table.getRandomRowEntry("[total no of pages]");		
+		String identifierType = table.getRandomRowEntry("[identifier create item]");
+		String identifierValue = table.getRandomRowEntry("[identifier value]");
+		
+		this.publicationLanguageBox.sendKeys(publicationLanguage);
+		hideAllSuggestions();
+		this.datePrint.sendKeys(datePrint);
+		this.pageNumberBox.sendKeys(pageNumber);
+		//Publisher
+		//Place
+		//Review type
+		Select identifierSelect = new Select(identifierDropdown);
+		identifierSelect.selectByVisibleText(identifierType);
+		identifierValueBox.sendKeys(identifierValue);
+	}
+	
+	// PM-40, PM-41, PM-46,
+	private void fillInDetailsForSeries(TableHelper table) {
+		String publicationLanguage = table.getRandomRowEntry("[Language of publication]");		
+		String datePrint = table.getRandomRowEntry("[Date published in print valid]");
+		String dateOnline = table.getRandomRowEntry("[Date published online valid]");
+		String pageNumber = table.getRandomRowEntry("[total no of pages]");
+		
+		this.publicationLanguageBox.sendKeys(publicationLanguage);
+		hideAllSuggestions();
+		this.datePrint.sendKeys(datePrint);
+		this.dateOnline.sendKeys(dateOnline);
+		this.pageNumberBox.sendKeys(pageNumber);
+		//Publisher
+		//Place
+		//Table of content
+		//Review type
+	}
+	
 	// PM-40, PM-41, PM-42, PM-44, PM-45
 	private void fillInDates(String print, String online, String accepted, String submitted, String modified, String created) {
 		datePrint.sendKeys(print);
@@ -810,6 +863,10 @@ public class FullSubmissionPage extends BasePage {
 	
 	private ViewItemPage save() {
 		saveButton.click();
+		
+		//TODO: Handle this wait in a more generic way
+		//Use the headline 'Item' to check that the ViewItem page is loaded
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("\\h1[contains(text(),'Item')]")));
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
