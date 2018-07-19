@@ -9,6 +9,7 @@
 		<classes>
 			<class name="test.java.base.TestSuiteInitialisation"></class>
 			<class name="test.java.base.BaseTest"></class>
+
 			<class name="test.java.base.depositor.EasyArticleDeterministicTest"></class>
 			<class name="test.java.base.depositor.EasyPatentTest"></class>
 			<class name="test.java.base.depositor.EasyLegalTest"></class>
@@ -22,7 +23,7 @@
 			<class name="test.java.base.depositor.FullStandardEventTest"></class>
 			<class name="test.java.base.depositor.FullStandardDegreeTest"></class>
 			<class name="test.java.base.moddep.StandardSubmitJournalArticleTest"></class>
-			
+		
 			<class name="test.java.base.guest.SimpleSearchUnregisteredTest"></class>
 			<class name="test.java.base.moddep.SimpleSearchRegisteredTest"></class>
 			<class name="test.java.base.guest.AdvancedSearchUnregisteredTest"></class>
@@ -33,12 +34,12 @@
 			<class name="test.java.base.moddep.InstallCitationStyleTest"></class>
 			<class name="test.java.base.guest.EditCitationTest"></class>
  			<class name="test.java.base.guest.SearchContentTest"></class>
- 			
-<!-- 		TODO: Begin simple workflow: not yet implemented in test instance -->
-<!-- 		<class name="test.java.base.depositor.FullSimplePaperDeterministicTest"></class> -->
-<!-- 		<class name="test.java.base.depositor.FullSimpleEventDependentTest"></class> -->
-<!-- 		<class name="test.java.base.depositor.FullSimpleSourceDependentTest"></class> -->
-<!-- 		<class name="test.java.base.depositor.FullSimpleNoSourceTest"></class> -->
+
+ 			<class name="test.java.base.depositor.FullSimplePaperDeterministicTest"></class>
+ 			<class name="test.java.base.depositor.FullSimpleEventDependentTest"></class>
+ 			<class name="test.java.base.depositor.FullSimpleSourceDependentTest"></class>
+ 			<class name="test.java.base.depositor.FullSimpleNoSourceTest"></class>
+
 		</classes>
 	</test>
 
