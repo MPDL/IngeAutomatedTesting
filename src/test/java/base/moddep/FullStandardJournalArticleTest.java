@@ -12,7 +12,7 @@ import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
 import test.java.base.BaseLoggedInUserTest;
 
-public class StandardSubmitJournalArticleTest extends BaseLoggedInUserTest {
+public class FullStandardJournalArticleTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;
 	private StartPage startPage;

@@ -22,7 +22,7 @@
 			<class name="test.java.base.depositor.FullStandardSourceIndependentTest"></class>
 			<class name="test.java.base.depositor.FullStandardEventTest"></class>
 			<class name="test.java.base.depositor.FullStandardDegreeTest"></class>
-			<class name="test.java.base.moddep.StandardSubmitJournalArticleTest"></class>
+			<class name="test.java.base.moddep.FullStandardJournalArticleTest"></class>
 		
 			<class name="test.java.base.guest.SimpleSearchUnregisteredTest"></class>
 			<class name="test.java.base.moddep.SimpleSearchRegisteredTest"></class>
