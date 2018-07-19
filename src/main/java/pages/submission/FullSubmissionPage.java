@@ -365,7 +365,7 @@ public class FullSubmissionPage extends BasePage {
 		WebElement uploadFileURL = driver.findElement(By.id("form1:btnUploadFileFromUrl"));
 		uploadFileURL.click();
 		
-		contentCategoryDropdown = driver.findElement(By.id("form1:fileUploads:1:selFileContentCategory"));
+		contentCategoryDropdown = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("form1:fileUploads:1:selFileContentCategory")));
 		contentCategorySelect = new Select(contentCategoryDropdown);
 		contentCategorySelect.selectByVisibleText(contentCategory);
 	}
@@ -465,7 +465,7 @@ public class FullSubmissionPage extends BasePage {
 		addAuthorsLink.click();
 		
 		//Wait until the page is loaded after the click, by checking weather any 'old' element is now stale on the new page
-		wait.until(ExpectedConditions.stalenessOf(addAuthorsLink));
+		wait.until(ExpectedConditions.stalenessOf(parseAuthorsBox));
 		//TODO: Handle wait for the Throbber/Pageload in a generic way.
 		
 		PageFactory.initElements(driver, this);
