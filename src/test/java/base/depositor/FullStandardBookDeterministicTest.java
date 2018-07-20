@@ -14,7 +14,9 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 
 /**
- * TestLink UC #5
+ * Testcase #2 <br>
+ * TestLink UC #5 <br>
+ * 
  * Tests full submission of a book in standard workflow.
  * @author apetrova
  *

@@ -22,6 +22,7 @@ public class SubmitItemPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	// PM-130, PM-133
 	public ViewItemPage submitItem() {
 		submitCommentBox.sendKeys("Testing item submission.");
 		submitItemButton.click();

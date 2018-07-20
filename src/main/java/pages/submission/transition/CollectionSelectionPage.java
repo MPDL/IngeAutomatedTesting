@@ -32,6 +32,7 @@ public class CollectionSelectionPage extends BasePage {
 		return PageFactory.initElements(driver, FullSubmissionPage.class);
 	}
 	
+	// PM-17
 	public FullSubmissionPage fullSubmissionStandard() {
 		standardTestContext.click();
 		

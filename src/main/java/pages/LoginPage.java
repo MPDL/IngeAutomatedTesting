@@ -35,6 +35,7 @@ public class LoginPage {
 		return PageFactory.initElements(driver, DepositorHomePage.class);
 	}
 	
+	// PM-03
 	public ModeratorHomePage loginAsModerator(String username, String password) {
 		login(username, password);
 		return PageFactory.initElements(driver, ModeratorHomePage.class);

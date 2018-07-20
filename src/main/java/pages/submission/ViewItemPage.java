@@ -91,13 +91,14 @@ public class ViewItemPage extends BasePage {
 		return ItemStatus.DISCARDED;
 	}
 	
-	// PM-60
+	// PM-60, PM-134, PM-135
 	public ViewItemPage releaseItem() {
 		releaseItemLink.click();
 		
 		return new FinaliseSubmissionPage(driver).releaseSubmission();
 	}
 	
+	// PM-130, PM-133
 	public ViewItemPage submitItem() {
 		submitItemLink.click();
 		
@@ -117,6 +118,7 @@ public class ViewItemPage extends BasePage {
 		return new DiscardItemPage(driver).discardItem();
 	}
 	
+	// PM-131, PM-135
 	public ViewItemPage editItem() {
 		editItemLink.click();
 		
@@ -141,6 +143,7 @@ public class ViewItemPage extends BasePage {
 		return new EditItemPage(driver).addAuthor(secondAuthor);
 	}
 	
+	// PM-132
 	public ViewItemPage sendBackForRework() {
 		reviseItemLink.click();
 		

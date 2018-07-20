@@ -213,6 +213,7 @@ public class FullSubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	// PM-22
 	// note: only the 'select by visible text' method is used in order to be able to validate afterwards
 	public ViewItemPage fullSubmission(String genre, String title, String author, String[] filepaths) {
 		fillInBasics(genre, title);
@@ -304,7 +305,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInBasics(genre, title);
 	}
 	
-	// PM-32
+	// PM-32, PM-108
 	private void fillInBasics(String genre, String title) {
 		Select genreSelect = new Select(genreDropdown);
 		genreSelect.selectByVisibleText(genre.toString());
@@ -312,7 +313,7 @@ public class FullSubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	// PM-33
+	// PM-33, PM-109, PM-110
 	private void uploadFile(TableHelper table) {
 		String filepath = table.getRandomRowEntry("[upload file]");
 		String contentCategory = table.getRandomRowEntry("[content category all]");
@@ -325,7 +326,7 @@ public class FullSubmissionPage extends BasePage {
 		uploadFile(filepath, contentCategory, visibility, description, statement, date, licenseURL, fileURL);
 	}
 	
-	// PM-33
+	// PM-33, PM-109, PM-34, PM-110
 	private void uploadFiles(String[] filepaths) {
 		int n = filepaths.length;
 		for (int i = 0; i < n; i++) {
@@ -333,7 +334,7 @@ public class FullSubmissionPage extends BasePage {
 		}
 	}
 	
-	// PM-33
+	// PM-33, PM-109, PM-110
 	private void uploadFile(String filepath, String contentCategory, String visibility, String description, String statement, String date, String licenseURL, String fileURL) {
 		String addFileInputID = "form1:inpFile_input";
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -370,7 +371,7 @@ public class FullSubmissionPage extends BasePage {
 		contentCategorySelect.selectByVisibleText(contentCategory);
 	}
 	
-	// PM-33
+	// PM-33, PM-109, PM-34, PM-110
 	private void uploadFile(String filepath, int i) {
 		String addFileButtonID = "form1:inpFile_input";
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -384,7 +385,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInRights(i);
 	}
 	
-	// PM-34
+	// PM-34, PM-110
 	private void fillInRights(int i) {
 		WebElement copyrightInformation = driver.findElement(By.id("form1:fileUploads:" + i + ":inpFileDescription"));
 		copyrightInformation.sendKeys("See license below.");
@@ -405,14 +406,14 @@ public class FullSubmissionPage extends BasePage {
 		fillInSource();
 	}
 	
-	// PM-35
+	// PM-35, PM-111
 	private void fillInLocator(TableHelper table) {
 		String locator = table.getRandomRowEntry("[locator]");
 		String contentCategoryLocator = table.getRandomRowEntry("[content category all]");
 		fillInLocator(locator, contentCategoryLocator, "");
 	}
 	
-	// PM-35
+	// PM-35, PM-111
 	private void fillInLocator() {
 		locatorBox.sendKeys("https://subversion.mpdl.mpg.de/repos/smc/tags/public/PubMan/Wegweiser_durch_PubMan/Wegweiser_durch_PubMan.pdf");
 		saveLocator.click();
@@ -438,7 +439,7 @@ public class FullSubmissionPage extends BasePage {
 		descriptionBox.sendKeys(locatorDescription);
 	}
 	
-	// PM-36
+	// PM-36, PM-112
 	private void fillInAuthors(TableHelper table) {
 		String roleAll = table.getRandomRowEntry("[role all]");
 		String familyName = table.getRandomRowEntry("[Person]");
@@ -495,7 +496,7 @@ public class FullSubmissionPage extends BasePage {
 		}
 	}
 
-	// PM-36
+	// PM-36, PM-112
 	private void fillInPersonInfo(String author) {
 		personFamilyNameBox.sendKeys(author);
 		hideAllSuggestions();
@@ -504,7 +505,7 @@ public class FullSubmissionPage extends BasePage {
 		hideAllSuggestions();
 	}
 	
-	// PM-38
+	// PM-38, PM-114
 	private void fillInContent(TableHelper table) {
 		String keywords = table.getRandomRowEntry("[free keywords]");
 		String abstractText = table.getRandomRowEntry("[abstract]");
@@ -525,7 +526,7 @@ public class FullSubmissionPage extends BasePage {
 		}
 	}
 	
-	// PM-38
+	// PM-38, PM-114
 	private void fillInContent(String keywords, String classificationType, String classificationValue, String abstractText, String abstractLanguage) {
 		contentKeywordsBox.sendKeys(keywords);
 		Select classificationSelect = new Select(classificationDropdown);
@@ -537,12 +538,13 @@ public class FullSubmissionPage extends BasePage {
 		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
 	}
 	
-	// PM-38
+	// PM-38, PM-114
 	private void fillInContent() {
 		fillInContent("test, QA, INGe", "DDC", "", "some abstract", "eng - English");
 	}
 	
 	// PM-40, PM-41, PM-42, PM-44, PM-45, PM-46, PM-48
+	// PM-115, PM-116, PM-117, PM-118, PM-119, PM-120, PM-121, PM-122, PM-124
 	private void fillInDetails(TableHelper table) {
 		String datePrint = table.getRandomRowEntry("[Date published in print valid]");
 		String dateOnline = table.getRandomRowEntry("[Date published online valid]");
@@ -618,6 +620,7 @@ public class FullSubmissionPage extends BasePage {
 	}
 	
 	// PM-40, PM-41, PM-42, PM-44, PM-45, PM-46, PM-48
+	// PM-116, PM-117, PM-118, PM-119, PM-120, PM-121, PM-122, PM-124
 	private void fillInDetails() {
 		datePrint.sendKeys("2016-06-06");
 		dateOnline.sendKeys("2016-05-05");
@@ -653,7 +656,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInEvent("Test Conference", "Munich", "2016-01-01", "2016-01-02");
 	}
 	
-	// PM-50
+	// PM-50, PM-125
 	private void fillInProject(TableHelper table) {
 		String projectName = table.getRandomRowEntry("[Project name]");
 		String grantID = table.getRandomRowEntry("[Grant ID]");
@@ -661,7 +664,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInProject(projectName, grantID, fundingProgram);
 	}
 	
-	// PM-50
+	// PM-50, PM-125
 	private void fillInProject(String projectName, String grantID, String fundingProgram) {
 		projectNameBox.sendKeys(projectName);
 		grantIDBox.sendKeys(grantID);
@@ -669,11 +672,12 @@ public class FullSubmissionPage extends BasePage {
 		hideAllSuggestions();
 	}
 	
-	// PM-50
+	// PM-50, PM-125
 	private void fillInProjectInfo() {
 		fillInProject("Test Project", "1", "Funding Programme 7 (FP7) - European Commission (EC)");
 	}
 	
+	//PM-115
 	private void fillInLanguage() {
 		languageBox.sendKeys("eng");
 	}

@@ -22,6 +22,7 @@ public class FinaliseSubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	// PM-60, PM-134, PM-135
 	public ViewItemPage releaseSubmission() {
 		confirmationTextArea.sendKeys("Testing release.");
 		releaseSubmissionButton.click();

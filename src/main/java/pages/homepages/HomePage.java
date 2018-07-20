@@ -23,6 +23,7 @@ public class HomePage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	// PM-91, PM-92
 	public StartPage logout() {
 		return metaMenuComponent.logout();
 	}

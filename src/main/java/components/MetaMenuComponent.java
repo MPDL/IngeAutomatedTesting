@@ -32,6 +32,7 @@ public class MetaMenuComponent {
 		PageFactory.initElements(driver, this);
 	}
 	
+	// PM-91, PM-92
 	public StartPage logout() {
 		if(driver.findElements(By.xpath("//input[contains(@id, 'lnkLogin')]")).isEmpty()) {
 			logoutButton.click();		

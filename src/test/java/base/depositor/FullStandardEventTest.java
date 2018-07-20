@@ -18,6 +18,13 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
+/**
+ * Testcase #2 <br>
+ * TestLink UC #5 <br>
+ * 
+ * @author helk
+ *
+ */
 public class FullStandardEventTest extends BaseLoggedInUserTest {
 
 	private String title;
