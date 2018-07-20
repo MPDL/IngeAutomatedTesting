@@ -12,6 +12,13 @@ import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
 import test.java.base.BaseLoggedInUserTest;
 
+/**
+ * Testcase #3 <br>
+ * TestLink UC #6 <br>
+ * 
+ * @author helk
+ *
+ */
 public class FullStandardJournalArticleTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;

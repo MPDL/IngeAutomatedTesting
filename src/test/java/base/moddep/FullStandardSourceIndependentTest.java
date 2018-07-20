@@ -16,6 +16,13 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
+/**
+ * Testcase #3 <br>
+ * TestLink UC #6 <br>
+ * 
+ * @author helk
+ *
+ */
 public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;
