@@ -98,7 +98,7 @@ public class ViewItemPage extends BasePage {
 		return new FinaliseSubmissionPage(driver).releaseSubmission();
 	}
 	
-	// PM-130, PM-133
+	// PM-130, PM-133, PM-144
 	public ViewItemPage submitItem() {
 		submitItemLink.click();
 		

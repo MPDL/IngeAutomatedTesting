@@ -18,6 +18,13 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
 
+/**
+ * Testcase #4 <br>
+ * TestLink UC #7 <br>
+ * 
+ * @author helk
+ *
+ */
 public class EasyEventDependentTest extends BaseLoggedInUserTest {
   
 	private String title;

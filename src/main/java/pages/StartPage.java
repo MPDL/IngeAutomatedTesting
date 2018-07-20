@@ -40,11 +40,13 @@ public class StartPage extends BasePage {
 		return mostRecentItemTitle;
 	}
 	
+	// PM-02
 	public DepositorHomePage loginAsDepositor(String username, String password) {
 		login(username, password);
 		return PageFactory.initElements(driver, DepositorHomePage.class);
 	}
 	
+	// PM-03
 	public ModeratorHomePage loginAsModerator(String username, String password) {
 		login(username, password);
 		return PageFactory.initElements(driver, ModeratorHomePage.class);

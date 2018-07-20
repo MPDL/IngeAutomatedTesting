@@ -45,6 +45,7 @@ public class CollectionSelectionPage extends BasePage {
 		return PageFactory.initElements(driver, EasySubmissionPage.class);
 	}
 	
+	// PM-18, PM-19
 	public EasySubmissionPage easySubmissionStandard() {
 		standardTestContext.click();
 		

@@ -12,6 +12,13 @@ import main.java.pages.submission.ViewItemPage;
 import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 
+/**
+ * Testcase #4 <br>
+ * TestLink UC #7 <br>
+ * 
+ * @author helk
+ *
+ */
 public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 
 	private String title;

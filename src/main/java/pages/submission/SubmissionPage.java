@@ -27,7 +27,8 @@ public class SubmissionPage extends BasePage {
 		
 		PageFactory.initElements(driver, this);
 	}
-	
+
+	// PM-18, PM-19
 	public EasySubmissionPage goToEasySubmissionStandardPage() {
 		easySubmissionLink.click();
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);

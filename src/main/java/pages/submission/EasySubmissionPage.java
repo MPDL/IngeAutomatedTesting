@@ -115,7 +115,8 @@ public class EasySubmissionPage extends BasePage {
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
-		// switch to full submission mode
+  	    
+		// PM-89: switch to full submission mode
 		WebElement fullSubmissionButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep3Manual:lnkAddDetails"));
 		fullSubmissionButton.click();
 		//TODO: Open a new Edit	Item Page with PageFactory and save the input there
@@ -129,6 +130,7 @@ public class EasySubmissionPage extends BasePage {
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	
+	// PM-84
 	private void fillInBasic(TableHelper table, GenreGroup genreGroup) {
   	    try {
           Thread.sleep(500);
@@ -144,6 +146,7 @@ public class EasySubmissionPage extends BasePage {
 		fillInBasic(genre, title);
 	}
 	
+	// PM-84
 	private void fillInBasic(String genre, String title) {
 		WebElement genreDropdown = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:selGenre"));
 		Select genreSelect = new Select(genreDropdown);
@@ -153,6 +156,7 @@ public class EasySubmissionPage extends BasePage {
 		genreTitleBox.sendKeys(title);
 	}
 	
+	// Add file, Add rights
 	private void uploadFile(TableHelper table) {
 		String filepath = table.getRandomRowEntry("[upload file]");
 		String contentCategory = table.getRandomRowEntry("[content category all]");
@@ -165,10 +169,12 @@ public class EasySubmissionPage extends BasePage {
 		uploadFile(filepath, contentCategory, visibility, description, statement, date, licenseURL, fileURL);
 	}
 	
+	// Add file, Add rights
 	private void uploadFile(String filepath) {
 		uploadFile(filepath, "Abstract", "Public", "", "", "", "", "");
 	}
 	
+	// Add file, Add rights
 	private void uploadFile(String filepath, String contentCategory, String visibility, String description, String statement, String date, String licenseURL, String fileURL) {
 		String addFileInputID = "form1:easySubmission:easySubmissionStep1Manual:inpFile_input";
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -208,12 +214,14 @@ public class EasySubmissionPage extends BasePage {
 		
 	}
 	
+	// Add locator
 	private void addLocator(TableHelper table) {
 		String locator = table.getRandomRowEntry("[locator]");
 		String contentCategoryLocator = table.getRandomRowEntry("[content category all]");
 		addLocator(locator, contentCategoryLocator, "");
 	}
 
+	// Add locator
 	private void addLocator() {
 		WebElement locatorBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:locatorUploads:0:inpLocatorLocator1"));
 		locatorBox.sendKeys("https://subversion.mpdl.mpg.de/repos/smc/tags/public/PubMan/Wegweiser_durch_PubMan/Wegweiser_durch_PubMan.pdf");
@@ -226,6 +234,7 @@ public class EasySubmissionPage extends BasePage {
 		descriptionBox.sendKeys("A sample locator");
 	}
 	
+	// Add locator
 	private void addLocator(String locator, String contentCategoryLocator, String locatorDescription) {
 		WebElement locatorBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:locatorUploads:0:inpLocatorLocator1"));
 		locatorBox.sendKeys(locator);
@@ -238,6 +247,7 @@ public class EasySubmissionPage extends BasePage {
 		descriptionBox.sendKeys(locatorDescription);
 	}
 	
+	// PM-85, Add organization
 	private void fillInAuthors(TableHelper table) {
 		String roleAll = table.getRandomRowEntry("[role all]");
 		String familyName = table.getRandomRowEntry("[Person]");
@@ -247,6 +257,7 @@ public class EasySubmissionPage extends BasePage {
 		fillInAuthors(roleAll, familyName, multipleAuthors, organisation, orgAddress);
 	}
 	
+	// PM-85, Add organization
 	private void fillInAuthors(String roleAll, String familyName, String multipleAuthors, String organisation, String orgAddress) {
 		WebElement authorFamilyName = driver.findElement(By.xpath("//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]"));
 		authorFamilyName.sendKeys(familyName);
@@ -271,6 +282,7 @@ public class EasySubmissionPage extends BasePage {
 		WebElement personOrgNrBox = driver.findElement(By.xpath("//input[contains(@id, 'inppersons_person_ous_optional')]"));
 		personOrgNrBox.sendKeys("1");
 		
+		//TODO: Adapt to the FullSubmission.fillInAuthors method!
 		// set all authors to given role
 //		List<WebElement> roleDropdowns = driver.findElements(By.xpath("//select[contains(@id, ':selCreatorRoleString')]"));
 //		for (WebElement dropdown : roleDropdowns) {
@@ -279,12 +291,14 @@ public class EasySubmissionPage extends BasePage {
 //		}
 	}
 	
+	// Add Content
 	private void fillInContent(TableHelper table) {
 		String keywords = table.getRandomRowEntry("[free keywords]");
 		String abstractText = table.getRandomRowEntry("[abstract]");
 		fillInContent(keywords, abstractText);
 	}
 	
+	// Add Content
 	private void fillInContent(String keywords, String abstractText) {
 		WebElement keywordsBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep2Manual:inpFreeKeywords"));
 		keywordsBox.sendKeys(keywords);
@@ -302,6 +316,7 @@ public class EasySubmissionPage extends BasePage {
 		fillInDates(print, online, accepted, submitted, modified, created);
 	}
 	
+	// PM-87, Add date ...
 	private void fillInDates(String print, String online, String accepted, String submitted, String modified, String created) {
 		WebElement datePrint = driver.findElement(By.xpath("//input[contains(@id, 'txtDatePublishedInPrint')]"));
 		datePrint.sendKeys(print);
@@ -317,6 +332,7 @@ public class EasySubmissionPage extends BasePage {
 		dateCreated.sendKeys(created);
 	}
 	
+	// PM-88, Add details of source
 	private void fillInSource(String sourceGenre, String sourceTitle, String volume, String issue, String startPage, String endPage) {
 		WebElement sourceGenreDropdown = driver.findElement(By.id("form1:easySubmission:easySubmissionStep3Manual:selSourceGenre"));
 		Select sourceGenreSelect = new Select(sourceGenreDropdown);
