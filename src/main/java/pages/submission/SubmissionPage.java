@@ -75,6 +75,7 @@ public class SubmissionPage extends BasePage {
 	}
 
 	// The depositor cannot choose between workflows, the moderator can.
+	// PM-22
 	public FullSubmissionPage depositorGoToFullSubmissionPage() {
 		fullSubmissionLink.click();
 		

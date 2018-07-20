@@ -30,6 +30,7 @@ public class CombinedHomePage extends HomePage {
 		return mainMenuComponent.goToItemsPage();
 	}
 	
+	// PM-17, (PM-18)
 	public SubmissionPage goToSubmissionPage() {
 		return mainMenuComponent.goToSubmissionPage();
 	}

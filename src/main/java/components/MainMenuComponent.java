@@ -72,6 +72,7 @@ public class MainMenuComponent {
 		return PageFactory.initElements(driver, QAWorkspacePage.class);
 	}
 	
+	// PM-17, (PM-18)
 	public SubmissionPage goToSubmissionPage() {
 		submissionLink.click();
 		

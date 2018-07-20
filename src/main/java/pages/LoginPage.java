@@ -41,6 +41,7 @@ public class LoginPage {
 		return PageFactory.initElements(driver, ModeratorHomePage.class);
 	}
 	
+	// PM-01
 	public CombinedHomePage loginAsCombinedUser(String username, String password) {
 		login(username, password);
 		return PageFactory.initElements(driver, CombinedHomePage.class);

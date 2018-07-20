@@ -236,6 +236,7 @@ public class FullSubmissionPage extends BasePage {
 		return save();
 	}
 	
+	// PM-22
 	public ViewItemPage fullSubmissionSrcIndep(TableHelper table) {
 		fillInCommon(GenreGroup.SOURCE_INDEP, table);
 		fillInSourceIndependent(table);
@@ -299,13 +300,13 @@ public class FullSubmissionPage extends BasePage {
 		fillInProject(table);
 	}
 	
-	// PM-32
+	// PM-32, PM-61
 	private void fillInBasics(String genre, TableHelper table) {		
 		String title = table.getRandomRowEntry("[title]");
 		fillInBasics(genre, title);
 	}
 	
-	// PM-32, PM-108
+	// PM-32, PM-108, PM-61
 	private void fillInBasics(String genre, String title) {
 		Select genreSelect = new Select(genreDropdown);
 		genreSelect.selectByVisibleText(genre.toString());
@@ -313,7 +314,7 @@ public class FullSubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	// PM-33, PM-109, PM-110
+	// PM-33, PM-109, PM-110, PM-62, PM-63
 	private void uploadFile(TableHelper table) {
 		String filepath = table.getRandomRowEntry("[upload file]");
 		String contentCategory = table.getRandomRowEntry("[content category all]");
@@ -326,7 +327,7 @@ public class FullSubmissionPage extends BasePage {
 		uploadFile(filepath, contentCategory, visibility, description, statement, date, licenseURL, fileURL);
 	}
 	
-	// PM-33, PM-109, PM-34, PM-110
+	// PM-33, PM-109, PM-34, PM-110, PM-62
 	private void uploadFiles(String[] filepaths) {
 		int n = filepaths.length;
 		for (int i = 0; i < n; i++) {
@@ -334,7 +335,7 @@ public class FullSubmissionPage extends BasePage {
 		}
 	}
 	
-	// PM-33, PM-109, PM-110
+	// PM-33, PM-109, PM-110, PM-62, PM-63
 	private void uploadFile(String filepath, String contentCategory, String visibility, String description, String statement, String date, String licenseURL, String fileURL) {
 		String addFileInputID = "form1:inpFile_input";
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -371,7 +372,7 @@ public class FullSubmissionPage extends BasePage {
 		contentCategorySelect.selectByVisibleText(contentCategory);
 	}
 	
-	// PM-33, PM-109, PM-34, PM-110
+	// PM-33, PM-109, PM-34, PM-110, PM-62
 	private void uploadFile(String filepath, int i) {
 		String addFileButtonID = "form1:inpFile_input";
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -385,7 +386,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInRights(i);
 	}
 	
-	// PM-34, PM-110
+	// PM-34, PM-110, PM-63
 	private void fillInRights(int i) {
 		WebElement copyrightInformation = driver.findElement(By.id("form1:fileUploads:" + i + ":inpFileDescription"));
 		copyrightInformation.sendKeys("See license below.");
@@ -406,14 +407,14 @@ public class FullSubmissionPage extends BasePage {
 		fillInSource();
 	}
 	
-	// PM-35, PM-111
+	// PM-35, PM-111, PM-64
 	private void fillInLocator(TableHelper table) {
 		String locator = table.getRandomRowEntry("[locator]");
 		String contentCategoryLocator = table.getRandomRowEntry("[content category all]");
 		fillInLocator(locator, contentCategoryLocator, "");
 	}
 	
-	// PM-35, PM-111
+	// PM-35, PM-111, PM-64
 	private void fillInLocator() {
 		locatorBox.sendKeys("https://subversion.mpdl.mpg.de/repos/smc/tags/public/PubMan/Wegweiser_durch_PubMan/Wegweiser_durch_PubMan.pdf");
 		saveLocator.click();
@@ -426,7 +427,7 @@ public class FullSubmissionPage extends BasePage {
 		locatorDescription.sendKeys("A sample locator.");
 	}
 	
-	// PM-35
+	// PM-35, PM-64
 	private void fillInLocator(String locator, String contentCategoryLocator, String locatorDescription) {
 		WebElement locatorBox = driver.findElement(By.id("form1:locatorUploads:0:inpAddUrl"));
 		locatorBox.sendKeys(locator);
@@ -439,7 +440,7 @@ public class FullSubmissionPage extends BasePage {
 		descriptionBox.sendKeys(locatorDescription);
 	}
 	
-	// PM-36, PM-112
+	// PM-36, PM-112, PM-65
 	private void fillInAuthors(TableHelper table) {
 		String roleAll = table.getRandomRowEntry("[role all]");
 		String familyName = table.getRandomRowEntry("[Person]");
@@ -449,7 +450,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInAuthors(roleAll, familyName, multipleAuthors, organisation, orgAddress);
 	}
 	
-	// PM-36
+	// PM-36, PM-65
 	private void fillInAuthors(String roleAll, String familyName, String multipleAuthors, String organisation, String orgAddress) {
 		personFamilyNameBox.sendKeys(familyName);
 		hideAllSuggestions();
@@ -496,7 +497,7 @@ public class FullSubmissionPage extends BasePage {
 		}
 	}
 
-	// PM-36, PM-112
+	// PM-36, PM-112, (PM-65)
 	private void fillInPersonInfo(String author) {
 		personFamilyNameBox.sendKeys(author);
 		hideAllSuggestions();
@@ -505,7 +506,7 @@ public class FullSubmissionPage extends BasePage {
 		hideAllSuggestions();
 	}
 	
-	// PM-38, PM-114
+	// PM-38, PM-114, PM-67
 	private void fillInContent(TableHelper table) {
 		String keywords = table.getRandomRowEntry("[free keywords]");
 		String abstractText = table.getRandomRowEntry("[abstract]");
@@ -526,7 +527,7 @@ public class FullSubmissionPage extends BasePage {
 		}
 	}
 	
-	// PM-38, PM-114
+	// PM-38, PM-114, PM-67
 	private void fillInContent(String keywords, String classificationType, String classificationValue, String abstractText, String abstractLanguage) {
 		contentKeywordsBox.sendKeys(keywords);
 		Select classificationSelect = new Select(classificationDropdown);
@@ -538,13 +539,14 @@ public class FullSubmissionPage extends BasePage {
 		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
 	}
 	
-	// PM-38, PM-114
+	// PM-38, PM-114, PM-67
 	private void fillInContent() {
 		fillInContent("test, QA, INGe", "DDC", "", "some abstract", "eng - English");
 	}
 	
 	// PM-40, PM-41, PM-42, PM-44, PM-45, PM-46, PM-48
 	// PM-115, PM-116, PM-117, PM-118, PM-119, PM-120, PM-121, PM-122, PM-124
+	// PM-68, PM-69, PM-70, PM-71, PM-72, PM-73, PM-74, PM-77
 	private void fillInDetails(TableHelper table) {
 		String datePrint = table.getRandomRowEntry("[Date published in print valid]");
 		String dateOnline = table.getRandomRowEntry("[Date published online valid]");
@@ -601,6 +603,7 @@ public class FullSubmissionPage extends BasePage {
 	}
 	
 	// PM-40, PM-41, PM-42, PM-44, PM-45
+	// PM-69, PM-70, PM-71, PM-72, PM-73, PM-74
 	private void fillInDates(String print, String online, String accepted, String submitted, String modified, String created) {
 		datePrint.sendKeys(print);
 		dateOnline.sendKeys(online);
@@ -610,6 +613,7 @@ public class FullSubmissionPage extends BasePage {
 		dateCreated.sendKeys(created);
 	}
 	// PM-46, PM-48
+	// PM-68, PM-77
 	private void fillInPublication(String publicationLanguage, String pageNumber, String identifierType, String identifierValue) {
 		publicationLanguageBox.sendKeys(publicationLanguage);
 		hideAllSuggestions();
@@ -621,6 +625,7 @@ public class FullSubmissionPage extends BasePage {
 	
 	// PM-40, PM-41, PM-42, PM-44, PM-45, PM-46, PM-48
 	// PM-116, PM-117, PM-118, PM-119, PM-120, PM-121, PM-122, PM-124
+	// PM-69, PM-70, PM-71, PM-72, PM-73, PM-74, PM-77
 	private void fillInDetails() {
 		datePrint.sendKeys("2016-06-06");
 		dateOnline.sendKeys("2016-05-05");
@@ -656,7 +661,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInEvent("Test Conference", "Munich", "2016-01-01", "2016-01-02");
 	}
 	
-	// PM-50, PM-125
+	// PM-50, PM-125, PM-78
 	private void fillInProject(TableHelper table) {
 		String projectName = table.getRandomRowEntry("[Project name]");
 		String grantID = table.getRandomRowEntry("[Grant ID]");
@@ -664,7 +669,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInProject(projectName, grantID, fundingProgram);
 	}
 	
-	// PM-50, PM-125
+	// PM-50, PM-125, PM-78
 	private void fillInProject(String projectName, String grantID, String fundingProgram) {
 		projectNameBox.sendKeys(projectName);
 		grantIDBox.sendKeys(grantID);
@@ -672,16 +677,17 @@ public class FullSubmissionPage extends BasePage {
 		hideAllSuggestions();
 	}
 	
-	// PM-50, PM-125
+	// PM-50, PM-125, PM-78
 	private void fillInProjectInfo() {
 		fillInProject("Test Project", "1", "Funding Programme 7 (FP7) - European Commission (EC)");
 	}
 	
-	//PM-115
+	//PM-115, PM-68
 	private void fillInLanguage() {
 		languageBox.sendKeys("eng");
 	}
 	
+	// PM-79, PM-80
 	private void fillInSourceIndependent(TableHelper table) {
 		String genreSource = table.getRandomRowEntry("[genre source]");
 		String titleSource = table.getRandomRowEntry("[title source]");
@@ -789,7 +795,7 @@ public class FullSubmissionPage extends BasePage {
 		fillInSourceIdentifier(identifierSource, identifierValue, issueSource, startPageSource, endPageSource);
 	}
 	
-	// PM-51, PM-52
+	// PM-51, PM-52, PM-79, PM-80
 	private void fillInSourceBasics(String genreSource, String titleSource, String roleSource, String personSource,
 			String orgSource, String orgAddrSource) {
 		Select genreSourceSelect = new Select(sourceGenreDropdown);
@@ -812,7 +818,7 @@ public class FullSubmissionPage extends BasePage {
 		sourceCreatorOrgAddrBox.sendKeys(orgAddrSource);
 	}
 	
-	// PM-53
+	// PM-53, PM-81
 	private void fillInSourceDetails(String volumeSource, String numPagesSource, String publisherSource, String placeSource) {
 		sourceVolumeBox.sendKeys(volumeSource);
 		sourcePageNrBox.sendKeys(numPagesSource);
@@ -858,7 +864,7 @@ public class FullSubmissionPage extends BasePage {
 		sourceStartPageBox.sendKeys(startPageSource);
 	}
 	
-	// PM-51, PM-52, PM-53
+	// PM-51, PM-52, PM-53, PM-79, PM-80, PM-81
 	private void fillInSource() {
 		fillInSourceBasics("Book", "Test Book", "Author", "Testermann, Testo (MPI for Social Anthropology, Max Planck Society)",
 				"MPI for Social Anthropology, Max Planck Society", "");
