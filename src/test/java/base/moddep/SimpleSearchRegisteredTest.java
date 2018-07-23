@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import main.java.pages.StartPage;
-import main.java.pages.homepages.DepositorHomePage;
+import main.java.pages.homepages.CombinedHomePage;
 import main.java.pages.search.SearchResultsPage;
 import test.java.base.BaseLoggedInUserTest;
 
@@ -20,7 +20,7 @@ public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 
 	private String searchQuery = "test";
 	
-	private DepositorHomePage depositorHomePage;
+	private CombinedHomePage combinedHomePage;
 	
 	@BeforeClass
 	public void setup() {
@@ -29,14 +29,13 @@ public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 1)
 	public void logInAsCombinedUser() {
-		//TODO: Login as combined user
-		depositorHomePage = new StartPage(driver).loginAsDepositor(depositorUsername, depositorPassword);
+		combinedHomePage = new StartPage(driver).loginAsCombinedUser(modDepUsername, modDepPassword);
 	}
 	
 	@Test(priority = 2)
 	public void noSearchCriteriaTest() {
-		String expectedHeadline = depositorHomePage.getHeadline();
-		SearchResultsPage searchResultsPage = depositorHomePage.quickSearch("");
+		String expectedHeadline = combinedHomePage.getHeadline();
+		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch("");
 		String headlineText = searchResultsPage.getHeadline();
 		searchResultsPage.goToStartPage();
 		
@@ -45,8 +44,8 @@ public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void simpleSearchTest() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		SearchResultsPage searchResultsPage = depositorHomePage.quickSearch(searchQuery);
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch(searchQuery);
 		String headlineText = searchResultsPage.getHeadline();
 		try {
 			Assert.assertEquals(headlineText, "Search Results");
@@ -60,8 +59,8 @@ public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 2)
 	public void onlyPublishedItems() {
-		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
-		SearchResultsPage searchResultsPage = depositorHomePage.quickSearch(searchQuery);
+		combinedHomePage = (CombinedHomePage) new StartPage(driver).goToHomePage(combinedHomePage);
+		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch(searchQuery);
 		boolean allReleased = searchResultsPage.allResultsReleased();
 		Assert.assertTrue(allReleased, "An item in search results has not been released.");
 	}
