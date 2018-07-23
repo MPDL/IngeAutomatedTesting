@@ -59,6 +59,13 @@ public class SearchResultsPage extends BasePage {
 		return searchResults.size();
 	}
 	
+	/**
+	 * Checks if all visible Search Result Items of the first page have the state 'Released'. <br>
+	 * 
+	 * @return {@code true} if all Items of the first result page have the state released; <br>
+	 * 		   {@code true} if no result is shown; <br>
+     *         {@code false} otherwise.
+	 */
 	// (PM-105)
 	public boolean allResultsReleased() {
 		int serarchResultsCount = searchResults.size();

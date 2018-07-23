@@ -14,12 +14,14 @@ import test.java.base.BaseLoggedInUserTest;
  * Testcase #6
  * TestLink UC #8
  * 
+ * Assumes at least one item matching each search query is present
+ * 
  * @author helk
  *
  */
 public class AdministrativeSearchTest extends BaseLoggedInUserTest {
 
-	private String title = "test";
+	private String titleQuery = "Submission";
 	private CombinedHomePage combinedHomePage;
 	
 	@BeforeClass
@@ -35,7 +37,7 @@ public class AdministrativeSearchTest extends BaseLoggedInUserTest {
 	@Test(priority=2)
 	public void administrativeSearchTest() {
 		AdministrativeSearchPage administrativeSearchPage = combinedHomePage.goToAdministrativeSearchPage();
-		SearchResultsPage searchResultsPage = administrativeSearchPage.advancedSearch(title, "", "");
+		SearchResultsPage searchResultsPage = administrativeSearchPage.advancedSearch(titleQuery, "", "");
 		String headlineText = searchResultsPage.getHeadline();
 		try {
 			Assert.assertEquals(headlineText, "Search Results");
