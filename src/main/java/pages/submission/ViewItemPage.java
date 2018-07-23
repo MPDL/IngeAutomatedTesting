@@ -112,6 +112,7 @@ public class ViewItemPage extends BasePage {
 		return PageFactory.initElements(driver, MyItemsPage.class);
 	}
 	
+	// PM-137
 	public ViewItemPage discardItem() {
 		discardItemLink.click();
 		

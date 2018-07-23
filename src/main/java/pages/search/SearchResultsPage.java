@@ -59,6 +59,7 @@ public class SearchResultsPage extends BasePage {
 		return searchResults.size();
 	}
 	
+	// (PM-105)
 	public boolean allResultsReleased() {
 		int serarchResultsCount = searchResults.size();
 		for (int i = 0; i < serarchResultsCount; i++) {

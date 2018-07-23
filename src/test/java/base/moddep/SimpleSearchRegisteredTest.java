@@ -9,6 +9,13 @@ import main.java.pages.homepages.DepositorHomePage;
 import main.java.pages.search.SearchResultsPage;
 import test.java.base.BaseLoggedInUserTest;
 
+/**
+ * Testcase #8
+ * TestLink UC #10
+ * 
+ * @author helk
+ *
+ */
 public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 
 	private String searchQuery = "test";
@@ -22,6 +29,7 @@ public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 	
 	@Test(priority = 1)
 	public void logInAsCombinedUser() {
+		//TODO: Login as combined user
 		depositorHomePage = new StartPage(driver).loginAsDepositor(depositorUsername, depositorPassword);
 	}
 	

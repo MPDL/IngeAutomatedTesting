@@ -40,6 +40,7 @@ public class SearchComponent {
 		return PageFactory.initElements(driver, AdvancedSearchPage.class);
 	}
 	
+	// PM-102
 	public SearchResultsPage quickSearch(String searchQuery) {
 		quickSearchBox.sendKeys(searchQuery);
 		includeFilesCheckBox.click();

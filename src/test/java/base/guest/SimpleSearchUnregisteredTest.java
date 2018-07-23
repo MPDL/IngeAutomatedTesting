@@ -4,10 +4,17 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import test.java.base.BaseTest;
 import main.java.pages.StartPage;
 import main.java.pages.search.SearchResultsPage;
+import test.java.base.BaseTest;
 
+/**
+ * Testcase #7
+ * TestLink UC #9
+ * 
+ * @author helk
+ *
+ */
 public class SimpleSearchUnregisteredTest extends BaseTest {
 
 	private String searchQuery = "test";

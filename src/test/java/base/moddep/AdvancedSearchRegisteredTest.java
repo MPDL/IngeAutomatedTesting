@@ -10,7 +10,10 @@ import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
 import test.java.base.BaseLoggedInUserTest;
 
-/*
+/**
+ * Testcase #10
+ * TestLink UC #12 
+ *
  * Assumes at least one item matching each search query is present
  */
 public class AdvancedSearchRegisteredTest extends BaseLoggedInUserTest {

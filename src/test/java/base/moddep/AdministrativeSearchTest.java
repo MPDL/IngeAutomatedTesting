@@ -10,6 +10,13 @@ import main.java.pages.search.AdministrativeSearchPage;
 import main.java.pages.search.SearchResultsPage;
 import test.java.base.BaseLoggedInUserTest;
 
+/**
+ * Testcase #6
+ * TestLink UC #8
+ * 
+ * @author helk
+ *
+ */
 public class AdministrativeSearchTest extends BaseLoggedInUserTest {
 
 	private String title = "test";

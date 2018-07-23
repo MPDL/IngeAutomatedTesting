@@ -68,6 +68,7 @@ public abstract class BasePage {
 		return PageFactory.initElements(driver, LoginPage.class);
 	}
 	
+	// PM-102
 	public SearchResultsPage quickSearch(String searchQuery) {
 		return searchComponent.quickSearch(searchQuery);
 	}

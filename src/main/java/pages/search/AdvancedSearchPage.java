@@ -33,6 +33,7 @@ public class AdvancedSearchPage extends BasePage {
 		PageFactory.initElements(driver,  this);
 	}
 	
+	// PM-141, PM-142, PM-106
 	public SearchResultsPage advancedSearch(String title, String author, String organisation) {
 		fillInTitle(title);
 		fillInAuthor(author);
