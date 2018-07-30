@@ -34,7 +34,7 @@ public class TestSuiteInitialisation {
 	private static Logger log4j = LogManager.getLogger(TestSuiteInitialisation.class.getName());
 	private static Properties properties;
 	
-	private static final String startPageURL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	private static final String startPageURL = "https://qa.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
 	private final String propertiesFileName = "ingeTestData";
 	
 	@Parameters({"browserType"})
