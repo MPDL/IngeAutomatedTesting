@@ -14,6 +14,8 @@ import test.java.base.BaseLoggedInUserTest;
  * Testcase #6
  * TestLink UC #8
  * 
+ * Search for non-published items. <br>
+ * 
  * Assumes at least one item matching each search query is present
  * 
  * @author helk
@@ -21,13 +23,15 @@ import test.java.base.BaseLoggedInUserTest;
  */
 public class AdministrativeSearchTest extends BaseLoggedInUserTest {
 
-	private String titleQuery = "Submission";
+	private String titleQuery = "Test";
 	private CombinedHomePage combinedHomePage;
 	
 	@BeforeClass
 	public void setup() {
 		super.setup();
 	}
+	
+	//TODO: Before tests: Create matching (Submission) items to search for, if not already existing.
 	
 	@Test(priority=1)
 	public void logInAsCombinedUser() {

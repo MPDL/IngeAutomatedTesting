@@ -14,12 +14,14 @@ import test.java.base.BaseLoggedInUserTest;
  * Testcase #10
  * TestLink UC #12 
  *
+ * Small Advanced Search Test. <br>
+ *
  * Assumes at least one item matching each search query is present
  */
 public class AdvancedSearchRegisteredTest extends BaseLoggedInUserTest {
 	
 	private String titleQuery = "Submission";
-	private String authorQuery = "Testermann";
+	private String authorQuery = "Test";
 	private String organisationQuery = "MPDL";
 	
 	private CombinedHomePage combinedHomePage;
@@ -28,6 +30,8 @@ public class AdvancedSearchRegisteredTest extends BaseLoggedInUserTest {
 	public void setup() {
 		super.setup();
 	}
+	
+	//TODO: Before tests: Create matching (Submission) items to search for, if not already existing.
 	
 	@Test(priority=1)
 	public void logInAsCombinedUser() {

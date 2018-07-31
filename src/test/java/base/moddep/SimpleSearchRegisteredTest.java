@@ -13,12 +13,14 @@ import test.java.base.BaseLoggedInUserTest;
  * Testcase #8
  * TestLink UC #10
  * 
+ * Small Quick Search Test. <br>
+ * 
  * @author helk
  *
  */
 public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 
-	private String searchQuery = "test";
+	private String searchQuery = "Test";
 	
 	private CombinedHomePage combinedHomePage;
 	
@@ -26,6 +28,8 @@ public class SimpleSearchRegisteredTest extends BaseLoggedInUserTest {
 	public void setup() {
 		super.setup();
 	}
+	
+	//TODO: Before tests: Create matching (Submission) items to search for, if not already existing.
 	
 	@Test(priority = 1)
 	public void logInAsCombinedUser() {

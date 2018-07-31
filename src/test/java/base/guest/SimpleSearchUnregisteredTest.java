@@ -12,17 +12,23 @@ import test.java.base.BaseTest;
  * Testcase #7
  * TestLink UC #9
  * 
+ * Small Quick Search Test without being logged in. <br>
+ * 
+ * Assumes at least one item matching each search query is present
+ * 
  * @author helk
  *
  */
 public class SimpleSearchUnregisteredTest extends BaseTest {
 
-	private String searchQuery = "test";
+	private String searchQuery = "Test";
 	
 	@BeforeClass
 	public void setup() {
 		super.setup();
 	}
+	
+	//TODO: Before tests: Create matching (Submission) items to search for, if not already existing.
 	
 	@Test
 	public void noSearchCriteriaTest() {
