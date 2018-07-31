@@ -42,6 +42,9 @@ public class FullSubmissionPage extends BasePage {
 	@FindBy(xpath = "//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]")
 	private WebElement personFamilyNameBox;
 	
+	@FindBy(xpath = "//input[contains(@id, '0:inppersons_person_given_name_optional')]")
+	private WebElement personGivenNameBox;
+	
 	@FindBy(id = "btnShowMultipleAuthors")
 	private WebElement addMultipleAuthorsLink;
 	
@@ -213,13 +216,28 @@ public class FullSubmissionPage extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	/**
+	 * Performe a FULL SUBMISSION filling in the minimal set of required fields. <br>
+	 * Uses 'Other' as Genre and sets the OrgNr to '1'.
+	 * 
+	 * @param title The titel of this submission
+	 * @param author The author of this submssion
+	 * @param organization The organization of this submission
+	 * @return
+	 */
+	public ViewItemPage fullSubmissionMinimal(String title, String author, String organization) {
+		fillInBasics("Other", title);
+		fillInPersonAndOrganization(author, "", "1", organization, "");
+		return save();
+	}
+	
 	// PM-22
 	// note: only the 'select by visible text' method is used in order to be able to validate afterwards
 	public ViewItemPage fullSubmission(String genre, String title, String author, String[] filepaths) {
 		fillInBasics(genre, title);
 		fillInGenericData(genre);
 		uploadFiles(filepaths);
-		fillInPersonInfo(author);
+		fillInPersonAndOrganization(author, "", "1", "MPI for Social Anthropology, Max Planck Society", "");
 		return save();
 	}
 	
@@ -498,12 +516,14 @@ public class FullSubmissionPage extends BasePage {
 	}
 
 	// PM-36, PM-112, (PM-65)
-	private void fillInPersonInfo(String author) {
-		personFamilyNameBox.sendKeys(author);
+	private void fillInPersonAndOrganization(String familyName, String givenName, String orgNr, String organization, String organizationAdress) {
+		personFamilyNameBox.sendKeys(familyName);
 		hideAllSuggestions();
-		orgNrBox.sendKeys("1");
-		orgNameBox.sendKeys("MPI for Social Anthropology, Max Planck Society");
+		personGivenNameBox.sendKeys(givenName);
+		orgNrBox.sendKeys(orgNr);
+		orgNameBox.sendKeys(organization);
 		hideAllSuggestions();
+		orgAddrBox.sendKeys(organizationAdress);
 	}
 	
 	// PM-38, PM-114, PM-67
