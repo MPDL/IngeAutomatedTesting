@@ -45,7 +45,7 @@ public abstract class BasePage {
 	protected MainMenuComponent mainMenuComponent;
 	protected SearchComponent searchComponent;
 	
-	private final int EXPLICIT_TIMEOUT = 200;
+	private final int EXPLICIT_TIMEOUT = 20;
 	
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
@@ -159,7 +159,6 @@ public abstract class BasePage {
 	  fileName = "/" + fileName;
       String filepath = getClass().getResource(fileName).getPath();
       String os = System.getProperty("os.name");
-      System.out.println("OS " + os);
       if (driver instanceof FirefoxDriver) {
         if (os.startsWith("Windows")) {
           filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
@@ -170,8 +169,7 @@ public abstract class BasePage {
           filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
         }
       }
-        
-      System.out.println("filepath: " + filepath);
+      
       return filepath;
 	}
 	
