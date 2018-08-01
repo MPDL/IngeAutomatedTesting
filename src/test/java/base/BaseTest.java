@@ -95,7 +95,6 @@ public abstract class BaseTest {
 	  fileName = "/" + fileName;
       String filepath = getClass().getResource(fileName).getPath();
       String os = System.getProperty("os.name");
-      System.out.println("OS " + os);
       if (driver instanceof FirefoxDriver) {
         if (os.startsWith("Windows")) {
           filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
@@ -106,8 +105,7 @@ public abstract class BaseTest {
           filepath = filepath.substring(1, filepath.length()).replace('/', File.separatorChar);
         }
       }
-        
-      System.out.println("filepath: " + filepath);
+      
       return filepath;
 	}
 	
@@ -136,14 +134,13 @@ public abstract class BaseTest {
 	public void failureScreenshot(ITestResult result) {
 		if (result.getStatus() == ITestResult.FAILURE) {
 			try {
-				String screenshotPath = "./target/screenshot" + result.getName() + ".jpg";
+				String screenshotPath = "./target/Screenshot_" + result.getName() + ".jpg";
 				File screenshot = ((TakesScreenshot) driver).getScreenshotAs(org.openqa.selenium.OutputType.FILE);
 				FileUtils.copyFile(screenshot, new File(screenshotPath));
 			}
 			catch (IOException exc) {}
 			
-			log4j.error(result.getName() + ": ");
-			log4j.error(result.getThrowable().getMessage());
+			log4j.error(result.getName() + ": " + result.getThrowable().getMessage());
 		}
 	}
 	
