@@ -3,6 +3,8 @@ package test.java.base.moddep;
 import java.util.Map;
 
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -242,4 +244,16 @@ public class FullStandardSourceDependentBookTest extends BaseLoggedInUserTest {
 		ViewItemPage viewItem = combinedHomePage.openReleasedItemByTitle(releasedTitle);
 		viewItem = viewItem.discardItem();
 	}
+	
+	/**
+	 * If any method fails, save the randomly generated data for reproducibility.
+	 */
+	@AfterClass
+	public void saveDataAfterFailure(ITestContext context) {
+		if (context.getFailedTests().size() > 0) {
+			String testOutputPath = "./target/" + this.getClass().getSimpleName() + ".txt";
+			table.writeContentsToFile(testOutputPath);
+		}
+	}
+	
 }
