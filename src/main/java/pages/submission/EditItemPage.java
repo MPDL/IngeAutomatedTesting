@@ -78,13 +78,12 @@ public class EditItemPage extends BasePage {
 	public ViewItemPage addAuthor(String nextAuthorFamilyName) {		
 		int creatorCount = authors.findElements(By.xpath(".//select[contains(@id, 'selCreatorRoleString')]")).size();
 		
-		WebElement addNextAuthor = authors.findElement(By.xpath(".//input[@id='form1:j_idt512:" + (creatorCount-1) + ":btnAddCreator']"));
+		WebElement addNextAuthor = authors.findElement(By.xpath("(.//input[contains(@id, 'btnAddCreator') and @title='Add Creator'])[" + creatorCount + "]"));
 		wait.until(ExpectedConditions.elementToBeClickable(addNextAuthor));
 		addNextAuthor.click();
 		
-		String nextFamilyNameBoxXPath = "//input[@id='form1:j_idt512:" + creatorCount + ":inpcreator_persons_person_family_name_optional']";
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(nextFamilyNameBoxXPath)));
-		WebElement nextFamilyNameBox = authors.findElement(By.xpath("." + nextFamilyNameBoxXPath));
+		WebElement nextFamilyNameBox = authors.findElement(By.xpath("(.//input[contains(@id, 'inpcreator_persons_person_family_name_optional')])[" + (creatorCount+1) + "]"));
+		wait.until(ExpectedConditions.elementToBeClickable(nextFamilyNameBox));
 		nextFamilyNameBox.sendKeys(nextAuthorFamilyName);
 		
 		//If the first option of the suggestion-menu should be selected, use the following code:
