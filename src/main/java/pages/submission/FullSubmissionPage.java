@@ -556,6 +556,7 @@ public class FullSubmissionPage extends BasePage {
 		hideAllSuggestions();
 		abstractBox.sendKeys(abstractText);
 		Select abstractLanguageSelect = new Select(abstractLanguageBox);
+		abstractLanguageBox.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text() = '"+ abstractLanguage +"']")));
 		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
 	}
