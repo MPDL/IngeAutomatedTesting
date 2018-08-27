@@ -555,9 +555,11 @@ public class FullSubmissionPage extends BasePage {
 		classificationValueBox.sendKeys(classificationValue);
 		hideAllSuggestions();
 		abstractBox.sendKeys(abstractText);
-		Select abstractLanguageSelect = new Select(abstractLanguageBox);
-		abstractLanguageBox.click();
-		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
+		
+		//FIXME: Sometimes selectByVisibleText() for the language-Select-Box leads in all tests to an Exception: "Cannot locate element with text: eng - English". Cause: unknown.
+//		Select abstractLanguageSelect = new Select(abstractLanguageBox);
+//		abstractLanguageBox.click();
+//		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
 	}
 	
 	// PM-38, PM-114, PM-67
