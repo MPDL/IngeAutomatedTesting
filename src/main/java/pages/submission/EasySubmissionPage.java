@@ -206,7 +206,10 @@ public class EasySubmissionPage extends BasePage {
 	      fileURLBox.sendKeys(fileURL);
 	      WebElement uploadFileURL = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:btnEditItemUpload"));
 	      uploadFileURL.click();
-	        
+	      
+	      //Wait until the page is loaded after the upload of the file, by checking weather any 'old' element is now stale on the new page
+	      wait.until(ExpectedConditions.stalenessOf(uploadFileURL));
+	      
 	      contentCategoryDropdown = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:1:selContentCategory"));
 	      contentCategorySelect = new Select(contentCategoryDropdown);
 	      contentCategorySelect.selectByVisibleText(contentCategory);
