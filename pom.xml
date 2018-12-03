@@ -27,6 +27,10 @@
 	  					<suiteXmlFile>res/firefoxPubManSuite.xml</suiteXmlFile>
 <!-- 	  					<suiteXmlFile>res/chromePubManSuite.xml</suiteXmlFile> -->
 	  				</suiteXmlFiles>
+	  				<systemPropertyVariables>
+						<webdriver.gecko.driver>${project.basedir}/drivers/${geckodriver.binary.name}</webdriver.gecko.driver>
+						<webdriver.chrome.driver>${project.basedir}/drivers/${chromedriver.binary.name}</webdriver.chrome.driver>
+					</systemPropertyVariables>
 	  			</configuration>
 			</plugin>
 			<plugin>
@@ -37,6 +41,46 @@
 	  				<source>1.7</source>
 	  				<target>1.7</target>
 	  			</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.webdriverextensions</groupId>
+				<artifactId>webdriverextensions-maven-plugin</artifactId>
+				<version>3.1.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>install-drivers</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<drivers>
+						<driver>
+							<name>geckodriver</name>
+							<platform>windows</platform>
+							<bit>64</bit>
+							<version>0.23.0</version>
+						</driver>
+						<driver>
+							<name>geckodriver</name>
+							<platform>linux</platform>
+							<bit>64</bit>
+							<version>0.23.0</version>
+						</driver>
+						<driver>
+							<name>chromedriver</name>
+							<platform>windows</platform>
+							<bit>32</bit>
+							<version>2.43</version>
+						</driver>
+						<driver>
+							<name>chromedriver</name>
+							<platform>linux</platform>
+							<bit>64</bit>
+							<version>2.43</version>
+						</driver>
+					</drivers>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -108,4 +152,32 @@
 	    <version>3.7</version>
 	</dependency>
   </dependencies>
+  
+  <profiles>
+  	<profile>
+			<id>windows_os</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<geckodriver.binary.name>geckodriver-windows-64bit.exe</geckodriver.binary.name>
+				<chromedriver.binary.name>chromedriver-windows-32bit.exe</chromedriver.binary.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>unix_os</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<geckodriver.binary.name>geckodriver-linux-64bit</geckodriver.binary.name>
+				<chromedriver.binary.name>chromedriver-linux-64bit</chromedriver.binary.name>
+			</properties>
+		</profile>
+  </profiles>
+  
 </project>
