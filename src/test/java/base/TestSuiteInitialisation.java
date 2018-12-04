@@ -16,7 +16,6 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -34,7 +33,9 @@ public class TestSuiteInitialisation {
 	private static Logger log4j = LogManager.getLogger(TestSuiteInitialisation.class.getName());
 	private static Properties properties;
 	
-	private static final String startPageURL = "https://qa.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	private static final boolean HEADLESS = true;
+	
+	private static final String startPageURL = "https://qa.pure.mpdl.mpg.de/pubman/faces/HomePage.jsp";
 	private final String propertiesFileName = "ingeTestData";
 	
 	@Parameters({"browserType"})
@@ -68,13 +69,19 @@ public class TestSuiteInitialisation {
 	
 	private FirefoxDriver initialiseFirefoxDriver() {
 		log4j.info("Launching Firefox browser...");
-		System.setProperty("webdriver.gecko.driver", "/" + System.getenv("geckodriver"));
-		FirefoxOptions options = new FirefoxOptions();
-		options.setCapability("marionette", true);
+		String geckoDriverSystemPropertyName = "webdriver.gecko.driver";
+		String geckodriverPath = System.getProperty(geckoDriverSystemPropertyName);
+		if(geckodriverPath != null) {
+			log4j.info("Found system property '" + geckoDriverSystemPropertyName + "': " + geckodriverPath);
+		}else {
+			log4j.error("System property '" + geckoDriverSystemPropertyName + "' not found.");
+		}
 		
+		FirefoxOptions options = new FirefoxOptions();
+		options.setCapability("marionette", true);		
 		FirefoxBinary binary = new FirefoxBinary();
 		options.setBinary(binary);
-		options.setHeadless(true);
+		options.setHeadless(HEADLESS);
 		FirefoxProfile profile = initFirefoxProfile();
 		options.setProfile(profile);
 
@@ -100,17 +107,28 @@ public class TestSuiteInitialisation {
 		return profile;
 	}
 	
-	/*
-	* TODO provide Jenkins with ChromeDriver
-	*/
 	private ChromeDriver initialiseChromeDriver() {
-		ChromeOptions options = new ChromeOptions();
-		options.setBinary("/" + System.getenv("chromeDriver"));
-		System.setProperty("webdriver.chrome.driver", "/" + System.getenv("chromeDriver"));
-		DesiredCapabilities chrome = DesiredCapabilities.chrome();
-		chrome.setCapability(ChromeOptions.CAPABILITY, options);
 		log4j.info("Launching Chrome browser...");
-		return new ChromeDriver();
+		String chromeDriverSystemPropertyName = "webdriver.chrome.driver";
+		String chromedriverPath = System.getProperty(chromeDriverSystemPropertyName);
+		if(chromedriverPath != null) {
+			log4j.info("Found system property '" + chromeDriverSystemPropertyName + "': " + chromedriverPath);
+		}else {
+			log4j.error("System property '" + chromeDriverSystemPropertyName + "' not found.");
+		}
+		
+		ChromeOptions options = new ChromeOptions();
+		options.setCapability("marionette", true);
+		options.setHeadless(HEADLESS);
+		options.addArguments("--window-size=1920,1200");
+		
+		// Without these two proxy-options the tests are very slow in headless mode:
+		// Set proxy-server -> 'direct://' means: Do not use a proxy for all connections
+		options.addArguments("--proxy-server='direct://'");
+		// Set which addresses should not be proxied -> * means: All. Do not use a proxy without any exception
+		options.addArguments("--proxy-bypass-list=*");
+		
+		return new ChromeDriver(options);
 	}
 	
 	private void loadProperties() throws FileNotFoundException {
