@@ -60,7 +60,7 @@ public class FullStandardJournalArticleTest extends BaseLoggedInUserTest {
 	@Test(priority = 1)
 	public void submitJournalArticle() {
 		loginCombined();
-		FullSubmissionPage fullSubmission = combinedHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
+		FullSubmissionPage fullSubmission = combinedHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
 		ViewItemPage viewItem = fullSubmission.fullSubmission("Journal Article", title, author, filepath);
 		String actualTitle = viewItem.getItemTitle();
 		

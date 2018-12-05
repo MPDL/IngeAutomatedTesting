@@ -36,6 +36,7 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.easySubmissionStandard();
 	}
 	
+	// PM-18, PM-19
 	public EasySubmissionPage goToEasySubmissionSimplePage() {
 		easySubmissionLink.click();
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
@@ -43,7 +44,7 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.easySubmissionSimple();
 	}
 	
-	// PM-22
+	// PM-18, PM-22
 	public FullSubmissionPage goToFullSubmissionStandardPage() {
 		fullSubmissionLink.click();
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
@@ -51,7 +52,7 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.fullSubmissionStandard();
 	}
 	
-	// PM-22
+	// PM-18, PM-22
 	public FullSubmissionPage goToFullSubmissionSimplePage() {
 		fullSubmissionLink.click();
 		CollectionSelectionPage collectionSelectionPage = PageFactory.initElements(driver, CollectionSelectionPage.class);
@@ -75,18 +76,4 @@ public class SubmissionPage extends BasePage {
 		return collectionSelectionPage.importSubmissionStandard();
 	}
 
-	// The depositor cannot choose between workflows, the moderator can.
-	// PM-22
-	public FullSubmissionPage depositorGoToFullSubmissionPage() {
-		fullSubmissionLink.click();
-		
-		return PageFactory.initElements(driver, FullSubmissionPage.class);
-	}
-	
-	// The depositor cannot choose between workflows, the moderator can.
-	public EasySubmissionPage depositorGoToEasySubmissionPage() {
-		easySubmissionLink.click();
-		
-		return PageFactory.initElements(driver, EasySubmissionPage.class);
-	}
 }

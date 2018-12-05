@@ -59,7 +59,7 @@ public class FullStandardSourceDependentBookTest extends BaseLoggedInUserTest {
 	@Test(priority = 1)
 	public void submitSourceDependentBook() {
 		loginCombined();
-		FullSubmissionPage fullSubmission = combinedHomePage.goToSubmissionPage().depositorGoToFullSubmissionPage();
+		FullSubmissionPage fullSubmission = combinedHomePage.goToSubmissionPage().goToFullSubmissionStandardPage();
 		viewItemPage = fullSubmission.fullSubmissionSrcDepBook(table);
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
