@@ -97,6 +97,8 @@ public class EasySubmissionPage extends BasePage {
         }
 		WebElement nextButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:lnkNext"));
 		nextButton.click();
+		
+		wait.until(ExpectedConditions.stalenessOf(nextButton));
 	}
 	
 	private void goToStepThree() {
@@ -107,6 +109,8 @@ public class EasySubmissionPage extends BasePage {
         }
 		WebElement nextButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep2Manual:lnkNext"));
 		nextButton.click();
+		
+		wait.until(ExpectedConditions.stalenessOf(nextButton));
 	}
 	
 	private ViewItemPage submit() {
@@ -187,7 +191,18 @@ public class EasySubmissionPage extends BasePage {
 		
 		WebElement visibilityDropdown = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:0:selFileVisibility"));
 		Select visibilitySelect = new Select(visibilityDropdown);
-		visibilitySelect.selectByVisibleText(visibility);
+		// When the visibility is 'Restricted' an IP Range has to be selected -> Bug in PubMan: In the easySubmission the IP Range can NOT be set
+		// Especially a problem for the despositor, he can not finish easy submission without IP Range being set
+		// For now: When the visibility is 'Restricted', set it to another visibility instead
+		if(visibility.equalsIgnoreCase("Restricted")) {
+			//FIXME: As soon as the Bug is fixed and the field is visible: Set the IP Range instead of setting another visibility + Add the IP Ranges value also to the data_table-file
+			visibilitySelect.selectByVisibleText("Public");
+//			WebElement ipRangesDropdown = driver.findElement(By.xpath("//select[contains(@id,'selFileAudienceIps')]"));
+//			Select ipRangesSelect = new Select(ipRangesDropdown);
+//			ipRangesSelect.selectByVisibleText("Max Planck Digital Library, München");
+		} else {
+			visibilitySelect.selectByVisibleText(visibility);
+		}
 		
 		WebElement descriptionBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:0:inpComponentDescription"));
 		descriptionBox.sendKeys(description);
