@@ -124,6 +124,10 @@ public class TableHelper {
 		return cellValue;
 	}
 	
+	public void setRowEntry(String key, String value) {
+		randomValueMap.put(key, value);
+	}
+	
 	public Map<String, String> getMap() {
 		return Collections.unmodifiableMap(randomValueMap);
 	}

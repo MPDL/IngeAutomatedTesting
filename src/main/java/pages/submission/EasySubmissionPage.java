@@ -165,6 +165,16 @@ public class EasySubmissionPage extends BasePage {
 		String filepath = table.getRandomRowEntry("[upload file]");
 		String contentCategory = table.getRandomRowEntry("[content category all]");
 		String visibility = table.getRandomRowEntry("[Visibility]");
+		
+		// When the visibility is 'Restricted' an IP Range has to be selected 
+		// -> Bug in Firefox: The drop-down menu options of the IP Range can NOT be selected
+		// For now: When the visibility is 'Restricted', set it to another visibility instead
+		if(visibility.equalsIgnoreCase("Restricted")) {
+			//FIXME: As soon as the Bug is fixed or there is a workaround: Set the IP Range instead of setting another visibility
+			table.setRowEntry("[Visibility]", "Public");
+			visibility = "Public";
+		}
+		
 		String description = table.getRandomRowEntry("[description file]");
 		String statement = table.getRandomRowEntry("[Copyright statement]");
 		String date = table.getRandomRowEntry("[Copyright Date]");
@@ -191,18 +201,9 @@ public class EasySubmissionPage extends BasePage {
 		
 		WebElement visibilityDropdown = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:0:selFileVisibility"));
 		Select visibilitySelect = new Select(visibilityDropdown);
-		// When the visibility is 'Restricted' an IP Range has to be selected -> Bug in PubMan: In the easySubmission the IP Range can NOT be set
-		// Especially a problem for the despositor, he can not finish easy submission without IP Range being set
-		// For now: When the visibility is 'Restricted', set it to another visibility instead
-		if(visibility.equalsIgnoreCase("Restricted")) {
-			//FIXME: As soon as the Bug is fixed and the field is visible: Set the IP Range instead of setting another visibility + Add the IP Ranges value also to the data_table-file
-			visibilitySelect.selectByVisibleText("Public");
-//			WebElement ipRangesDropdown = driver.findElement(By.xpath("//select[contains(@id,'selFileAudienceIps')]"));
-//			Select ipRangesSelect = new Select(ipRangesDropdown);
-//			ipRangesSelect.selectByVisibleText("Max Planck Digital Library, München");
-		} else {
-			visibilitySelect.selectByVisibleText(visibility);
-		}
+		visibilitySelect.selectByVisibleText(visibility);
+		//TODO: Set the 'IP Range' drop-down menu if the visibility='Restricted' (As soon as Firefox-Bug (#4) is fixed)
+		//FIXME: There is also a Bug in PubMan (In the easySubmission the IP Range can NOT be set), which has to be fixed before 'IP Range' can be selected!
 		
 		WebElement descriptionBox = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:fileUploads:0:inpComponentDescription"));
 		descriptionBox.sendKeys(description);
