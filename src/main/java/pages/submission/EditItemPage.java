@@ -14,9 +14,6 @@ public class EditItemPage extends BasePage {
 	@FindBy(id = "form1:inputTitleText")
 	private WebElement titleBox;
 	
-	@FindBy(id = "iterCreatorOrganisationAuthors")
-	private WebElement authors;
-	
 	@FindBy(xpath = "//input[contains(@id, '0:inpcreator_persons_person_family_name_optional')]")
 	private WebElement personFamilyNameBox;
 	
@@ -75,13 +72,17 @@ public class EditItemPage extends BasePage {
 	 * @param nextAuthorFamilyName familyName of the author to add
 	 * @return the ViewItemPage
 	 */
-	public ViewItemPage addAuthor(String nextAuthorFamilyName) {		
+	public ViewItemPage addAuthor(String nextAuthorFamilyName) {
+		WebElement authors = driver.findElement(By.id("iterCreatorOrganisationAuthors"));
 		int creatorCount = authors.findElements(By.xpath(".//select[contains(@id, 'selCreatorRoleString')]")).size();
 		
 		WebElement addNextAuthor = authors.findElement(By.xpath("(.//input[contains(@id, 'btnAddCreator') and @title='Add Creator'])[" + creatorCount + "]"));
 		wait.until(ExpectedConditions.elementToBeClickable(addNextAuthor));
 		addNextAuthor.click();
 		
+		wait.until(ExpectedConditions.stalenessOf(authors));
+		
+		authors = driver.findElement(By.id("iterCreatorOrganisationAuthors"));
 		WebElement nextFamilyNameBox = authors.findElement(By.xpath("(.//input[contains(@id, 'inpcreator_persons_person_family_name_optional')])[" + (creatorCount+1) + "]"));
 		wait.until(ExpectedConditions.elementToBeClickable(nextFamilyNameBox));
 		nextFamilyNameBox.sendKeys(nextAuthorFamilyName);
