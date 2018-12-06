@@ -10,10 +10,10 @@ import main.java.pages.submission.ViewItemPage;
 
 public class FetchMetadataPage extends BasePage {
 
-	@FindBy(id = "form1:j_idt545:0:inporganizations_organization_name")
-	private WebElement organisationBox;
+	@FindBy(xpath = "//textarea[contains(@id, '0:inporganizations_organization_name')]")
+	private WebElement orgNameBox;
 	
-	@FindBy(id = "form1:j_idt497:0:inppersons_person_ous_optional")
+	@FindBy(xpath = "//input[contains(@id, '0:inppersons_person_ous_optional')]")
 	private WebElement orgNrBox;
 	
 	@FindBy(id = "form1:lnkSaveAndSubmit")
@@ -33,7 +33,7 @@ public class FetchMetadataPage extends BasePage {
 	}
 	
 	private void fillInAdditionalData() {
-		organisationBox.sendKeys("Institute for Theoretical Physics II ");
+		orgNameBox.sendKeys("Institute for Theoretical Physics II ");
 		orgNrBox.sendKeys("1");
 	}
 }
