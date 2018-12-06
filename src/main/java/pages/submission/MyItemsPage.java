@@ -3,11 +3,11 @@ package main.java.pages.submission;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import main.java.pages.BasePage;
@@ -53,14 +53,14 @@ public class MyItemsPage extends BasePage {
 	}
 	
 	public boolean exportItem(String itemTitle, String value) {
-		try {
+		List<WebElement> exportLinks = driver.findElements(By.xpath("//a[contains(@id, 'lnkChangeSubmenuToExport')]"));
+		if(exportLinks.size() > 0) {
+			WebElement exportLink = exportLinks.get(0);
 			exportLink.click();
+			wait.until(ExpectedConditions.stalenessOf(exportLink));
 			PageFactory.initElements(driver, this);
 		}
-		catch (NoSuchElementException exc) {
-			// export submenu already open: do nothing
-			// TODO this is only a temporary solution, design a fix
-		}
+		//else: export submenu already open -> do nothing
 			
 		Select formatSelect = new Select(formatDropdown);
 		formatSelect.selectByValue(value);
