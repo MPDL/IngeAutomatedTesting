@@ -13,6 +13,9 @@ import main.java.pages.submission.MultipleImportPage;
 
 public class CollectionSelectionPage extends BasePage {
 	
+	//TODO: Set the names of the two contexts in TestSuiteInitialisation. 
+	// The names must match with the test-contexts created in the admintool!
+	
 	@FindBy(linkText = "Test Context Simple Workflow")
 	private WebElement simpleTestContext;
 	

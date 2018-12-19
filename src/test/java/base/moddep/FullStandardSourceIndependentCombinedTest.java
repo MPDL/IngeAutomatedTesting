@@ -25,7 +25,7 @@ import test.java.base.TableHelper;
  * @author helk
  *
  */
-public class FullStandardSourceIndependentTest extends BaseLoggedInUserTest {
+public class FullStandardSourceIndependentCombinedTest extends BaseLoggedInUserTest {
 
 	private CombinedHomePage combinedHomePage;
 	private StartPage startPage;

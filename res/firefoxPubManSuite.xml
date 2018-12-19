@@ -20,7 +20,7 @@
 <!--
 -->
 			<class name="test.java.base.depositor.FullStandardBookDeterministicTest"></class>
-			<class name="test.java.base.moddep.FullStandardSourceIndependentTest"></class>
+			<class name="test.java.base.moddep.FullStandardSourceIndependentCombinedTest"></class>
 			<class name="test.java.base.moddep.FullStandardSourceDependentTest"></class>
 			<class name="test.java.base.moddep.FullStandardSourceDependentBookTest"></class>
 			<class name="test.java.base.depositor.FullStandardSourceIndependentTest"></class>
@@ -28,7 +28,7 @@
 			<class name="test.java.base.depositor.FullStandardDegreeTest"></class>
 			<class name="test.java.base.moddep.FullStandardJournalArticleTest"></class>
 <!--
--->			
+-->
 			<class name="test.java.base.guest.SimpleSearchUnregisteredTest"></class>
 			<class name="test.java.base.moddep.SimpleSearchRegisteredTest"></class>
 			<class name="test.java.base.guest.AdvancedSearchUnregisteredTest"></class>
