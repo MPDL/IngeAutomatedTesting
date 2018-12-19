@@ -131,6 +131,8 @@ public class EasySubmissionPage extends BasePage {
 		WebElement saveButton = driver.findElement(By.id("form1:lnkSave"));
 		saveButton.click();
 		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@id, 'lnkEdit')]")));
+		
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
 	

@@ -567,7 +567,7 @@ public class FullSubmissionPage extends BasePage {
 		hideAllSuggestions();
 		abstractBox.sendKeys(abstractText);
 		
-		//FIXME: Sometimes selectByVisibleText() for the language-Select-Box leads in all tests to an Exception: "Cannot locate element with text: eng - English". Cause: unknown.
+		//FIXME: Sometimes selectByVisibleText() for the language-Select-Box leads in all tests to an Exception: "Cannot locate element with text: eng - English". Cause: #4.
 //		Select abstractLanguageSelect = new Select(abstractLanguageBox);
 //		abstractLanguageBox.click();
 //		abstractLanguageSelect.selectByVisibleText(abstractLanguage);
@@ -908,9 +908,7 @@ public class FullSubmissionPage extends BasePage {
 	private ViewItemPage save() {
 		saveButton.click();
 		
-		//TODO: Handle this wait in a more generic way
-		//Use the headline 'Item' to check that the ViewItem page is loaded
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("\\h1[contains(text(),'Item')]")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@id, 'lnkEdit')]")));
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}
