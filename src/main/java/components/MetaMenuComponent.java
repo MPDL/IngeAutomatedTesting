@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.log4testng.Logger;
 
 import main.java.pages.StartPage;
@@ -35,7 +37,11 @@ public class MetaMenuComponent {
 	// PM-91, PM-92
 	public StartPage logout() {
 		if(driver.findElements(By.xpath("//input[contains(@id, 'lnkLogin')]")).isEmpty()) {
-			logoutButton.click();		
+			WebElement logoutButton = driver.findElement(By.xpath("//input[contains(@id, 'lnkLogout')]"));
+			logoutButton.click();
+			
+			new WebDriverWait(driver, 20).until(ExpectedConditions.stalenessOf(logoutButton));
+			
 			return PageFactory.initElements(driver, StartPage.class);
 		}else {
 			log4j.error("User already logged out.");

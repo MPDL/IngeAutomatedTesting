@@ -24,7 +24,7 @@ public abstract class BaseLoggedInUserTest extends BaseTest{
 	// PM-91
 	@AfterClass
 	public StartPage logout() {
-		HomePage homePage = navigateToHomePage();		
+		HomePage homePage = navigateToHomePage();
 		return homePage.logout();
 	}
 	
