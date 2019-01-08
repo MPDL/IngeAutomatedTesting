@@ -49,10 +49,11 @@ public class SearchComponent {
 	// PM-102
 	public SearchResultsPage quickSearch(String searchQuery) {
 		quickSearchBox.sendKeys(searchQuery);
-		includeFilesCheckBox.click();		
+		includeFilesCheckBox.click();
+		WebElement staleElement = driver.findElement(By.xpath("//input[contains(@id, 'btnQuickSearchStart')]"));
 		quickSearchButton.click();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Search Results')]")));
+		wait.until(ExpectedConditions.stalenessOf(staleElement));
 		
 		return PageFactory.initElements(driver, SearchResultsPage.class);
 	}
