@@ -80,11 +80,6 @@ public class EasyArticleDeterministicTest extends BaseLoggedInUserTest {
 	public void moderatorDiscardsSubmission() {
 		moderatorHomePage = (ModeratorHomePage) new StartPage(driver).goToHomePage(moderatorHomePage);
 		viewItemPage = moderatorHomePage.openReleasedItemByTitle(title);
-		try {
-          Thread.sleep(250);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
 		viewItemPage = viewItemPage.discardItem();
 	}
 }

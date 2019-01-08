@@ -38,6 +38,7 @@ public class MyItemsPage extends BasePage {
 	public ViewItemPage openItemByTitle(String itemTitle) {
 		WebElement itemLink = driver.findElement(By.cssSelector("a[title='" + itemTitle + "']"));
 		itemLink.click();
+		wait.until(ExpectedConditions.stalenessOf(itemLink));
 			
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}

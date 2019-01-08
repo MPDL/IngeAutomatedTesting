@@ -5,10 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VisualEditor {
 
 	private WebDriver driver;
+	private WebDriverWait wait;
 	
 	@FindBy(id = "styleMenuUl")
 	private WebElement hiddenMenu;
@@ -21,6 +24,7 @@ public class VisualEditor {
 	
 	public VisualEditor(WebDriver driver) {
 		this.driver = driver;
+		wait = new WebDriverWait(driver, 20);
 		
 		PageFactory.initElements(driver, this);
 	}
@@ -56,11 +60,9 @@ public class VisualEditor {
 	
 	private void saveStyle() {
 		styleMenu.click();
-		try {
-	      Thread.sleep(1000);
-	    } catch (InterruptedException e) {
-	      e.printStackTrace();
-	    }
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Save Style")));
+		
 		hiddenMenu.findElement(By.cssSelector("ul li:nth-of-type(3)")).click();
 	}
 }

@@ -25,6 +25,7 @@ import main.java.pages.search.AdvancedSearchPage;
 import main.java.pages.search.SearchResultsPage;
 import main.java.pages.submission.ViewItemPage;
 import main.java.pages.tools.ToolsPage;
+import test.java.base.SeleniumWrapper;
 
 /**
  * Components and actions common to every QA-PubMan page.
@@ -98,11 +99,6 @@ public abstract class BasePage {
 		itemTitle = "\"" + itemTitle + "\"";
 		
 		SearchResultsPage searchResultsPage = searchComponent.quickSearch(itemTitle);
-		try {
-	      Thread.sleep(250);
-	    } catch (InterruptedException e) {
-	      e.printStackTrace();
-	    }
 		
 		if(searchResultsPage.getResultCount() > 1) {
 			log4j.warn("More than one item with " + itemTitle + " found.");
@@ -123,12 +119,11 @@ public abstract class BasePage {
 	
 	public Object openLinkNewWindow(WebElement link, Object PageType) {
 		String firstHandle = driver.getWindowHandle();
+		int oldWindowCount = driver.getWindowHandles().size();
 		link.click();
-		try {
-          Thread.sleep(250);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
+		
+		wait.until(SeleniumWrapper.newWindowOpened(oldWindowCount));
+		
 		Set<String> windowHandles = driver.getWindowHandles();
 		windowHandles.remove(firstHandle);
 		for(String winHandle : driver.getWindowHandles()){

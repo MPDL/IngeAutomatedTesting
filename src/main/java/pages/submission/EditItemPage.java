@@ -37,11 +37,6 @@ public class EditItemPage extends BasePage {
 	
 	// PM-131, PM-135
 	public ViewItemPage editItem() {
-  	    try {
-          Thread.sleep(250);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
 		editDescription(" (revised by moderator)");
 		saveButton.click();
 		

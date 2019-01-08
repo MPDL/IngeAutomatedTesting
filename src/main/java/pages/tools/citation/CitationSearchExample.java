@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CitationSearchExample {
 
 	private WebDriver driver;
+	private WebDriverWait wait;
 	
 	@FindBy(id = "styleFormatInputControls")
 	private WebElement styleFormat;
@@ -25,21 +26,19 @@ public class CitationSearchExample {
 	
 	public CitationSearchExample(WebDriver driver) {
 		this.driver = driver;
+		this.wait = new WebDriverWait(driver, 20);
 		
 		PageFactory.initElements(driver, this);
 	}
 	
 	public List<WebElement> getSearchResults() {
-		WebElement searchButton = styleFormat.findElement(By.id("searchButton"));
-		// sleep needed to ensure correct script execution
-		try {
-          Thread.sleep(2000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
+		wait.until(ExpectedConditions.elementToBeClickable(searchButton));
+		
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchButton);
-		WebElement allResults = driver.findElement(By.id("searchResults"));
-		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("featuredStyle")));
+		
+		WebElement allResults = driver.findElement(By.id("searchResults"));		
 		searchResults = allResults.findElements(By.tagName("table"));
 		
 		return searchResults;

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import main.java.pages.BasePage;
@@ -47,6 +48,7 @@ public class SearchResultsPage extends BasePage {
 		
 		WebElement titleLink = searchResults.get(0).findElement(By.xpath("//a[contains(@id, 'shortTitle')]"));
 		titleLink.click();
+		wait.until(ExpectedConditions.stalenessOf(titleLink));
 		
 		return PageFactory.initElements(driver, ViewItemPage.class);
 	}

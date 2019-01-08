@@ -1,13 +1,17 @@
 package main.java.pages.tools.citation;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CitationStyleEditor {
 
 	private WebDriver driver;
+	private WebDriverWait wait;
 	
 	private static CitationStyleEditor instance;
 	
@@ -22,6 +26,7 @@ public class CitationStyleEditor {
 	
 	public CitationStyleEditor(WebDriver driver) {
 		this.driver = driver;
+		wait = new WebDriverWait(driver, 20);
 		
 		PageFactory.initElements(driver, this);
 	}
@@ -34,11 +39,9 @@ public class CitationStyleEditor {
 	
 	public CitationSearchExample searchByExample() {
 		searchExampleLink.click();
-		try {
-          Thread.sleep(250);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
+		
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//title[text()='CSL Search by Example']")));
+		
 		return PageFactory.initElements(driver, CitationSearchExample.class);
 	}
 	
@@ -47,11 +50,6 @@ public class CitationStyleEditor {
 	}
 	
 	private CitationSearchName searchByName() {
-	    try {
-          Thread.sleep(2000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
 		searchByNameLink.click();
 		
 		return PageFactory.initElements(driver, CitationSearchName.class);

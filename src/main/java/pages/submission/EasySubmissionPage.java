@@ -90,11 +90,6 @@ public class EasySubmissionPage extends BasePage {
 	}
 	
 	private void goToStepTwo() {
-	    try {
-          Thread.sleep(500);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
 		WebElement nextButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep1Manual:lnkNext"));
 		nextButton.click();
 		
@@ -102,11 +97,6 @@ public class EasySubmissionPage extends BasePage {
 	}
 	
 	private void goToStepThree() {
-  	  try {
-          Thread.sleep(500);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
 		WebElement nextButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep2Manual:lnkNext"));
 		nextButton.click();
 		
@@ -114,12 +104,6 @@ public class EasySubmissionPage extends BasePage {
 	}
 	
 	private ViewItemPage submit() {
-  	    try {
-          Thread.sleep(500);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-  	    
 		// PM-89: switch to full submission mode
 		WebElement fullSubmissionButton = driver.findElement(By.id("form1:easySubmission:easySubmissionStep3Manual:lnkAddDetails"));
 		fullSubmissionButton.click();
@@ -138,11 +122,6 @@ public class EasySubmissionPage extends BasePage {
 	
 	// PM-84
 	private void fillInBasic(TableHelper table, GenreGroup genreGroup) {
-  	    try {
-          Thread.sleep(500);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
 	    log4j.debug("Table: " + table);
 	    for(Entry<String, String> entry : table.getMap().entrySet()) {
           log4j.debug("Table-Key: " + entry.getKey() + " - Table-Value: " + entry.getValue());

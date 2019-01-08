@@ -73,11 +73,6 @@ public class ViewItemPage extends BasePage {
 	}
 	
 	public ItemStatus getItemStatus() {
-  	    try {
-          Thread.sleep(250);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
         WebElement itemStatus = driver.findElement(By.className("statusIcon"));
 		String classNames = itemStatus.getAttribute("class");
 		if (classNames.contains("pendingItem"))
