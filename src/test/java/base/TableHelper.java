@@ -39,7 +39,7 @@ public class TableHelper {
 			data = dataTableFile.getSheetAt(0); // getting sheet site 1
 		}
 		catch (InvalidFormatException | IOException e) {
-		  e.printStackTrace();
+		  log4j.error("Error converting the data.", e);
 		}
 		finally {
 			if (dataTableFile != null) {

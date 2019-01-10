@@ -73,8 +73,8 @@ public abstract class BaseTest {
 		moderatorPassword = getPropertyValue("moderatorPassword");
 		
 		modDepName = getPropertyValue("modDepName");
-		modDepUsername = getPropertyValue("modDepUsername1");
-		modDepPassword = getPropertyValue("modDepPassword1");
+		modDepUsername = getPropertyValue("modDepUsername");
+		modDepPassword = getPropertyValue("modDepPassword");
 	}
 	
 	public String getPageHeadline() {

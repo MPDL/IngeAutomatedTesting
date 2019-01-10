@@ -15,6 +15,7 @@
 		<resources>
 			<resource>
 				<directory>res</directory>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 		<plugins>
@@ -154,30 +155,42 @@
   </dependencies>
   
   <profiles>
+  
   	<profile>
-			<id>windows_os</id>
-			<activation>
-				<os>
-					<family>windows</family>
-				</os>
-			</activation>
-			<properties>
-				<geckodriver.binary.name>geckodriver-windows-64bit.exe</geckodriver.binary.name>
-				<chromedriver.binary.name>chromedriver-windows-32bit.exe</chromedriver.binary.name>
-			</properties>
-		</profile>
-		<profile>
-			<id>unix_os</id>
-			<activation>
-				<os>
-					<family>unix</family>
-				</os>
-			</activation>
-			<properties>
-				<geckodriver.binary.name>geckodriver-linux-64bit</geckodriver.binary.name>
-				<chromedriver.binary.name>chromedriver-linux-64bit</chromedriver.binary.name>
-			</properties>
-		</profile>
+		<id>windows_os</id>
+		<activation>
+			<os>
+				<family>windows</family>
+			</os>
+		</activation>
+		<properties>
+			<geckodriver.binary.name>geckodriver-windows-64bit.exe</geckodriver.binary.name>
+			<chromedriver.binary.name>chromedriver-windows-32bit.exe</chromedriver.binary.name>
+		</properties>
+	</profile>
+	
+	<profile>
+		<id>unix_os</id>
+		<activation>
+			<os>
+				<family>unix</family>
+			</os>
+		</activation>
+		<properties>
+			<geckodriver.binary.name>geckodriver-linux-64bit</geckodriver.binary.name>
+			<chromedriver.binary.name>chromedriver-linux-64bit</chromedriver.binary.name>
+		</properties>
+	</profile>
+	
+	<profile>
+		<id>inge_gui_testing_passwords</id>
+		<properties>
+			<depositorPassword>Please define passwords in your settings.xml</depositorPassword>
+			<moderatorPassword>Please define passwords in your settings.xml</moderatorPassword>
+			<modDepPassword>Please define passwords in your settings.xml</modDepPassword>
+		</properties>
+	</profile>
+		
   </profiles>
   
 </project>

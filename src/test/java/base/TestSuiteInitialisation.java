@@ -1,9 +1,8 @@
 package test.java.base;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -31,12 +30,17 @@ public class TestSuiteInitialisation {
 
 	private static WebDriver driver;
 	private static Logger log4j = LogManager.getLogger(TestSuiteInitialisation.class.getName());
+	
+	/** properties file with required login information for test user and admin **/
+	public static final String propertiesFileName = "ingeTestData.properties";
 	private static Properties properties;
 	
 	private static final boolean HEADLESS = true;
 	
-	private static final String startPageURL = "https://qa.pure.mpdl.mpg.de/pubman/faces/HomePage.jsp";
-	private final String propertiesFileName = "ingeTestData";
+	private static final String QA_PURE_URL = "https://qa.pure.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	private static final String DEV_PURE_URL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	// The startPageURL defines on which server the selenium tests are executed!
+	private static final String startPageURL = QA_PURE_URL;
 	
 	@Parameters({"browserType"})
 	@BeforeSuite
@@ -69,6 +73,7 @@ public class TestSuiteInitialisation {
 	
 	private FirefoxDriver initialiseFirefoxDriver() {
 		log4j.info("Launching Firefox browser...");
+		// The system property webdriver.gecko.driver must be set to the webdriver-executable-file -> this is done by Maven!
 		String geckoDriverSystemPropertyName = "webdriver.gecko.driver";
 		String geckodriverPath = System.getProperty(geckoDriverSystemPropertyName);
 		if(geckodriverPath != null) {
@@ -109,6 +114,7 @@ public class TestSuiteInitialisation {
 	
 	private ChromeDriver initialiseChromeDriver() {
 		log4j.info("Launching Chrome browser...");
+		// The system property webdriver.chrome.driver must be set to the webdriver-executable-file -> this is done by Maven!
 		String chromeDriverSystemPropertyName = "webdriver.chrome.driver";
 		String chromedriverPath = System.getProperty(chromeDriverSystemPropertyName);
 		if(chromedriverPath != null) {
@@ -131,22 +137,22 @@ public class TestSuiteInitialisation {
 		return new ChromeDriver(options);
 	}
 	
-	private void loadProperties() throws FileNotFoundException {
-		String propertiesEnvName = "/" + System.getenv(propertiesFileName);
+	private void loadProperties() {
+		log4j.info("Reading properties file");
 		properties = new Properties();
-		FileInputStream input = new FileInputStream(new File(propertiesEnvName));
-
+		InputStream input = this.getClass().getClassLoader().getResourceAsStream(propertiesFileName);
+		
 		try {	
 			properties.load(input);
+			log4j.info("Successfully loaded " + propertiesFileName);
 		} catch (IOException e) {
-			log4j.error("Properties file with login data couldn't be loaded");
-			e.printStackTrace();
+			log4j.error("Properties file with login data couldn't be loaded", e);
 		} finally {
         	if (input != null) {
         		try {
         			input.close();
         		} catch (IOException e) {
-        			e.printStackTrace();
+        			log4j.error("Error closing the inputStream", e);
         		}
         	}
         }
