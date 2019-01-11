@@ -15,8 +15,11 @@
 		<resources>
 			<resource>
 				<directory>res</directory>
-				<filtering>true</filtering>
 			</resource>
+			<resource>
+	        	<directory>res-filtered</directory>
+	        	<filtering>true</filtering>
+	      	</resource>
 		</resources>
 		<plugins>
 			<plugin>
