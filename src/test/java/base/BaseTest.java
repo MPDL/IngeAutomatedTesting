@@ -2,11 +2,12 @@ package test.java.base;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -136,9 +137,11 @@ public abstract class BaseTest {
 			try {
 				String screenshotPath = "./target/Screenshot_" + result.getName() + ".jpg";
 				File screenshot = ((TakesScreenshot) driver).getScreenshotAs(org.openqa.selenium.OutputType.FILE);
-				FileUtils.copyFile(screenshot, new File(screenshotPath));
+				Files.copy(screenshot.toPath(), new File(screenshotPath).toPath(), StandardCopyOption.REPLACE_EXISTING);
 			}
-			catch (IOException exc) {}
+			catch (IOException exc) {
+				log4j.error("Error copying the screenshot file.", exc);
+			}
 			
 			log4j.error(result.getName() + ": " + result.getThrowable().getMessage());
 		}
