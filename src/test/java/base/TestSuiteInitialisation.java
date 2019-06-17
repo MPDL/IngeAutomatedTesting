@@ -93,6 +93,7 @@ public class TestSuiteInitialisation {
 		
 		// Set a different binary if another Version of Firefox should be used for the tests
 //		options.setBinary("C:/Program Files/Firefox Nightly/firefox.exe");
+//		options.setBinary("C:/Program Files/Firefox Developer Edition/firefox.exe");
 		
 		options.setCapability("marionette", true);
 		options.setHeadless(HEADLESS);
