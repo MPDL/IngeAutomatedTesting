@@ -20,6 +20,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 /**
  * Sets up the test suite in accordance to browser specified in the .xml file of
  * the suite.
@@ -79,8 +81,11 @@ public class TestSuiteInitialisation {
 
 	private WebDriver initialiseFirefoxDriver() {
 		log4j.info("Launching Firefox browser...");
+		
+		WebDriverManager.firefoxdriver().setup();
+		
 		// The system property webdriver.gecko.driver must be set to the
-		// webdriver-executable-file -> this is done by Maven!
+		// webdriver-executable-file -> this is done by the WebDriverManager!
 		String geckoDriverSystemPropertyName = "webdriver.gecko.driver";
 		String geckodriverPath = System.getProperty(geckoDriverSystemPropertyName);
 		if (geckodriverPath != null) {
@@ -132,8 +137,11 @@ public class TestSuiteInitialisation {
 
 	private WebDriver initialiseChromeDriver() {
 		log4j.info("Launching Chrome browser...");
+		
+		WebDriverManager.chromedriver().setup();
+		
 		// The system property webdriver.chrome.driver must be set to the
-		// webdriver-executable-file -> this is done by Maven!
+		// webdriver-executable-file -> this is done by the WebDriverManager!
 		String chromeDriverSystemPropertyName = "webdriver.chrome.driver";
 		String chromedriverPath = System.getProperty(chromeDriverSystemPropertyName);
 		if (chromedriverPath != null) {
