@@ -46,8 +46,8 @@ public class TestSuiteInitialisation {
 	private static final String DEV_PURE_URL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
 
 	// The startPageURL defines on which server the selenium tests are executed!
-//	private static final String startPageURL = QA_PURE_URL;
-	 private static final String startPageURL = DEV_PURE_URL;
+	private static final String startPageURL = QA_PURE_URL;
+//	 private static final String startPageURL = DEV_PURE_URL;
 
 	@Parameters({ "browserType" })
 	@BeforeSuite
