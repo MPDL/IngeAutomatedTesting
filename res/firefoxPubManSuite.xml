@@ -48,6 +48,8 @@
  			<class name="test.java.base.depositor.FullSimpleNoSourceTest"></class>
 <!--
 -->
+			<class name="test.java.base.moddep.BatchProcessingTest"></class>
+
 		</classes>
 	</test>
 

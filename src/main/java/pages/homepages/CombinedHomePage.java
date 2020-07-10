@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import main.java.pages.submission.ImportWorkspacePage;
 import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.SubmissionPage;
+import main.java.pages.workspaces.BatchWorkspaceViewPage;
 
 public class CombinedHomePage extends HomePage {
 
@@ -37,5 +38,9 @@ public class CombinedHomePage extends HomePage {
 	
 	public ImportWorkspacePage goToImportWorkspace() {
 		return mainMenuComponent.goToImportWorkspacePage();
+	}
+	
+	public BatchWorkspaceViewPage goToBatchProcessingWorkspace() {
+		return mainMenuComponent.goToBatchProcessingPage();
 	}
 }

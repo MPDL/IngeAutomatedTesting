@@ -12,6 +12,7 @@ import main.java.pages.submission.MyItemsPage;
 import main.java.pages.submission.QAWorkspacePage;
 import main.java.pages.submission.SubmissionPage;
 import main.java.pages.tools.ToolsPage;
+import main.java.pages.workspaces.BatchWorkspaceViewPage;
 import test.java.base.TestSuiteInitialisation;
 
 /**
@@ -70,6 +71,14 @@ public class MainMenuComponent {
 		qaWorkspaceLink.click();
 		
 		return PageFactory.initElements(driver, QAWorkspacePage.class);
+	}
+	
+	public BatchWorkspaceViewPage goToBatchProcessingPage() {
+		workspaceLink.click();
+		WebElement batchProcessingWorkspaceLink = driver.findElement(By.xpath("//a[contains(@id, 'lnkBatchWorkspace')]"));
+		batchProcessingWorkspaceLink.click();
+		
+		return PageFactory.initElements(driver, BatchWorkspaceViewPage.class);
 	}
 	
 	// PM-17, (PM-18)
