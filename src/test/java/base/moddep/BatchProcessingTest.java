@@ -18,7 +18,7 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.ItemStatus;
 
 /**
- * Test the Batch Processing workflow.
+ * Test for a (rudimentary example) Batch Processing workflow.
  * 
  * @author helk
  *
@@ -37,17 +37,19 @@ public class BatchProcessingTest extends BaseLoggedInUserTest {
 	private String[] filepath;
 
 	private final String successState = "SUCCESS";
-	private final String wrongBatchActionSate = "Wrong Batch Action state.";
 	private final String localTagName = "Local tag 1.";
+
+	private final String wrongBatchActionSate = "Wrong Batch Action state for item: ";
+	private final String itemHasNoTags = "Item has no tags.";
 
 	@Override
 	@BeforeClass
 	public void setup() {
 		super.setup();
 		filepath = new String[] { getFilepath("SamplePDFFile.pdf") };
-		this.title1 = "Batch Processing 1: " + getTimeStamp();
-		this.title2 = "Batch Processing 2: " + getTimeStamp();
-		this.title3 = "Batch Processing 3: " + getTimeStamp();
+		this.title1 = "Batch Processing item 1: " + getTimeStamp();
+		this.title2 = "Batch Processing item 2: " + getTimeStamp();
+		this.title3 = "Batch Processing item 3: " + getTimeStamp();
 		this.author = "Test Testermann";
 	}
 
@@ -96,39 +98,49 @@ public class BatchProcessingTest extends BaseLoggedInUserTest {
 	}
 
 	@Test(priority = 6)
+	public void submitItem3() {
+		viewItemPage.submitItem();
+		ItemStatus itemStatus = viewItemPage.getItemStatus();
+
+		Assert.assertEquals(itemStatus, ItemStatus.SUBMITTED, "Item is not submitted.");
+	}
+
+	@Test(priority = 7)
 	public void addItemsToBatchProcessingViaMyItemsList() {
 		refreshHomePage();
 		combinedHomePage.goToMyItemsPage().openActionsView().selectAndAddToBatchProcessing(this.title2, this.title3);
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 8)
 	public void openBatchProcessingWorkspace() {
 		refreshHomePage();
 		batchProcessingViewPage = combinedHomePage.goToBatchProcessingWorkspace();
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 9)
 	public void submitViaBatchProcessing() {
 		batchProcessingProtocolPage = batchProcessingViewPage.openActionsView().submit();
 
-		List<String> logStates = batchProcessingProtocolPage.getLogStates();
-		// TODO: get Log-State by itemTitle!
-		Assert.assertEquals(logStates.get(0), successState, wrongBatchActionSate);
-		Assert.assertEquals(logStates.get(1), successState, wrongBatchActionSate);
-		Assert.assertEquals(logStates.get(2), successState, wrongBatchActionSate);
-	}
-
-	@Test(priority = 9)
-	public void addTagViaBatchProcessing() {
-		batchProcessingProtocolPage = batchProcessingViewPage.openActionsView().addLocalTag(localTagName);
-
-		List<String> logStates = batchProcessingProtocolPage.getLogStates();
-		Assert.assertEquals(logStates.get(0), successState, wrongBatchActionSate);
-		Assert.assertEquals(logStates.get(1), successState, wrongBatchActionSate);
-		Assert.assertEquals(logStates.get(2), successState, wrongBatchActionSate);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title1), successState,
+				wrongBatchActionSate + title1);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title2), successState,
+				wrongBatchActionSate + title2);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title3), "ERROR", wrongBatchActionSate + title3);
 	}
 
 	@Test(priority = 10)
+	public void addTagViaBatchProcessing() {
+		batchProcessingProtocolPage = batchProcessingViewPage.openActionsView().addLocalTag(localTagName);
+
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title1), successState,
+				wrongBatchActionSate + title1);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title2), successState,
+				wrongBatchActionSate + title2);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title3), successState,
+				wrongBatchActionSate + title3);
+	}
+
+	@Test(priority = 11)
 	public void checkBatchProcessingResultOfSubmitAndLocalTag() {
 		refreshHomePage();
 
@@ -136,37 +148,39 @@ public class BatchProcessingTest extends BaseLoggedInUserTest {
 		ItemStatus itemStatus1 = viewItem1Page.getItemStatus();
 		Assert.assertEquals(itemStatus1, ItemStatus.SUBMITTED, "Item 1 was not submitted.");
 		List<String> localTags1 = viewItem1Page.getLocalTags();
-		Assert.assertEquals(localTags1.isEmpty(), false, "Item has no tags.");
-		Assert.assertEquals(localTags1.get(0), localTagName, "First tag not equals " + localTagName);
+		Assert.assertEquals(localTags1.isEmpty(), false, itemHasNoTags);
+		Assert.assertEquals(localTags1.get(0), localTagName);
 
 		ViewItemPage viewItem2Page = combinedHomePage.goToMyItemsPage().openItemByTitle(title2);
 		ItemStatus itemStatus2 = viewItem2Page.getItemStatus();
 		Assert.assertEquals(itemStatus2, ItemStatus.SUBMITTED, "Item 2 was not submitted.");
 		List<String> localTags2 = viewItem2Page.getLocalTags();
-		Assert.assertEquals(localTags2.isEmpty(), false, "Item has no tags.");
-		Assert.assertEquals(localTags2.get(0), localTagName, "First tag not equals " + localTagName);
+		Assert.assertEquals(localTags2.isEmpty(), false, itemHasNoTags);
+		Assert.assertEquals(localTags2.get(0), localTagName);
 
 		ViewItemPage viewItem3Page = combinedHomePage.goToMyItemsPage().openItemByTitle(title3);
 		ItemStatus itemStatus3 = viewItem3Page.getItemStatus();
 		Assert.assertEquals(itemStatus3, ItemStatus.SUBMITTED, "Item 3 was not submitted.");
 		List<String> localTags3 = viewItem3Page.getLocalTags();
-		Assert.assertEquals(localTags3.isEmpty(), false, "Item has no tags.");
-		Assert.assertEquals(localTags3.get(0), localTagName, "First tag not equals " + localTagName);
+		Assert.assertEquals(localTags3.isEmpty(), false, itemHasNoTags);
+		Assert.assertEquals(localTags3.get(0), localTagName);
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 12)
 	public void deleteViaBatchProcessing() {
 		refreshHomePage();
 		batchProcessingViewPage = combinedHomePage.goToBatchProcessingWorkspace();
 		batchProcessingProtocolPage = batchProcessingViewPage.openActionsView().delete();
 
-		List<String> logStates = batchProcessingProtocolPage.getLogStates();
-		Assert.assertEquals(logStates.get(0), successState, wrongBatchActionSate);
-		Assert.assertEquals(logStates.get(1), successState, wrongBatchActionSate);
-		Assert.assertEquals(logStates.get(2), successState, wrongBatchActionSate);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title1), successState,
+				wrongBatchActionSate + title1);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title2), successState,
+				wrongBatchActionSate + title2);
+		Assert.assertEquals(batchProcessingProtocolPage.getLogState(title3), successState,
+				wrongBatchActionSate + title3);
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 13)
 	public void checkAllItemsAreDeleted() {
 		refreshHomePage();
 
