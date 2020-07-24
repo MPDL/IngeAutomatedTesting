@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import main.java.pages.LoginPage;
 import main.java.pages.StartPage;
 import main.java.pages.homepages.CombinedHomePage;
+import main.java.pages.search.SearchResultsPage;
 import main.java.pages.submission.EasySubmissionPage;
 import main.java.pages.submission.FullSubmissionPage;
 import main.java.pages.submission.ViewItemPage;
@@ -184,8 +185,14 @@ public class BatchProcessingTest extends BaseLoggedInUserTest {
 	public void checkAllItemsAreDeleted() {
 		refreshHomePage();
 
-		boolean myItemsIsNotEmpty = combinedHomePage.goToMyItemsPage().hasItems();
-		Assert.assertEquals(myItemsIsNotEmpty, false, "My Items is not empty. Deletion of the items did not work.");
+		SearchResultsPage searchResultsPage = combinedHomePage.quickSearch(title1);
+		Assert.assertTrue(searchResultsPage.noItemsFound(), "Discarded item " + title1 + " is still found.");
+
+		searchResultsPage = searchResultsPage.quickSearch(title2);
+		Assert.assertTrue(searchResultsPage.noItemsFound(), "Discarded item " + title2 + " is still found.");
+
+		searchResultsPage = searchResultsPage.quickSearch(title3);
+		Assert.assertTrue(searchResultsPage.noItemsFound(), "Discarded item " + title3 + " is still found.");
 	}
 
 }
