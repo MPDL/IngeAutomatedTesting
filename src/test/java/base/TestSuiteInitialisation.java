@@ -26,8 +26,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  * Sets up the test suite in accordance to browser specified in the .xml file of
  * the suite.
  * 
- * @param browserType
- *            name of the browser in low-caps
+ * @param browserType name of the browser in low-caps
  * @author apetrova
  *
  */
@@ -42,12 +41,11 @@ public class TestSuiteInitialisation {
 
 	private static final boolean HEADLESS = true;
 
-	private static final String QA_PURE_URL = "https://qa.pure.mpdl.mpg.de/pubman/faces/HomePage.jsp";
-	private static final String DEV_PURE_URL = "https://dev.inge.mpdl.mpg.de/pubman/faces/HomePage.jsp";
+	// The PURE_URL defines on which server the selenium tests are executed!
+	public static final String PURE_URL = "https://qa.pure.mpdl.mpg.de";
+//	public static final String PURE_URL = "https://dev.inge.mpdl.mpg.de";
 
-	// The startPageURL defines on which server the selenium tests are executed!
-	private static final String startPageURL = QA_PURE_URL;
-//	 private static final String startPageURL = DEV_PURE_URL;
+	private static final String startPageURL = PURE_URL + "/pubman/faces/HomePage.jsp";
 
 	@Parameters({ "browserType" })
 	@BeforeSuite
@@ -81,9 +79,9 @@ public class TestSuiteInitialisation {
 
 	private WebDriver initialiseFirefoxDriver() {
 		log4j.info("Launching Firefox browser...");
-		
+
 		WebDriverManager.firefoxdriver().setup();
-		
+
 		// The system property webdriver.gecko.driver must be set to the
 		// webdriver-executable-file -> this is done by the WebDriverManager!
 		String geckoDriverSystemPropertyName = "webdriver.gecko.driver";
@@ -95,11 +93,12 @@ public class TestSuiteInitialisation {
 		}
 
 		FirefoxOptions options = new FirefoxOptions();
-		
-		// Set a different binary if another Version of Firefox should be used for the tests
+
+		// Set a different binary if another Version of Firefox should be used for the
+		// tests
 //		options.setBinary("C:/Program Files/Firefox Nightly/firefox.exe");
 //		options.setBinary("C:/Program Files/Firefox Developer Edition/firefox.exe");
-		
+
 		options.setCapability("marionette", true);
 		options.setHeadless(HEADLESS);
 		FirefoxProfile profile = initFirefoxProfile();
@@ -107,11 +106,11 @@ public class TestSuiteInitialisation {
 
 		WebDriver webDriver = new FirefoxDriver(options);
 		Capabilities capabilities = ((RemoteWebDriver) webDriver).getCapabilities();
-		
+
 		String browserName = capabilities.getBrowserName();
 		String browserVersion = capabilities.getVersion();
 		log4j.info("Browser version: " + browserVersion + " (" + browserName + ")");
-		
+
 		return webDriver;
 	}
 
@@ -137,9 +136,9 @@ public class TestSuiteInitialisation {
 
 	private WebDriver initialiseChromeDriver() {
 		log4j.info("Launching Chrome browser...");
-		
+
 		WebDriverManager.chromedriver().setup();
-		
+
 		// The system property webdriver.chrome.driver must be set to the
 		// webdriver-executable-file -> this is done by the WebDriverManager!
 		String chromeDriverSystemPropertyName = "webdriver.chrome.driver";
@@ -151,12 +150,13 @@ public class TestSuiteInitialisation {
 		}
 
 		ChromeOptions options = new ChromeOptions();
-		
+
 		options.setCapability("marionette", true);
 		options.setHeadless(HEADLESS);
 		options.addArguments("--window-size=1920,1200");
 
-		// Without the two following proxy-options the tests do not run in headless mode or are very slow:
+		// Without the two following proxy-options the tests do not run in headless mode
+		// or are very slow:
 		// Set proxy-server -> 'direct://' means: Do not use a proxy for all connections
 		options.addArguments("--proxy-server='direct://'");
 		// Set which addresses should not be proxied -> * means: All. Do not use a proxy
@@ -165,11 +165,11 @@ public class TestSuiteInitialisation {
 
 		WebDriver webDriver = new ChromeDriver(options);
 		Capabilities capabilities = ((RemoteWebDriver) webDriver).getCapabilities();
-		
+
 		String browserName = capabilities.getBrowserName();
 		String browserVersion = capabilities.getVersion();
 		log4j.info("Browser version: " + browserVersion + " (" + browserName + ")");
-		
+
 		return webDriver;
 	}
 

@@ -18,6 +18,7 @@ import test.java.base.BaseLoggedInUserTest;
 import test.java.base.GenreGroup;
 import test.java.base.ItemStatus;
 import test.java.base.TableHelper;
+import test.java.base.TestHelper;
 
 /**
  * Testcase #1 <br>
@@ -29,25 +30,26 @@ import test.java.base.TableHelper;
 public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 
 	private String title;
-	
+
 	private DepositorHomePage depositorHomePage;
 	private ViewItemPage viewItemPage;
-	
+
 	private TableHelper table = new TableHelper();
 	private Map<String, String> values;
-	
+
+	@Override
 	@BeforeClass
 	public void setup() {
 		super.setup();
 	}
-	
+
 	@Test(priority = 1)
 	public void loginAsDepositor() {
 		LoginPage loginPage = new StartPage(driver).goToLoginPage();
 		depositorHomePage = loginPage.loginAsDepositor(depositorUsername, depositorPassword);
 		Assert.assertEquals(depositorHomePage.getUsername(), depositorName, "Expected and actual name don't match.");
 	}
-	
+
 	@Test(priority = 2)
 	public void fullSubmissionSimpleEventDependent() {
 		FullSubmissionPage fullSubmissionPage = depositorHomePage.goToSubmissionPage().goToFullSubmissionSimplePage();
@@ -55,12 +57,12 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.PENDING, "Item was not uploaded.");
 	}
-	
+
 	@Test(priority = 3, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
 	public void checkDataCorrectness() {
 		values = table.getMap();
 		title = values.get("[title]");
-		
+
 		Assert.assertEquals(viewItemPage.getItemTitle(), title.trim());
 		compare("Genre", GenreGroup.EVENT_DEPENDENT.toString());
 		compare("Name", "[upload file]");
@@ -78,32 +80,34 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 		compare("Funding program", "[Funding program]");
 		compare("Title", "[Title of event]");
 		compare("Source Genre", "[genre source]");
-		Assert.assertEquals(viewItemPage.getValue("Volume / Issue"), values.get("[Volume source]").trim() + " " + "(" + values.get("[issue source]").trim() + ")");
+		Assert.assertEquals(viewItemPage.getValue("Volume / Issue"),
+				values.get("[Volume source]").trim() + " " + "(" + values.get("[issue source]").trim() + ")");
 		if (values.containsKey("[identifier create item]") && values.get("[identifier create item]") != null
-		  && values.containsKey("[identifier value]") && values.get("[identifier value]") != null)
-        {
-		  Assert.assertEquals(viewItemPage.getValue("Identifiers"), values.get("[identifier create item]").trim() + ": " + values.get("[identifier value]").trim());
-        }
-		if (values.containsKey("[Publisher source]") && values.get("[Publisher source]") != null)
-        {
-		  Assert.assertEquals(viewItemPage.getValue("Publ. Info"), values.get("[Place source]").trim() + " : " + values.get("[Publisher source]").trim());
-        }
-		if (values.containsKey("[identifier source create item]") && values.get("[identifier source create item]") != null
-	      && values.containsKey("[identifier source value]") && values.get("[identifier source value]") != null)
-	    {
-		  Assert.assertEquals(viewItemPage.getValue("Identifier"), values.get("[identifier source create item]").trim() + ": " + values.get("[identifier source value]").trim());
-        }
+				&& values.containsKey("[identifier value]") && values.get("[identifier value]") != null) {
+			TestHelper.compareIdentifiers(viewItemPage.getValue("Identifiers"),
+					values.get("[identifier create item]").trim(), values.get("[identifier value]").trim());
+		}
+		if (values.containsKey("[Publisher source]") && values.get("[Publisher source]") != null) {
+			Assert.assertEquals(viewItemPage.getValue("Publ. Info"),
+					values.get("[Place source]").trim() + " : " + values.get("[Publisher source]").trim());
+		}
+		if (values.containsKey("[identifier source create item]")
+				&& values.get("[identifier source create item]") != null
+				&& values.containsKey("[identifier source value]") && values.get("[identifier source value]") != null) {
+			TestHelper.compareIdentifiers(viewItemPage.getValue("Identifier"),
+					values.get("[identifier source create item]").trim(),
+					values.get("[identifier source value]").trim());
+		}
 	}
-	
+
 	private void compare(String label, String expected) {
-	  if (values.get(expected) == null)
-      {
-        log4j.info("Expected Value empty. Won't compare");
-        return;
-      }
+		if (values.get(expected) == null) {
+			log4j.info("Expected Value empty. Won't compare");
+			return;
+		}
 		Assert.assertEquals(viewItemPage.getValue(label), values.get(expected).trim());
 	}
-	
+
 	@Test(priority = 4, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
 	public void depositorReleasesSubmission() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
@@ -112,14 +116,14 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 		ItemStatus itemStatus = viewItemPage.getItemStatus();
 		Assert.assertEquals(itemStatus, ItemStatus.RELEASED, "Item was not released.");
 	}
-	
+
 	@Test(priority = 5, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
 	public void viewMostRecentItems() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		String mostRecentItemTitle = depositorHomePage.goToStartPage().getNameOfMostRecentItem();
 		Assert.assertEquals(mostRecentItemTitle, title, "Item does not show up at the start page.");
 	}
-	
+
 	@Test(priority = 6, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
 	public void viewItem() {
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
@@ -127,14 +131,14 @@ public class FullSimpleEventDependentTest extends BaseLoggedInUserTest {
 		String actualTitle = viewItemPage.getItemTitle();
 		Assert.assertEquals(actualTitle, title, "Expected and actual title do not match.");
 	}
-	
+
 	@Test(priority = 7, dependsOnMethods = { "fullSubmissionSimpleEventDependent" })
 	public void discardSubmission() {
 		depositorHomePage = (DepositorHomePage) new StartPage(driver).goToHomePage(depositorHomePage);
 		MyItemsPage myItemsPage = depositorHomePage.goToMyItemsPage();
 		myItemsPage.discardItemByTitle(title);
 	}
-	
+
 	@AfterClass
 	public void saveDataAfterFailure(ITestContext context) {
 		if (context.getFailedTests().size() > 0) {

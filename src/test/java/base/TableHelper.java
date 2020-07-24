@@ -18,45 +18,49 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.log4testng.Logger;
 
 public class TableHelper {
-	
-    private static final Logger log4j = Logger.getLogger(TableHelper.class);
-  
+
+	// TODO: The whole data driven tests (Accessing the data/datatabel and comparing
+	// the results in the tests) have to be refactored!!!
+
+	private static final Logger log4j = Logger.getLogger(TableHelper.class);
+
 	private Map<String, Integer> headerMap;
 	private Map<String, String> randomValueMap;
-    private XSSFSheet dataTable;
-	
+	private XSSFSheet dataTable;
+
 	public TableHelper() {
 		createMap(loadDataTable());
 		randomValueMap = new HashMap<>();
 	}
-	
+
 	private XSSFSheet loadDataTable() {
-	    XSSFSheet data = null;
+		XSSFSheet data = null;
 		String filepath = getClass().getResource("/data_table.xlsx").getPath();
 		XSSFWorkbook dataTableFile = null;
 		try {
 			dataTableFile = new XSSFWorkbook(new File(filepath));
 			data = dataTableFile.getSheetAt(0); // getting sheet site 1
-		}
-		catch (InvalidFormatException | IOException e) {
-		  log4j.error("Error converting the data.", e);
-		}
-		finally {
+		} catch (InvalidFormatException | IOException e) {
+			log4j.error("Error converting the data.", e);
+		} finally {
 			if (dataTableFile != null) {
-				try { dataTableFile.close(); } catch (IOException e) { }
+				try {
+					dataTableFile.close();
+				} catch (IOException e) {
+				}
 			}
 		}
 		this.dataTable = data;
-        return data;
-		
+		return data;
+
 	}
-	
+
 	/**
 	 * Maps each header to its table row for easier access
 	 */
 	private void createMap(XSSFSheet dataTable) {
 		headerMap = new HashMap<>();
-		
+
 		if (dataTable != null) {
 			int rowCount = dataTable.getLastRowNum();
 			for (int i = 0; i < rowCount; i++) {
@@ -67,10 +71,10 @@ public class TableHelper {
 				}
 			}
 		}
-		
+
 	}
-	
-	//TODO: Refactor this method
+
+	// TODO: Refactor this method
 	public String getRandomRowEntry(String category) {
 		Integer index = headerMap.get(category);
 		if (index == null) {
@@ -92,15 +96,15 @@ public class TableHelper {
 		}
 		return result;
 	}
-	
+
 	private String getCellValue(Cell cell) {
 		String cellValue;
-		
-		if(cell != null) {
+
+		if (cell != null) {
 			CellType cellType = cell.getCellTypeEnum();
 			String cellAdress = cell.getAddress().formatAsString();
-			
-			switch(cellType) {
+
+			switch (cellType) {
 			case STRING:
 				cellValue = cell.getStringCellValue();
 				break;
@@ -114,24 +118,25 @@ public class TableHelper {
 				cellValue = "";
 				break;
 			default:
-				throw new IllegalArgumentException("The cell-type '" + cellType + "' of the cell (" + cellAdress + ") is not supported.");
+				throw new IllegalArgumentException(
+						"The cell-type '" + cellType + "' of the cell (" + cellAdress + ") is not supported.");
 			}
-		}else {
+		} else {
 			log4j.error("No cell to get the value from.");
 			return null;
-		}		
-		
+		}
+
 		return cellValue;
 	}
-	
+
 	public void setRowEntry(String key, String value) {
 		randomValueMap.put(key, value);
 	}
-	
+
 	public Map<String, String> getMap() {
 		return Collections.unmodifiableMap(randomValueMap);
 	}
-	
+
 	public void writeContentsToFile(String filepath) {
 		File testOutput = new File(filepath);
 		try (PrintWriter pw = new PrintWriter(testOutput, "UTF-8")) {
@@ -140,7 +145,7 @@ public class TableHelper {
 					pw.write(label + ": " + randomValueMap.get(label) + "\n");
 				}
 			}
+		} catch (IOException exc) {
 		}
-		catch (IOException exc) {}
 	}
 }
