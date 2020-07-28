@@ -22,6 +22,8 @@ public class TableHelper {
 	// TODO: The whole data driven tests (Accessing the data/datatabel and comparing
 	// the results in the tests) have to be refactored!!!
 
+	public static final String CONE_IDENTIFIER_TYPE = "CoNE";
+
 	private static final Logger log4j = Logger.getLogger(TableHelper.class);
 
 	private Map<String, Integer> headerMap;

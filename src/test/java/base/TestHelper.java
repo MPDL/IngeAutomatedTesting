@@ -10,6 +10,8 @@ import org.testng.Assert;
  */
 public class TestHelper {
 
+	public static final String CONE_URL = TestSuiteInitialisation.PURE_URL + "/" + "cone";
+
 	/**
 	 * Compares (Assert.assertEquals) the actualIdentifierValue to the
 	 * expectedIdentifierValue.
@@ -20,8 +22,8 @@ public class TestHelper {
 	 */
 	public static void compareIdentifiers(String actualIdentifierValue, String expectedIdentifierType,
 			String expectedIdentifierValue) {
-		if ("CoNE".equals(expectedIdentifierType)) {
-			expectedIdentifierValue = TestSuiteInitialisation.PURE_URL + "/" + expectedIdentifierValue;
+		if (TableHelper.CONE_IDENTIFIER_TYPE.equalsIgnoreCase(expectedIdentifierType)) {
+			expectedIdentifierValue = CONE_URL + expectedIdentifierValue;
 		}
 
 		Assert.assertEquals(actualIdentifierValue, expectedIdentifierType + ": " + expectedIdentifierValue);
