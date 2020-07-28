@@ -21,8 +21,16 @@ import test.java.base.ItemStatus;
 
 public class ViewItemPage extends BasePage {
 
+	// TODO: Distinguish between ViewItemFullPage and ViewItemOverviewPage
+	// => Second Page Object class representing the ViewItemOverviewPage needed,
+	// besides ViewItemPage (representing the ViewItemFullPage)
+	// See method getPublicationTitle()
+
 	@FindBy(css = ".itemHeadline>b")
 	private WebElement itemTitle;
+
+	@FindBy(css = ".tile_publication_title")
+	private WebElement publicationTitle;
 
 	@FindBy(css = ".labelLine")
 	private List<WebElement> labels;
@@ -76,6 +84,15 @@ public class ViewItemPage extends BasePage {
 
 	public String getItemTitle() {
 		return itemTitle.getText().trim();
+	}
+
+	/**
+	 * Get the (publication) title of the item in the ViewItemOverviewPage.
+	 * 
+	 * @return the publication title of the item
+	 */
+	public String getPublicationTitle() {
+		return this.publicationTitle.getText().trim();
 	}
 
 	public ItemStatus getItemStatus() {

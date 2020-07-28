@@ -42,6 +42,7 @@ public class FullStandardSourceDependentTest extends BaseLoggedInUserTest {
 	private TableHelper table = new TableHelper();
 	private Map<String, String> values;
 
+	@Override
 	@BeforeClass
 	public void setup() {
 		super.setup();
@@ -156,14 +157,18 @@ public class FullStandardSourceDependentTest extends BaseLoggedInUserTest {
 	}
 
 	@Test(priority = 10, dependsOnMethods = { "submitSourceDependent" })
-	public void searchReleasedItem() {
+	public void searchAndOpenReleasedItem() {
 		refreshHomePage();
 		startPage = combinedHomePage.logout();
-		SearchResultsPage searchResults = startPage.quickSearch(submittedTitle);
+		SearchResultsPage searchResults = startPage.quickSearch("\"" + submittedTitle + "\"");
 
 		int resultCount = searchResults.getResultCount();
-		loginCombined();
 		Assert.assertNotEquals(resultCount, 0, "No results found for title: '" + submittedTitle + "'");
+
+		ViewItemPage viewItem = searchResults.openFirstResult();
+		Assert.assertEquals(viewItem.getPublicationTitle(), submittedTitle);
+
+		loginCombined();
 	}
 
 	@Test(priority = 11, dependsOnMethods = { "submitSourceDependent" })
@@ -184,14 +189,18 @@ public class FullStandardSourceDependentTest extends BaseLoggedInUserTest {
 	}
 
 	@Test(priority = 13, dependsOnMethods = { "submitSourceDependent" })
-	public void searchReleasedItemNewTitle() {
+	public void searchAndOpenReleasedItemNewTitle() {
 		refreshHomePage();
 		startPage = combinedHomePage.logout();
-		SearchResultsPage searchResults = startPage.quickSearch(releasedTitle);
+		SearchResultsPage searchResults = startPage.quickSearch("\"" + releasedTitle + "\"");
 
 		int resultCount = searchResults.getResultCount();
-		loginCombined();
 		Assert.assertNotEquals(resultCount, 0, "No results found for title: '" + releasedTitle + "'");
+
+		ViewItemPage viewItem = searchResults.openFirstResult();
+		Assert.assertEquals(viewItem.getPublicationTitle(), releasedTitle);
+
+		loginCombined();
 	}
 
 	@Test(priority = 14, dependsOnMethods = { "submitSourceDependent" })
