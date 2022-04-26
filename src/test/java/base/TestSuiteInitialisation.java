@@ -42,9 +42,9 @@ public class TestSuiteInitialisation {
 	private static final boolean HEADLESS = true;
 
 	// The PURE_URL defines on which server the selenium tests are executed!
-//	public static final String PURE_URL = "https://qa.pure.mpdl.mpg.de";
+	public static final String PURE_URL = "https://qa.pure.mpdl.mpg.de";
 //	public static final String PURE_URL = "https://dev.inge.mpdl.mpg.de";
-	public static final String PURE_URL = "https://ingo.mpdl.mpg.de";
+//	public static final String PURE_URL = "https://ingo.mpdl.mpg.de";
 
 	private static final String startPageURL = PURE_URL + "/pubman/faces/HomePage.jsp";
 
